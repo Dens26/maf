@@ -2,7 +2,7 @@
 
 export const headerMenu = [
     // { name: 'Theme Info', link: '/theme-info' },
-    { name: 'A propos', link: '/team/denisbekaert' },
+    { name: 'A propos', link: '/team/denis' },
     { name: 'Services', link: '/services' },
     { name: 'Articles', link: '/blog' },
     // { name: 'Style-Guide', link: '/style-guide', showArrow: false,

@@ -11,7 +11,7 @@ publish: true
 seo:
   title: "Créer son entreprise individuelle : mode d’emploi"
   description: "Un accompagnement personnalisé pour lancer votre entreprise individuelle sans stress."
-  icon: "/icons/briefcase.jpg"
+  icon: "/icons/create-company.jpg"
 ---
 
 ## Créer son entreprise individuelle : mode d’emploi

@@ -11,7 +11,7 @@ publish: true
 seo:
   title: "Modifier l’adresse de son entreprise individuelle"
   description: "Un accompagnement fiable pour déclarer le déménagement ou le transfert d’établissement de votre entreprise individuelle."
-  icon: "/icons/adresse.jpg"
+  icon: "/icons/moving.jpg"
 ---
 
 ## Modifier l’adresse de son entreprise individuelle
