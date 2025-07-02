@@ -2,7 +2,7 @@
 title: "Modifier l’activité ou le nom commercial de son EI : mode d’emploi"
 excerpt: "Vous souhaitez modifier l’activité déclarée ou changer le nom commercial de votre entreprise individuelle ? Voici les étapes à suivre."
 featuredImage: "./images/activities.jpg"
-publishDate: "2025-03-15"
+publishDate: "2025-06-01"
 publish: true
 categories: ["Formalities"]
 

@@ -2,7 +2,7 @@
 title: "Quelles formalités en cas de changement d’adresse de son EI ?"
 excerpt: "Découvrez les démarches à suivre pour déclarer le changement d’adresse de votre entreprise individuelle, simplement et efficacement."
 featuredImage: "./images/moving.jpg"
-publishDate: "2025-02-22"
+publishDate: "2025-06-15"
 publish: true
 categories: ["Formalities"]
 

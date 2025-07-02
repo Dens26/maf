@@ -56,7 +56,7 @@ Conformément au **Règlement Général sur la Protection des Données (RGPD)**,
 - Vous opposer à leur traitement ou en demander la limitation
 - Retirer votre consentement à tout moment
 
-📩 Pour exercer vos droits : contact@monassistantformalites.fr
+📩 Pour exercer vos droits : contact-maf@db-dev.fr 
 
 ## Sécurité des données
 
@@ -79,5 +79,5 @@ Cette politique peut être modifiée. La dernière mise à jour date du **12 jui
 Pour toute question relative à vos données personnelles :
 
 **Mon Assistant Formalités**  
-📧 contact@monassistantformalites.fr  
+📧 contact-maf@db-dev.fr
 📍 Cornas, 07130 – France

@@ -2,7 +2,7 @@
 title: "Quelles sont les obligations administratives annuelles d’une EI ?"
 excerpt: "Découvrez les principales obligations administratives qu'un entrepreneur individuel doit respecter chaque année."
 featuredImage: "./images/administration.jpg"
-publishDate: "2025-04-05"
+publishDate: "2025-05-15"
 publish: true
 categories: ["Formalities"]
 
