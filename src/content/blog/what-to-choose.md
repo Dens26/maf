@@ -2,7 +2,7 @@
 title: "Micro-entreprise ou EI classique : que choisir ?"
 excerpt:  "Vous hésitez entre la micro-entreprise et l'entreprise individuelle classique ? Voici les points clés pour faire un choix adapté à votre situation."
 featuredImage: "./images/what-to-choose.jpg"
-publishDate: "2025-02-22"
+publishDate: "2025-04-15"
 publish: true
 categories: ["Formalities"]
 

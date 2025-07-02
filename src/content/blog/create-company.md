@@ -2,7 +2,7 @@
 title: "Créer son entreprise individuelle : Guide complet pour démarrer"
 excerpt: "Découvrez les étapes essentielles pour créer votre entreprise individuelle facilement et en toute sérénité"
 featuredImage: "./images/create-company.jpg"
-publishDate: "2025-02-22"
+publishDate: "2025-05-01"
 publish: true
 categories: ["Formalities"]
 

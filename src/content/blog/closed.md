@@ -2,7 +2,7 @@
 title: "Radiation d’une EI : comment bien clore son activité ?"
 excerpt: "Vous souhaitez arrêter votre activité indépendante ? Découvrez comment radier correctement votre entreprise individuelle."
 featuredImage: "./images/closed.jpg"
-publishDate: "2023-11-15"
+publishDate: "2025-07-01"
 publish: true
 categories: ["Formalities"]
 

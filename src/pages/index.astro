@@ -14,7 +14,6 @@ import { faqLists } from '@data/faqs';
 import RecentPosts from '@components/sections/RecentPosts.astro';
 import heroImage from '../assets/images/home/default-hero-2.jpg';
 import styleGuideImage from '../assets/images/home/advisor.jpg';
-import ServiceGrid from '@components/sections/serviceGrid.astro';
 
 const seoTitle = "Mandataire administratif pour formalités d'entreprise";
 const seoDescription =
@@ -143,10 +142,10 @@ const recentPostsSection = {
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="base" background="light" />
-    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Formalities" />
+    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={2} category="Formalities" />
     <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
-    <Logos content={logosSection} background="base" padding="small" />
+    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
     <Stats content={sideBySideStats} background="dark" padding="base" />
     <Faqs content={faqsSection} background="base" padding="base" />
 </Layout>

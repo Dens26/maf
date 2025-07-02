@@ -1,14 +1,14 @@
 export const siteConfig = {
   companyName: 'Mon Assistant Formalités',
-  siteUrl: 'https://titan-core.com',
+  siteUrl: 'https://mon-assistant-formalites.db-dev.fr',
   Socials: {
-      xSocial: 'https://x.com/astrodotbuild',
-      Github: 'https://github.com/withastro',
-      Instagram: 'https://www.instagram.com/astrodotbuild',
-      LinkedIn: 'https://www.linkedin.com/company/astrodotbuild',
-      Email: 'support@titan-core.com',
-      Phone: '+123 456 7890',
-      Location: '123 Main St, Anytown, USA',
+      xSocial: 'en cours',
+      // Github: 'https://github.com/withastro',
+      // Instagram: 'https://www.instagram.com/astrodotbuild',
+      LinkedIn: 'https://www.linkedin.com/mon-assistant-formalites',
+      Email: 'contact-maf@db-dev.fr',
+      Phone: '+33769924672',
+      Location: 'Cornas, 07130 – France',
   }
 };
 
