@@ -1,0 +1,45 @@
+---
+name: "Denis BEKAERT"
+headshot: "./images/zeus.jpg"
+jobTitle: "Fondateur & Formaliste"
+publish: true
+order: 1
+linkedin: "https://www.linkedin.com"
+linkedinUsername: "Denis Bekaert"
+email: "contact@monassistantformalite-dbdev.com"
+# xSocial: "https://x.com/zeus"
+# xSocialUsername: "zeus"
+# github: "https://github.com/zeus"
+# githubUsername: "zeus"
+---
+
+## À propos de moi
+
+Je m’appelle **Denis Bekaert**, fondateur de **Mon Assistant Formalités**.  
+Mon objectif est clair : simplifier les démarches administratives pour les entrepreneurs individuels en leur offrant un accompagnement clair, efficace et bienveillant.
+
+Fort de mon expérience au sein de l’**INPI**, j’accompagne quotidiennement des professionnels dans l’utilisation du **Guichet Unique**. Cette proximité avec les utilisateurs m’a permis de mieux comprendre les enjeux, les blocages et les besoins concrets des entrepreneurs face aux formalités administratives.
+
+### Parcours
+
+Titulaire d’un **baccalauréat professionnel en comptabilité**, j’ai acquis de solides bases en gestion et en organisation.  
+Après plusieurs expériences dans le **développement web**, j’occupe aujourd’hui le poste de **téléconseiller à l’INPI**, où j’assiste les professionnels dans leurs démarches de création, modification ou cessation d’activité.
+
+C’est à la croisée de ces compétences — techniques, administratives et humaines — qu’est né Mon Assistant Formalités.
+
+### Méthode et valeurs
+
+Je mets un point d’honneur à travailler avec **rigueur**, **pédagogie** et **disponibilité**.  
+Chaque mission est menée avec le souci d’apporter une solution concrète, adaptée au profil de l’entrepreneur, et toujours expliquée de manière simple et transparente.
+
+### Réalisations
+
+- Accompagnement de **nombreux professionnels** via le Guichet Unique (INPI).
+- **Création et pilotage de projets numériques** orientés utilisateur.
+- **Formation continue** en digital, automatisation et gestion des formalités.
+
+### Un peu plus sur moi
+
+- Curieux et passionné par **l’automatisation** des processus, je cherche sans cesse à optimiser le temps de mes clients.
+- Amoureux des **outils bien conçus** et des **to-do lists efficaces**.
+- Mon ambition à long terme : développer un assistant intelligent capable de **gérer automatiquement les formalités administratives** pour les indépendants.

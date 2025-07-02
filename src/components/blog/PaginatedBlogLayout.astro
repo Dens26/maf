@@ -7,8 +7,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-astro';
 
 import blogHeroImage from '@assets/images/blog-hero-2.jpg';
 
-const seoTitle = "Blog";
-const seoDescription = "Our blog is where we share our thoughts and ideas about the latest trends in the web development industry.";
+const seoTitle = "Articles";
+const seoDescription = "Notre blog est l'endroit où nous partageons les articles concernant les dernières informations des formalités entreprise du guichet unique.";
 
 interface Props {
     posts: any[];
@@ -57,7 +57,7 @@ const heroContent = {
                     {prevPage && (
                         <Button href={prevPage} variant="primary" class="flex items-center gap-2">
                             <ChevronLeft size={20} />
-                            Previous
+                            Précédent
                         </Button>
                     )}
                     
@@ -79,7 +79,7 @@ const heroContent = {
 
                     {nextPage && (
                         <Button href={nextPage} variant="primary">
-                            Next
+                            Suivant
                             <ChevronRight size={20} />
                         </Button>
                     )}

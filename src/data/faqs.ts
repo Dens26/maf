@@ -13,24 +13,28 @@ export const faqLists: Record<string, FaqList> = {
         id: 'main',
         faqs: [
             {
-                question: "Is Titan Core completely free to use?",
-                answer: "Yes, Titan Core is 100% free and open-source. You can use it for personal and commercial projects without any licensing fees."
+                question: "Qu’est-ce qu’un mandataire en formalités administratives ?",
+                answer: "C’est un professionnel habilité à réaliser pour vous les démarches liées à la création, la modification ou la radiation d’une entreprise. Il agit en votre nom grâce à un mandat écrit."
             },
             {
-                question: "How do I customize the color schemes?",
-                answer: "Titan Core comes with 10 pre-built color schemes that can be easily switched through the theme configuration file. For custom colors, you can modify the CSS variables in the `src/styles/global.css` file to match your brand identity."
+                question: "À qui s’adressent vos services ?",
+                answer: "Mes services s’adressent principalement aux entrepreneurs individuels, micro-entrepreneurs, freelances et professions libérales qui souhaitent déléguer leurs démarches administratives."
             },
             {
-                question: "Do I need to know Astro JS to use this theme?",
-                answer: "Basic familiarity with Astro JS is helpful, but not required. The component-based architecture makes it easy to understand and modify even if you're new to Astro."
+                question: "Est-ce que tout peut se faire à distance ?",
+                answer: "Oui, toutes les formalités sont gérables en ligne. Vous n’avez pas besoin de vous déplacer : un simple échange par email ou téléphone suffit."
             },
             {
-                question: "Can I use Titan Core as a starting point for client projects?",
-                answer: "Absolutely! Titan Core is designed to be a foundation theme that you can build upon for client projects. Its clean architecture and minimal approach make it perfect as a starting point for customized websites."
+                question: "Quels documents dois-je fournir ?",
+                answer: "Cela dépend de la formalité concernée. Lors de notre premier contact, je vous indique précisément les documents nécessaires pour constituer votre dossier."
             },
             {
-                question: "How often is Titan Core updated?",
-                answer: "We aim to update Titan Core regularly to keep it compatible with the latest Astro JS releases and web standards. Major updates are released quarterly, with smaller fixes and improvements added more frequently. You can star our GitHub repository to stay informed about updates."
+                question: "Combien de temps prennent les démarches ?",
+                answer: "Le délai varie selon la formalité et l’administration concernée. Je vous informe toujours des délais estimés dès le départ et vous tiens informé tout au long du processus."
+            },
+            {
+                question: "Vos prestations sont-elles éligibles aux frais professionnels ?",
+                answer: "Oui, mes prestations sont facturées avec justificatif, et peuvent être comptabilisées comme frais professionnels pour votre activité."
             }
         ]
     }

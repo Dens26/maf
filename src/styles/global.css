@@ -14,26 +14,26 @@
     --color-background: #f8f9ff;
     --color-background-light: #eef1ff;
     --color-background-dark: #1a1f3c;
-    
+
     --color-headline: #1a1f3c;
     --color-headline-light: #1a1f3c;
     --color-headline-dark: #ffffff;
-    
+
     --color-eyebrow: #1e3c8c;
     --color-eyebrow-light: #1e3c8c;
     --color-eyebrow-dark: #e6b800;
-    
+
     --color-body-base: #1a1f3c;
     --color-body-light: #1a1f3c;
     --color-body-dark: #ffffff;
-    
+
     --color-input: var(--color-background-light);
     --color-input-light: var(--color-background-light);
     --color-input-dark: var(--color-background-dark);
     --color-input-text: var(--color-body-base);
     --color-input-text-light: var(--color-headline-light);
     --color-input-text-dark: var(--color-headline-dark);
-    
+
     --color-nav-text: var(--color-body-base);
     --color-nav-text-hover: var(--color-primary);
     --color-nav-text-active: var(--color-primary);
@@ -43,10 +43,10 @@
     --color-nav-mobile-text-hover: #e6b800;
     --color-nav-mobile-text-active: #ffffff;
     --color-nav-mobile-text-current: #ffffff;
-    
+
     --color-header-logo: var(--color-primary);
     --color-footer-logo: var(--color-primary);
-    
+
     --text-h1: clamp(2rem, 5vw + 1rem, 4rem);
     --text-h2: clamp(1.5rem, 4vw + 0.5rem, 2.5rem);
     --text-h3: clamp(1.25rem, 3vw + 0.25rem, 2rem);
@@ -61,7 +61,7 @@
     --text-article-h5: clamp(0.875rem, 1.5vw + 0.0625rem, 1.15rem);
     --text-article-h6: clamp(0.75rem, 1.2vw + 0.03125rem, 0.9rem);
     --text-article-h6: clamp(0.75rem, 1.2vw + 0.03125rem, 0.9rem);
-    
+
     --text-xsmall: clamp(0.625rem, 1.5vw + 0.0625rem, 0.75rem);
     --text-small: clamp(0.875rem, 1.5vw + 0.0625rem, 1rem);
     --text-base: clamp(1rem, 2vw + 0.125rem, 1.25rem);
@@ -71,14 +71,14 @@
     --spacing-small: clamp(2rem, 10vw + 1rem, 6rem);
     --spacing-base: clamp(4rem, 10vw + 1rem, 8rem);
     --spacing-large: clamp(6rem, 10vw + 1rem, 10rem);
-    
+
     --container-small: 1000px;
     --container-base: 1400px;
 
     --border-radius-small: 0.5rem;
     --border-radius-base: 1rem;
     --border-radius-large: 2rem;
-    
+
     --font-bruno-ace: 'Bruno Ace SC', sans-serif;
     --font-noto-sans-kr: "Noto Sans KR", sans-serif;
     --font-base: 'Noto Sans KR', sans-serif;
@@ -87,8 +87,8 @@
 }
 
 @layer base {
-    
-    
+
+
     [data-theme='zeus'] {
         --color-primary: #3557c1;
         --color-primary-light: #4b6ed4;
@@ -453,48 +453,180 @@
 }
 
 @layer components {
-    html { font-size: 16px; color: var(--color-text-base); }
-    body { background-color: var(--color-background); font-size: var(--text-base); font-family: var(--font-base); font-weight: 400;}
-    h1 { font-size: var(--text-h1); font-family: var(--font-headline); font-weight: 500 ;}
-    h2 { font-size: var(--text-h2); font-family: var(--font-headline); font-weight: 500 ;}
-    h3 { font-size: var(--text-h3); font-family: var(--font-headline); font-weight: 500 ;}
-    h4 { font-size: var(--text-h4); font-family: var(--font-headline); font-weight: 500 ;}
-    h5 { font-size: var(--text-h5); font-family: var(--font-headline); font-weight: 500 ;}
-    h6 { font-size: var(--text-h6); font-family: var(--font-headline); font-weight: 500 ;}
-    a { color: var(--color-primary); }
-    p { color: var(--color-text-base); }
-    article h1 { font-size: var(--text-article-h1); margin: 0 0 2rem}
-    article h2 { font-size: var(--text-article-h2); margin: 0 0 2rem}
-    article h3 { font-size: var(--text-article-h3); margin: 0 0 1.75rem}
-    article h4 { font-size: var(--text-article-h4); margin: 0 0 1.5rem}
-    article h5 { font-size: var(--text-article-h5); margin: 0 0 1.25rem}
-    article h6 { font-size: var(--text-article-h6); margin: 0 0 1rem}
-    article p { font-size: var(--text-base); margin: 0 0 1.75rem; line-height: 1.8;}
-    article ol { font-size: var(--text-base); margin: 0 0 2rem; padding-left: 2rem; list-style-type: decimal; }
-    article ol ::marker { color: var(--color-primary); }
-    article ul { font-size: var(--text-base); margin: 0 0 2rem; padding-left: 2rem; list-style-type: disc; }
-    article ul ::marker { color: var(--color-primary); }
-    article blockquote { font-size: var(--text-base); margin: 0 0 1.75rem; padding-left: 2rem; border-left: 4px solid var(--color-primary); }
-    
+    html {
+        font-size: 16px;
+        color: var(--color-text-base);
+    }
+
+    body {
+        background-color: var(--color-background);
+        font-size: var(--text-base);
+        font-family: var(--font-base);
+        font-weight: 400;
+    }
+
+    h1 {
+        font-size: var(--text-h1);
+        font-family: var(--font-headline);
+        font-weight: 500;
+    }
+
+    h2 {
+        font-size: var(--text-h2);
+        font-family: var(--font-headline);
+        font-weight: 500;
+    }
+
+    h3 {
+        font-size: var(--text-h3);
+        font-family: var(--font-headline);
+        font-weight: 500;
+    }
+
+    h4 {
+        font-size: var(--text-h4);
+        font-family: var(--font-headline);
+        font-weight: 500;
+    }
+
+    h5 {
+        font-size: var(--text-h5);
+        font-family: var(--font-headline);
+        font-weight: 500;
+    }
+
+    h6 {
+        font-size: var(--text-h6);
+        font-family: var(--font-headline);
+        font-weight: 500;
+    }
+
+    a {
+        color: var(--color-primary);
+    }
+
+    p {
+        color: var(--color-text-base);
+    }
+
+    article h1 {
+        font-size: var(--text-article-h1);
+        margin: 0 0 2rem
+    }
+
+    article h2 {
+        font-size: var(--text-article-h2);
+        margin: 0 0 2rem
+    }
+
+    article h3 {
+        font-size: var(--text-article-h3);
+        margin: 0 0 1.75rem
+    }
+
+    article h4 {
+        font-size: var(--text-article-h4);
+        margin: 0 0 1.5rem
+    }
+
+    article h5 {
+        font-size: var(--text-article-h5);
+        margin: 0 0 1.25rem
+    }
+
+    article h6 {
+        font-size: var(--text-article-h6);
+        margin: 0 0 1rem
+    }
+
+    article p {
+        font-size: var(--text-base);
+        margin: 0 0 1.75rem;
+        line-height: 1.8;
+    }
+
+    article ol {
+        font-size: var(--text-base);
+        margin: 0 0 2rem;
+        padding-left: 2rem;
+        list-style-type: decimal;
+    }
+
+    article ol ::marker {
+        color: var(--color-primary);
+    }
+
+    article ul {
+        font-size: var(--text-base);
+        margin: 0 0 2rem;
+        padding-left: 2rem;
+        list-style-type: disc;
+    }
+
+    article ul ::marker {
+        color: var(--color-primary);
+    }
+
+    article blockquote {
+        font-size: var(--text-base);
+        margin: 0 0 1.75rem;
+        padding-left: 2rem;
+        border-left: 4px solid var(--color-primary);
+    }
+
 }
 
 @layer utilities {
-    .text-header-logo { color: var(--color-header-logo); }
-    .text-footer-logo { color: var(--color-footer-logo); }
-    
-    .pt-small { padding-top: var(--spacing-small); }
-    .pt-base { padding-top: var(--spacing-base); }
-    .pt-large { padding-top: var(--spacing-large); }
+    .text-header-logo {
+        color: var(--color-header-logo);
+    }
 
-    .pb-small { padding-bottom: var(--spacing-small); }
-    .pb-base { padding-bottom: var(--spacing-base); }
-    .pb-large { padding-bottom: var(--spacing-large); }
+    .text-footer-logo {
+        color: var(--color-footer-logo);
+    }
 
-    .py-small { padding-top: var(--spacing-small); padding-bottom: var(--spacing-small); }
-    .py-base { padding-top: var(--spacing-base); padding-bottom: var(--spacing-base); }
-    .py-large { padding-top: var(--spacing-large); padding-bottom: var(--spacing-large); }
-    
-    .cursor-pointer { cursor: pointer; }
+    .pt-small {
+        padding-top: var(--spacing-small);
+    }
+
+    .pt-base {
+        padding-top: var(--spacing-base);
+    }
+
+    .pt-large {
+        padding-top: var(--spacing-large);
+    }
+
+    .pb-small {
+        padding-bottom: var(--spacing-small);
+    }
+
+    .pb-base {
+        padding-bottom: var(--spacing-base);
+    }
+
+    .pb-large {
+        padding-bottom: var(--spacing-large);
+    }
+
+    .py-small {
+        padding-top: var(--spacing-small);
+        padding-bottom: var(--spacing-small);
+    }
+
+    .py-base {
+        padding-top: var(--spacing-base);
+        padding-bottom: var(--spacing-base);
+    }
+
+    .py-large {
+        padding-top: var(--spacing-large);
+        padding-bottom: var(--spacing-large);
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
 }
 
 html,
@@ -511,11 +643,12 @@ body {
 .site-container {
     @apply mx-auto max-w-[var(--container-base)] w-full;
 }
+
 .site-container--small {
     @apply mx-auto max-w-[var(--container-small)] w-full;
 }
 
-.header-offset{
+.header-offset {
     @apply pt-24;
 }
 
@@ -526,9 +659,9 @@ body {
     --c2: var(--color-primary-dark);
 
     --_g:
-    var(--c1) 0% 5%, var(--c2) 6% 15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
-    var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
-    #0000 96%;
+        var(--c1) 0% 5%, var(--c2) 6% 15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
+        var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
+        #0000 96%;
     background:
         radial-gradient(50% 50% at 100% 0, var(--_g)),
         radial-gradient(50% 50% at 0 100%, var(--_g)),
@@ -563,4 +696,18 @@ pre[class*="language-"] {
     padding: 0.2rem 0.5rem;
     border-radius: 2px;
     font-weight: 400;
+}
+
+.full-logo {
+    display: none;
+}
+
+@media screen and (min-width: 576px) {
+    .full-logo {
+        display: block;
+    }
+
+    .min-logo {
+        display: none;
+    }
 }

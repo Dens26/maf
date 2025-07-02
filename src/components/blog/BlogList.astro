@@ -23,13 +23,13 @@ const activeCategories = categories.filter((category) =>
 ---
 
 <section class="site-container mx-auto px-4 py-base">
-    <div
+    <!-- <div
         class="mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6"
         data-aos="fade-in"
         data-aos-delay="100"
     >
         <div class="w-full">
-            <h2 class="text-lg font-semibold mb-4">Filter by Categories:</h2>
+            <h2 class="text-lg font-semibold mb-4">Filtrer par catégories:</h2>
             <div class="flex flex-wrap gap-2">
                 <a
                     href="/blog"
@@ -39,7 +39,7 @@ const activeCategories = categories.filter((category) =>
                             : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
                     }`}
                 >
-                    Show All
+                    Tour afficher
                 </a>
                 {
                     activeCategories.map((category) => (
@@ -63,7 +63,7 @@ const activeCategories = categories.filter((category) =>
                 >{allPosts.length}</span
             > posts
         </p>
-    </div>
+    </div> -->
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {
@@ -83,5 +83,5 @@ const activeCategories = categories.filter((category) =>
         }
     </div>
 
-    {posts.length === 0 && <p class="text-center text-gray-500 py-8">No posts found in this category.</p>}
+    {posts.length === 0 && <p class="text-center text-gray-500 py-8">Aucun article trouvé dans cette catégorie.</p>}
 </section>

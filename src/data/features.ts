@@ -21,33 +21,33 @@ export const featureLists: Record<string, FeatureList> = {
         features: [
             {
                 icon: Zap,
-                title: 'Lightning Fast Performance',
-                description: 'Optimized for speed and performance'
+                title: 'Formalités simplifiées',
+                description: 'Je prends en charge la rédaction, le dépôt et le suivi de vos formalités.'
             },
             {
                 icon: Shield,
-                title: 'SEO Optimized Structure',
-                description: 'Built with SEO best practices in mind'
+                title: 'Conformité garantie',
+                description: 'Vos démarches sont réalisées selon les dernières exigences réglementaires.'
             },
             {
                 icon: TabletSmartphone,
-                title: 'Responsive by Default',
-                description: 'Mobile-friendly out of the box'
+                title: '100% à distance',
+                description: 'Toutes les démarches peuvent être traitées en ligne, où que vous soyez.'
             },
             {
                 icon: Smile,
-                title: 'Easy Customization',
-                description: 'Customize the theme to your liking'
+                title: 'Gain de temps assuré',
+                description: 'Focalisez-vous sur votre activité pendant que je m’occupe du reste.'
             },
             {
                 icon: Type,
-                title: 'TypeScript Support',
-                description: 'Built with TypeScript in mind'
+                title: 'Transparence totale',
+                description: 'Vous êtes informé à chaque étape, sans jargon inutile.'
             },
             {
                 icon: CodeXml,
-                title: 'Minimal Dependencies',
-                description: 'Keep your project lightweight'
+                title: 'Adapté aux indépendants',
+                description: 'Spécialiste des entreprises individuelles et micro-entrepreneurs.'
             }
         ]
     },
@@ -56,18 +56,18 @@ export const featureLists: Record<string, FeatureList> = {
         features: [
             {
                 icon: Heart,
-                title: 'Made with Love',
-                description: 'Crafted with attention to detail'
+                title: 'Accompagnement humain',
+                description: 'Je reste disponible et à l’écoute tout au long du processus.'
             },
             {
                 icon: Coffee,
-                title: 'Always Fresh',
-                description: 'Regular updates and improvements'
+                title: 'Dossiers toujours à jour',
+                description: 'Veille juridique permanente pour garantir des formalités conformes.'
             },
             {
                 icon: Smile,
-                title: 'User Friendly',
-                description: 'Intuitive and easy to use'
+                title: 'Simplicité d’accès',
+                description: 'Un simple message ou appel pour lancer vos démarches.'
             }
         ]
     }

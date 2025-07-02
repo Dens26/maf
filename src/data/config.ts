@@ -1,5 +1,5 @@
 export const siteConfig = {
-  companyName: 'Titan Core',
+  companyName: 'Mon Assistant Formalités',
   siteUrl: 'https://titan-core.com',
   Socials: {
       xSocial: 'https://x.com/astrodotbuild',
@@ -14,8 +14,8 @@ export const siteConfig = {
 
 export const SEO = {
   Separator: '|',
-  SiteName: 'Titan Core',
-  defaultDescription: 'A modern, high-performance Astro JS theme',
+  SiteName: 'Mon Assistant Formalités ',
+  defaultDescription: "Simplifiez vos formalités d’entreprise",
 };
   
 export const blogSetting = {

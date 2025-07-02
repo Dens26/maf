@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import { getPaddingClass } from '@utils/styleUtils';
+import type { PaddingSize } from '@utils/styleUtils';
+
+interface Props {
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+
+const { padding, paddingTop, paddingBottom } = Astro.props;
+const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+
+const services = await getCollection('service', ({ data }) => {
+    return data.publish !== false;
+});
+---
+
+<section class:list={['relative', paddingClass]}>
+    <div class="site-container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 xl:gap-x-8 xl:gap-y-14">
+            {
+                services.map((service, index) => (
+                    <div
+                    class="flex flex-col bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 group overflow-hidden border border-gray-200"
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                    data-aos-duration="800"
+                    >
+                    <a href={`/services/${service.id}`} class="flex flex-col h-full">
+                        
+                        <!-- Image ou visuel -->
+                        <div class="relative h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
+                        {service.data.icon ? (
+                            <img
+                            src={service.data.icon}
+                            alt={service.data.name}
+                            class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                            />
+                        ) : (
+                            <div class="w-20 h-20 bg-gray-200 rounded-md flex items-center justify-center">
+                            <span class="text-gray-400">No Image</span>
+                            </div>
+                        )}
+                        </div>
+
+                        <!-- Contenu -->
+                        <div class="flex flex-col flex-grow gap-4 p-6">
+                        <!-- Titre -->
+                        <h3 class="text-lg font-semibold text-center text-gray-900 group-hover:text-primary transition-colors">
+                            {service.data.name}
+                        </h3>
+
+                        <!-- Prix en surimpression ou bandeau -->
+                        {service.data.priceRange && (
+                            <div class="text-center">
+                            <span class="inline-block bg-primary/10 text-primary font-semibold text-sm rounded-full px-3 py-1">
+                                {service.data.priceRange}
+                            </span>
+                            </div>
+                        )}
+
+                        <!-- Description courte -->
+                        <p class="text-sm text-gray-600 text-center line-clamp-4">
+                            {service.data.description}
+                        </p>
+
+                        <!-- Bouton lire plus -->
+                        <div class="mt-auto text-center">
+                            <span class="inline-block text-primary text-sm font-medium hover:underline">
+                            En savoir plus →
+                            </span>
+                        </div>
+                        </div>
+                    </a>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

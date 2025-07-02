@@ -13,132 +13,140 @@ import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
 import RecentPosts from '@components/sections/RecentPosts.astro';
 import heroImage from '../assets/images/home/default-hero-2.jpg';
-import styleGuideImage from '../assets/images/home/developer.jpg';
+import styleGuideImage from '../assets/images/home/advisor.jpg';
+import ServiceGrid from '@components/sections/serviceGrid.astro';
 
-const seoTitle = "Modern, High-Performance Astro Theme";
-const seoDescription = "A modern, high-performance Astro theme for developer portfolios and documentation sites.";
+const seoTitle = "Mandataire administratif pour formalités d'entreprise";
+const seoDescription =
+    "Accompagnement professionnel pour la création, la modification et la radiation d'entreprise. Simplifiez vos démarches administratives avec un mandataire expérimenté.";
 
 const heroContent = {
-    title: 'The Foundation for Beautiful Astro JS Websites',
-    description: 'Titan Core is a minimal, performance-focused Astro JS theme that serves as the perfect foundation for your next web project. Built with clean code and modern best practices, it\'s designed to be extended and customized to your specific needs.',
+    title: 'Simplifiez vos formalités d’entreprise',
+    description:
+        'Création, modification, radiation… Je prends en charge vos démarches administratives pour vous permettre de vous concentrer sur votre activité.',
     buttons: [
         {
-            text: 'Get Started',
+            text: 'Demander un devis',
             link: '/contact',
-            target: '_self'
+            target: '_self',
         },
         {
-            text: 'View on GitHub',
-            link: 'https://github.com/rspisarski/titan-core',
-            target: '_blank'
-        }
+            text: 'En savoir plus *',
+            link: '/services',
+            target: '_self',
+        },
     ],
     backgroundImage: heroImage,
-    overlayOpacity: 0.2
-}
+    overlayOpacity: 0.2,
+};
 
 const featuresSection = {
-    eyebrow: "CORE FEATURES",
-    title: "Everything You Need, Nothing You Don't",
-    description: "Titan Core gives you a solid foundation with essential features while staying lightweight and customizable. Start with a clean slate and build exactly what you need without the bloat.",
+    eyebrow: 'Mes services',
+    title: 'Un accompagnement complet et personnalisé',
+    description:
+        'Je vous accompagne dans toutes vos démarches administratives liées à la vie de votre entreprise. Gain de temps, conformité, tranquillité d’esprit.',
     features: featureLists.main.features,
     button: {
-        text: "View Theme Info",
-        link: "/theme-info",
-        variant: "primary" as const
-    }
-}
+        text: 'Voir tous les services *',
+        link: '/services',
+        variant: 'primary' as const,
+    },
+};
 
 const FooterCta = {
-    eyebrow: "Join The Community",
-    title: ' Start Building With Titan Core Today',
-    description: 'Titan Core is open-source and constantly improving. Join our community of developers to contribute, get support, or showcase what you\'ve built.',
+    eyebrow: "Besoin d'aide ?",
+    title: 'Confiez-moi vos formalités dès aujourd’hui',
+    description:
+        'Je vous aide à sécuriser vos démarches administratives en toute simplicité. Contactez-moi pour en discuter.',
     hideCta: false,
     button: {
-        text: 'Download Titan Core',
-        link: 'https://github.com/rspisarski/titan-core',
-        target: '_blank'
-    }
-}
+        text: 'Me contacter',
+        link: '/contact',
+        target: '_self',
+    },
+};
 
 const styleGuideSection = {
-    eyebrow: "Design System",
-    headline: "Consistent & Beautiful Components",
-    description: "Titan Core comes with a complete style guide to ensure your projects maintain visual consistency. From typography to interactive elements, we've carefully crafted each component.",
+    eyebrow: 'Pourquoi me faire confiance ?',
+    headline: 'Clarté, réactivité et professionnalisme',
+    description:
+        'Chaque formalité est traitée avec rigueur et transparence. Vous bénéficiez d’un accompagnement humain et d’un suivi personnalisé, sans jargon ni paperasse inutile.',
     image: {
         src: styleGuideImage,
-        alt: "Featured image"
+        alt: 'Documents administratifs en cours de traitement',
     },
     buttons: [
         {
-            text: "Explore Style Guide",
-            link: "/style-guide",
-            variant: "primary" as const
-        }
-    ]
-}
+            text: 'Découvrir mon approche *',
+            link: '/about',
+            variant: 'primary' as const,
+        },
+    ],
+};
 
 const sideBySideStats = {
-    eyebrow: "Stats",
-    title: "Built for Speed and Flexibility",
-    description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
+    eyebrow: 'Chiffres clés',
+    title: 'Des formalités gérées avec efficacité',
+    description:
+        'Des dizaines d’entrepreneurs m’ont déjà fait confiance pour gérer leurs obligations administratives rapidement et sans erreur.',
     variant: 'side-by-side' as const,
     stats: statsLists.withContent.stats,
     content: {
-        title: "Built for Speed and Flexibility",
-        description: "Titan Core is designed with performance and developer experience in mind. Our lightweight theme gives you all the essentials without the bloat, letting you build exactly what you need with impressive speed.",
+        title: 'Un interlocuteur unique et disponible',
+        description:
+            'Je suis votre unique contact pour toutes vos formalités. Réponses rapides, explications claires et résultats conformes.',
         button: {
-            text: "Discover Titan Core",
-            link: "/theme-info",
-            variant: "primary" as const
-        }
-    }
+            text: 'Voir les témoignages *',
+            link: '/stories',
+            variant: 'primary' as const,
+        },
+    },
 };
 
 const mainCta = {
-    eyebrow: "Build Blocks",
-    title: "Ready-to-Use Components",
-    description: "Save development time with our pre-built, accessible components. Each one is designed to integrate seamlessly with your projects while maintaining excellent performance.",
+    eyebrow: 'Démarches facilitées',
+    title: 'Formalités administratives sans tracas',
+    description:
+        'Ne perdez plus de temps dans les méandres administratifs. Confiez vos démarches à un professionnel de confiance.',
     button: {
-        text: "View All Components",
-        link: "/components",
-        variant: "primary" as const,
-        target: "_self" as const
-    }
+        text: 'Commencer maintenant',
+        link: '/contact',
+        variant: 'primary' as const,
+        target: '_self' as const,
+    },
 };
 
-
 const logosSection = {
-    eyebrow: "Our Clients",
-    logos: logoLists.main.logos
-}
+    eyebrow: "Ils m'ont fait confiance",
+    logos: logoLists.main.logos,
+};
 
 const faqsSection = {
-    eyebrow: "FAQs",
-    title: 'Frequently Asked Questions',
-    description: 'Find answers to common questions about our platform and services.',
-    faqs: faqLists.main.faqs
-}
+    eyebrow: "Questions fréquentes",
+    title: 'Vos questions, mes réponses',
+    description: 'Voici les réponses aux questions les plus souvent posées sur mes prestations et mon fonctionnement.',
+    faqs: faqLists.main.faqs,
+};
 
 const recentPostsSection = {
-    eyebrow: "LATEST INSIGHTS",
-    title: " Learn From Our Experience",
-    description: "Explore our latest articles on Astro JS development, theme customization tips, and web performance best practices.",
+    eyebrow: "Conseils pratiques",
+    title: "Mieux comprendre vos obligations",
+    description: "Je vous partage des conseils utiles pour mieux appréhender les démarches administratives et rester en conformité avec la réglementation.",
     button: {
-            text: "View All Posts",
-            link: "/blog",
-        variant: "primary" as const
-    }
-}
+        text: "Lire les articles",
+        link: "/blog",
+        variant: "primary" as const,
+    },
+};
 ---
 
 <Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="base" background="light" />
-    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Theme Usage"/>
+    <RecentPosts content={recentPostsSection} background="base" padding="base" postsToShow={3} category="Formalities" />
     <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="base" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="base" />
-    <Logos content={logosSection} background="base" padding='small'/>
-    <Stats content={sideBySideStats} background='dark' padding="base"/>
+    <Logos content={logosSection} background="base" padding="small" />
+    <Stats content={sideBySideStats} background="dark" padding="base" />
     <Faqs content={faqsSection} background="base" padding="base" />
 </Layout>

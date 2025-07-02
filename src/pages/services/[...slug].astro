@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const serviceEntries = await getCollection('service');
+    return serviceEntries.map((entry) => ({
+        params: { slug: entry.id },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const seoTitle = entry.data.name;
+const seoDescription = entry.data.description;
+let seoImage: string | undefined = entry.data.icon;
+
+if (seoImage && !seoImage.startsWith('http')) {
+    const siteUrl = import.meta.env.SITE || 'https://exemple.com';
+    seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
+}
+---
+
+<Layout title={seoTitle} description={seoDescription} image={seoImage}>
+    {
+        entry.data.icon && (
+            <div class="w-full h-96 absolute top-0 left-0 z-0 overflow-hidden border-b border-black">
+                <img src={entry.data.icon} alt="" class="w-full h-full object-cover grayscale opacity-20" />
+                <div class="absolute inset-0 bg-primary/10 backdrop-blur-md" />
+            </div>
+        )
+    }
+
+    <article class="site-container--small mx-auto px-4 relative z-10 pb-24 pt-40">
+        <!-- Titre et meta -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-4">{entry.data.name}</h1>
+            <p class="text-gray-600 max-w-xl mx-auto">{entry.data.description}</p>
+        </div>
+
+        <!-- Infos clés -->
+        <div class="grid sm:grid-cols-3 gap-6 text-sm text-center max-w-3xl mx-auto pt-16 m-16">
+            {
+                entry.data.category && (
+                    <div class="bg-gray-600/90 hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20">
+                        <p class="font-semibold text-gray-300 mb-1">Catégorie</p>
+                        <p class="text-white">{entry.data.category}</p>
+                    </div>
+                )
+            }
+            {
+                entry.data.priceRange && (
+                    <div class="bg-gray-600/90 hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20">
+                        <p class="font-semibold text-gray-300 mb-1">Tarif</p>
+                        <p class="text-white">{entry.data.priceRange}</p>
+                        <p class="text-xs text-gray-300 mt-2">* Hors frais du Guichet Unique</p>
+                    </div>
+                )
+            }
+            {
+                entry.data.duration && (
+                    <div class="bg-gray-600/90 hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20">
+                        <p class="font-semibold text-gray-300 mb-1">Délai de traitement</p>
+                        <p class="text-white">{entry.data.duration}</p>
+                    </div>
+                )
+            }
+        </div>
+
+        <!-- Contenu Markdown -->
+        <div class="prose prose-neutral dark:prose-invert max-w-none mx-auto">
+            <Content />
+        </div>
+    </article>
+</Layout>

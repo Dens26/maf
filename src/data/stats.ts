@@ -46,23 +46,22 @@ export const statsLists: Record<string, StatsList> = {
         id: 'withContent',
         stats: [
             {
-                value: 10,
-                label: 'Color Schemes',
+                value: 2025,
+                label: "Année de lancement",
             },
             {
-                value: 14.53,
-                label: 'Core Bundle Size',
-                suffix: 'KB'
+                value: 100,
+                label: "des démarches traitées en ligne",
+                suffix: "%",
             },
             {
-                value: 11,
-                label: 'Pre-Built Components',
+                value: 6,
+                label: "mois d'expérience à l'INPI",
             },
             {
-                value: 10,
-                label: 'Build Time',
-                prefix: '<100',
-                suffix: 's'
+                value: 48,
+                label: "heures max pour un retour",
+                prefix: "<",
             }
         ]
     }

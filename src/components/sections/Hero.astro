@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 interface HeroContent {
     title: string;
     description: string;
-        buttons?: {
+    buttons?: {
         text: string;
         link: string;
         variant?: 'primary' | 'secondary' | 'ghostLight' | 'ghostDark';
@@ -24,41 +24,44 @@ const opacity = content.overlayOpacity ?? 1; // Default opacity if not specified
 ---
 
 <section class="header-offset relative">
-    {content.backgroundImage && (
-        <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden">
-            <Image
-                src={content.backgroundImage}
-                alt=""
-                width={1920}
-                height={1080}
-                class="w-full h-full object-cover"
-                quality={70}
-                format="webp"
-                loading="eager"
-                decoding="async"
-            />
-            <div
-                class="hero-background absolute inset-0 left-0 top-0 w-full h-full overflow-hidden"
-                style={`opacity: ${opacity};`}
-            ></div>
-        </div>
-    )}
+    {
+        content.backgroundImage && (
+            <div class="absolute inset-0 left-0 top-0 w-full h-full overflow-hidden">
+                <Image
+                    src={content.backgroundImage}
+                    alt=""
+                    width={1920}
+                    height={1080}
+                    class="w-full h-full object-cover"
+                    quality={70}
+                    format="webp"
+                    loading="eager"
+                    decoding="async"
+                />
+                <div class="absolute inset-0 bg-black/80" style={`opacity: ${opacity};`} />
+            </div>
+        )
+    }
 
-    <div class="site-container mx-auto px-4 py-large relative z-10 flex flex-col md:items-center md:justify-center md:text-center">
+    <div
+        class="site-container mx-auto px-4 py-large relative z-10 flex flex-col md:items-center md:justify-center md:text-center"
+    >
         <h1 class="text-white text-balance" data-aos="fade-up">{content.title}</h1>
         <p class="text-white mt-2 text-balance" data-aos="fade-up" data-aos-delay="100">{content.description}</p>
-        {content.buttons && content.buttons.length > 0 && (
-            <div class="flex flex-wrap gap-4 mt-8" data-aos="fade-up">
-                {content.buttons.map((button) => (
-                    <Button
-                        href={button.link}
-                        target={button.target || '_self'}
-                        variant={button.variant || 'primary'}
-                    >
-                        {button.text}
-                    </Button>
-                ))}
-            </div>
-        )}
+        {
+            content.buttons && content.buttons.length > 0 && (
+                <div class="flex flex-wrap gap-4 mt-8" data-aos="fade-up">
+                    {content.buttons.map((button) => (
+                        <Button
+                            href={button.link}
+                            target={button.target || '_self'}
+                            variant={button.variant || 'primary'}
+                        >
+                            {button.text}
+                        </Button>
+                    ))}
+                </div>
+            )
+        }
     </div>
 </section>

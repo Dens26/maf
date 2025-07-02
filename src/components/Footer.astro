@@ -22,11 +22,11 @@ interface Props {
 const { footerCta } = Astro.props;
 
 const defaultCta = {
-  title: "Ready to get started?",
-  description: "Join us today and transform your digital presence with our innovative solutions.",
+  title: "Besoin d'aide ?",
+  description: "Confiez-moi vos formalités dès aujourd’hui. Je vous aide à sécuriser vos démarches administratives en toute simplicité. Contactez-moi pour en discuter.",
   hideCta: false,
   button: {
-    text: "Contact Us",
+    text: "Me contacter",
     link: "/contact",
     target: "_self"
   }
@@ -61,17 +61,17 @@ const currentYear = new Date().getFullYear();
       <div class="col-span-1">
         <Logo variant="footer" />
         <p class="mt-4 text-white">
-          Empowering your digital journey with innovative solutions.
+          Gain de temps, conformité, tranquillité d’esprit. .
         </p>
       </div>
       
       <div class="col-span-1">
-        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <h3 class="text-lg font-semibold mb-4"></h3>
         <nav>
           <ul class="space-y-2">
-            {footerMenu.map(item => (
+            <!-- {footerMenu.map(item => (
               <li><a href={item.link} class="text-body-dark hover:text-white transition-colors">{item.name}</a></li>
-            ))}
+            ))} -->
           </ul>
         </nav>
       </div>
@@ -79,7 +79,7 @@ const currentYear = new Date().getFullYear();
 
     <div class="mt-8 flex flex-col md:flex-row justify-between items-center">
       <div class="text-body-dark text-sm">
-        © {currentYear} {siteConfig.companyName}. All rights reserved.
+        © {currentYear} {siteConfig.companyName}. Tous droits réservés.
       </div>
       
       <nav class="mt-4 md:mt-0">

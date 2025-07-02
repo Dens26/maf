@@ -26,9 +26,9 @@ export const categories: Category[] = [
     description: 'Exploring accessibility and user experience'
   },
   {
-    name: 'Theme Usage',
-    slug: 'theme-usage',
-    description: 'Learn how to use the theme'
+    name: 'Formalities',
+    slug: 'formalities',
+    description: 'Information on business formalities'
   },
   {
     name: 'Astro JS',

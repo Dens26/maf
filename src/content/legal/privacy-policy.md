@@ -1,84 +1,83 @@
 ---
-title: "Privacy Policy"
-lastUpdated: "2024-03-04"
+title: "Politique de confidentialité"
+lastUpdated: "2025-06-12"
 seo:
-  title: "Privacy Policy - Your Rights and Our Responsibilities"
-  description: "Learn how we collect, use, and protect your personal information in compliance with data protection regulations."
+  title: "Politique de confidentialité - Mon Assistant Formalités"
+  description: "Découvrez comment Mon Assistant Formalités collecte, utilise et protège vos données personnelles, en conformité avec le RGPD."
 ---
 
 ## Introduction
 
-Welcome to our Privacy Policy. This document explains how we collect, use, and protect your personal information when you use our website and services.
+Chez **Mon Assistant Formalités**, la protection de vos données personnelles est une priorité. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre site et nos services d’accompagnement administratif.
 
-## Information We Collect
+## Données que nous collectons
 
-### Personal Information
+### Données personnelles
 
-We may collect the following types of personal information:
+Nous pouvons collecter les données suivantes :
 
-- **Contact Information**: Name, email address, phone number, and mailing address.
-- **Account Information**: Username, password, and account preferences.
-- **Technical Information**: IP address, browser type, device information, and cookies.
-- **Usage Information**: Pages visited, time spent on site, and interaction with content.
+- **Informations de contact** : nom, prénom, adresse e-mail, numéro de téléphone, adresse postale.
+- **Informations relatives à votre activité** : statut juridique, numéro SIRET, adresse professionnelle.
+- **Échanges** : contenu de vos messages, demandes de contact, informations fournies dans le cadre d’une mission.
 
-### How We Collect Information
+### Moyens de collecte
 
-Information is collected through:
+Les données sont collectées via :
 
-- Direct submission via forms
-- Cookies and tracking technologies
-- Third-party services and analytics
+- Les formulaires de contact ou de demande d’accompagnement
+- Les échanges par email ou téléphone
+- Des outils d’analyse de fréquentation (cookies anonymisés)
 
-## How We Use Your Information
+## Utilisation de vos données
 
-We use your information to:
+Vos données sont utilisées pour :
 
-- Provide and improve our services
-- Communicate with you about our products and services
-- Process transactions and fulfill orders
-- Personalize your experience
-- Comply with legal obligations
+- Répondre à vos demandes
+- Réaliser les formalités administratives que vous nous confiez
+- Vous envoyer des informations utiles concernant votre activité ou nos services
+- Respecter nos obligations légales
 
-## Data Sharing and Disclosure
+## Partage de vos données
 
-We may share your information with:
+Vos données ne sont **jamais revendues**.
 
-- Service providers who help us operate our business
-- Legal authorities when required by law
-- Business partners with your consent
+Elles peuvent être partagées avec des tiers uniquement dans les cas suivants :
 
-We do not sell your personal information to third parties.
+- Pour exécuter une prestation que vous nous avez confiée (ex. : dépôt via le Guichet Unique)
+- Pour répondre à une obligation légale
+- Avec votre consentement explicite
 
-## Your Rights
+## Vos droits
 
-Depending on your location, you may have the right to:
+Conformément au **Règlement Général sur la Protection des Données (RGPD)**, vous pouvez :
 
-- Access your personal information
-- Correct inaccurate information
-- Delete your information
-- Object to certain processing activities
-- Data portability
-- Withdraw consent
+- Accéder à vos données
+- Demander leur rectification ou leur suppression
+- Vous opposer à leur traitement ou en demander la limitation
+- Retirer votre consentement à tout moment
 
-## Data Security
+📩 Pour exercer vos droits : contact@monassistantformalites.fr
 
-We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
+## Sécurité des données
 
-## Cookies and Tracking Technologies
+Nous mettons en œuvre des mesures techniques et organisationnelles adaptées pour garantir la sécurité de vos informations (accès restreint, protection des outils numériques…).
 
-Our website uses cookies and similar technologies to enhance your browsing experience. You can manage your cookie preferences through your browser settings.
+## Cookies
 
-## Children's Privacy
+Notre site utilise des cookies uniquement à des fins de fonctionnement et de mesure d’audience (de manière anonymisée). Vous pouvez configurer votre navigateur pour les refuser.
 
-Our services are not intended for children under 13. We do not knowingly collect information from children under 13.
+## Public visé
 
-## Changes to This Privacy Policy
+Nos services s’adressent uniquement à des personnes majeures. Nous ne collectons pas intentionnellement de données concernant des mineurs.
 
-We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+## Mise à jour
 
-## Contact Us
+Cette politique peut être modifiée. La dernière mise à jour date du **12 juin 2025**. Toute modification importante vous sera notifiée via le site.
 
-If you have any questions about this Privacy Policy, please contact us at:
+## Contact
 
-- Email: privacy@example.com
-- Address: 123 Privacy Street, Data City, 12345 
+Pour toute question relative à vos données personnelles :
+
+**Mon Assistant Formalités**  
+📧 contact@monassistantformalites.fr  
+📍 Cornas, 07130 – France

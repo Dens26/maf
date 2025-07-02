@@ -43,6 +43,19 @@ const team = defineCollection({
             publish: z.boolean().default(true),
         }),
 });
+const service = defineCollection({
+    loader: glob({ base: './src/content/service', pattern: '**/*.md' }),
+    schema: z.object({
+        name: z.string(),
+        description: z.string(),
+        icon: z.string().optional(),
+        category: z.string().optional(),
+        priceRange: z.string().optional(),
+        duration: z.string().optional(),
+        order: z.number().default(999),
+        publish: z.boolean().default(true),
+    }),
+});
 
 const legal = defineCollection({
     loader: glob({ base: './src/content/legal', pattern: '**/*.md' }),
@@ -58,4 +71,4 @@ const legal = defineCollection({
     }),
 });
 
-export const collections = { blog, team, legal };
+export const collections = { blog, team, service, legal };

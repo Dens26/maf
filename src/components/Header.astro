@@ -5,7 +5,7 @@ import { Menu, X, ChevronDown } from 'lucide-astro';
 import Button from '@components/ui/Button.astro';
 
 const ctaButton = {
-    name: 'Contact Us',
+    name: 'Me contacter',
     link: '/contact',
 };
 
@@ -43,24 +43,17 @@ const isCurrentPage = (link: string) => {
                                         aria-current={isCurrentPage(item.link) ? 'page' : undefined}
                                     >
                                         {item.name}
-                                        {item.children && item.showArrow && (
-                                            <ChevronDown
-                                                size={16}
-                                                class="transform transition-transform inline-block ml-1"
-                                                aria-hidden="true"
-                                            />
-                                        )}
                                     </a>
-                                    {item.children && (
+                                    {/* {item.children && (
                                         <button
                                             type="button"
                                             class="sr-only"
                                             aria-expanded="false"
                                             aria-label={item.name}
                                         />
-                                    )}
+                                    )} */}
                                 </div>
-                                {item.children && (
+                                {/* {item.children && (
                                     <ul
                                         class:list={[
                                             'submenu absolute mt-2 bg-nav-submenu-bg border-black border rounded-md min-w-[200px] transition-all duration-200 opacity-0 invisible overflow-hidden z-50',
@@ -84,7 +77,7 @@ const isCurrentPage = (link: string) => {
                                             </li>
                                         ))}
                                     </ul>
-                                )}
+                                )} */}
                             </li>
                         ))
                     }
@@ -128,7 +121,7 @@ const isCurrentPage = (link: string) => {
                                             >
                                                 {item.name}
                                             </a>
-                                            {item.children && (
+                                            {/* {item.children && (
                                                 <button
                                                     class:list={[
                                                         'mobile-submenu-button p-2 -mr-2 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
@@ -144,9 +137,9 @@ const isCurrentPage = (link: string) => {
                                                         class="transform transition-transform duration-200"
                                                     />
                                                 </button>
-                                            )}
+                                            )} */}
                                         </div>
-                                        {item.children && (
+                                        {/* {item.children && (
                                             <ul class="mobile-submenu ml-4 mt-2 space-y-2 hidden" role="menu">
                                                 {item.children.map((child) => (
                                                     <li role="none">
@@ -168,7 +161,7 @@ const isCurrentPage = (link: string) => {
                                                     </li>
                                                 ))}
                                             </ul>
-                                        )}
+                                        )} */}
                                     </div>
                                 </li>
                             ))

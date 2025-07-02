@@ -1,0 +1,19 @@
+---
+import Layout from '@layouts/Layout.astro';
+import InnerHero from '@components/sections/InnerHero.astro';
+import ServiceGrid from '@components/sections/serviceGrid.astro';
+
+const seoTitle = "Services";
+const seoDescription = "Listes des services proposés";
+
+const heroContent = {
+    title: "Services",
+    description: "Listes des services proposés",
+}
+
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <InnerHero content={heroContent}  />
+    <ServiceGrid padding='base'/>
+</Layout>

@@ -1,74 +1,74 @@
 ---
-title: "Terms of Service"
-lastUpdated: "2024-03-04"
+title: "Conditions Générales d’Utilisation"
+lastUpdated: "2025-06-12"
 seo:
-  title: "Terms of Service - Rules for Using Our Platform"
-  description: "Our terms of service outline the rules, guidelines, and legal agreements between you and our company."
+  title: "Conditions Générales d’Utilisation - Règles pour utiliser nos services"
+  description: "Les conditions générales d’utilisation définissent les règles, directives et accords légaux entre vous et Mon Assistant Formalités."
 ---
 
 ## Introduction
 
-Welcome to our Terms of Service. These terms govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.
+Bienvenue dans nos Conditions Générales d’Utilisation. Ces conditions régissent votre utilisation de notre site web et de nos services. En accédant ou utilisant nos services, vous acceptez d’être lié par ces conditions.
 
-## Definitions
+## Définitions
 
-- **"Company"**, **"we"**, **"us"**, or **"our"** refers to [Your Company Name].
-- **"Services"** refers to the website, applications, and other offerings provided by the Company.
-- **"User"**, **"you"**, or **"your"** refers to the individual or entity using our Services.
-- **"Content"** refers to text, images, videos, audio, and other materials that may appear on our Services.
+- **« Société »**, **« nous »**, **« notre »** désignent Mon Assistant Formalités.
+- **« Services »** désigne le site web, les applications et les prestations fournies par Mon Assistant Formalités.
+- **« Utilisateur »**, **« vous »** désigne toute personne utilisant nos Services.
+- **« Contenu »** désigne les textes, images, vidéos, sons et autres matériaux présents sur nos Services.
 
-## Account Registration
+## Inscription et compte utilisateur
 
-When you create an account with us, you must provide accurate and complete information. You are responsible for maintaining the security of your account and password. The Company cannot and will not be liable for any loss or damage from your failure to comply with this security obligation.
+Si vous créez un compte, vous devez fournir des informations exactes et complètes. Vous êtes responsable de la confidentialité de vos identifiants. Nous ne pourrons être tenus responsables de toute perte liée à une utilisation non autorisée de votre compte.
 
-## Acceptable Use
+## Utilisation acceptable
 
-You agree not to use the Services to:
+Vous vous engagez à ne pas utiliser les Services pour :
 
-- Violate any applicable laws or regulations
-- Infringe upon the rights of others
-- Distribute malware or other harmful code
-- Interfere with or disrupt the Services
-- Engage in unauthorized data collection
-- Send unsolicited communications
+- Violer les lois et réglementations en vigueur
+- Porter atteinte aux droits d’autrui
+- Distribuer des virus, malwares ou codes malveillants
+- Perturber ou interrompre les Services
+- Collecter des données sans autorisation
+- Envoyer des communications non sollicitées
 
-## Intellectual Property
+## Propriété intellectuelle
 
-### Our Content
+### Contenu de Mon Assistant Formalités
 
-The Services and all content and materials available through the Services are the property of the Company or its licensors and are protected by copyright, trademark, and other intellectual property laws.
+Les Services et tous les contenus disponibles sont la propriété exclusive de Mon Assistant Formalités ou de ses partenaires, protégés par les lois sur la propriété intellectuelle.
 
-### Your Content
+### Votre contenu
 
-You retain ownership of any content you submit, post, or display on or through the Services. By submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute your content.
+Vous conservez la propriété des contenus que vous soumettez via nos Services. En soumettant un contenu, vous nous accordez une licence mondiale, non exclusive, gratuite pour utiliser, reproduire, modifier et diffuser ce contenu dans le cadre de nos Services.
 
-## Termination
+## Résiliation
 
-We may terminate or suspend your account and access to the Services at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.
+Nous pouvons suspendre ou résilier votre accès aux Services à tout moment, sans préavis, notamment en cas de violation des présentes conditions ou de comportement préjudiciable.
 
-## Disclaimer of Warranties
+## Exclusion de garanties
 
-THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+Les Services sont fournis « en l’état » et « selon disponibilité », sans aucune garantie expresse ou implicite, y compris, mais sans s’y limiter, les garanties de qualité, d’adéquation à un usage particulier ou d’absence de contrefaçon.
 
-## Limitation of Liability
+## Limitation de responsabilité
 
-IN NO EVENT SHALL THE COMPANY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICES.
+Mon Assistant Formalités ne pourra en aucun cas être tenu responsable des dommages indirects, incidents, spéciaux, consécutifs ou punitifs, y compris la perte de profits, de données ou de clientèle, résultant de l’utilisation ou de l’impossibilité d’utiliser les Services.
 
-## Indemnification
+## Indemnisation
 
-You agree to indemnify, defend, and hold harmless the Company and its officers, directors, employees, agents, and affiliates from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) that such parties may incur as a result of or arising from your violation of these Terms.
+Vous acceptez d’indemniser et de défendre Mon Assistant Formalités ainsi que ses dirigeants, employés et partenaires contre toute réclamation, dommage, coût ou dépense résultant de votre violation des présentes conditions.
 
-## Changes to Terms
+## Modifications des conditions
 
-We reserve the right to modify these Terms at any time. If we make changes, we will provide notice by posting the updated Terms on this page and updating the "Last Updated" date. Your continued use of the Services after any such changes constitutes your acceptance of the new Terms.
+Nous nous réservons le droit de modifier ces conditions à tout moment. En cas de modification, nous publierons la nouvelle version sur cette page avec une mise à jour de la date. Votre utilisation continue des Services vaut acceptation des conditions modifiées.
 
-## Governing Law
+## Droit applicable
 
-These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.
+Ces conditions sont régies par le droit français, sans tenir compte des règles relatives aux conflits de lois.
 
-## Contact Us
+## Contact
 
-If you have any questions about these Terms, please contact us at:
+Pour toute question concernant ces conditions, vous pouvez nous contacter à :
 
-- Email: legal@example.com
-- Address: 123 Legal Avenue, Terms City, 12345 
+- Email : contact@monassistantformalites.fr  
+- Adresse : 12 Rue des Formalités, 75000 Paris

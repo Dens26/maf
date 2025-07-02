@@ -13,14 +13,10 @@ if (isNaN(dateObj.getTime())) {
     throw new Error('Invalid date provided to Date component');
 }
 
-const formattedDate = dateObj.toLocaleDateString('en-US', {
+const formattedDate = dateObj.toLocaleDateString('fr-FR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-}).replace(/(\d+)(?=(,))/, (match: string) => {
-    const day = parseInt(match);
-    const suffix = ['th', 'st', 'nd', 'rd'][(day % 10 > 3 || day > 20) ? 0 : day % 10];
-    return day + suffix;
 });
 ---
 
