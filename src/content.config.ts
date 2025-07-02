@@ -71,4 +71,12 @@ const legal = defineCollection({
     }),
 });
 
-export const collections = { blog, team, service, legal };
+const process = defineCollection({
+  loader: glob({ base: './src/content/process', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, team, service, legal, process };
