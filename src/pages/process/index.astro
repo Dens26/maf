@@ -1,0 +1,76 @@
+---
+import Layout from '@layouts/Layout.astro';
+import InnerHero from '@components/sections/InnerHero.astro';
+
+const seoTitle = 'Méthode d’accompagnement';
+const seoDescription = 'Un accompagnement clair et structuré pour simplifier vos formalités';
+
+const heroContent = {
+    title: seoTitle,
+    description: seoDescription,
+};
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <InnerHero content={heroContent} />
+    <div class="site-container mx-auto px-4 py-8">
+        <article class="site-container--small mx-auto px-4 prose relative z-10 pb-base">
+            <div class="mb-12 text-center">
+                <h1>{seoTitle}</h1>
+                <p class="text-gray-600 max-w-xl mx-auto">{seoDescription}</p>
+            </div>
+
+            <section class="mt-8 space-y-12">
+                <div>
+                    <h3>1. Prise de contact et devis</h3>
+                    <p>
+                        Vous me contactez pour me présenter votre besoin.<br />
+                        Je vous fournis un devis clair et détaillé, précisant les prestations et les tarifs.<br />
+                        Le paiement s’effectue avant le début du traitement.<br />
+                        Toutes les informations pour régler vous seront transmises avec le devis.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>2. Analyse de votre dossier</h3>
+                    <p>
+                        Vous me transmettez tous les documents et informations nécessaires.<br />
+                        Toutes vos données sont traitées de manière strictement confidentielle, conformément à ma politique
+                        de confidentialité.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>3. Traitement de la formalité</h3>
+                    <p>
+                        Je prends en charge la formalité avec rigueur et professionnalisme.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>4. Confirmation et suivi</h3>
+                    <p>
+                        Une fois la formalité déposée, vous recevez une confirmation (copie du dépôt, récépissé ou
+                        justificatif transmis par l’organisme concerné).<br />
+                        Je reste disponible pour toute question ou demande de suivi complémentaire.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>5. Délais</h3>
+                    <p>
+                        Je m’engage à traiter votre dossier dans les meilleurs délais, généralement sous 48 heures
+                        ouvrées.<br />
+                    </p>
+                </div>
+            </section>
+
+            <div class="mt-12 text-center">
+                <p>
+                    N’hésitez pas à <a href="/contact">me contacter</a> si vous avez la moindre question sur cette procédure. Je suis là pour
+                    vous accompagner simplement et efficacement.
+                </p>
+            </div>
+        </article>
+    </div>
+</Layout>

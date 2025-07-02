@@ -1,12 +1,12 @@
 ---
-name: "Denis BEKAERT"
+name: "Denis"
 headshot: "./images/zeus.jpg"
 jobTitle: "Fondateur & Formaliste"
 publish: true
 order: 1
 linkedin: "https://www.linkedin.com"
-linkedinUsername: "Denis Bekaert"
-email: "contact@monassistantformalite-dbdev.com"
+linkedinUsername: "Mon Assistant Formalités"
+email: "contact-maf@db-dev.fr"
 # xSocial: "https://x.com/zeus"
 # xSocialUsername: "zeus"
 # github: "https://github.com/zeus"
@@ -15,7 +15,7 @@ email: "contact@monassistantformalite-dbdev.com"
 
 ## À propos de moi
 
-Je m’appelle **Denis Bekaert**, fondateur de **Mon Assistant Formalités**.  
+Je m’appelle **Denis**, fondateur de **Mon Assistant Formalités**.  
 Mon objectif est clair : simplifier les démarches administratives pour les entrepreneurs individuels en leur offrant un accompagnement clair, efficace et bienveillant.
 
 Fort de mon expérience au sein de l’**INPI**, j’accompagne quotidiennement des professionnels dans l’utilisation du **Guichet Unique**. Cette proximité avec les utilisateurs m’a permis de mieux comprendre les enjeux, les blocages et les besoins concrets des entrepreneurs face aux formalités administratives.
@@ -40,6 +40,7 @@ Chaque mission est menée avec le souci d’apporter une solution concrète, ada
 
 ### Un peu plus sur moi
 
-- Curieux et passionné par **l’automatisation** des processus, je cherche sans cesse à optimiser le temps de mes clients.
-- Amoureux des **outils bien conçus** et des **to-do lists efficaces**.
-- Mon ambition à long terme : développer un assistant intelligent capable de **gérer automatiquement les formalités administratives** pour les indépendants.
+- J’ai à cœur de **rendre les démarches administratives plus simples et accessibles**, en parlant un langage clair et sans jargon.  
+- J’accorde beaucoup d’importance à la **confiance**, à la **réactivité** et à la **transparence** dans chaque accompagnement.  
+- Mon objectif : proposer un service fiable et humain, qui **soulage les indépendants** de leurs formalités pour qu’ils se concentrent sur l’essentiel.
+

@@ -34,7 +34,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 <p class:list={[textColor]}>
                     Une question sur vos formalités ?
                 </p>
-                <p class:list={[textColor]}>N’hésitez pas à me contacter par email ou par téléphone.</p>
+                <p class:list={[textColor]}>N’hésitez pas à me contacter.</p>
                 <div class:list={['flex flex-col gap-2 mt-4', textColor]}>
                     <div class="flex items-center gap-2">
                         <Mail aria-hidden="true" />
@@ -42,12 +42,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                             ${siteConfig.Socials.Email}
                         </a>
                     </div>
-                    <div class="flex items-center gap-2">
+                    <!-- <div class="flex items-center gap-2">
                         <Phone aria-hidden="true" />
                         <a href={`tel:${siteConfig.Socials.Phone}`}>
                             ${siteConfig.Socials.Phone}
                         </a>
-                    </div>
+                    </div> -->
                     <div class="flex items-center gap-2">
                         <MapPin aria-hidden="true" />
                         <a

@@ -11,7 +11,7 @@ publish: true
 seo:
   title: "Modifier l’activité de son entreprise individuelle"
   description: "Un accompagnement complet pour déclarer officiellement un changement ou un ajout d’activité à votre entreprise individuelle."
-  icon: "/icons/activite.jpg"
+  icon: "/icons/activities.jpg"
 ---
 
 ## Modifier l’activité de son entreprise individuelle
