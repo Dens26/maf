@@ -2,9 +2,9 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
-// dotenv.config();
+dotenv.config();
 
 // Get the site URL from environment variable or use a default for local development
 const site = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
