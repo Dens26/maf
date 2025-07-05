@@ -11,8 +11,7 @@ seo:
 **Mon Assistant Formalités**  
 Entrepreneur Individuel – Denis Bekaert  
 📍 16 impasse Chantoiseau, 07130 Cornas, France  
-📧 contact-maf@db-dev.fr  
-📞 +33 6 10 10 10 10  
+📧 contact-maf@db-dev.fr
 SIREN : [à compléter]
 
 ## Hébergeur
