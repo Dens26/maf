@@ -17,9 +17,9 @@ Bienvenue dans nos Conditions Générales d’Utilisation. Ces conditions régis
 - **« Utilisateur »**, **« vous »** désigne toute personne utilisant nos Services.
 - **« Contenu »** désigne les textes, images, vidéos, sons et autres matériaux présents sur nos Services.
 
-## Inscription et compte utilisateur
+<!-- ## Inscription et compte utilisateur
 
-Si vous créez un compte, vous devez fournir des informations exactes et complètes. Vous êtes responsable de la confidentialité de vos identifiants. Nous ne pourrons être tenus responsables de toute perte liée à une utilisation non autorisée de votre compte.
+Si vous créez un compte, vous devez fournir des informations exactes et complètes. Vous êtes responsable de la confidentialité de vos identifiants. Nous ne pourrons être tenus responsables de toute perte liée à une utilisation non autorisée de votre compte. -->
 
 ## Utilisation acceptable
 
@@ -70,5 +70,6 @@ Ces conditions sont régies par le droit français, sans tenir compte des règle
 
 Pour toute question concernant ces conditions, vous pouvez nous contacter à :
 
-- Email : contact@monassistantformalites.fr  
-- Adresse : 12 Rue des Formalités, 75000 Paris
+**Mon Assistant Formalités**  
+📧 contact-maf@db-dev.fr
+📍 Cornas, 07130 – France

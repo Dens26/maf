@@ -44,7 +44,8 @@ if (seoImage && !seoImage.startsWith('http')) {
         <div class="grid sm:grid-cols-3 gap-6 text-sm text-center max-w-3xl mx-auto pt-16 m-16">
             {
                 entry.data.category && (
-                    <div class="bg-gray-600/90 hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20">
+                    <div class="relative group bg-primary hover:bg-primary-light transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20 overflow-hidden">
+                        <span class="absolute -left-10 -top-5 h-64 w-2/3 translate-x-[250%] rotate-12 bg-white opacity-20 transition-all duration-250 ease-out group-hover:translate-x-[2%]" />
                         <p class="font-semibold text-gray-300 mb-1">Catégorie</p>
                         <p class="text-white">{entry.data.category}</p>
                     </div>
@@ -52,7 +53,8 @@ if (seoImage && !seoImage.startsWith('http')) {
             }
             {
                 entry.data.priceRange && (
-                    <div class="bg-gray-600/90 hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20">
+                    <div class="relative group bg-primary hover:bg-primary-light transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20 overflow-hidden">
+                        <span class="absolute -left-10 -top-5 h-64 w-2/3 translate-x-[250%] rotate-12 bg-white opacity-20 transition-all duration-250 ease-out group-hover:translate-x-[2%]" />
                         <p class="font-semibold text-gray-300 mb-1">Tarif</p>
                         <p class="text-white">{entry.data.priceRange}</p>
                         <p class="text-xs text-gray-300 mt-2">* Hors frais du Guichet Unique</p>
@@ -61,7 +63,8 @@ if (seoImage && !seoImage.startsWith('http')) {
             }
             {
                 entry.data.duration && (
-                    <div class="bg-gray-600/90 hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20">
+                    <div class="relative group bg-primary hover:bg-primary-light transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20 overflow-hidden">
+                        <span class="absolute -left-10 -top-5 h-64 w-2/3 translate-x-[250%] rotate-12 bg-white opacity-20 transition-all duration-250 ease-out group-hover:translate-x-[2%]" />
                         <p class="font-semibold text-gray-300 mb-1">Délai de traitement</p>
                         <p class="text-white">{entry.data.duration}</p>
                     </div>

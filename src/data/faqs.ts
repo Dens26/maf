@@ -30,7 +30,7 @@ export const faqLists: Record<string, FaqList> = {
             },
             {
                 question: "Combien de temps prennent les démarches ?",
-                answer: "Le délai varie selon la formalité et l’administration concernée. Je vous informe toujours des délais estimés dès le départ et vous tiens informé tout au long du processus."
+                answer: "Votre dossier est validé par mes soins sous 48h ouvrées maximum après réception complète. Une fois la formalité déposée, les délais dépendent des organismes en charge de la validation. Je vous informe de chaque étape et reste disponible pour le suivi."
             },
             {
                 question: "Vos prestations sont-elles éligibles aux frais professionnels ?",
