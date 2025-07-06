@@ -7,40 +7,47 @@ const mailjet = Mailjet.apiConnect(
   import.meta.env.MJ_API_KEY_PRIVATE
 );
 
-export async function POST(context: APIContext) {
-  const body = await context.request.json();
-  console.log('Body reçu :', body)
-  const { name, email, message } = body;
+export async function POST({ request }: APIContext) {
+  const body = await request.json();
 
   try {
-    const result = await mailjet.post('send', { version: 'v3.1' }).request({
+    const response = await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
           From: {
             Email: 'contact@mon-assistant-formalites.db-dev.fr',
-            Name: 'Mon Assistant Formalités'
+            Name: 'Mon Assistant Formalités',
           },
           To: [
             {
               Email: 'denis.bekaert@live.fr',
-              Name: 'Denis'
-            }
+              Name: 'Denis Bekaert',
+            },
           ],
-          Subject: `Message de ${name} via le formulaire`,
-          TextPart: message,
-          HTMLPart: `
-            <h3>Message reçu via le site</h3>
-            <p><strong>Nom:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong><br/>${message}</p>
-          `
-        }
-      ]
+          TemplateID: 7133670,
+          TemplateLanguage: true,
+          Subject: `Message de ${body.name} via le formulaire`,
+          Variables: {
+            name: body.name,
+            email: body.email,
+            phone: body.phone,
+            company: body.company,
+            hear_about: body['hear-about'],
+            interests: body.interests,
+            service: body.service,
+            message: body.message,
+          },
+        },
+      ],
     });
 
-    return new Response(JSON.stringify({ success: true }));
-  } catch (err) {
-    console.error(err);
-    return new Response(JSON.stringify({ success: false }), { status: 500 });
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+    });
+  } catch (error) {
+    console.error('Erreur Mailjet:', error);
+    return new Response(JSON.stringify({ error: 'Erreur serveur' }), {
+      status: 500,
+    });
   }
 }
