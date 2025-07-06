@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 import dotenv from 'dotenv';
+import vercel from '@astrojs/vercel';
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ dotenv.config();
 const site = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 
 export default defineConfig({
+  adapter: vercel(),
   site,
   vite: {
     plugins: [tailwindcss()],

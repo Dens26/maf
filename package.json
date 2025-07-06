@@ -11,6 +11,7 @@
         "astro": "astro"
     },
     "dependencies": {
+        "@astrojs/vercel": "^8.2.1",
         "aos": "^2.3.4",
         "dotenv": "^17.0.1",
         "node-mailjet": "^6.0.8"
