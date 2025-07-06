@@ -9,7 +9,7 @@ const mailjet = Mailjet.apiConnect(
 
 export async function POST(context: APIContext) {
   const body = await context.request.json();
-  console.log(body)
+  console.log('Body reçu :', body)
   const { name, email, message } = body;
 
   try {
@@ -17,7 +17,7 @@ export async function POST(context: APIContext) {
       Messages: [
         {
           From: {
-            Email: 'ton-email-valide@mail.com',
+            Email: 'contact@mon-assistant-formalites.db-dev.fr',
             Name: 'Mon Assistant Formalités'
           },
           To: [
