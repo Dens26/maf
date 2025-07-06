@@ -6,7 +6,7 @@ export const siteConfig = {
       // Github: 'https://github.com/withastro',
       // Instagram: 'https://www.instagram.com/astrodotbuild',
       LinkedIn: 'https://www.linkedin.com/mon-assistant-formalites',
-      Email: 'contact-maf@db-dev.fr',
+      Email: 'contact@mon-assistant-formalites.db-dev.fr',
       Phone: '+33769924672',
       Location: 'Cornas, 07130 – France',
   }

@@ -79,5 +79,5 @@ Cette politique peut être modifiée. La dernière mise à jour date du **12 jui
 Pour toute question relative à vos données personnelles :
 
 **Mon Assistant Formalités**  
-📧 contact-maf@db-dev.fr
+📧 contact@mon-assistant-formalites.db-dev.fr
 📍 Cornas, 07130 – France

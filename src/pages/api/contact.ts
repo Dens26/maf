@@ -1,3 +1,4 @@
+export const prerender = false;
 import { type APIContext } from 'astro';
 import Mailjet from 'node-mailjet';
 
@@ -8,6 +9,7 @@ const mailjet = Mailjet.apiConnect(
 
 export async function POST(context: APIContext) {
   const body = await context.request.json();
+  console.log(body)
   const { name, email, message } = body;
 
   try {
@@ -15,7 +17,7 @@ export async function POST(context: APIContext) {
       Messages: [
         {
           From: {
-            Email: 'ton-email-validé@mail.com',
+            Email: 'ton-email-valide@mail.com',
             Name: 'Mon Assistant Formalités'
           },
           To: [

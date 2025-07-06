@@ -71,5 +71,5 @@ Ces conditions sont régies par le droit français, sans tenir compte des règle
 Pour toute question concernant ces conditions, vous pouvez nous contacter à :
 
 **Mon Assistant Formalités**  
-📧 contact-maf@db-dev.fr
+📧 contact@mon-assistant-formalites.db-dev.fr
 📍 Cornas, 07130 – France
