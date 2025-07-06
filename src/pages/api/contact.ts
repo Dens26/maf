@@ -22,8 +22,8 @@ export async function POST(context: APIContext) {
           },
           To: [
             {
-              Email: 'destinataire@mail.com',
-              Name: 'Toi'
+              Email: 'denis.bekaert@live.fr',
+              Name: 'Denis'
             }
           ],
           Subject: `Message de ${name} via le formulaire`,
