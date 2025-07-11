@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert('Message envoyé avec succès.');
         form.reset();
       } else {
-        alert('Une erreur est survenue. Veuillez réessayer.');
+        alert('Une erreur est survenue. Veuillez réessayer.' + response);
       }
     } catch (error) {
       console.error(error);
