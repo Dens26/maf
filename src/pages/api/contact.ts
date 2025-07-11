@@ -41,6 +41,7 @@ export async function POST({ request }: APIContext) {
       ],
     });
 
+    console.log(new Response(JSON.stringify({ success: true })))
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
     });
