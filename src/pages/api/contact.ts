@@ -3,8 +3,8 @@ import { type APIContext } from 'astro';
 import Mailjet from 'node-mailjet';
 
 const mailjet = Mailjet.apiConnect(
-  import.meta.env.MJ_API_KEY_PUBLIC,
-  import.meta.env.MJ_API_KEY_PRIVATE
+  import.meta.env.MJ_APIKEY_PUBLIC,
+  import.meta.env.MJ_APIKEY_PRIVATE
 );
 
 export async function POST({ request }: APIContext) {
@@ -41,7 +41,6 @@ export async function POST({ request }: APIContext) {
       ],
     });
 
-    console.log(new Response(JSON.stringify({ success: true })))
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
     });
