@@ -10,22 +10,54 @@ const mailjet = Mailjet.apiConnect(
 export async function POST({ request }: APIContext) {
   const body = await request.json();
 
-  console.log('BODY:', body); // ← debug utile pour vérifier les valeurs reçues
+  const {
+    name = '',
+    email = '',
+    phone = '',
+    company = '',
+    message = '',
+    service = '',
+    interests = '',
+    ['hear_about']: hearAbout = '', // attention au nom de la clé
+  } = body;
+
+  const interestText = Array.isArray(interests) ? interests.join(', ') : interests;
+
+  const now = new Date().toLocaleString('fr-FR', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  const htmlContent = `
+  <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+    <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://mon-assistant-formalites.db-dev.fr/images/Logo.png" alt="Logo Mon Assistant Formalités" style="max-width: 150px; height: auto;" />
+      </div>
+      <h2 style="color: #2c3e50;">📩 Nouvelle demande via le formulaire de contact</h2>
+      <p><strong>Date :</strong> ${now}</p>
+      <p><strong>Nom :</strong> ${name}</p>
+      <p><strong>Email :</strong> <a href="mailto:${email}">${email}</a></p>
+      <p><strong>Téléphone :</strong> ${phone}</p>
+      <p><strong>Entreprise :</strong> ${company || 'Non renseignée'}</p>
+      <p><strong>Service demandé :</strong> ${service}</p>
+      <p><strong>Comment nous a-t-il connu :</strong> ${hearAbout}</p>
+      <p><strong>Centres d’intérêt :</strong> ${interestText}</p>
+      <p><strong>Message :</strong></p>
+      <blockquote style="margin: 15px 0; padding-left: 15px; border-left: 3px solid #ccc; color: #555;">${message}</blockquote>
+      <hr style="margin-top: 30px;"/>
+      <p style="font-size: 0.9em; color: #888;">Formulaire envoyé depuis <a href="https://app.mon-assistant-formalites.db-dev.fr/contact">mon-assistant-formalites.db-dev.fr</a></p>
+    </div>
+  </div>
+`;
+
+
 
   try {
-    const variables = {
-      name: body.name || '',
-      email: body.email || '',
-      phone: body.phone || '',
-      company: body.company || '',
-      message: body.message || '',
-      service: body.service || '',
-      hear_about: body.hear_about || '', // ← tu peux renommer ça en "hear-about" si ton template l'attend ainsi
-      interests: Array.isArray(body.interests) ? body.interests.join(', ') : (body.interests || ''),
-    };
-
-    console.log('VARIABLES ENVOYÉES À MAILJET:', variables); // ← log utile
-
     const response = await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
@@ -35,14 +67,12 @@ export async function POST({ request }: APIContext) {
           },
           To: [
             {
-              Email: 'denis.bekaert@live.fr',
+              Email: 'denis.bekaert@live.fr', // ou autre destinataire
               Name: 'Denis Bekaert',
             },
           ],
-          TemplateID: 7152261,
-          TemplateLanguage: true,
-          Subject: `Message de ${variables.name} via le formulaire`,
-          Variables: variables,
+          Subject: `Message de ${name} via le formulaire`,
+          HTMLPart: htmlContent,
         },
       ],
     });
