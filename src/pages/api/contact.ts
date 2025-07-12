@@ -32,7 +32,7 @@ export async function POST({ request }: APIContext) {
     minute: '2-digit'
   });
 
-  const htmlContent = `
+const htmlContent = `
   <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
       <div style="text-align: center; margin-bottom: 20px;">
@@ -48,12 +48,13 @@ export async function POST({ request }: APIContext) {
       <p><strong>Comment nous a-t-il connu :</strong> ${hearAbout}</p>
       <p><strong>Centres d’intérêt :</strong> ${interestText}</p>
       <p><strong>Message :</strong></p>
-      <blockquote style="margin: 15px 0; padding-left: 15px; border-left: 3px solid #ccc; color: #555;">${message}</blockquote>
+      <blockquote style="margin: 15px 0; padding-left: 15px; border-left: 3px solid #ccc; color: #555;">${message.replace(/\n/g, '<br>')}</blockquote>
       <hr style="margin-top: 30px;"/>
       <p style="font-size: 0.9em; color: #888;">Formulaire envoyé depuis <a href="https://app.mon-assistant-formalites.db-dev.fr/contact">mon-assistant-formalites.db-dev.fr</a></p>
     </div>
   </div>
 `;
+
 
 
 
