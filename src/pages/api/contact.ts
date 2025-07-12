@@ -67,10 +67,14 @@ export async function POST({ request }: APIContext) {
           },
           To: [
             {
-              Email: 'denis.bekaert@live.fr', // ou autre destinataire
+              Email: 'contact@mon-assistant-formalites.db-dev.fr', // ou autre destinataire
               Name: 'Denis Bekaert',
             },
           ],
+          ReplyTo: {
+            Email: body.email, // email du client qui a soumis le formulaire
+            Name: body.name,
+          },
           Subject: `Message de ${name} via le formulaire`,
           HTMLPart: htmlContent,
         },
