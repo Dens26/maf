@@ -9,8 +9,23 @@ const mailjet = Mailjet.apiConnect(
 
 export async function POST({ request }: APIContext) {
   const body = await request.json();
-  console.log(body);
+
+  console.log('BODY:', body); // ← debug utile pour vérifier les valeurs reçues
+
   try {
+    const variables = {
+      name: body.name || '',
+      email: body.email || '',
+      phone: body.phone || '',
+      company: body.company || '',
+      message: body.message || '',
+      service: body.service || '',
+      hear_about: body.hear_about || '', // ← tu peux renommer ça en "hear-about" si ton template l'attend ainsi
+      interests: Array.isArray(body.interests) ? body.interests.join(', ') : (body.interests || ''),
+    };
+
+    console.log('VARIABLES ENVOYÉES À MAILJET:', variables); // ← log utile
+
     const response = await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
@@ -26,17 +41,8 @@ export async function POST({ request }: APIContext) {
           ],
           TemplateID: 7152261,
           TemplateLanguage: true,
-          Subject: `Message de ${body.name} via le formulaire`,
-          Variables: {
-            name: body.name,
-            email: body.email,
-            phone: body.phone,
-            company: body.company,
-            hear_about: body.hear_about,
-            interests: Array.isArray(body.interests) ? body.interests.join(', ') : body.interests,
-            service: body.service,
-            message: body.message,
-          },
+          Subject: `Message de ${variables.name} via le formulaire`,
+          Variables: variables,
         },
       ],
     });
