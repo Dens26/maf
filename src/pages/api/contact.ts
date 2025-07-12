@@ -24,7 +24,7 @@ export async function POST({ request }: APIContext) {
               Name: 'Denis Bekaert',
             },
           ],
-          TemplateID: 7133670,
+          TemplateID: 7152261,
           TemplateLanguage: true,
           Subject: `Message de ${body.name} via le formulaire`,
           Variables: {
