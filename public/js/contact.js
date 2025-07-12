@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
+    data.interests = formData.getAll('interests');
 
     try {
       const response = await fetch('/api/contact', {
