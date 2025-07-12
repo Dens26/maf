@@ -32,12 +32,11 @@ export async function POST({ request }: APIContext) {
     minute: '2-digit'
   });
 
-const htmlContent = `
+  const htmlContent = `
   <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
       <div style="text-align: center; margin-bottom: 20px;">
-        <img src="https://app.mon-assistant-formalites.db-dev.fr/images/logo.png" alt="Logo Mon Assistant Formalités" style="max-width: 150px; height: auto;" />
-      </div>
+        <img src="https://app.mon-assistant-formalites.db-dev.fr/images/logo.png" alt="Logo Mon Assistant Formalités" style="width: 100%; height: auto; max-width: none;" />      </div>
       <h2 style="color: #2c3e50;">📩 Nouvelle demande via le formulaire de contact</h2>
       <p><strong>Date :</strong> ${now}</p>
       <p><strong>Nom :</strong> ${name}</p>
