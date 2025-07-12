@@ -36,7 +36,8 @@ export async function POST({ request }: APIContext) {
   <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
       <div style="text-align: center; margin-bottom: 20px;">
-        <img src="https://app.mon-assistant-formalites.db-dev.fr/images/logo.png" alt="Logo Mon Assistant Formalités" style="width: 100%; height: auto; max-width: none;" />      </div>
+        <img src="https://app.mon-assistant-formalites.db-dev.fr/images/logo.png" alt="Logo Mon Assistant Formalités" style="width: 100%; height: auto; max-width: none;" />
+      </div>
       <h2 style="color: #2c3e50;">📩 Nouvelle demande via le formulaire de contact</h2>
       <p><strong>Date :</strong> ${now}</p>
       <p><strong>Nom :</strong> ${name}</p>
@@ -54,11 +55,9 @@ export async function POST({ request }: APIContext) {
   </div>
 `;
 
-
-
-
   try {
-    const response = await mailjet.post('send', { version: 'v3.1' }).request({
+    // 1. Envoi du mail complet à contact@...
+    await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
           From: {
@@ -67,16 +66,40 @@ export async function POST({ request }: APIContext) {
           },
           To: [
             {
-              Email: 'contact@mon-assistant-formalites.db-dev.fr', // ou autre destinataire
-              Name: 'Denis Bekaert',
+              Email: 'contact@mon-assistant-formalites.db-dev.fr',
+              Name: 'Mon Assistant Formalités',
             },
           ],
           ReplyTo: {
-            Email: body.email, // email du client qui a soumis le formulaire
-            Name: body.name,
+            Email: email, // email du client qui a soumis le formulaire
+            Name: name,
           },
           Subject: `Message de ${name} via le formulaire`,
           HTMLPart: htmlContent,
+        },
+      ],
+    });
+
+    // 2. Envoi d’une notification simple à ta boîte perso
+    await mailjet.post('send', { version: 'v3.1' }).request({
+      Messages: [
+        {
+          From: {
+            Email: 'contact@mon-assistant-formalites.db-dev.fr',
+            Name: 'Mon Assistant Formalités',
+          },
+          To: [
+            {
+              Email: 'denis.bekaert@live.fr',
+              Name: 'Denis Bekaert',
+            },
+          ],
+          Subject: `Notification : nouvelle demande de ${name}`,
+          TextPart: `Une nouvelle demande a été envoyée via le formulaire de contact.\n\nNom : ${name}\nEmail : ${email}\nMessage : ${message.substring(0, 100)}...`,
+          HTMLPart: `<p>Une nouvelle demande a été envoyée via le formulaire de contact.</p>
+                     <p><strong>Nom :</strong> ${name}</p>
+                     <p><strong>Email :</strong> ${email}</p>
+                     <p><strong>Message :</strong> ${message.substring(0, 100)}...</p>`,
         },
       ],
     });
