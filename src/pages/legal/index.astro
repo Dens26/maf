@@ -25,11 +25,11 @@ const heroContent = {
                 {
                     sortedEntries.map((entry) => {
                         // Format the last updated date
-                        const formattedDate = new Intl.DateTimeFormat('en-US', {
+                        const formattedDate = new Intl.DateTimeFormat('fr-FR', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric',
-                        }).format(entry.data.lastUpdated);
+                        }).format(new Date(entry.data.lastUpdated));
 
                         return (
                             <div class="border-b border-body-base/10 pb-6">
@@ -37,7 +37,7 @@ const heroContent = {
                                     <h2 class="text-medium group-hover:text-accent transition-colors">
                                         {entry.data.title}
                                     </h2>
-                                    <p class="text-sm text-body-base/80 mt-2">Last updated: {formattedDate}</p>
+                                    <p class="text-sm text-body-base/80 mt-2">Dernière mise à jour: {formattedDate}</p>
                                 </a>
                             </div>
                         );
