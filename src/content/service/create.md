@@ -97,6 +97,8 @@ Lancez votre entreprise individuelle en toute sérénité grâce à un accompagn
 4. Suivi du dossier jusqu’à la validation ou le rejet de la demande
 5. Transmission des documents officiels (attestation RNE, SIRET)
 
+
+
 ---
 
 ## Pourquoi choisir Mon Assistant Formalités ?
