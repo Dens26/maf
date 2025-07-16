@@ -3,7 +3,7 @@ name: "Cessation d’activité"
 description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre entreprise individuelle."
 icon: "/images/closed.jpg"
 category: "Formalités de cessation"
-priceRange: "à partir de 49€"
+priceRange: "à partir de 59€"
 duration: "48h en moyenne"
 order: 4
 publish: true

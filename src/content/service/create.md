@@ -23,9 +23,8 @@ Avec **Mon Assistant Formalités**, bénéficiez d’un **accompagnement clair e
 
 ## Ce que comprend la prestation
 
-- Conseil sur le **choix du statut** adapté (EI, micro-entrepreneur…)
 - Constitution du **dossier complet** pour le Guichet Unique
-- Transmission et suivi du dépôt auprès des organismes (INSEE, INPI, URSSAF)
+- Transmission et suivi du dépôt auprès des organismes (INSEE, GREFFE, CMA, .)
 - Réponse à vos questions tout au long de la procédure
 
 ---
@@ -39,7 +38,7 @@ C’est cette formalité qui vous permet d’obtenir votre **numéro SIRET**, in
 
 ## Ce que je vous propose en plus
 
-🎯 Un accompagnement **pratique et humain**, réalisé lors d’un **rendez-vous téléphonique personnalisé**, pour :
+Un accompagnement **pratique et humain**, réalisé lors d’un **rendez-vous téléphonique personnalisé**, pour :
 
 - **Préparer et envoyer votre dossier complet**
 - Répondre à **toutes vos questions** administratives ou pratiques
@@ -74,8 +73,8 @@ C’est cette formalité qui vous permet d’obtenir votre **numéro SIRET**, in
 Une fois la demande traitée par le Guichet Unique, vous recevrez une **attestation d’immatriculation au RNE** ainsi qu’un **avis de situation au répertoire SIRENE** (si disponible), ou une **notification de refus**.
 
 - En cas de **validation**, un numéro SIRET vous est attribué, ce qui vous permet de débuter légalement votre activité.
-  - ✅ **L’attestation d’immatriculation au RNE** est systématiquement fournie.
-  - 📄 **L’avis de situation au répertoire SIRENE** pourra également être transmis, sauf si vos données sont en diffusion restreinte.
+  - **L’attestation d’immatriculation au RNE** est systématiquement fournie.
+  - **L’avis de situation au répertoire SIRENE** pourra également être transmis, sauf si vos données sont en diffusion restreinte.
 - En cas de **refus**, le dossier est considéré comme **clos**, sauf commande explicite d’un nouveau dépôt.
 
 #### ⚠️ **Attention** :
@@ -103,12 +102,12 @@ Lancez votre entreprise individuelle en toute sérénité grâce à un accompagn
 
 ## Pourquoi choisir Mon Assistant Formalités ?
 
-- ✅ Un **interlocuteur unique** pour un suivi personnalisé  
-- 🧾 Une **démarche claire, expliquée** à chaque étape  
-- 📩 Assistance par mail (et téléphone si nécessaire) jusqu’à la validation du dossier  
-- 🔍 Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
-- 🛑 Aucun abonnement, aucun frais caché : **tarif unique clair** dès le départ  
-- 🇫🇷 Accompagnement humain, basé en France
+- Un **interlocuteur unique** pour un suivi personnalisé  
+- Une **démarche claire, expliquée** à chaque étape  
+- Assistance par mail (et téléphone si nécessaire) jusqu’à la validation du dossier  
+- Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
+- Aucun abonnement, aucun frais caché : **tarif unique clair** dès le départ  
+- Accompagnement humain, basé en France
 
 ---
 

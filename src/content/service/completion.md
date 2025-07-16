@@ -3,7 +3,7 @@ name: "Complétion de données manquantes sur le RNE"
 description: "Un accompagnement efficace pour ajouter les informations absentes sur la fiche de votre entreprise individuelle."
 icon: "/images/completion.jpg"
 category: "Formalités correctives"
-priceRange: "à partir de 39€"
+priceRange: "à partir de 49€"
 duration: "48h en moyenne"
 order: 6
 publish: true
