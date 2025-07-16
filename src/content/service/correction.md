@@ -3,7 +3,7 @@ name: "Correction de données erronées sur le RNE"
 description: "Un accompagnement rigoureux pour rectifier les erreurs présentes sur la fiche de votre entreprise individuelle."
 icon: "/images/correction.jpg"
 category: "Formalités correctives"
-priceRange: "à partir de 39€"
+priceRange: "à partir de 49€"
 duration: "48h en moyenne"
 order: 5
 publish: true

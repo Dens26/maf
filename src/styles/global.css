@@ -582,23 +582,23 @@
 
     .legal-text h1 {
         font-size: 2rem;
-        line-height: 1.5rem;
         margin-bottom: 2rem;
         color: var(--color-primary-dark);
     }
 
     .legal-text h2 {
         font-size: 1.5rem;
-        line-height: 1.5rem;
-        margin-bottom: 1rem;
+        line-height: 1.6rem;
+        margin-bottom: 1.5rem;
         margin-top: 1.5rem;
         color: var(--color-primary);
     }
 
     .legal-text h3 {
         font-size: 1.25rem;
-        line-height: 1rem;
+        line-height: 1.6rem;
         margin-bottom: 0.5rem;
+        margin-top: 1rem;
     }
 
     .legal-text ul {
@@ -608,43 +608,52 @@
     }
 
     .service-text p {
-        font-size: 1.25rem;
-        line-height: 2rem;
-        margin-bottom: 2rem;
+        font-size: 1rem;
+        line-height: 1.6rem;
+        margin-bottom: 1rem;
     }
 
     .service-text h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         margin-bottom: 1rem;
         color: var(--color-primary-dark);
     }
 
     .service-text h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin-top: 1rem;
         margin-bottom: 1rem;
         color: var(--color-primary);
     }
 
     .service-text h3 {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         margin-top: 1rem;
         margin-bottom: 1rem;
     }
 
     .service-text h4 {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
         margin-bottom: 0.5rem;
     }
 
     .service-text h5 {
-        font-size: 0.85rem;
-        margin-bottom: 2rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        margin-bottom: 1rem;
     }
 
     .service-text ul {
-        font-size: 1.25rem;
-        margin-bottom: 2rem;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        margin-bottom: 1rem;
+        /* line-height: 1.6; */
+    }
+    .service-text li {
+        font-size: 0.875rem;
+        line-height: 1rem;
+        margin-bottom: 1rem;
         /* line-height: 1.6; */
     }
 
