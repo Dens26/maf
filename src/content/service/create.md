@@ -42,7 +42,7 @@ Un accompagnement **pratique et humain**, réalisé lors d’un **rendez-vous t�
 
 - **Préparer et envoyer votre dossier complet**
 - Répondre à **toutes vos questions** administratives ou pratiques
-- Assurer un **suivi du dépôt jusqu’à l’obtention du SIRET**
+- Assurer un **suivi du dépôt jusqu’à l’obtention du SIREN**
 - Gérer les éventuels **régularisations**
 
 ---
@@ -51,7 +51,7 @@ Un accompagnement **pratique et humain**, réalisé lors d’un **rendez-vous t�
 
 - Le service est proposé à partir de **69€ TTC**.  
 - Ce tarif couvre exclusivement **ma prestation d’accompagnement et de constitution du dossier**.  
-- Des frais supplémentaires peuvent être demandés par les organismes valideurs (INSEE, INPI, URSSAF, etc.).
+- Des frais supplémentaires peuvent être demandés par les organismes valideurs (INSEE, GREFFE, CMA, etc.).
 
 #### Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents. Ce délai ne comprend pas le temps de traitement des organismes officiels, qui peut varier.
 
@@ -95,8 +95,6 @@ Lancez votre entreprise individuelle en toute sérénité grâce à un accompagn
 3. Réalisation et dépôt de votre déclaration au Guichet Unique
 4. Suivi du dossier jusqu’à la validation ou le rejet de la demande
 5. Transmission des documents officiels (attestation RNE, SIRET)
-
-
 
 ---
 
