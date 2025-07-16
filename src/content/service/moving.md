@@ -1,6 +1,6 @@
 ---
-name: "Modification d’adresse de l’entreprise"
-description: "Un accompagnement fiable pour déclarer le déménagement ou le transfert d’établissement de votre entreprise individuelle."
+name: "Modification d’adresse"
+description: "Pour un déménagement, transfert d’établissement de votre entreprise individuelle sans stress."
 icon: "/images/moving.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 59€"
@@ -9,8 +9,8 @@ order: 2
 publish: true
 
 seo:
-  title: "Modifier l’adresse de son entreprise individuelle"
-  description: "Un accompagnement fiable pour déclarer le déménagement ou le transfert d’établissement de votre entreprise individuelle."
+  title: "Modification d’adresse"
+  description: "Pour un déménagement, transfert d’établissement de votre entreprise individuelle sans stress."
   icon: "/icons/moving.jpg"
 ---
 
