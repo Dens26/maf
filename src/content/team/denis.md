@@ -16,7 +16,7 @@ email: "contact-maf@db-dev.fr"
 ## À propos de moi
 
 Je m’appelle **Denis**, fondateur de **Mon Assistant Formalités**.  
-Mon objectif est clair : simplifier les démarches administratives pour les entrepreneurs individuels en leur offrant un accompagnement clair, efficace et bienveillant.
+Mon objectif est clair : simplifier les démarches administratives pour les entrepreneurs individuels en leur offrant un accompagnement clair, efficace et bienveillant..
 
 Fort de mon expérience au sein de l’**INPI**, j’accompagne quotidiennement des professionnels dans l’utilisation du **Guichet Unique**. Cette proximité avec les utilisateurs m’a permis de mieux comprendre les enjeux, les blocages et les besoins concrets des entrepreneurs face aux formalités administratives.
 
