@@ -8,6 +8,9 @@ duration: "48h en moyenne"
 order: 4
 publish: true
 
+link: "/forms/cessation"
+text: "Cessez votre entreprise"
+
 seo:
   title: "Déclarer la cessation d’activité de son entreprise individuelle"
   description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre entreprise individuelle."
@@ -56,8 +59,3 @@ Une erreur ou un oubli peut retarder la radiation de votre entreprise ou génér
 - Préparation du dossier de radiation,
 - Transmission auprès du Guichet Unique,
 - Accompagnement jusqu’à l’enregistrement effectif de la cessation.
-
----
-
-Vous cessez votre activité indépendante ?  
-📩 [Contactez-moi](/contact) pour une assistance rapide et professionnelle.

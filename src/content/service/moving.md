@@ -8,6 +8,9 @@ duration: "48h en moyenne"
 order: 2
 publish: true
 
+link: "/forms/moving"
+text: "Modifiez votre adresse"
+
 seo:
   title: "Modification d’adresse"
   description: "Pour un déménagement, transfert d’établissement de votre entreprise individuelle sans stress."

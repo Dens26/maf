@@ -8,6 +8,9 @@ duration: "48h en moyenne"
 order: 3
 publish: true
 
+link: "/forms/activities"
+text: "Ajouter vos activités"
+
 seo:
   title: "Modifier l’activité de son entreprise individuelle"
   description: "Un accompagnement complet pour déclarer officiellement un changement ou un ajout d’activité à votre entreprise individuelle."
@@ -57,8 +60,3 @@ Un intitulé d’activité mal formulé ou une erreur de code APE peut bloquer v
 - Formulation conforme de l’activité,
 - Rédaction du dossier,
 - Suivi administratif jusqu’à validation.
-
----
-
-Vous souhaitez adapter ou élargir votre activité ?  
-📩 [Contactez-moi](/contact) pour être accompagné avec clarté et efficacité.
