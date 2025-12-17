@@ -51,9 +51,6 @@ const formBackground = 'light';
             <Input label="Nom" id="name" name="name" required background={formBackground} class="uppercase"/>
             <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" />
             <Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} />
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" />
             <div id="birthdepartment-wrapper" class="hidden transition-all duration-300">
                 <Select label="Département de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder=""/>
@@ -66,19 +63,11 @@ const formBackground = 'light';
     <div class="space-y-6 bg-white p-6 rounded-lg">
         <div class="text-md font-semibold">Adresse</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder=''/>
-            <Input label="Nom" id="name" name="name" required background={formBackground} class="uppercase"/>
-            <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" />
-            <Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} />
+
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} />
-            <Input label="Commune de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize"/>
-            <Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} />
-            <div id="birthdepartment-wrapper" class="hidden transition-all duration-300">
-            <Select label="Département de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder=""/>
-            </div>
+
         </div>
     </div>
 </form>
