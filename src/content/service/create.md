@@ -8,6 +8,9 @@ duration: "48h en moyenne"
 order: 1
 publish: true
 
+link: "/forms/create"
+text: "Créez votre entreprise"
+
 seo:
   title: "Création d'entreprise"
   description: "Un accompagnement personnalisé pour lancer votre entreprise individuelle sans stress."
@@ -106,8 +109,3 @@ Lancez votre entreprise individuelle en toute sérénité grâce à un accompagn
 - Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
 - Aucun abonnement, aucun frais caché : **tarif unique clair** dès le départ  
 - Accompagnement humain, basé en France
-
----
-
-Vous souhaitez lancer votre entreprise rapidement et sans tracas ?  
-📩 [Contactez-moi](/contact) pour une assistance personnalisée.

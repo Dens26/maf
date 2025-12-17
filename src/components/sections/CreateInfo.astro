@@ -1,0 +1,41 @@
+---
+import Create from '@components/forms/Create.astro';
+import Stepper from '@components/forms/Stepper.astro';
+import { getBackgroundColor, getTextColor, getPaddingClass } from '@utils/styleUtils';
+import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
+import { siteConfig } from '@data/config';
+import { Mail, Phone, MapPin } from 'lucide-astro';
+export interface Props {
+    content?: {
+        title?: string;
+        description?: string;
+        contactInfo?: {
+            email?: string;
+            phone?: string;
+            address?: string;
+        };
+    };
+    background?: ThemeColor;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+const { content, background = 'base', padding, paddingTop, paddingBottom } = Astro.props;
+
+const bgColor = getBackgroundColor(background);
+const textColor = getTextColor(background);
+const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+---
+
+<section class:list={[bgColor, paddingClass]}>
+    <div class="site-container px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <Stepper currentStep={1} />
+            </div>
+            <div class="md:col-span-2">
+                <Create />
+            </div>
+        </div>
+    </div>
+</section>

@@ -8,6 +8,9 @@ duration: "48h en moyenne"
 order: 6
 publish: true
 
+link: "/forms/completion"
+text: "n'existe plus"
+
 seo:
   title: "Compléter les informations manquantes sur le Registre National des Entreprises"
   description: "Un accompagnement efficace pour ajouter les informations absentes sur la fiche de votre entreprise individuelle."

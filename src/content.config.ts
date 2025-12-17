@@ -54,6 +54,8 @@ const service = defineCollection({
         duration: z.string().optional(),
         order: z.number().default(999),
         publish: z.boolean().default(true),
+        link: z.string(),
+        text: z.string(),
     }),
 });
 

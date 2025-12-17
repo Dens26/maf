@@ -8,18 +8,12 @@ import {
 } from '../../../utils/styleUtils';
 import type { ThemeColor } from '../../../utils/styleUtils';
 
-interface Option {
-    label: string;
-    value: string;
-}
-
 interface Props {
     label: string;
     id: string;
     name: string;
-    options: Option[];
     required?: boolean;
-    placeholder?: string;
+    placeholder?: string; // Optionnel, affiché en texte grisé si besoin
     background?: ThemeColor;
     class?: string;
 }
@@ -28,16 +22,13 @@ const {
     label,
     id,
     name,
-    options,
     required = false,
-    placeholder = 'Select an option',
+    placeholder = '',
     background = 'base',
     class: className = '',
 } = Astro.props;
 
 const labelClass = getHeadlineColor(background);
-const textClass = getTextColor(background);
-const bgClass = getBackgroundColor(background === 'dark' ? 'light' : 'base');
 const inputBgClass = getInputBackgroundColor(background);
 const inputTextClass = getInputTextColor(background);
 ---
@@ -47,25 +38,20 @@ const inputTextClass = getInputTextColor(background);
         {label}
         {required && <span class="text-red-500">*</span>}
     </label>
-    <select
-        {id}
-        {name}
-        {required}
+    <input
+        type="date"
+        id={id}
+        name={name}
+        required={required}
+        placeholder={placeholder}
         class={`
-        w-full px-3 py-2 
-        ${inputBgClass}
-        ${inputTextClass}
-        border border-primary/20
-        rounded-lg 
-        focus:ring-2 focus:ring-primary focus:border-primary 
-        ${className}
-    `}
-    >
-        <option value="" disabled selected>
-            {placeholder}
-        </option>
-
-        {options.map((option) => <option value={option.value}>{option.label}</option>)}
-    </select>
+            w-full px-3 py-2
+            ${inputBgClass}
+            ${inputTextClass}
+            border border-primary/20
+            rounded-lg
+            focus:ring-2 focus:ring-primary focus:border-primary
+            ${className}
+        `}
+    />
 </div>
-

@@ -8,6 +8,9 @@ duration: "48h en moyenne"
 order: 5
 publish: true
 
+link: "/forms/correction"
+text: "Corrigez vos données sur le RNE"
+
 seo:
   title: "Corriger les informations erronées sur le Registre National des Entreprises"
   description: "Un accompagnement rigoureux pour rectifier les erreurs présentes sur la fiche de votre entreprise individuelle."
