@@ -1,0 +1,252 @@
+---
+import Button from '@components/ui/Button.astro';
+import Input from '@components/ui/form/Input.astro';
+import Date from '@components/ui/form/Date.astro';
+import Select from '@components/ui/form/Select.astro';
+import countries from '@data/countries.json';
+import departments from '@data/departments.json';
+
+const genderOptions = [
+  { label: 'M.', value: 'monsieur' },
+  { label: 'Mme', value: 'madame' },
+];
+
+const complementnumberOptions = [
+  { label: 'Bis', value: 'bis' },
+  { label: 'Ter', value: 'ter' },
+  { label: 'Quater', value: 'quater' },
+  { label: 'Quinquies', value: 'quinquies' },
+  { label: 'Sexies', value: 'sexies' },
+  { label: 'Septies', value: 'septies' },
+  { label: 'Octies', value: 'octies' },
+  { label: 'Nonies', value: 'nonies' }
+];
+
+const tracktypeOptions = [
+  { label: "Allée", value: "Allée" },
+  { label: "Allée privée", value: "Allée privée" },
+  { label: "Avenue", value: "Avenue" },
+  { label: "Boulevard", value: "Boulevard" },
+  { label: "Boulevard périphérique", value: "Boulevard périphérique" },
+  { label: "Cité", value: "Cité" },
+  { label: "Cour", value: "Cour" },
+  { label: "Chemin", value: "Chemin" },
+  { label: "Chemin rural", value: "Chemin rural" },
+  { label: "Impasse", value: "Impasse" },
+  { label: "Lotissement", value: "Lotissement" },
+  { label: "Parc", value: "Parc" },
+  { label: "Passage", value: "Passage" },
+  { label: "Place", value: "Place" },
+  { label: "Place de la…", value: "Place de la…" },
+  { label: "Promenade", value: "Promenade" },
+  { label: "Quai", value: "Quai" },
+  { label: "Route", value: "Route" },
+  { label: "Route départementale", value: "Route départementale" },
+  { label: "Route nationale", value: "Route nationale" },
+  { label: "Ruelle", value: "Ruelle" },
+  { label: "Résidence", value: "Résidence" },
+  { label: "Sentier", value: "Sentier" },
+  { label: "Villa", value: "Villa" },
+  { label: "Voie", value: "Voie" },
+  { label: "Zone industrielle", value: "Zone industrielle" }
+];
+
+const insuranceorganizationOptions = [
+  { label: "Agricole", value: "Agricole" },
+  { label: "ENIM", value: "ENIM" },
+  { label: "Non salarié non Agricole", value: "Non salarié non Agricole" },
+  { label: "Régime génééral", value: "Régime génééral" },
+  { label: "Autres", value: "Autres" }
+];
+
+const countryOptions = [
+  { label: "France", value: "FR" },
+  ...countries
+    .filter(c => c.name !== "France")
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(c => ({ label: c.name, value: c.code }))
+];
+
+const nationalityOptions = [
+  { label: "Française", value: "FR" },
+  ...countries
+    .filter(c => c.nationality !== "Française")
+    .sort((a, b) => a.nationality.localeCompare(b.nationality))
+    .map(c => ({ label: c.nationality, value: c.code }))
+];
+
+const departmentOptions = departments
+  .sort((a, b) => a.code.localeCompare(b.code))
+  .map(dep => ({ 
+    label: `${dep.code} - ${dep.dep_name}`, 
+    value: dep.code 
+  }));
+
+const formBackground = 'light';
+---
+
+<div>
+  <h3 class="text-xl-2 font-semibold mb-4">Informations personnelles</h3>
+</div>
+
+<form id="create-form" >
+
+    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+      <div class="text-md font-semibold">Contact</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
+          <Input label="Téléphone" id="phone" name="phone" required background={formBackground} />
+      </div>
+    </div>
+
+    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+        <div class="text-md font-semibold">Enrepreneur</div>
+        <div class="grid grid-cols-3 gap-4">
+          <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1"/>
+          <div class="col-span-2">
+            <Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <Input label="Nom" id="name" name="name" required background={formBackground} class="uppercase"/>
+          <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" />
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" />
+          <div id="birthdepartment-wrapper" class="hidden transition-all duration-300">
+              <Select label="Département de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder=""/>
+          </div>
+          <Input label="Commune de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize"/>
+          <Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} placeholder="" />
+      </div>
+    </div>
+
+    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+      <div class="text-md font-semibold">Protection sociale</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground} placeholder=""/>
+          <div id="healthinsurance-wrapper" class="hidden transition-all duration-300">
+            <Input label="N° Sécurité sociale" id="healthinsurance" name="healthinsurance" required background={formBackground}/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-6 bg-white p-6 rounded-lg">
+      <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
+      <div class="grid grid-cols-4 gap-4">
+        <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
+        <div class="col-span-3 grid grid-cols-2 gap-4">
+          <Select label="Complément" id="complementnumber" name="complementnumber" options={complementnumberOptions} background={formBackground} placeholder=""class="w-full" />
+          <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+        <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
+        <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+        <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
+      </div>
+    </div>
+    <div class="text-end my-8">
+      <Button href="/forms/create/business" variant="primary" size="md" class='uppercase'>étape suivante</Button>
+    </div>
+</form>
+
+<!-- Script côté client -->
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('create-form');
+
+    const countrySelect = document.querySelector('select[name="birthcountry"]');
+    const departmentWrapper = document.getElementById('birthdepartment-wrapper');
+    const departmentInput = document.getElementById('birthdepartment');
+
+    const nationalitySelect = document.querySelector('select[name="nationality"]');
+    const healthinsuranceWrapper = document.getElementById('healthinsurance-wrapper');
+    const healthinsuranceInput = document.getElementById('healthinsurance');
+
+    if (!form || !countrySelect || !nationalitySelect || !departmentWrapper || !departmentInput || !healthinsuranceWrapper || !healthinsuranceInput) return;
+
+    const toggleDepartment = () => {
+        if (countrySelect.value === 'FR') {
+            departmentWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+            departmentWrapper.classList.add('opacity-100', 'h-auto');
+            departmentInput.setAttribute('required', ''); // obligatoire si France
+        } else {
+            departmentWrapper.classList.add('opacity-0', 'h-0');
+            departmentWrapper.classList.remove('opacity-100', 'h-auto');
+            setTimeout(() => departmentWrapper.classList.add('hidden'), 300);
+            departmentInput.removeAttribute('required'); // pas obligatoire si autre pays
+        }
+    };
+
+    const toggleHealthinsurance = () => {
+        if (nationalitySelect.value === 'FR') {
+            healthinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+            healthinsuranceWrapper.classList.add('opacity-100', 'h-auto');
+            healthinsuranceInput.setAttribute('required', ''); // obligatoire si France
+        } else {
+            healthinsuranceWrapper.classList.add('opacity-0', 'h-0');
+            healthinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
+            setTimeout(() => healthinsuranceWrapper.classList.add('hidden'), 300);
+            healthinsuranceInput.removeAttribute('required'); // pas obligatoire si autre nationalité
+        }
+    };
+
+    // Vérification initiale
+    toggleDepartment();
+    toggleHealthinsurance();
+
+    // Écoute des changements
+    countrySelect.addEventListener('change', toggleDepartment);
+    nationalitySelect.addEventListener('change', toggleHealthinsurance);
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Message envoyé avec succès !');
+                form.reset();
+                toggleDepartment();
+                toggleHealthinsurance(); // remise à l'état initial
+            } else {
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Erreur réseau. Veuillez vérifier votre connexion.');
+        }
+    });
+
+    // Filtrage chiffres pour le code postal, voie, téléphone, numéro de sécurité sociale
+    document.addEventListener("input", (e) => {
+      if (e.target.name === "zipcode") {
+        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
+      }
+      if (e.target.name === "tracknumber") {
+        e.target.value = e.target.value.replace(/\D/g, "");
+      }
+      if (e.target.name === "phone") {
+        e.target.value = e.target.value.replace(/\D/g, "");
+      }
+      if (e.target.name === "healthinsurance") {
+        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 15);;
+      }
+    });
+});
+</script>
+
