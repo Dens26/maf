@@ -5,6 +5,8 @@ import { getBackgroundColor, getTextColor, getPaddingClass } from '@utils/styleU
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
 import { siteConfig } from '@data/config';
 import { Mail, Phone, MapPin } from 'lucide-astro';
+import Button from '@components/ui/Button.astro';
+
 export interface Props {
     content?: {
         title?: string;
@@ -20,10 +22,14 @@ export interface Props {
     paddingTop?: PaddingSize;
     paddingBottom?: PaddingSize;
 }
+
+const step = {
+    value : 1
+};
+
 const { content, background = 'base', padding, paddingTop, paddingBottom } = Astro.props;
 
 const bgColor = getBackgroundColor(background);
-const textColor = getTextColor(background);
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 ---
 
@@ -31,11 +37,15 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
     <div class="site-container px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <Stepper currentStep={1} />
+                <Stepper currentStep={step.value} id="stepper"/>
             </div>
             <div class="md:col-span-2">
                 <Create />
             </div>
+        </div>
+        <div class="text-end my-8">
+            <Button id="previousStepBtn" variant="primary" size="md" class='uppercase hidden'>étape précédente</Button>
+            <Button id="nextStepBtn" variant="primary" size="md" class='uppercase'>étape suivante</Button>
         </div>
     </div>
 </section>

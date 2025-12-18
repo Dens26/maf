@@ -23,5 +23,5 @@ export const blogSetting = {
 }
 
 export const themeSetting = {
-  theme: 'zeus'
+  theme: 'hermes'
 }

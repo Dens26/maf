@@ -1,6 +1,6 @@
 ---
 name: "Création d'entreprise"
-description: "Un accompagnement personnalisé pour lancer votre entreprise individuelle sans stress."
+description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
 icon: "/images/create-company.jpg"
 category: "Formalités de création"
 priceRange: "à partir de 69€"
@@ -9,11 +9,11 @@ order: 1
 publish: true
 
 link: "/forms/create"
-text: "Créez votre entreprise"
+text: "Commencer ma création"
 
 seo:
   title: "Création d'entreprise"
-  description: "Un accompagnement personnalisé pour lancer votre entreprise individuelle sans stress."
+  description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
   icon: "/icons/create-company.jpg"
 ---
 
