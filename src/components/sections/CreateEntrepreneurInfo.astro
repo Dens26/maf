@@ -1,0 +1,40 @@
+---
+import Create from '@components/forms/CreateEntrepreneur.astro';
+import Stepper from '@components/forms/Stepper.astro';
+import { getBackgroundColor, getPaddingClass } from '@utils/styleUtils';
+import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
+
+export interface Props {
+    content?: {
+        title?: string;
+        description?: string;
+        contactInfo?: {
+            email?: string;
+            phone?: string;
+            address?: string;
+        };
+    };
+    background?: ThemeColor;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+
+const { content, background = 'base', padding, paddingTop, paddingBottom } = Astro.props;
+
+const bgColor = getBackgroundColor(background);
+const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+---
+
+<section class:list={[bgColor, paddingClass]}>
+    <div class="site-container px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <Stepper currentStep={1} id="stepper"/>
+            </div>
+            <div class="md:col-span-2">
+                <Create />
+            </div>
+        </div>
+    </div>
+</section>

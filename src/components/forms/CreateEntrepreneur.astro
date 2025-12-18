@@ -1,9 +1,7 @@
 ---
 import Button from '@components/ui/Button.astro';
 import Input from '@components/ui/form/Input.astro';
-import Textarea from '@components/ui/form/Textarea.astro';
 import Date from '@components/ui/form/Date.astro';
-import Checkbox from '@components/ui/form/Checkbox.astro';
 import Select from '@components/ui/form/Select.astro';
 import countries from '@data/countries.json';
 import departments from '@data/departments.json';
@@ -153,6 +151,9 @@ const formBackground = 'light';
       <div class="grid grid-cols-1 gap-4">
         <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
       </div>
+    </div>
+    <div class="text-end my-8">
+      <Button href="/forms/create/business" variant="primary" size="md" class='uppercase'>étape suivante</Button>
     </div>
 </form>
 

@@ -8,7 +8,7 @@ duration: "48h en moyenne"
 order: 1
 publish: true
 
-link: "/forms/create"
+link: "/forms/create/entrepreneur"
 text: "Commencer ma création"
 
 seo:

@@ -1,0 +1,136 @@
+---
+import Button from '@components/ui/Button.astro';
+import Input from '@components/ui/form/Input.astro';
+import Radio from '@components/ui/form/Radio.astro';
+import Select from '@components/ui/form/Select.astro';
+import Textarea from '@components/ui/form/Textarea.astro';
+
+const existingsirenOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const microOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const accreOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const supportcontractOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const turnoverOptions = [
+    { label: 'Mensuel', value: 'mensuel' },
+    { label: 'Trimestriel', value: 'trimestriel' },
+];
+
+const otheractivityOptions = [
+    { label: 'Sans activité', value: 'Sans activité' },
+    { label: 'Non salarié non agricole', value: 'Non salarié non agricole' },
+    { label: 'Pension d\'invalidité', value: 'Invalidité' },
+    { label: 'Retraité', value: 'Retraité' },
+    { label: 'Salarié', value: 'Salarié' },
+    { label: 'Salarié agricole', value: 'Salarié agricole' },
+    { label: 'Autre', value: 'Autre' },
+];
+
+const domiciliationOptions = [
+    { label: 'au domicile personnel', value: 'personnel' },
+    { label: 'à une autre adresse', value: 'établissement' },
+    { label: 'à une adresse de domiciliation', value: 'domiciliation' }
+];
+
+const formBackground = 'light';
+---
+
+<div>
+    <h3 class="text-xl-2 font-semibold mb-4">Informations Entreprise</h3>
+</div>
+
+<form id="create-form">
+    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+        <div class="text-md font-semibold">Entrepreneur</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Radio label="Disposez-vous d'un contrat d'appui ?" id="supportcontract" name="supportcontract" options={supportcontractOptions} required background={formBackground} />
+            <Radio label="Demande d'ACRE de moins de 3 ans ?" id="accre" name="accre" options={accreOptions}  required background={formBackground} />
+            <Radio label="Avez-vous déjà eu une entreprise ?" id="existingsiren" name="existingsiren" options={existingsirenOptions}  required background={formBackground} />
+            <div id="siren-wrapper" class="hidden transition-all duration-300">
+                <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
+            </div>
+            <div id="siren-wrapper" class="hidden transition-all duration-300">
+                <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
+            </div>
+            <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder=""/>
+        </div>
+    </div>
+
+    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+        <div class="text-md font-semibold">Fiscalité</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions}  required background={formBackground} />
+            <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} placeholder=""/>
+        </div>
+    </div>
+
+    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+        <div class="text-md font-semibold">Activités de l'entreprise</div>
+        <Textarea rows={3} label="Description de votre activité" id="activity" name="activity" required background={formBackground} class='text-sm' />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Select label="L'activité sera exercée:" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder=""/>
+        </div>
+    </div>
+
+    <div class="flex justify-between my-8">
+        <Button href="/forms/create/entrepreneur" variant="primary" size="md" class="uppercase">étape précédente</Button>
+        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">étape suivante</Button>
+    </div>
+</form>
+
+<!-- Script côté client -->
+<script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('create-form');
+        const sirenWrapper = document.getElementById('siren-wrapper');
+        const sirenInput = document.getElementById('siren');
+        const existingSirens = document.querySelectorAll('input[name="existingsiren"]');
+
+        if (!form || !sirenWrapper || !sirenInput || !existingSirens.length) return;
+
+        const toggleExistingSiren = (value) => {
+            if (value === 'oui') {
+                sirenWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+                sirenWrapper.classList.add('opacity-100', 'h-auto');
+                sirenInput.setAttribute('required', '');
+            } else {
+                sirenWrapper.classList.add('opacity-0', 'h-0');
+                sirenWrapper.classList.remove('opacity-100', 'h-auto');
+                sirenInput.removeAttribute('required');
+                setTimeout(() => sirenWrapper.classList.add('hidden'), 300);
+            }
+        };
+
+        // État initial
+        const checked = [...existingSirens].find((r) => r.checked);
+        if (checked) toggleExistingSiren(checked.value);
+
+        // Écoute des changements radio
+        existingSirens.forEach((radio) => {
+            radio.addEventListener('change', (e) => {
+                toggleExistingSiren(e.target.value);
+            });
+        });
+
+        // Filtrage SIREN (9 chiffres)
+        document.addEventListener('input', (e) => {
+            if (e.target.name === 'siren') {
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+            }
+        });
+    });
+</script>

@@ -1,11 +1,8 @@
 ---
-import Create from '@components/forms/Create.astro';
+import Create from '@components/forms/CreateBusiness.astro';
 import Stepper from '@components/forms/Stepper.astro';
-import { getBackgroundColor, getTextColor, getPaddingClass } from '@utils/styleUtils';
+import { getBackgroundColor, getPaddingClass } from '@utils/styleUtils';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
-import { siteConfig } from '@data/config';
-import { Mail, Phone, MapPin } from 'lucide-astro';
-import Button from '@components/ui/Button.astro';
 
 export interface Props {
     content?: {
@@ -23,10 +20,6 @@ export interface Props {
     paddingBottom?: PaddingSize;
 }
 
-const step = {
-    value : 1
-};
-
 const { content, background = 'base', padding, paddingTop, paddingBottom } = Astro.props;
 
 const bgColor = getBackgroundColor(background);
@@ -37,15 +30,11 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
     <div class="site-container px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <Stepper currentStep={step.value} id="stepper"/>
+                <Stepper currentStep={2} id="stepper"/>
             </div>
             <div class="md:col-span-2">
                 <Create />
             </div>
-        </div>
-        <div class="text-end my-8">
-            <Button id="previousStepBtn" variant="primary" size="md" class='uppercase hidden'>étape précédente</Button>
-            <Button id="nextStepBtn" variant="primary" size="md" class='uppercase'>étape suivante</Button>
         </div>
     </div>
 </section>
