@@ -55,8 +55,8 @@ const insuranceorganizationOptions = [
   { label: "Agricole", value: "Agricole" },
   { label: "ENIM", value: "ENIM" },
   { label: "Non salarié non Agricole", value: "Non salarié non Agricole" },
-  { label: "Régime génééral", value: "Régime génééral" },
-  { label: "Autres", value: "Autres" }
+  { label: "Régime général", value: "Régime général" },
+  { label: "Autre", value: "Autre" }
 ];
 
 const countryOptions = [
@@ -89,9 +89,9 @@ const formBackground = 'light';
   <h3 class="text-xl-2 font-semibold mb-4">Informations personnelles</h3>
 </div>
 
-<form id="create-form" >
+<form id="create-form" action="/forms/create/business" >
 
-    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
       <div class="text-md font-semibold">Contact</div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
@@ -99,7 +99,7 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
         <div class="text-md font-semibold">Enrepreneur</div>
         <div class="grid grid-cols-3 gap-4">
           <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1"/>
@@ -121,10 +121,13 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
       <div class="text-md font-semibold">Protection sociale</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground} placeholder=""/>
+          <div id="otherhealthinsurance-wrapper" class="hidden transition-all duration-300">
+            <Input label="Autre organisme d'assurance" id="otherhealthinsurance" name="otherhealthinsurance" required background={formBackground}/>
+          </div>
           <div id="healthinsurance-wrapper" class="hidden transition-all duration-300">
             <Input label="N° Sécurité sociale" id="healthinsurance" name="healthinsurance" required background={formBackground}/>
           </div>
@@ -132,18 +135,19 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-lg">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
       <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
       <div class="grid grid-cols-4 gap-4">
         <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
         <div class="col-span-3 grid grid-cols-2 gap-4">
-          <Select label="Complément" id="complementnumber" name="complementnumber" options={complementnumberOptions} background={formBackground} placeholder=""class="w-full" />
+          <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=""class="w-full" />
           <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
-      </div>
+        <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} />
+    </div>
       <div class="grid grid-cols-2 gap-4">
         <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
         <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
@@ -153,6 +157,7 @@ const formBackground = 'light';
       </div>
     </div>
     <div class="text-end my-8">
+      <!-- <Button type='submit' variant="primary" size="md" class='uppercase'>étape suivante</Button> -->
       <Button href="/forms/create/business" variant="primary" size="md" class='uppercase'>étape suivante</Button>
     </div>
 </form>
@@ -170,18 +175,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const healthinsuranceWrapper = document.getElementById('healthinsurance-wrapper');
     const healthinsuranceInput = document.getElementById('healthinsurance');
 
-    if (!form || !countrySelect || !nationalitySelect || !departmentWrapper || !departmentInput || !healthinsuranceWrapper || !healthinsuranceInput) return;
+    const healthinsuranceValue = document.querySelector('select[name="insuranceorganization"]');
+    const otherhealtinsuranceWrapper = document.getElementById('otherhealthinsurance-wrapper');
+    const otherhealtinsuranceInput = document.getElementById('otherhealthinsurance');
+
+    if (!form || !countrySelect || !nationalitySelect || !healthinsuranceValue || !departmentWrapper || !healthinsuranceWrapper || !otherhealtinsuranceWrapper || !departmentInput || !healthinsuranceInput || !otherhealtinsuranceInput) return;
 
     const toggleDepartment = () => {
         if (countrySelect.value === 'FR') {
             departmentWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
             departmentWrapper.classList.add('opacity-100', 'h-auto');
-            departmentInput.setAttribute('required', ''); // obligatoire si France
+            departmentInput.setAttribute('required', '');
         } else {
             departmentWrapper.classList.add('opacity-0', 'h-0');
             departmentWrapper.classList.remove('opacity-100', 'h-auto');
             setTimeout(() => departmentWrapper.classList.add('hidden'), 300);
-            departmentInput.removeAttribute('required'); // pas obligatoire si autre pays
+            departmentInput.removeAttribute('required');
         }
     };
 
@@ -189,48 +198,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nationalitySelect.value === 'FR') {
             healthinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
             healthinsuranceWrapper.classList.add('opacity-100', 'h-auto');
-            healthinsuranceInput.setAttribute('required', ''); // obligatoire si France
+            healthinsuranceInput.setAttribute('required', '');
         } else {
             healthinsuranceWrapper.classList.add('opacity-0', 'h-0');
             healthinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
             setTimeout(() => healthinsuranceWrapper.classList.add('hidden'), 300);
-            healthinsuranceInput.removeAttribute('required'); // pas obligatoire si autre nationalité
+            healthinsuranceInput.removeAttribute('required');
         }
+    };
+
+    const toggleOtherhealthinsurance = () => {
+      if (healthinsuranceValue.value === 'Autre') {
+        otherhealtinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+        otherhealtinsuranceWrapper.classList.add('opacity-100', 'h-auto');
+        otherhealtinsuranceInput.setAttribute('required', '');
+      } else {
+        otherhealtinsuranceWrapper.classList.add('opacity-0', 'h-0');
+        otherhealtinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
+        setTimeout(() => otherhealtinsuranceWrapper.classList.add('hidden'), 300);
+        otherhealtinsuranceInput.removeAttribute('required');
+      }
     };
 
     // Vérification initiale
     toggleDepartment();
     toggleHealthinsurance();
+    toggleOtherhealthinsurance();
 
     // Écoute des changements
     countrySelect.addEventListener('change', toggleDepartment);
     nationalitySelect.addEventListener('change', toggleHealthinsurance);
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-
-            if (response.ok) {
-                alert('Message envoyé avec succès !');
-                form.reset();
-                toggleDepartment();
-                toggleHealthinsurance(); // remise à l'état initial
-            } else {
-                alert('Une erreur est survenue. Veuillez réessayer.');
-            }
-        } catch (error) {
-            console.error(error);
-            alert('Erreur réseau. Veuillez vérifier votre connexion.');
-        }
-    });
+    healthinsuranceValue.addEventListener('change', toggleOtherhealthinsurance);
 
     // Filtrage chiffres pour le code postal, voie, téléphone, numéro de sécurité sociale
     document.addEventListener("input", (e) => {

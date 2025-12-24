@@ -4,6 +4,7 @@ import Input from '@components/ui/form/Input.astro';
 import Radio from '@components/ui/form/Radio.astro';
 import Select from '@components/ui/form/Select.astro';
 import Textarea from '@components/ui/form/Textarea.astro';
+import countries from '@data/countries.json';
 
 const existingsirenOptions = [
     { label: 'Oui', value: 'oui' },
@@ -42,8 +43,65 @@ const otheractivityOptions = [
 
 const domiciliationOptions = [
     { label: 'au domicile personnel', value: 'personnel' },
-    { label: 'à une autre adresse', value: 'établissement' },
-    { label: 'à une adresse de domiciliation', value: 'domiciliation' }
+    { label: 'dans un local professionnel', value: 'local' },
+    { label: 'à l’adresse du bien loué (LMNP)', value: 'lmnp' },
+    { label: 'dans un centre de domiciliation', value: 'domiciliation' }
+];
+
+const formofactivityOptions = [
+    { label: 'libérale', value: 'liberale' },
+    { label: 'commerciale', value: 'commerciale' },
+    { label: 'artisanale', value: 'artisanale' },
+    { label: 'location de biens immobiliers', value: 'location_biens' },
+    { label: 'agricole', value: 'agricole' }
+];
+
+const complementnumberOptions = [
+    { label: 'Bis', value: 'bis' },
+    { label: 'Ter', value: 'ter' },
+    { label: 'Quater', value: 'quater' },
+    { label: 'Quinquies', value: 'quinquies' },
+    { label: 'Sexies', value: 'sexies' },
+    { label: 'Septies', value: 'septies' },
+    { label: 'Octies', value: 'octies' },
+    { label: 'Nonies', value: 'nonies' }
+];
+
+const tracktypeOptions = [
+    { label: "Allée", value: "Allée" },
+    { label: "Allée privée", value: "Allée privée" },
+    { label: "Avenue", value: "Avenue" },
+    { label: "Boulevard", value: "Boulevard" },
+    { label: "Boulevard périphérique", value: "Boulevard périphérique" },
+    { label: "Cité", value: "Cité" },
+    { label: "Cour", value: "Cour" },
+    { label: "Chemin", value: "Chemin" },
+    { label: "Chemin rural", value: "Chemin rural" },
+    { label: "Impasse", value: "Impasse" },
+    { label: "Lotissement", value: "Lotissement" },
+    { label: "Parc", value: "Parc" },
+    { label: "Passage", value: "Passage" },
+    { label: "Place", value: "Place" },
+    { label: "Place de la…", value: "Place de la…" },
+    { label: "Promenade", value: "Promenade" },
+    { label: "Quai", value: "Quai" },
+    { label: "Route", value: "Route" },
+    { label: "Route départementale", value: "Route départementale" },
+    { label: "Route nationale", value: "Route nationale" },
+    { label: "Ruelle", value: "Ruelle" },
+    { label: "Résidence", value: "Résidence" },
+    { label: "Sentier", value: "Sentier" },
+    { label: "Villa", value: "Villa" },
+    { label: "Voie", value: "Voie" },
+    { label: "Zone industrielle", value: "Zone industrielle" }
+];
+
+const countryOptions = [
+    { label: "France", value: "FR" },
+    ...countries
+        .filter(c => c.name !== "France")
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(c => ({ label: c.name, value: c.code }))
 ];
 
 const formBackground = 'light';
@@ -54,7 +112,7 @@ const formBackground = 'light';
 </div>
 
 <form id="create-form">
-    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
         <div class="text-md font-semibold">Entrepreneur</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Radio label="Disposez-vous d'un contrat d'appui ?" id="supportcontract" name="supportcontract" options={supportcontractOptions} required background={formBackground} />
@@ -63,14 +121,11 @@ const formBackground = 'light';
             <div id="siren-wrapper" class="hidden transition-all duration-300">
                 <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
             </div>
-            <div id="siren-wrapper" class="hidden transition-all duration-300">
-                <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
-            </div>
             <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder=""/>
         </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
         <div class="text-md font-semibold">Fiscalité</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions}  required background={formBackground} />
@@ -78,59 +133,195 @@ const formBackground = 'light';
         </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-lg mb-8">
+    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
         <div class="text-md font-semibold">Activités de l'entreprise</div>
-        <Textarea rows={3} label="Description de votre activité" id="activity" name="activity" required background={formBackground} class='text-sm' />
+        <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class='text-sm' />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Select label="L'activité sera exercée:" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder=""/>
+            <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder=""/>
+            <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder=""/>
+        </div>
+    </div>
+
+    <div id="localaddress-wraper" class="hidden space-y-6 bg-white p-6 rounded-sm mb-4 transition-all duration-300">
+      <div class="text-md font-semibold">Adresse de l'établissement</div>
+      <div class="grid grid-cols-4 gap-4">
+        <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
+        <div class="col-span-3 grid grid-cols-2 gap-4">
+            <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=""class="w-full" />
+            <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
+        <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} />
+    </div>
+        <div class="grid grid-cols-2 gap-4">
+            <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
+            <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
+        </div>
+        <div class="grid grid-cols-1 gap-4">
+            <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
         </div>
     </div>
 
     <div class="flex justify-between my-8">
         <Button href="/forms/create/entrepreneur" variant="primary" size="md" class="uppercase">étape précédente</Button>
-        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">étape suivante</Button>
+        <Button type='submit' variant="primary" size="md" class="uppercase">étape suivante</Button>
     </div>
 </form>
 
 <!-- Script côté client -->
+<!-- Script côté client -->
 <script type="module">
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('create-form');
-        const sirenWrapper = document.getElementById('siren-wrapper');
-        const sirenInput = document.getElementById('siren');
-        const existingSirens = document.querySelectorAll('input[name="existingsiren"]');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('create-form');
+    if (!form) return;
 
-        if (!form || !sirenWrapper || !sirenInput || !existingSirens.length) return;
+    // -----------------------------
+    // SIREN
+    // -----------------------------
+    const sirenWrapper = document.getElementById('siren-wrapper');
+    const sirenInput = document.getElementById('siren');
+    const existingSirens = form.querySelectorAll('input[name="existingsiren"]');
 
-        const toggleExistingSiren = (value) => {
-            if (value === 'oui') {
-                sirenWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-                sirenWrapper.classList.add('opacity-100', 'h-auto');
-                sirenInput.setAttribute('required', '');
-            } else {
-                sirenWrapper.classList.add('opacity-0', 'h-0');
-                sirenWrapper.classList.remove('opacity-100', 'h-auto');
-                sirenInput.removeAttribute('required');
-                setTimeout(() => sirenWrapper.classList.add('hidden'), 300);
-            }
-        };
+    const toggleSiren = (value) => {
+        if (!sirenWrapper || !sirenInput) return;
+        if (value === 'oui') {
+            sirenWrapper.classList.remove('hidden');
+            sirenWrapper.classList.add('opacity-100', 'h-auto');
+            sirenWrapper.classList.remove('opacity-0', 'h-0');
+            sirenInput.setAttribute('required', '');
+        } else {
+            sirenWrapper.classList.add('opacity-0', 'h-0');
+            sirenWrapper.classList.remove('opacity-100', 'h-auto');
+            sirenInput.removeAttribute('required');
+            setTimeout(() => sirenWrapper.classList.add('hidden'), 300);
+        }
+    };
 
-        // État initial
-        const checked = [...existingSirens].find((r) => r.checked);
-        if (checked) toggleExistingSiren(checked.value);
-
-        // Écoute des changements radio
-        existingSirens.forEach((radio) => {
-            radio.addEventListener('change', (e) => {
-                toggleExistingSiren(e.target.value);
-            });
-        });
-
-        // Filtrage SIREN (9 chiffres)
-        document.addEventListener('input', (e) => {
-            if (e.target.name === 'siren') {
-                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
-            }
-        });
+    existingSirens.forEach(radio => {
+        radio.addEventListener('change', e => toggleSiren(e.target.value));
+        if (radio.checked) toggleSiren(radio.value);
     });
+
+    if (sirenInput) {
+        sirenInput.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+        });
+    }
+
+    // -----------------------------
+    // Form of Activity & LMNP
+    // -----------------------------
+    const formofactivitySelect = form.querySelector('select[name="formofactivity"]');
+    const domiciliationSelect = form.querySelector('select[name="domiciliation"]');
+
+    const localWrapper = document.getElementById('localaddress-wraper');
+    const localInputs = localWrapper ? localWrapper.querySelectorAll('input, select') : [];
+
+    const toggleLMNPOption = () => {
+        if (!formofactivitySelect || !domiciliationSelect) return;
+
+        // Vérifie si LMNP existe déjà
+        let lmnpOption = domiciliationSelect.querySelector('option[value="lmnp"]');
+
+        if (formofactivitySelect.value === "location_biens") {
+            // Si LMNP n’existe pas, on l’ajoute
+            if (!lmnpOption) {
+                lmnpOption = document.createElement('option');
+                lmnpOption.value = 'lmnp';
+                lmnpOption.textContent = 'à l’adresse du bien loué (LMNP)';
+                domiciliationSelect.appendChild(lmnpOption);
+            }
+
+            // Sélection automatique LMNP et désactivation du select
+            domiciliationSelect.value = "lmnp";
+            domiciliationSelect.disabled = true;
+
+            // Affiche localWrapper et rend champs requis
+            if (localWrapper) {
+                localWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+                localWrapper.classList.add('opacity-100', 'h-auto');
+            }
+            localInputs.forEach(el => {
+                if (el.dataset.optional !== 'true') el.setAttribute('required', '');
+            });
+        } else {
+            // Réactive le select et retire LMNP si présent
+            domiciliationSelect.disabled = false;
+            if (lmnpOption) lmnpOption.remove();
+
+            // Masque la section localWrapper
+            if (localWrapper) {
+                localWrapper.classList.add('opacity-0', 'h-0');
+                localWrapper.classList.remove('opacity-100', 'h-auto');
+                setTimeout(() => localWrapper.classList.add('hidden'), 300);
+            }
+            localInputs.forEach(el => el.removeAttribute('required'));
+        }
+    };
+
+    if (formofactivitySelect) {
+        formofactivitySelect.addEventListener('change', toggleLMNPOption);
+        toggleLMNPOption();
+    }
+
+    // -----------------------------
+    // Domiciliation classique
+    // -----------------------------
+    const toggleLocalAddress = () => {
+        if (!domiciliationSelect || !localWrapper) return;
+        const isLocal = domiciliationSelect.value === 'local';
+
+        if (isLocal) {
+            localWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+            localWrapper.classList.add('opacity-100', 'h-auto');
+            localInputs.forEach(el => {
+                if (el.dataset.optional !== 'true') el.setAttribute('required', '');
+            });
+        } else if (formofactivitySelect.value !== "location_biens") {
+            localWrapper.classList.add('opacity-0', 'h-0');
+            localWrapper.classList.remove('opacity-100', 'h-auto');
+            localInputs.forEach(el => el.removeAttribute('required'));
+            setTimeout(() => localWrapper.classList.add('hidden'), 300);
+        }
+    };
+
+    if (domiciliationSelect) {
+        domiciliationSelect.addEventListener('change', toggleLocalAddress);
+        toggleLocalAddress();
+    }
+
+    // -----------------------------
+    // Soumission du formulaire
+    // -----------------------------
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Message envoyé avec succès !');
+                form.reset();
+                toggleSiren('');
+                toggleLMNPOption();
+                toggleLocalAddress();
+            } else {
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Erreur réseau. Veuillez vérifier votre connexion.');
+        }
+    });
+});
 </script>
+
+
