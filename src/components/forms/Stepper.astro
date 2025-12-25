@@ -19,25 +19,13 @@ const steps = ['Informations personnelles', 'Informations entreprise', 'Récapit
                         <!-- Label -->
                         <div class="absolute left-full ml-4 top-1/2 -translate-y-1/2 w-max">
                             <h6
-                                class:list={[
-                                    'text-sm font-semibold',
-                                    isActive && 'text-slate-900',
-                                    isDone && 'text-slate-900',
-                                    !isDone && !isActive && 'text-slate-400',
-                                ]}
-                            >
+                                class:list={['text-sm font-semibold', isActive && 'text-slate-900', isDone && 'text-slate-900', !isDone && !isActive && 'text-slate-400',]}>
                                 {label}
                             </h6>
                         </div>
 
                         <!-- Cercle -->
-                        <div
-                            class:list={[
-                                'w-7 h-7 border-2 flex items-center justify-center rounded-full',
-                                (isDone || isActive) && 'border-green-500',
-                                !isDone && !isActive && 'border-gray-300',
-                            ]}
-                        >
+                        <div class:list={['w-7 h-7 border-2 flex items-center justify-center rounded-full', (isDone || isActive) && 'border-green-500', !isDone && !isActive && 'border-gray-300',]}>
                             {isDone && (
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-green-500" viewBox="0 0 24 24">
                                     <path d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z" />
@@ -52,12 +40,7 @@ const steps = ['Informations personnelles', 'Informations entreprise', 'Récapit
 
                     <!-- Ligne -->
                     {!isLast && (
-                        <div
-                            class:list={[
-                                'w-0.5 h-8',
-                                isDone ? 'bg-green-500' : 'bg-gray-300',
-                            ]}
-                        />
+                        <div class:list={['w-0.5 h-4 md:h-16', isDone ? 'bg-green-500' : 'bg-gray-300',]} />
                     )}
                 </div>
             );

@@ -91,7 +91,7 @@ const formBackground = 'light';
 
 <form id="create-form" action="/forms/create/business" >
 
-    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
       <div class="text-md font-semibold">Contact</div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
@@ -99,7 +99,7 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
         <div class="text-md font-semibold">Enrepreneur</div>
         <div class="grid grid-cols-3 gap-4">
           <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1"/>
@@ -121,7 +121,7 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
       <div class="text-md font-semibold">Protection sociale</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground} placeholder=""/>
@@ -135,7 +135,7 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <div class="space-y-6 bg-white p-6 rounded-sm mb-4">
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
       <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
       <div class="grid grid-cols-4 gap-4">
         <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
