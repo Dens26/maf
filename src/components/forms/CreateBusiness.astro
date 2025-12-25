@@ -121,7 +121,10 @@ const formBackground = 'light';
             <div id="siren-wrapper" class="hidden transition-all duration-300">
                 <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
             </div>
-            <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder=""/>
+            <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder="" />
+            <div id="otheractivitydetail-wrapper" class="hidden transition-all duration-300">
+                <Input label="Précisez votre profession" id="otheractivitydetail" name="otheractivitydetail" required background={formBackground} />
+            </div>
         </div>
     </div>
 
@@ -129,7 +132,7 @@ const formBackground = 'light';
         <div class="text-md font-semibold">Fiscalité</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions}  required background={formBackground} />
-            <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} placeholder=""/>
+            <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} placeholder="" />
         </div>
     </div>
 
@@ -137,10 +140,10 @@ const formBackground = 'light';
         <div class="text-md font-semibold">Activités de l'entreprise</div>
         <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class='text-sm' />
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder=""/>
-            <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder=""/>
+            <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder="" />
+            <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder="" />
         </div>
-        <div class="grid grid-cols-2 gap-4" id="domiciliationsiren-wrapper" class="hidden transition-all duration-300">
+        <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-4 hidden transition-all duration-300">
             <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
             <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
         </div>
@@ -151,7 +154,7 @@ const formBackground = 'light';
         <div class="grid grid-cols-4 gap-4">
             <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
             <div class="col-span-3 grid grid-cols-2 gap-4">
-                <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=""class="w-full" />
+                <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
                 <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
             </div>
         </div>
@@ -180,6 +183,27 @@ const formBackground = 'light';
         const form = document.getElementById('create-form');
         if (!form) return;
 
+        // DETAIL AUTRE ACTIVITE
+        const otheractivitydetailWrapper = document.getElementById('otheractivitydetail-wrapper');
+        const otheractivitydetailInput = document.getElementById('otheractivitydetail');
+        const otheractivitySelect = form.querySelector('[name="otheractivity"]');
+
+        const toggleOtherActivityDetail = () => {
+            if (!otheractivitydetailWrapper || !otheractivitydetailInput || !otheractivitySelect) return;
+
+            if (otheractivitySelect.value === 'Autre') {
+                otheractivitydetailWrapper.classList.remove('hidden');
+                otheractivitydetailInput.setAttribute('required', '');
+            } else {
+                otheractivitydetailWrapper.classList.add('hidden');
+                otheractivitydetailInput.removeAttribute('required');
+                otheractivitydetailInput.value = ''; // optionnel mais propre
+            }
+        };
+
+        otheractivitySelect.addEventListener('change', toggleOtherActivityDetail);
+        toggleOtherActivityDetail();
+
         // SIREN EXISTANT
         const sirenWrapper = document.getElementById('siren-wrapper');
         const sirenInput = document.getElementById('siren');
@@ -199,24 +223,20 @@ const formBackground = 'light';
 
         existingSirens.forEach(radio => {
             radio.addEventListener('change', e => toggleSiren(e.target.value));
-            if (radio.checked) toggleSiren(radio.value);
+            if (radio.checked)
+                toggleSiren(radio.value);
         });
 
-        if (sirenInput) {
-            sirenInput.addEventListener('input', e => {
-                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
-            });
-        }
+        if (sirenInput)
+            sirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
         // DOMICILIATION / LMNP / ADRESSE
         const formofactivitySelect = form.querySelector('[name="formofactivity"]');
-        const domiciliationSelect = form.querySelector('[name="domiciliation"]');
 
         const localWrapper = document.getElementById('localaddress-wraper');
-        const localInputs = localWrapper
-            ? localWrapper.querySelectorAll('input, select')
-            : [];
+        const localInputs = localWrapper? localWrapper.querySelectorAll('input, select') : [];
 
+        const domiciliationSelect = form.querySelector('[name="domiciliation"]');
         const domiciliationsirenWrapper = document.getElementById('domiciliationsiren-wrapper');
         const domiciliationsirenInput = document.getElementById('domiciliationsiren');
         const domiciliationnameInput = document.getElementById('domiciliationname');
@@ -237,19 +257,20 @@ const formBackground = 'light';
                 domiciliationSelect.disabled = true;
             } else {
                 domiciliationSelect.disabled = false;
-                if (lmnpOption) lmnpOption.remove();
+                if (lmnpOption)
+                    lmnpOption.remove();
             }
         };
 
+        // Adresse de l'établissement
         const handleAddress = () => {
-            const needsAddress = domiciliationSelect.value !== 'personnel';
+            const needsAddress = domiciliationSelect.value !== 'personnel' && domiciliationSelect.value !== '';
 
             if (needsAddress) {
                 localWrapper.classList.remove('hidden');
                 localInputs.forEach(el => {
-                    if (el.dataset.optional !== 'true') {
+                    if (el.dataset.optional !== 'true')
                         el.setAttribute('required', '');
-                    }
                 });
             } else {
                 localWrapper.classList.add('hidden');
@@ -270,11 +291,8 @@ const formBackground = 'light';
             }
         };
 
-        if (domiciliationsirenInput) {
-            domiciliationsirenInput.addEventListener('input', e => {
-                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
-            });
-        }
+        if (domiciliationsirenInput)
+            domiciliationsirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
         // Synchronisation
         const syncForm = () => {
