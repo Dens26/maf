@@ -61,6 +61,13 @@ const formofactivityOptions = [
     { label: 'agricole', value: 'agricole' }
 ];
 
+const formofsecondaryactivityOptions = [
+    { label: 'libérale', value: 'liberale' },
+    { label: 'commerciale', value: 'commerciale' },
+    { label: 'artisanale', value: 'artisanale' },
+    { label: 'agricole', value: 'agricole' }
+];
+
 const complementnumberOptions = [
     { label: 'Bis', value: 'bis' },
     { label: 'Ter', value: 'ter' },
@@ -152,16 +159,24 @@ const formBackground = 'light';
             <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
             <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
         </div>
-        <div class="hidden">
-            <Textarea label="Description de l’activité secondaire" id="secondaryActivities[0][description]" name="secondaryActivities[0][description]" required />
-            <Select label="Forme de l’activité" id="secondaryActivities[0][form]" name="secondaryActivities[0][form]" options={formofactivityOptions} required placeholder=''/>
-        </div>
-        <div id="addactivity-wrapper" class="grid grid-cols-2 hidden">
-            <Radio label="Cet établissement exercera-t-il des activités secondaires ?" id="addactivity" name="addactivity" options={nbrofactivities}  required background={formBackground} />
-            <div id="nbrofactivities-wrapper" class="hidden">
-                <Input type='number' min="1" max="5" label="Nombre d'activités secondaires" id="nbrofactivies" name="nbrofactivies" required background={formBackground} />
+        <div id="addactivity-wrapper" class="grid grid-cols-4 hidden">
+            <div class='col-span-3'>
+                <Radio label="Des activités secondaires sont-elles prévues ?" id="addactivity" name="addactivity" options={nbrofactivities}  required background={formBackground} />
+            </div>
+            <div id="nbrofactivities-wrapper" class="hidden col-span-1">
+                <Input type='number' min="1" max="5" label="Nbr d'activités" id="nbrofactivies" name="nbrofactivies" required background={formBackground} />
             </div>
         </div>
+
+        <div id="secondary-activities-container" class="space-y-4"></div>
+        <template id="secondary-activity-template">
+            <div class="grid grid-cols-4 gap-4">
+                <div class="col-span-3">
+                    <Textarea label="Activité secondaire" rows={1} required />
+                </div>
+                <Select label="Forme" options={formofsecondaryactivityOptions} required placeholder="" class="col-span-1" />
+            </div>
+        </template>
     </div>
 
     <div id="localaddress-wrapper" class="hidden space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4 transition-all duration-300">
@@ -198,35 +213,33 @@ const formBackground = 'light';
         const form = document.getElementById('create-form');
         if (!form) return;
 
-        // DETAIL AUTRE ACTIVITE
-        const otheractivitydetailWrapper = document.getElementById('otheractivitydetail-wrapper');
-        const otheractivitydetailInput = document.getElementById('otheractivitydetail');
-        const otheractivitySelect = form.querySelector('[name="otheractivity"]');
+        /*** AUTRE ACTIVITÉ ***/
+        const otherActivityWrapper = document.getElementById('otheractivitydetail-wrapper');
+        const otherActivityInput = document.getElementById('otheractivitydetail');
+        const otherActivitySelect = form.querySelector('[name="otheractivity"]');
 
         const toggleOtherActivityDetail = () => {
-            if (!otheractivitydetailWrapper || !otheractivitydetailInput || !otheractivitySelect) return;
+            if (!otherActivityWrapper || !otherActivityInput || !otherActivitySelect) return;
 
-            if (otheractivitySelect.value === 'Autre') {
-                otheractivitydetailWrapper.classList.remove('hidden');
-                otheractivitydetailInput.setAttribute('required', '');
+            if (otherActivitySelect.value === 'Autre') {
+                otherActivityWrapper.classList.remove('hidden');
+                otherActivityInput.setAttribute('required', '');
             } else {
-                otheractivitydetailWrapper.classList.add('hidden');
-                otheractivitydetailInput.removeAttribute('required');
-                otheractivitydetailInput.value = '';
+                otherActivityWrapper.classList.add('hidden');
+                otherActivityInput.removeAttribute('required');
+                otherActivityInput.value = '';
             }
         };
-
-        otheractivitySelect.addEventListener('change', toggleOtherActivityDetail);
+        otherActivitySelect.addEventListener('change', toggleOtherActivityDetail);
         toggleOtherActivityDetail();
 
-        // SIREN EXISTANT
+        /*** SIREN EXISTANT ***/
         const sirenWrapper = document.getElementById('siren-wrapper');
         const sirenInput = document.getElementById('siren');
         const existingSirens = form.querySelectorAll('input[name="existingsiren"]');
 
         const toggleSiren = (value) => {
             if (!sirenWrapper || !sirenInput) return;
-
             if (value === 'oui') {
                 sirenWrapper.classList.remove('hidden');
                 sirenInput.setAttribute('required', '');
@@ -235,58 +248,45 @@ const formBackground = 'light';
                 sirenInput.removeAttribute('required');
             }
         };
-
         existingSirens.forEach(radio => {
             radio.addEventListener('change', e => toggleSiren(e.target.value));
-            if (radio.checked)
-                toggleSiren(radio.value);
+            if (radio.checked) toggleSiren(radio.value);
         });
-
         if (sirenInput)
             sirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
-        // DOMICILIATION / LMNP / ADRESSE
-        const formofactivitySelect = form.querySelector('[name="formofactivity"]');
-
-        const localWrapper = document.getElementById('localaddress-wrapper');
-        const localInputs = localWrapper? localWrapper.querySelectorAll('input, select') : [];
-
+        /*** DOMICILIATION / LMNP / ADRESSE ***/
+        const formOfActivitySelect = form.querySelector('[name="formofactivity"]');
         const domiciliationSelect = form.querySelector('[name="domiciliation"]');
+        const localWrapper = document.getElementById('localaddress-wrapper');
+        const localInputs = localWrapper ? localWrapper.querySelectorAll('input, select') : [];
         const domiciliationsirenWrapper = document.getElementById('domiciliationsiren-wrapper');
-
         const domiciliationsirenInput = document.getElementById('domiciliationsiren');
         const domiciliationnameInput = document.getElementById('domiciliationname');
 
-        // LMNP
         const handleLMNP = () => {
             let lmnpOption = domiciliationSelect.querySelector('option[value="lmnp"]');
-
-            if (formofactivitySelect.value === 'location_biens') {
+            if (formOfActivitySelect.value === 'location_biens') {
                 if (!lmnpOption) {
                     lmnpOption = document.createElement('option');
                     lmnpOption.value = 'lmnp';
                     lmnpOption.textContent = 'à l’adresse du bien loué (LMNP)';
                     domiciliationSelect.appendChild(lmnpOption);
                 }
-
                 domiciliationSelect.value = 'lmnp';
                 domiciliationSelect.disabled = true;
             } else {
                 domiciliationSelect.disabled = false;
-                if (lmnpOption)
-                    lmnpOption.remove();
+                if (lmnpOption) lmnpOption.remove();
             }
         };
 
-        // Adresse de l'établissement
         const handleAddress = () => {
             const needsAddress = domiciliationSelect.value !== 'personnel' && domiciliationSelect.value !== '';
-
             if (needsAddress) {
                 localWrapper.classList.remove('hidden');
                 localInputs.forEach(el => {
-                    if (el.dataset.optional !== 'true')
-                        el.setAttribute('required', '');
+                    if (el.dataset.optional !== 'true') el.setAttribute('required', '');
                 });
             } else {
                 localWrapper.classList.add('hidden');
@@ -294,7 +294,6 @@ const formBackground = 'light';
             }
         };
 
-        // Centre de domiciliation
         const handleDomiciliationCenter = () => {
             if (domiciliationSelect.value === 'domiciliation') {
                 domiciliationsirenWrapper.classList.remove('hidden');
@@ -306,78 +305,88 @@ const formBackground = 'light';
                 domiciliationnameInput.removeAttribute('required');
             }
         };
-
         if (domiciliationsirenInput)
             domiciliationsirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
-        // Ajout d'acitivé secondaire
+        /*** ACTIVITÉS SECONDAIRES ***/
         const addActivityWrapper = document.getElementById('addactivity-wrapper');
-        const nbrofactiviesWrapper = document.getElementById('nbrofactivities-wrapper');
+        const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
         const addActivityRadio = form.querySelectorAll('input[name="addactivity"]');
-        const nbrofactiviesInput = document.getElementById('nbrofactivies');
+        const nbrofactivitiesInput = document.getElementById('nbrofactivies');
+        const container = document.getElementById('secondary-activities-container');
+        const template = document.getElementById('secondary-activity-template');
 
         const handleAddActivity = () => {
-            if (!addActivityWrapper || !nbrofactiviesWrapper || !nbrofactiviesInput) return;
+            if (!addActivityWrapper || !nbrofactivitiesWrapper || !nbrofactivitiesInput) return;
 
-            const isSecondaryAllowed =
-                domiciliationSelect.value !== 'lmnp' &&
-                domiciliationSelect.value !== '';
-
+            const isSecondaryAllowed = domiciliationSelect.value !== 'lmnp' && domiciliationSelect.value !== '';
             addActivityWrapper.classList.toggle('hidden', !isSecondaryAllowed);
 
             if (!isSecondaryAllowed) {
-                nbrofactiviesWrapper.classList.add('hidden');
-                nbrofactiviesInput.removeAttribute('required');
-                nbrofactiviesInput.value = '';
+                nbrofactivitiesWrapper.classList.add('hidden');
+                nbrofactivitiesInput.removeAttribute('required');
+                nbrofactivitiesInput.value = '';
+                container.innerHTML = '';
                 return;
             }
 
             const checkedRadio = form.querySelector('input[name="addactivity"]:checked');
-
             if (checkedRadio && checkedRadio.value === 'oui') {
-                nbrofactiviesWrapper.classList.remove('hidden');
-                nbrofactiviesInput.setAttribute('required', '');
-                nbrofactiviesInput.value = 1;
+                nbrofactivitiesWrapper.classList.remove('hidden');
+                nbrofactivitiesInput.setAttribute('required', '');
+                if (!nbrofactivitiesInput.value || parseInt(nbrofactivitiesInput.value, 10) < 1) nbrofactivitiesInput.value = 1;
             } else {
-                nbrofactiviesWrapper.classList.add('hidden');
-                nbrofactiviesInput.removeAttribute('required');
-                nbrofactiviesInput.value = '';
+                nbrofactivitiesWrapper.classList.add('hidden');
+                nbrofactivitiesInput.removeAttribute('required');
+                nbrofactivitiesInput.value = '';
+                container.innerHTML = '';
+            }
+            renderSecondaryActivities();
+        };
+
+        const renderSecondaryActivities = () => {
+            const count = parseInt(nbrofactivitiesInput.value, 10);
+            container.innerHTML = '';
+            if (!count || count < 1) return;
+
+            for (let i = 0; i < count; i++) {
+                const clone = template.content.cloneNode(true);
+                const textarea = clone.querySelector('textarea');
+                textarea.name = `secondaryActivities[${i}][description]`;
+                textarea.id = `secondaryActivities_${i}_description`;
+                const select = clone.querySelector('select');
+                select.name = `secondaryActivities[${i}][form]`;
+                select.id = `secondaryActivities_${i}_form`;
+                container.appendChild(clone);
             }
         };
 
-        nbrofactiviesInput.addEventListener('input', () => {
-            let value = parseInt(nbrofactiviesInput.value.replace(/\D/g, ''), 10);
-
-            if (isNaN(value)) {
-                nbrofactiviesInput.value = '';
-                return;
-            }
-
+        nbrofactivitiesInput.addEventListener('input', () => {
+            let value = parseInt(nbrofactivitiesInput.value.replace(/\D/g, ''), 10);
+            if (isNaN(value)) { nbrofactivitiesInput.value = ''; return; }
             if (value < 1) value = 1;
             if (value > 5) value = 5;
-
-            nbrofactiviesInput.value = value;
+            nbrofactivitiesInput.value = value;
+            renderSecondaryActivities();
         });
+        nbrofactivitiesInput.addEventListener('change', renderSecondaryActivities);
+        addActivityRadio.forEach(radio => radio.addEventListener('change', handleAddActivity));
 
-        addActivityRadio.forEach(radio => {
-            radio.addEventListener('change', handleAddActivity);
-        });
-
-        // Synchronisation
+        /*** SYNCHRONISATION FORMULAIRE ***/
         const syncForm = () => {
             handleLMNP();
             handleAddress();
             handleDomiciliationCenter();
             handleAddActivity();
         };
-
-        formofactivitySelect.addEventListener('change', syncForm);
+        formOfActivitySelect.addEventListener('change', syncForm);
         domiciliationSelect.addEventListener('change', syncForm);
 
-        // Init
+        // INIT
         syncForm();
     });
 </script>
+
 
 
 
