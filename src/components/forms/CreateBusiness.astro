@@ -151,28 +151,23 @@ const formBackground = 'light';
     <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
         <div class="text-md font-semibold">Activités de l'entreprise</div>
         <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class='text-sm' />
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4">
             <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder="" />
             <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder="" />
+            <Input label="Nom commercial (optionel)" id="businessname" name="businessname" background={formBackground} />
+            <div id="nbrofactivities-wrapper" class="hidden">
+                <Input type='number' min="0" max="5" label="Nombre d’activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
+            </div>
         </div>
         <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-4 hidden transition-all duration-300">
             <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
             <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
         </div>
-        <div id="addactivity-wrapper" class="grid grid-cols-4 hidden">
-            <div class='col-span-3'>
-                <Radio label="Des activités secondaires sont-elles prévues ?" id="addactivity" name="addactivity" options={nbrofactivities}  required background={formBackground} />
-            </div>
-            <div id="nbrofactivities-wrapper" class="hidden col-span-1">
-                <Input type='number' min="1" max="5" label="Nbr d'activités" id="nbrofactivies" name="nbrofactivies" required background={formBackground} />
-            </div>
-        </div>
-
         <div id="secondary-activities-container" class="space-y-4"></div>
         <template id="secondary-activity-template">
             <div class="grid grid-cols-4 gap-4">
                 <div class="col-span-3">
-                    <Textarea label="Activité secondaire" rows={1} required />
+                    <Textarea label="Description de l'activité secondaire" rows={1} required />
                 </div>
                 <Select label="Forme" options={formofsecondaryactivityOptions} required placeholder="" class="col-span-1" />
             </div>
@@ -223,10 +218,10 @@ const formBackground = 'light';
 
             if (otherActivitySelect.value === 'Autre') {
                 otherActivityWrapper.classList.remove('hidden');
-                otherActivityInput.setAttribute('required', '');
+                otherActivityInput.required = true;
             } else {
                 otherActivityWrapper.classList.add('hidden');
-                otherActivityInput.removeAttribute('required');
+                otherActivityInput.required = false;
                 otherActivityInput.value = '';
             }
         };
@@ -242,10 +237,10 @@ const formBackground = 'light';
             if (!sirenWrapper || !sirenInput) return;
             if (value === 'oui') {
                 sirenWrapper.classList.remove('hidden');
-                sirenInput.setAttribute('required', '');
+                sirenInput.required = true;
             } else {
                 sirenWrapper.classList.add('hidden');
-                sirenInput.removeAttribute('required');
+                sirenInput.required = false;
             }
         };
         existingSirens.forEach(radio => {
@@ -286,68 +281,59 @@ const formBackground = 'light';
             if (needsAddress) {
                 localWrapper.classList.remove('hidden');
                 localInputs.forEach(el => {
-                    if (el.dataset.optional !== 'true') el.setAttribute('required', '');
+                    if (el.dataset.optional !== 'true') el.required = true;
                 });
             } else {
                 localWrapper.classList.add('hidden');
-                localInputs.forEach(el => el.removeAttribute('required'));
+                localInputs.forEach(el => el.required = false);
             }
         };
 
         const handleDomiciliationCenter = () => {
             if (domiciliationSelect.value === 'domiciliation') {
                 domiciliationsirenWrapper.classList.remove('hidden');
-                domiciliationsirenInput.setAttribute('required', '');
-                domiciliationnameInput.setAttribute('required', '');
+                domiciliationsirenInput.required = true;
+                domiciliationnameInput.required = true;
             } else {
                 domiciliationsirenWrapper.classList.add('hidden');
-                domiciliationsirenInput.removeAttribute('required');
-                domiciliationnameInput.removeAttribute('required');
+                domiciliationsirenInput.required = false;
+                domiciliationnameInput.required = false;
             }
         };
         if (domiciliationsirenInput)
             domiciliationsirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
         /*** ACTIVITÉS SECONDAIRES ***/
-        const addActivityWrapper = document.getElementById('addactivity-wrapper');
         const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
-        const addActivityRadio = form.querySelectorAll('input[name="addactivity"]');
         const nbrofactivitiesInput = document.getElementById('nbrofactivies');
         const container = document.getElementById('secondary-activities-container');
         const template = document.getElementById('secondary-activity-template');
 
         const handleAddActivity = () => {
-            if (!addActivityWrapper || !nbrofactivitiesWrapper || !nbrofactivitiesInput) return;
+            if (!nbrofactivitiesWrapper || !nbrofactivitiesInput) return;
 
             const isSecondaryAllowed = domiciliationSelect.value !== 'lmnp' && domiciliationSelect.value !== '';
-            addActivityWrapper.classList.toggle('hidden', !isSecondaryAllowed);
 
             if (!isSecondaryAllowed) {
                 nbrofactivitiesWrapper.classList.add('hidden');
-                nbrofactivitiesInput.removeAttribute('required');
+                nbrofactivitiesInput.required = false;
                 nbrofactivitiesInput.value = '';
                 container.innerHTML = '';
                 return;
             }
 
-            const checkedRadio = form.querySelector('input[name="addactivity"]:checked');
-            if (checkedRadio && checkedRadio.value === 'oui') {
-                nbrofactivitiesWrapper.classList.remove('hidden');
-                nbrofactivitiesInput.setAttribute('required', '');
-                if (!nbrofactivitiesInput.value || parseInt(nbrofactivitiesInput.value, 10) < 1) nbrofactivitiesInput.value = 1;
-            } else {
-                nbrofactivitiesWrapper.classList.add('hidden');
-                nbrofactivitiesInput.removeAttribute('required');
-                nbrofactivitiesInput.value = '';
-                container.innerHTML = '';
-            }
+            nbrofactivitiesWrapper.classList.remove('hidden');
+            nbrofactivitiesInput.required = true;
+            if (!nbrofactivitiesInput.value) nbrofactivitiesInput.value = 0;
+
             renderSecondaryActivities();
         };
 
         const renderSecondaryActivities = () => {
-            const count = parseInt(nbrofactivitiesInput.value, 10);
+            const count = Number(nbrofactivitiesInput.value) || 0;
             container.innerHTML = '';
-            if (!count || count < 1) return;
+
+            if (count === 0) return;
 
             for (let i = 0; i < count; i++) {
                 const clone = template.content.cloneNode(true);
@@ -364,13 +350,12 @@ const formBackground = 'light';
         nbrofactivitiesInput.addEventListener('input', () => {
             let value = parseInt(nbrofactivitiesInput.value.replace(/\D/g, ''), 10);
             if (isNaN(value)) { nbrofactivitiesInput.value = ''; return; }
-            if (value < 1) value = 1;
+            if (value < 0) value = 0;
             if (value > 5) value = 5;
             nbrofactivitiesInput.value = value;
             renderSecondaryActivities();
         });
         nbrofactivitiesInput.addEventListener('change', renderSecondaryActivities);
-        addActivityRadio.forEach(radio => radio.addEventListener('change', handleAddActivity));
 
         /*** SYNCHRONISATION FORMULAIRE ***/
         const syncForm = () => {
@@ -386,7 +371,3 @@ const formBackground = 'light';
         syncForm();
     });
 </script>
-
-
-
-
