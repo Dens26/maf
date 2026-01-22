@@ -46,7 +46,7 @@ export const statsLists: Record<string, StatsList> = {
         id: 'withContent',
         stats: [
             {
-                value: 2025,
+                value: 2026,
                 label: "Année de lancement",
             },
             {
@@ -55,13 +55,13 @@ export const statsLists: Record<string, StatsList> = {
                 suffix: "%",
             },
             {
-                value: 6,
+                value: 10,
                 label: "mois d'expérience à l'INPI",
             },
             {
                 value: 48,
                 label: "heures max pour un retour",
-                prefix: "<",
+                prefix: "< ",
             }
         ]
     }
