@@ -157,94 +157,133 @@ const formBackground = 'light';
       </div>
     </div>
     <div class="text-end my-8">
-      <!-- <Button type='submit' variant="primary" size="md" class='uppercase'>étape suivante</Button> -->
-      <Button href="/forms/create/business" variant="primary" size="md" class='uppercase'>étape suivante</Button>
+      <Button type='submit' variant="primary" size="md" class='uppercase'>étape suivante</Button>
     </div>
 </form>
 
-<!-- Script côté client -->
+<!-- SCRIPT JS -->
 <script type="module">
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('create-form');
 
-    const countrySelect = document.querySelector('select[name="birthcountry"]');
-    const departmentWrapper = document.getElementById('birthdepartment-wrapper');
-    const departmentInput = document.getElementById('birthdepartment');
+  const form = document.getElementById('create-form');
+  if (!form) return;
 
-    const nationalitySelect = document.querySelector('select[name="nationality"]');
-    const healthinsuranceWrapper = document.getElementById('healthinsurance-wrapper');
-    const healthinsuranceInput = document.getElementById('healthinsurance');
+  const STORAGE_KEY = 'create-entrepreneur-form';
 
-    const healthinsuranceValue = document.querySelector('select[name="insuranceorganization"]');
-    const otherhealtinsuranceWrapper = document.getElementById('otherhealthinsurance-wrapper');
-    const otherhealtinsuranceInput = document.getElementById('otherhealthinsurance');
+  const countrySelect = document.querySelector('select[name="birthcountry"]');
+  const departmentWrapper = document.getElementById('birthdepartment-wrapper');
+  const departmentInput = document.getElementById('birthdepartment');
 
-    if (!form || !countrySelect || !nationalitySelect || !healthinsuranceValue || !departmentWrapper || !healthinsuranceWrapper || !otherhealtinsuranceWrapper || !departmentInput || !healthinsuranceInput || !otherhealtinsuranceInput) return;
+  const nationalitySelect = document.querySelector('select[name="nationality"]');
+  const healthinsuranceWrapper = document.getElementById('healthinsurance-wrapper');
+  const healthinsuranceInput = document.getElementById('healthinsurance');
 
-    const toggleDepartment = () => {
-        if (countrySelect.value === 'FR') {
-            departmentWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-            departmentWrapper.classList.add('opacity-100', 'h-auto');
-            departmentInput.setAttribute('required', '');
-        } else {
-            departmentWrapper.classList.add('opacity-0', 'h-0');
-            departmentWrapper.classList.remove('opacity-100', 'h-auto');
-            setTimeout(() => departmentWrapper.classList.add('hidden'), 300);
-            departmentInput.removeAttribute('required');
-        }
-    };
+  const healthinsuranceValue = document.querySelector('select[name="insuranceorganization"]');
+  const otherhealtinsuranceWrapper = document.getElementById('otherhealthinsurance-wrapper');
+  const otherhealtinsuranceInput = document.getElementById('otherhealthinsurance');
 
-    const toggleHealthinsurance = () => {
-        if (nationalitySelect.value === 'FR') {
-            healthinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-            healthinsuranceWrapper.classList.add('opacity-100', 'h-auto');
-            healthinsuranceInput.setAttribute('required', '');
-        } else {
-            healthinsuranceWrapper.classList.add('opacity-0', 'h-0');
-            healthinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
-            setTimeout(() => healthinsuranceWrapper.classList.add('hidden'), 300);
-            healthinsuranceInput.removeAttribute('required');
-        }
-    };
+  if (!countrySelect || !nationalitySelect || !healthinsuranceValue || !departmentWrapper || !healthinsuranceWrapper || !otherhealtinsuranceWrapper || !departmentInput || !healthinsuranceInput || !otherhealtinsuranceInput) return;
 
-    const toggleOtherhealthinsurance = () => {
-      if (healthinsuranceValue.value === 'Autre') {
-        otherhealtinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-        otherhealtinsuranceWrapper.classList.add('opacity-100', 'h-auto');
-        otherhealtinsuranceInput.setAttribute('required', '');
+  /* ================= STORAGE ================= */
+
+  const saveForm = () => {
+    const data = {};
+
+    new FormData(form).forEach((value, key) => {
+      data[key] = value;
+    });
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  };
+
+  const restoreForm = () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    Object.entries(data).forEach(([name, value]) => {
+      const field = form.querySelector(`[name="${name}"]`);
+      if (!field) return;
+
+      if (field.type === 'radio') {
+        const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
+        if (radio) radio.checked = true;
       } else {
-        otherhealtinsuranceWrapper.classList.add('opacity-0', 'h-0');
-        otherhealtinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
-        setTimeout(() => otherhealtinsuranceWrapper.classList.add('hidden'), 300);
-        otherhealtinsuranceInput.removeAttribute('required');
-      }
-    };
-
-    // Vérification initiale
-    toggleDepartment();
-    toggleHealthinsurance();
-    toggleOtherhealthinsurance();
-
-    // Écoute des changements
-    countrySelect.addEventListener('change', toggleDepartment);
-    nationalitySelect.addEventListener('change', toggleHealthinsurance);
-    healthinsuranceValue.addEventListener('change', toggleOtherhealthinsurance);
-
-    // Filtrage chiffres pour le code postal, voie, téléphone, numéro de sécurité sociale
-    document.addEventListener("input", (e) => {
-      if (e.target.name === "zipcode") {
-        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
-      }
-      if (e.target.name === "tracknumber") {
-        e.target.value = e.target.value.replace(/\D/g, "");
-      }
-      if (e.target.name === "phone") {
-        e.target.value = e.target.value.replace(/\D/g, "");
-      }
-      if (e.target.name === "healthinsurance") {
-        e.target.value = e.target.value.replace(/\D/g, "").slice(0, 15);;
+        field.value = value;
       }
     });
+  };
+
+  restoreForm();
+
+  form.addEventListener('input', saveForm);
+  form.addEventListener('change', saveForm);
+
+  /* ================= TOGGLES ================= */
+
+  const toggleDepartment = () => {
+    if (countrySelect.value === 'FR') {
+      departmentWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+      departmentWrapper.classList.add('opacity-100', 'h-auto');
+      departmentInput.setAttribute('required', '');
+    } else {
+      departmentWrapper.classList.add('opacity-0', 'h-0');
+      departmentWrapper.classList.remove('opacity-100', 'h-auto');
+      setTimeout(() => departmentWrapper.classList.add('hidden'), 300);
+      departmentInput.removeAttribute('required');
+    }
+  };
+
+  const toggleHealthinsurance = () => {
+    if (nationalitySelect.value === 'FR') {
+      healthinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+      healthinsuranceWrapper.classList.add('opacity-100', 'h-auto');
+      healthinsuranceInput.setAttribute('required', '');
+    } else {
+      healthinsuranceWrapper.classList.add('opacity-0', 'h-0');
+      healthinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
+      setTimeout(() => healthinsuranceWrapper.classList.add('hidden'), 300);
+      healthinsuranceInput.removeAttribute('required');
+    }
+  };
+
+  const toggleOtherhealthinsurance = () => {
+    if (healthinsuranceValue.value === 'Autre') {
+      otherhealtinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
+      otherhealtinsuranceWrapper.classList.add('opacity-100', 'h-auto');
+      otherhealtinsuranceInput.setAttribute('required', '');
+    } else {
+      otherhealtinsuranceWrapper.classList.add('opacity-0', 'h-0');
+      otherhealtinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
+      setTimeout(() => otherhealtinsuranceWrapper.classList.add('hidden'), 300);
+      otherhealtinsuranceInput.removeAttribute('required');
+    }
+  };
+
+  toggleDepartment();
+  toggleHealthinsurance();
+  toggleOtherhealthinsurance();
+
+  countrySelect.addEventListener('change', toggleDepartment);
+  nationalitySelect.addEventListener('change', toggleHealthinsurance);
+  healthinsuranceValue.addEventListener('change', toggleOtherhealthinsurance);
+
+  /* ================= FILTER INPUTS ================= */
+
+  document.addEventListener("input", (e) => {
+    if (e.target.name === "zipcode")
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
+
+    if (e.target.name === "tracknumber")
+      e.target.value = e.target.value.replace(/\D/g, "");
+
+    if (e.target.name === "phone")
+      e.target.value = e.target.value.replace(/\D/g, "");
+
+    if (e.target.name === "healthinsurance")
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 15);
+  });
+
 });
 </script>
-

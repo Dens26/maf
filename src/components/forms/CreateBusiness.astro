@@ -123,7 +123,7 @@ const formBackground = 'light';
     <h3 class="text-xl-2 font-semibold mb-4">Informations Entreprise</h3>
 </div>
 
-<form id="create-form">
+<form id="create-form" action="/forms/create/recapitulatif">
     <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
         <div class="text-md font-semibold">Entrepreneur</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -202,172 +202,193 @@ const formBackground = 'light';
     </div>
 </form>
 
-<!-- Script côté client -->
+<!-- SCRIPT JS -->
 <script type="module">
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('create-form');
-        if (!form) return;
+document.addEventListener('DOMContentLoaded', () => {
 
-        /*** AUTRE ACTIVITÉ ***/
-        const otherActivityWrapper = document.getElementById('otheractivitydetail-wrapper');
-        const otherActivityInput = document.getElementById('otheractivitydetail');
-        const otherActivitySelect = form.querySelector('[name="otheractivity"]');
+  const form = document.getElementById('create-form');
+  if (!form) return;
 
-        const toggleOtherActivityDetail = () => {
-            if (!otherActivityWrapper || !otherActivityInput || !otherActivitySelect) return;
+  const STORAGE_KEY = 'create-business-form';
 
-            if (otherActivitySelect.value === 'Autre') {
-                otherActivityWrapper.classList.remove('hidden');
-                otherActivityInput.required = true;
-            } else {
-                otherActivityWrapper.classList.add('hidden');
-                otherActivityInput.required = false;
-                otherActivityInput.value = '';
-            }
-        };
-        otherActivitySelect.addEventListener('change', toggleOtherActivityDetail);
-        toggleOtherActivityDetail();
-
-        /*** SIREN EXISTANT ***/
-        const sirenWrapper = document.getElementById('siren-wrapper');
-        const sirenInput = document.getElementById('siren');
-        const existingSirens = form.querySelectorAll('input[name="existingsiren"]');
-
-        const toggleSiren = (value) => {
-            if (!sirenWrapper || !sirenInput) return;
-            if (value === 'oui') {
-                sirenWrapper.classList.remove('hidden');
-                sirenInput.required = true;
-            } else {
-                sirenWrapper.classList.add('hidden');
-                sirenInput.required = false;
-            }
-        };
-        existingSirens.forEach(radio => {
-            radio.addEventListener('change', e => toggleSiren(e.target.value));
-            if (radio.checked) toggleSiren(radio.value);
-        });
-        if (sirenInput)
-            sirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
-
-        /*** DOMICILIATION / LMNP / ADRESSE ***/
-        const formOfActivitySelect = form.querySelector('[name="formofactivity"]');
-        const domiciliationSelect = form.querySelector('[name="domiciliation"]');
-        const localWrapper = document.getElementById('localaddress-wrapper');
-        const localInputs = localWrapper ? localWrapper.querySelectorAll('input, select') : [];
-        const domiciliationsirenWrapper = document.getElementById('domiciliationsiren-wrapper');
-        const domiciliationsirenInput = document.getElementById('domiciliationsiren');
-        const domiciliationnameInput = document.getElementById('domiciliationname');
-
-        const handleLMNP = () => {
-            let lmnpOption = domiciliationSelect.querySelector('option[value="lmnp"]');
-            if (formOfActivitySelect.value === 'location_biens') {
-                if (!lmnpOption) {
-                    lmnpOption = document.createElement('option');
-                    lmnpOption.value = 'lmnp';
-                    lmnpOption.textContent = 'à l’adresse du bien loué (LMNP)';
-                    domiciliationSelect.appendChild(lmnpOption);
-                }
-                domiciliationSelect.value = 'lmnp';
-                domiciliationSelect.disabled = true;
-            } else {
-                domiciliationSelect.disabled = false;
-                if (lmnpOption) lmnpOption.remove();
-            }
-        };
-
-        const handleAddress = () => {
-            const needsAddress = domiciliationSelect.value !== 'personnel' && domiciliationSelect.value !== '';
-            if (needsAddress) {
-                localWrapper.classList.remove('hidden');
-                localInputs.forEach(el => {
-                    if (el.dataset.optional !== 'true') el.required = true;
-                });
-            } else {
-                localWrapper.classList.add('hidden');
-                localInputs.forEach(el => el.required = false);
-            }
-        };
-
-        const handleDomiciliationCenter = () => {
-            if (domiciliationSelect.value === 'domiciliation') {
-                domiciliationsirenWrapper.classList.remove('hidden');
-                domiciliationsirenInput.required = true;
-                domiciliationnameInput.required = true;
-            } else {
-                domiciliationsirenWrapper.classList.add('hidden');
-                domiciliationsirenInput.required = false;
-                domiciliationnameInput.required = false;
-            }
-        };
-        if (domiciliationsirenInput)
-            domiciliationsirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
-
-        /*** ACTIVITÉS SECONDAIRES ***/
-        const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
-        const nbrofactivitiesInput = document.getElementById('nbrofactivies');
-        const container = document.getElementById('secondary-activities-container');
-        const template = document.getElementById('secondary-activity-template');
-
-        const handleAddActivity = () => {
-            if (!nbrofactivitiesWrapper || !nbrofactivitiesInput) return;
-
-            const isSecondaryAllowed = domiciliationSelect.value !== 'lmnp' && domiciliationSelect.value !== '';
-
-            if (!isSecondaryAllowed) {
-                nbrofactivitiesWrapper.classList.add('hidden');
-                nbrofactivitiesInput.required = false;
-                nbrofactivitiesInput.value = '';
-                container.innerHTML = '';
-                return;
-            }
-
-            nbrofactivitiesWrapper.classList.remove('hidden');
-            nbrofactivitiesInput.required = true;
-            if (!nbrofactivitiesInput.value) nbrofactivitiesInput.value = 0;
-
-            renderSecondaryActivities();
-        };
-
-        const renderSecondaryActivities = () => {
-            const count = Number(nbrofactivitiesInput.value) || 0;
-            container.innerHTML = '';
-
-            if (count === 0) return;
-
-            for (let i = 0; i < count; i++) {
-                const clone = template.content.cloneNode(true);
-                const textarea = clone.querySelector('textarea');
-                textarea.name = `secondaryActivities[${i}][description]`;
-                textarea.id = `secondaryActivities_${i}_description`;
-                const select = clone.querySelector('select');
-                select.name = `secondaryActivities[${i}][form]`;
-                select.id = `secondaryActivities_${i}_form`;
-                container.appendChild(clone);
-            }
-        };
-
-        nbrofactivitiesInput.addEventListener('input', () => {
-            let value = parseInt(nbrofactivitiesInput.value.replace(/\D/g, ''), 10);
-            if (isNaN(value)) { nbrofactivitiesInput.value = ''; return; }
-            if (value < 0) value = 0;
-            if (value > 5) value = 5;
-            nbrofactivitiesInput.value = value;
-            renderSecondaryActivities();
-        });
-        nbrofactivitiesInput.addEventListener('change', renderSecondaryActivities);
-
-        /*** SYNCHRONISATION FORMULAIRE ***/
-        const syncForm = () => {
-            handleLMNP();
-            handleAddress();
-            handleDomiciliationCenter();
-            handleAddActivity();
-        };
-        formOfActivitySelect.addEventListener('change', syncForm);
-        domiciliationSelect.addEventListener('change', syncForm);
-
-        // INIT
-        syncForm();
+  /*** ================= STORAGE ================= ***/
+  const saveForm = () => {
+    const data = {};
+    new FormData(form).forEach((value, key) => {
+      data[key] = value;
     });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  };
+
+  const restoreForm = () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+    Object.entries(data).forEach(([name, value]) => {
+      const field = form.querySelector(`[name="${name}"]`);
+      if (!field) return;
+      if (field.type === 'radio') {
+        const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
+        if (radio) radio.checked = true;
+      } else {
+        field.value = value;
+      }
+    });
+  };
+
+  restoreForm();
+
+  form.addEventListener('input', saveForm);
+  form.addEventListener('change', saveForm);
+
+  /*** ================= TOGGLES ================= ***/
+  const otherActivityWrapper = document.getElementById('otheractivitydetail-wrapper');
+  const otherActivityInput = document.getElementById('otheractivitydetail');
+  const otherActivitySelect = form.querySelector('[name="otheractivity"]');
+
+  const toggleOtherActivityDetail = () => {
+    if (!otherActivityWrapper || !otherActivityInput || !otherActivitySelect) return;
+    if (otherActivitySelect.value === 'Autre') {
+      otherActivityWrapper.classList.remove('hidden');
+      otherActivityInput.required = true;
+    } else {
+      otherActivityWrapper.classList.add('hidden');
+      otherActivityInput.required = false;
+      otherActivityInput.value = '';
+    }
+  };
+  otherActivitySelect.addEventListener('change', toggleOtherActivityDetail);
+  toggleOtherActivityDetail();
+
+  const sirenWrapper = document.getElementById('siren-wrapper');
+  const sirenInput = document.getElementById('siren');
+  const existingSirens = form.querySelectorAll('input[name="existingsiren"]');
+
+  const toggleSiren = (value) => {
+    if (!sirenWrapper || !sirenInput) return;
+    if (value === 'oui') {
+      sirenWrapper.classList.remove('hidden');
+      sirenInput.required = true;
+    } else {
+      sirenWrapper.classList.add('hidden');
+      sirenInput.required = false;
+    }
+  };
+  existingSirens.forEach(radio => {
+    radio.addEventListener('change', e => toggleSiren(e.target.value));
+    if (radio.checked) toggleSiren(radio.value);
+  });
+  if (sirenInput)
+    sirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
+
+  const formOfActivitySelect = form.querySelector('[name="formofactivity"]');
+  const domiciliationSelect = form.querySelector('[name="domiciliation"]');
+  const localWrapper = document.getElementById('localaddress-wrapper');
+  const localInputs = localWrapper ? localWrapper.querySelectorAll('input, select') : [];
+  const domiciliationsirenWrapper = document.getElementById('domiciliationsiren-wrapper');
+  const domiciliationsirenInput = document.getElementById('domiciliationsiren');
+  const domiciliationnameInput = document.getElementById('domiciliationname');
+
+  const handleLMNP = () => {
+    let lmnpOption = domiciliationSelect.querySelector('option[value="lmnp"]');
+    if (formOfActivitySelect.value === 'location_biens') {
+      if (!lmnpOption) {
+        lmnpOption = document.createElement('option');
+        lmnpOption.value = 'lmnp';
+        lmnpOption.textContent = 'à l’adresse du bien loué (LMNP)';
+        domiciliationSelect.appendChild(lmnpOption);
+      }
+      domiciliationSelect.value = 'lmnp';
+      domiciliationSelect.disabled = true;
+    } else {
+      domiciliationSelect.disabled = false;
+      if (lmnpOption) lmnpOption.remove();
+    }
+  };
+
+  const handleAddress = () => {
+    const needsAddress = domiciliationSelect.value !== 'personnel' && domiciliationSelect.value !== '';
+    if (needsAddress) {
+      localWrapper.classList.remove('hidden');
+      localInputs.forEach(el => { if (el.dataset.optional !== 'true') el.required = true; });
+    } else {
+      localWrapper.classList.add('hidden');
+      localInputs.forEach(el => el.required = false);
+    }
+  };
+
+  const handleDomiciliationCenter = () => {
+    if (domiciliationSelect.value === 'domiciliation') {
+      domiciliationsirenWrapper.classList.remove('hidden');
+      domiciliationsirenInput.required = true;
+      domiciliationnameInput.required = true;
+    } else {
+      domiciliationsirenWrapper.classList.add('hidden');
+      domiciliationsirenInput.required = false;
+      domiciliationnameInput.required = false;
+    }
+  };
+  if (domiciliationsirenInput)
+    domiciliationsirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
+
+  const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
+  const nbrofactivitiesInput = document.getElementById('nbrofactivies');
+  const container = document.getElementById('secondary-activities-container');
+  const template = document.getElementById('secondary-activity-template');
+
+  const handleAddActivity = () => {
+    if (!nbrofactivitiesWrapper || !nbrofactivitiesInput) return;
+    const isSecondaryAllowed = domiciliationSelect.value !== 'lmnp' && domiciliationSelect.value !== '';
+    if (!isSecondaryAllowed) {
+      nbrofactivitiesWrapper.classList.add('hidden');
+      nbrofactivitiesInput.required = false;
+      nbrofactivitiesInput.value = '';
+      container.innerHTML = '';
+      return;
+    }
+    nbrofactivitiesWrapper.classList.remove('hidden');
+    nbrofactivitiesInput.required = true;
+    if (!nbrofactivitiesInput.value) nbrofactivitiesInput.value = 0;
+    renderSecondaryActivities();
+  };
+
+  const renderSecondaryActivities = () => {
+    const count = Number(nbrofactivitiesInput.value) || 0;
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const clone = template.content.cloneNode(true);
+      const textarea = clone.querySelector('textarea');
+      textarea.name = `secondaryActivities[${i}][description]`;
+      textarea.id = `secondaryActivities_${i}_description`;
+      const select = clone.querySelector('select');
+      select.name = `secondaryActivities[${i}][form]`;
+      select.id = `secondaryActivities_${i}_form`;
+      container.appendChild(clone);
+    }
+  };
+
+  nbrofactivitiesInput.addEventListener('input', () => {
+    let value = parseInt(nbrofactivitiesInput.value.replace(/\D/g, ''), 10);
+    if (isNaN(value)) { nbrofactivitiesInput.value = ''; return; }
+    if (value < 0) value = 0;
+    if (value > 5) value = 5;
+    nbrofactivitiesInput.value = value;
+    renderSecondaryActivities();
+  });
+  nbrofactivitiesInput.addEventListener('change', renderSecondaryActivities);
+
+  const syncForm = () => {
+    handleLMNP();
+    handleAddress();
+    handleDomiciliationCenter();
+    handleAddActivity();
+  };
+  formOfActivitySelect.addEventListener('change', syncForm);
+  domiciliationSelect.addEventListener('change', syncForm);
+
+  syncForm();
+
+});
 </script>
+
