@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Layout.astro"
+import InnerHero from "@components/sections/InnerHero.astro"
+import CreateInfo from "@components/sections/CreateRecapitulatifInfo.astro"
+
+const heroContent = {
+    title: "Créez votre entreprise",
+    description: "Formulaire de création d'entreprise"
+}
+---
+
+<Layout title="Création" description="Creez votre entreprise">
+    <InnerHero content={heroContent} />
+    <CreateInfo background="base" padding="responsive" />
+</Layout>
