@@ -14,6 +14,7 @@ export interface Props {
 const { background = 'base', padding, paddingTop, paddingBottom } = Astro.props;
 const bgColor = getBackgroundColor(background);
 const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+
 ---
 
 <section class:list={[bgColor, paddingClass]}>
@@ -22,83 +23,146 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             <div>
                 <Stepper currentStep={3} id="stepper" />
             </div>
-        <div class="md:col-span-2">
-            <h2 class="text-xl-2 font-semibold mb-4">Récapitulatif de vos informations</h2>
-            <div id="recap-container" class="space-y-4 bg-white p-4 rounded-sm"></div>
-
-            <div class="flex justify-between my-8">
-                <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
-                <Button variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer ma formalité</Button>
+            <div class="md:col-span-2">
+                <h2 class="text-xl-2 font-semibold mb-6">Récapitulatif de vos informations</h2>
+                <div id="recap-container" class="space-y-6"></div>
+                <div class="flex justify-between my-8">
+                    <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+                    <Button variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer ma formalité</Button>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 </section>
 
 <script type="module">
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const STORAGE_KEY_ENTREPRENEUR = 'create-entrepreneur-form';
     const STORAGE_KEY_BUSINESS = 'create-business-form';
+    const { default: countries } = await import('/src/data/countries.json');
+
+    const formatCountry = (code) => {
+        if (!code) return '-';
+        const country = countries.find(c => c.code === code);
+        return country ? country.name : code;
+    };
+
+    const formatNationality = (code) => {
+        if (!code) return '-';
+        const country = countries.find(c => c.code === code);
+        return country ? country.nationality || country.name : code;
+}   ;
 
     const recapContainer = document.getElementById('recap-container');
     const submitBtn = document.getElementById('submit-formality');
-
     if (!recapContainer || !submitBtn) return;
 
-    // Récupérer les données depuis localStorage
     const entrepreneur = JSON.parse(localStorage.getItem(STORAGE_KEY_ENTREPRENEUR) || '{}');
     const business = JSON.parse(localStorage.getItem(STORAGE_KEY_BUSINESS) || '{}');
 
-    // Fonction utilitaire pour générer une ligne de récap
-    const createRecapLine = (label, value) => {
-        const div = document.createElement('div');
-        div.className = 'flex justify-between p-2 border-b border-gray-200';
-        div.innerHTML = `<strong>${label}:</strong> <span>${value || '-'}</span>`;
-        return div;
+    const capitalizeWords = v =>
+        (v || '')
+            .toLowerCase()
+            .split(' ')
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' ');
+
+    const formatDateFR = (dateStr) => {
+        if (!dateStr) return '-';
+        const [y, m, d] = dateStr.split('-');
+        return `${d}/${m}/${y}`;
     };
 
-    // Affichage des données
+    const createLine = (label, value) => `
+        <div class="grid grid-cols-2 gap-2 py-2 border-b border-gray-200">
+            <span class="text-gray-600">${label}</span>
+            <span class="font-medium text-right">${value || '-'}</span>
+        </div>
+    `;
+
+    const createSection = (title, rows) => {
+        const section = document.createElement('div');
+        section.className = 'bg-white rounded-sm p-4 shadow-xs';
+
+        section.innerHTML = `
+            <h3 class="text-lg font-semibold mb-4">${title}</h3>
+            <div class="space-y-1">
+                ${rows.join('')}
+            </div>
+        `;
+
+        return section;
+    };
+
     const displayRecap = () => {
         recapContainer.innerHTML = '';
-        
+
         if (Object.keys(entrepreneur).length) {
-            recapContainer.appendChild(createRecapLine('Nom', entrepreneur.name));
-            recapContainer.appendChild(createRecapLine('Prénom', entrepreneur.firstname));
-            recapContainer.appendChild(createRecapLine('Date de naissance', entrepreneur.birthdate));
-            recapContainer.appendChild(createRecapLine('Pays de naissance', entrepreneur.birthcountry));
-            recapContainer.appendChild(createRecapLine('Nationalité', entrepreneur.nationality));
-            recapContainer.appendChild(createRecapLine('Assurance santé', entrepreneur.insuranceorganization));
+            recapContainer.appendChild(
+                createSection('Informations personnelles', [
+                    createLine('Genre', (capitalizeWords(entrepreneur.gender || ''))),
+                    createLine('Nom', (entrepreneur.name || '').toUpperCase()),
+                    createLine('Prénom', capitalizeWords(entrepreneur.firstname)),
+                    createLine('Email', entrepreneur.email),
+                    createLine('Téléphone', entrepreneur.phone),
+                    createLine('Adresse', `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}, ${entrepreneur.zipcode || ''} ${entrepreneur.city || ''}`),
+                    createLine('Date de naissance', formatDateFR(entrepreneur.birthdate)),
+                    createLine('Pays de naissance', formatCountry(entrepreneur.birthcountry)),
+                    createLine('Département de naissance', formatCountry(entrepreneur.birthdepartment)),
+                    createLine('Nationalité', formatNationality(entrepreneur.nationality)),
+                    createLine('Assurance santé', entrepreneur.insuranceorganization),
+                    createLine("N° Sécurité sociale", entrepreneur.healthinsurance),
+                ])
+            );
         }
 
         if (Object.keys(business).length) {
-            recapContainer.appendChild(createRecapLine('Nom de l’entreprise', business.businessName));
-            recapContainer.appendChild(createRecapLine('SIREN', business.siren));
-            recapContainer.appendChild(createRecapLine('Forme d’activité', business.formofactivity));
-            recapContainer.appendChild(createRecapLine('Adresse', `${business.tracknumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`));
-            recapContainer.appendChild(createRecapLine('Domiciliation', business.domiciliation));
+            recapContainer.appendChild(
+                createSection("Informations de l'entreprise", [
+                    createLine('SIREN', business.siren || 'non'),
+                    createLine('Profession actuelle', business.otheractivity === 'Autre' 
+                        ? business.otheractivitydetail || '-'
+                        : business.otheractivity
+                    ),
+                    createLine('Micro-entreprise', business.micro),
+                    createLine('Déclaration URSSAF', business.insuranceorganization),
+                    createLine("Contrat d'appui", business.supportcontract),
+                    createLine("Demande d'ACCRE", business.accre),
+                ])
+            );
+            recapContainer.appendChild(
+                createSection("Activités de l'entreprise", [
+                    createLine('Nom commercial', business.businessname),
+                    createLine('Forme activité', business.formofactivity),
+                    createLine('Adresse', `${business.tracknumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`),
+                    createLine('Domiciliation', business.domiciliation),
+                ])
+            );
         }
+        console.log(entrepreneur, business);
     };
 
     displayRecap();
 
-    // Envoi des données
     submitBtn.addEventListener('click', async () => {
         try {
-        const response = await fetch('/api/send-formalite', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ entrepreneur, business })
-        });
+            const response = await fetch('/api/send-formalite', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ entrepreneur, business })
+            });
 
-        if (!response.ok) throw new Error('Erreur lors de l’envoi de la formalité.');
+            if (!response.ok) throw new Error();
 
-        alert('Formalité envoyée avec succès !');
-        localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
-        localStorage.removeItem(STORAGE_KEY_BUSINESS);
-        window.location.href = '/forms/create/confirmation';
-        } catch (error) {
-        console.error(error);
-        alert('Erreur lors de l’envoi de la formalité. Veuillez réessayer.');
+            alert('Formalité envoyée avec succès !');
+
+            localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
+            localStorage.removeItem(STORAGE_KEY_BUSINESS);
+
+            window.location.href = '/forms/create/confirmation';
+        } catch (err) {
+            alert('Erreur lors de l’envoi. Merci de réessayer.');
+            console.error(err);
         }
     });
 });
