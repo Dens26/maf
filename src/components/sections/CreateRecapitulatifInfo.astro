@@ -39,7 +39,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 document.addEventListener('DOMContentLoaded', async () => {
     const STORAGE_KEY_ENTREPRENEUR = 'create-entrepreneur-form';
     const STORAGE_KEY_BUSINESS = 'create-business-form';
-    const { default: countries } = await import('/src/data/countries.json');
+    const countries = await fetch('/data/countries.json').then(r => r.json());
 
     const formatCountry = (code) => {
         if (!code) return '-';
