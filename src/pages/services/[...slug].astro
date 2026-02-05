@@ -45,7 +45,7 @@ if (seoImage && !seoImage.startsWith('http')) {
         </div>
 
         <!-- Infos clés -->
-        <div class="grid sm:grid-cols-3 gap-6 text-sm text-center max-w-3xl mx-auto pt-16 m-16">
+        <!-- <div class="grid sm:grid-cols-3 gap-6 text-sm text-center max-w-3xl mx-auto pt-16 m-16">
             {
                 entry.data.category && (
                     <div class="relative group bg-primary hover:bg-primary-light transition-all duration-300 ease-in-out rounded-2xl p-6 shadow-md hover:shadow-lg transform hover:-translate-y-1 border border-gray-500/20 overflow-hidden">
@@ -74,14 +74,14 @@ if (seoImage && !seoImage.startsWith('http')) {
                     </div>
                 )
             }
-        </div>
+        </div> -->
 
-        <div class="text-center mb-12">
+        <!-- <div class="text-center mb-12">
             <Button href={entry.data.link} variant="primary" size="md" class='uppercase'>{entry.data.text}</Button>
-        </div>
+        </div> -->
 
         <!-- Contenu Markdown -->
-        <div class="prose prose-neutral dark:prose-invert service-text max-w-none mx-auto">
+        <div class="prose prose-neutral dark:prose-invert service-text max-w-none mx-auto pt-16 md:pt-8">
             <Content />
             <div class="text-center mt-12">
                 <Button href={entry.data.link} variant="primary" size="md" class='uppercase'>{entry.data.text}</Button>
