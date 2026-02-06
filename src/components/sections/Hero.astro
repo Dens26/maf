@@ -50,7 +50,7 @@ const opacity = content.overlayOpacity ?? 1; // Default opacity if not specified
         <p class="text-white mt-2 text-balance" data-aos="fade-up" data-aos-delay="100">{content.description}</p>
         {
             content.buttons && content.buttons.length > 0 && (
-                <div class="flex flex-wrap gap-4 mt-8" data-aos="fade-up">
+                <div class="flex flex-wrap justify-center gap-2 mt-8" data-aos="fade-up">
                     {content.buttons.map((button) => (
                         <Button
                             href={button.link}

@@ -52,16 +52,18 @@ export const statsLists: Record<string, StatsList> = {
             {
                 value: 100,
                 label: "des démarches traitées en ligne",
-                suffix: "%",
+                suffix: " %",
             },
             {
-                value: 10,
-                label: "mois d'expérience à l'INPI",
+                value: 100,
+                label: "clients satisfaits",
+                suffix: " % ",
             },
             {
                 value: 48,
-                label: "heures max pour un retour",
+                label: "pour un retour",
                 prefix: "< ",
+                suffix: " h"
             }
         ]
     }
