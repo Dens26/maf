@@ -5,7 +5,7 @@ icon: "/images/correction.jpg"
 category: "Formalités correctives"
 priceRange: "à partir de 49€"
 duration: "48h en moyenne"
-order: 5
+order: 4
 publish: true
 
 link: "/forms/correction"
