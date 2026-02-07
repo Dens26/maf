@@ -21,29 +21,13 @@ const seoDescription =
 
 const heroContent = {
     title: 'Simplifiez vos formalités',
-    description:
-        'Création, modification, radiation… Je prends en charge vos démarches administratives pour vous permettre de vous concentrer sur votre activité.',
+    description: 'Création, modification, radiation… Je prends en charge vos démarches administratives pour vous permettre de vous concentrer sur votre activité.',
     buttons: [
-        {
-            text: 'CREEZ',
-            link: '/forms/create/entrepreneur',
-            target: '_self',
-        },
-        {
-            text: 'MODIFIEZ',
-            link: '/forms/create/moving',
-            target: '_self',
-        },
-        {
-            text: 'CORIGEZ',
-            link: '/forms/create/correction',
-            target: '_self',
-        },
-        {
-            text: 'CESSEZ',
-            link: '/forms/create/cessation',
-            target: '_self',
-        },
+        { text: 'CRÉEZ', link: '/services/create', target: '_self' },
+        { text: 'DÉMÉNAGEZ', link: '/services/moving', target: '_self' },
+        { text: 'MODIFIEZ', link: '/services/activities', target: '_self' },
+        { text: 'CORIGEZ', link: '/services/correction', target: '_self' },
+        { text: 'CESSEZ', link: '/services/cessation', target: '_self', },
     ],
     backgroundImage: heroImage,
     overlayOpacity: 0.2,
@@ -52,77 +36,47 @@ const heroContent = {
 const featuresSection = {
     eyebrow: 'Mes services',
     title: 'Un accompagnement complet et personnalisé',
-    description:
-        'Je vous accompagne dans toutes vos démarches administratives liées à la vie de votre entreprise. Gain de temps, conformité, tranquillité d’esprit.',
+    description: 'Je vous accompagne dans toutes vos démarches administratives liées à la vie de votre entreprise. Gain de temps, conformité, tranquillité d’esprit.',
     features: featureLists.main.features,
-    button: {
-        text: 'Voir tous les services',
-        link: '/services',
-        variant: 'primary' as const,
-    },
+    button: { text: 'Voir tous les services', link: '/services', variant: 'primary' as const },
 };
 
 const FooterCta = {
     eyebrow: "Besoin d'aide ?",
     title: 'Confiez-moi vos formalités dès aujourd’hui',
-    description:
-        'Je vous aide à sécuriser vos démarches administratives en toute simplicité. Contactez-moi pour en discuter.',
+    description: 'Je vous aide à sécuriser vos démarches administratives en toute simplicité. Contactez-moi pour en discuter.',
     hideCta: false,
-    button: {
-        text: 'Me contacter',
-        link: '/contact',
-        target: '_self',
-    },
+    button: { text: 'Me contacter', link: '/contact', target: '_self' },
 };
 
 const styleGuideSection = {
     eyebrow: 'Pourquoi me faire confiance ?',
     headline: 'Clarté, réactivité et professionnalisme',
-    description:
-        'Chaque formalité est traitée avec rigueur et transparence. Vous bénéficiez d’un accompagnement humain et d’un suivi personnalisé, sans jargon ni paperasse inutile.',
-    image: {
-        src: styleGuideImage,
-        alt: 'Documents administratifs en cours de traitement',
-    },
+    description: 'Chaque formalité est traitée avec rigueur et transparence. Vous bénéficiez d’un accompagnement humain et d’un suivi personnalisé, sans jargon ni paperasse inutile.',
+    image: { src: styleGuideImage, alt: 'Documents administratifs en cours de traitement' },
     buttons: [
-        {
-            text: 'Découvrir mon approche',
-            link: '/process',
-            variant: 'primary' as const,
-        },
+        { text: 'Découvrir mon approche', link: '/process', variant: 'primary' as const },
     ],
 };
 
 const sideBySideStats = {
     eyebrow: 'Chiffres clés',
     title: 'Des formalités gérées avec efficacité',
-    description:
-        'Des dizaines d’entrepreneurs m’ont déjà fait confiance pour gérer leurs obligations administratives rapidement et sans erreur.',
+    description: 'Des dizaines d’entrepreneurs m’ont déjà fait confiance pour gérer leurs obligations administratives rapidement et sans erreur.',
     variant: 'side-by-side' as const,
     stats: statsLists.withContent.stats,
     content: {
         title: 'Un interlocuteur unique et disponible',
-        description:
-            'Je suis votre unique contact pour toutes vos formalités. Réponses rapides, explications claires et résultats conformes.',
-        button: {
-            text: 'Voir les témoignages',
-            link: '/stories',
-            variant: 'primary' as const,
-        },
+        description: 'Je suis votre unique contact pour toutes vos formalités. Réponses rapides, explications claires et résultats conformes.',
+        button: { text: 'Voir les témoignages', link: '/stories', variant: 'primary' as const, },
     },
 };
 
 const mainCta = {
     eyebrow: 'Démarches facilitées',
     title: 'Formalités administratives sans tracas',
-    description:
-        'Ne perdez plus de temps dans les méandres administratifs. Confiez vos démarches à un professionnel de confiance.',
-    button: {
-        text: 'Commencer maintenant',
-        link: '/contact',
-        variant: 'primary' as const,
-        target: '_self' as const,
-    },
+    description: 'Ne perdez plus de temps dans les méandres administratifs. Confiez vos démarches à un professionnel de confiance.',
+    button: { text: 'Commencer maintenant', link: '/contact', variant: 'primary' as const, target: '_self' as const },
 };
 
 const logosSection = {
@@ -141,11 +95,7 @@ const recentPostsSection = {
     eyebrow: "Conseils pratiques",
     title: "Mieux comprendre vos obligations",
     description: "Je vous partage des conseils utiles pour mieux appréhender les démarches administratives et rester en conformité avec la réglementation.",
-    button: {
-        text: "Lire les articles",
-        link: "/blog",
-        variant: "primary" as const,
-    },
+    button: { text: "Lire les articles", link: "/blog", variant: "primary" as const },
 };
 ---
 

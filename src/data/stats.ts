@@ -23,48 +23,19 @@ export const statsLists: Record<string, StatsList> = {
     main: {
         id: 'main',
         stats: [
-            {
-                value: 10,
-                label: 'Theme Configurations',
-            },
-            {
-                value: 11,
-                label: 'Pre-Built Components',
-            },
-            {
-                value: 48,
-                label: 'Team Members',
-            },
-            {
-                value: 500000,
-                label: 'Lines of Code',
-                prefix: '+'
-            }
+            { value: 10, label: 'Theme Configurations' },
+            { value: 11, label: 'Pre-Built Components' },
+            { value: 48, label: 'Team Members' },
+            { value: 500000, label: 'Lines of Code', prefix: '+' }
         ]
     },
     withContent: {
         id: 'withContent',
         stats: [
-            {
-                value: 2026,
-                label: "Année de lancement",
-            },
-            {
-                value: 100,
-                label: "des démarches traitées en ligne",
-                suffix: " %",
-            },
-            {
-                value: 100,
-                label: "clients satisfaits",
-                suffix: " % ",
-            },
-            {
-                value: 48,
-                label: "pour un retour",
-                prefix: "< ",
-                suffix: " h"
-            }
+            { value: 2026, label: "lancement du service" },
+            { value: 100, label: "démarches traitées en ligne", suffix: " %" },
+            { value: 59, label: "tarif unique par formalité*", suffix: " €" },
+            { value: 48, label: "délai de réponse maximum", prefix: "< ", suffix: " h" }
         ]
     }
 };

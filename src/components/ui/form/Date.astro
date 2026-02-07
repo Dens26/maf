@@ -16,6 +16,7 @@ interface Props {
     placeholder?: string; // Optionnel, affiché en texte grisé si besoin
     background?: ThemeColor;
     class?: string;
+    autocomplete?: string;
 }
 
 const {
@@ -26,6 +27,7 @@ const {
     placeholder = '',
     background = 'base',
     class: className = '',
+    autocomplete = ''
 } = Astro.props;
 
 const labelClass = getHeadlineColor(background);
@@ -44,6 +46,7 @@ const inputTextClass = getInputTextColor(background);
         name={name}
         required={required}
         placeholder={placeholder}
+        autocomplete={autocomplete}
         class={`
             w-full px-3 py-2
             text-sm

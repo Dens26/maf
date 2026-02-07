@@ -3,6 +3,7 @@ import Button from '@components/ui/Button.astro';
 import Input from '@components/ui/form/Input.astro';
 import Date from '@components/ui/form/Date.astro';
 import Select from '@components/ui/form/Select.astro';
+import Radio from '@components/ui/form/Radio.astro';
 import countries from 'public/data/countries.json';
 import departments from 'public/data/departments.json';
 
@@ -12,6 +13,7 @@ const genderOptions = [
 ];
 
 const complementnumberOptions = [
+  { label: '', value: '' },
   { label: 'Bis', value: 'bis' },
   { label: 'Ter', value: 'ter' },
   { label: 'Quater', value: 'quater' },
@@ -59,6 +61,26 @@ const insuranceorganizationOptions = [
   { label: "Autre", value: "Autre" }
 ];
 
+const situationOptions = [
+  { label: "Célibataire", value: "Célibataire" },
+  { label: "Divorcé", value: "Divorcé" },
+  { label: "En concubinage", value: "Concubinage" },
+  { label: "Marié", value: "Marié" },
+  { label: "Pacsé", value: "Pacsé" },
+  { label: "Veuf", value: "Veuf" }
+];
+
+const partnerFonctionOptions = [
+  { label: "Aucun", value: "Aucun" },
+  { label: "Collaborateur", value: "Collaborateur" },
+  { label: "Salarié", value: "Salarié" }
+];
+
+const partnerAddressOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
 const countryOptions = [
   { label: "France", value: "FR" },
   ...countries
@@ -89,110 +111,224 @@ const formBackground = 'light';
   <h3 class="text-xl-2 font-semibold mb-4">Informations personnelles</h3>
 </div>
 
-<form id="create-form" action="/forms/create/business" >
-
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-      <div class="text-md font-semibold">Contact</div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
-          <Input label="Téléphone" id="phone" name="phone" required background={formBackground} />
-      </div>
+<form id="create-form" action="/forms/create/business">
+  <!-- Contact -->
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Contact</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase" autocomplete="email" />
+      <Input label="Téléphone" id="phone" name="phone" required background={formBackground} autocomplete="tel" />
     </div>
+  </div>
 
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-        <div class="text-md font-semibold">Enrepreneur</div>
-        <div class="grid grid-cols-3 gap-4">
-          <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1"/>
-          <div class="col-span-2">
-            <Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} />
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <Input label="Nom" id="name" name="name" required background={formBackground} class="uppercase"/>
-          <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" />
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" />
-          <div id="birthdepartment-wrapper" class="hidden transition-all duration-300">
-              <Select label="Département de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder=""/>
-          </div>
-          <Input label="Commune de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize"/>
-          <Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} placeholder="" />
+  <!-- Entrepreneur -->
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Entrepreneur</div>
+
+    <!-- Genre / Nom / Prénom -->
+    <div class="grid grid-cols-5 gap-2">
+      <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1" autocomplete="sex" />
+      <div class="col-span-4 flex gap-2">
+        <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase" autocomplete="family-name" />
+        <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" autocomplete="given-name" />
       </div>
     </div>
 
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-      <div class="text-md font-semibold">Protection sociale</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground} placeholder=""/>
-          <div id="otherhealthinsurance-wrapper" class="hidden transition-all duration-300">
-            <Input label="Autre organisme d'assurance" id="otherhealthinsurance" name="otherhealthinsurance" required background={formBackground}/>
-          </div>
-          <div id="healthinsurance-wrapper" class="hidden transition-all duration-300">
-            <Input label="N° Sécurité sociale" id="healthinsurance" name="healthinsurance" required background={formBackground}/>
-          </div>
-        </div>
+    <!-- Nom d'usage / Date de naissance / Pays / Département / Ville / Nationalité / Situation -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase" autocomplete="family-name" />
+      <Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} autocomplete="bday" />
+      <Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" />
+      <div id="birthdepartment-wrapper" class="hidden transition-all duration-300">
+        <Select label="Département de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder="" />
       </div>
+      <Input label="Commune de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize" autocomplete="address-level2" />
+      <Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" />
+      <Select label="Situation matrimoniale" id="situation" name="situation" options={situationOptions} required background={formBackground} placeholder="" />
     </div>
+  </div>
 
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-      <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
-      <div class="grid grid-cols-4 gap-4">
-        <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
-        <div class="col-span-3 grid grid-cols-2 gap-4">
-          <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=""class="w-full" />
-          <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
+  <!-- Adresse de l'entrepreneur -->
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
+    <div class="grid grid-cols-4 gap-4">
+      <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" autocomplete="street-address" />
+      <div class="col-span-3 grid grid-cols-2 gap-4">
+        <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
+        <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder="" class="w-full" />
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address" />
+      <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2" />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
+      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
+    </div>
+    <div class="grid grid-cols-1 gap-4">
+      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
+    </div>
+  </div>
+
+    <!-- Protection sociale -->
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Protection sociale</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground} placeholder="" />
+      <div id="otherhealthinsurance-wrapper" class="hidden transition-all duration-300">
+        <Input label="Autre organisme d'assurance" id="otherhealthinsurance" name="otherhealthinsurance" required background={formBackground} />
+      </div>
+      <div id="healthinsurance-wrapper" class="hidden transition-all duration-300">
+        <Input label="N° Sécurité sociale" id="healthinsurance" name="healthinsurance" required background={formBackground} autocomplete="ssn" />
+      </div>
+    </div>
+  </div>
+
+    <!-- Conjoint -->
+  <div id="partner-wrapper" class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4 hidden transition-all duration-300">
+    <div class="text-md font-semibold">Conjoint</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Select label="Rôle du conjoint dans l'entreprise" id="partnerfonction" name="partnerfonction" options={partnerFonctionOptions} required background={formBackground} placeholder="" />
+    </div>
+    <div id="partnerinfo-wrapper">
+      <div class="grid grid-cols-5 gap-2">
+        <Select label="Genre" id="partnergender" name="partnergender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1" autocomplete="sex" />
+        <div class="col-span-4 flex gap-2">
+          <Input label="Nom" id="partnerbirthname" name="partnerbirthname" required background={formBackground} class="uppercase flex-1" autocomplete="family-name" />
+          <Input label="Prénom" id="partnerfirstname" name="partnerfirstname" required background={formBackground} class="capitalize flex-1" autocomplete="given-name" />
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
-        <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} />
-    </div>
-      <div class="grid grid-cols-2 gap-4">
-        <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
-        <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Input label="Nom d'usage" id="partnername" name="partnername" background={formBackground} class="uppercase" autocomplete="family-name" />
+        <Date label="Date de naissance" id="partnerbirthdate" name="partnerbirthdate" required background={formBackground} autocomplete="bday" />
+        <Select label="Pays de naissance" id="partnerbirthcountry" name="partnerbirthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" />
+        <Select label="Nationalité" id="partnernationality" name="partnernationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" />
+        <Radio label="Le conjoint réside-t-il à la même adresse que l’entrepreneur ?" id="partneraddress" name="partneraddress" options={partnerAddressOptions}  required background={formBackground} />
       </div>
     </div>
-    <div class="text-end my-8">
-      <Button type='submit' variant="primary" size="md" class='uppercase'>étape suivante</Button>
+  </div>
+
+    <!-- Adresse du conjoint -->
+  <div id="partneraddress-wrapper" class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4 hidden transition-all duration-300">
+    <div class="text-md font-semibold">Adresse du conjoint</div>
+    <div class="grid grid-cols-4 gap-4">
+      <Input label="N°" id="partnertracknumber" name="partnertracknumber" required background={formBackground} class="col-span-1" autocomplete="street-address" />
+      <div class="col-span-3 grid grid-cols-2 gap-4">
+        <Select label="Indice" id="partnercomplementnumber" name="partnercomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
+        <Select label="Type de voie" id="partnertracktype" name="partnertracktype" options={tracktypeOptions} required background={formBackground} placeholder="" class="w-full" />
+      </div>
     </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <Input label="Nom de la voie" id="partnerway" name="partnerway" required background={formBackground} autocomplete="street-address" />
+      <Input label="Complément d'adresse" id="partneradditionaladdress" name="partneradditionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2" />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <Input label="Code postal" id="partnerzipcode" name="partnerzipcode" required background={formBackground} autocomplete="postal-code" />
+      <Input label="Ville" id="partnercity" name="partnercity" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
+    </div>
+    <div class="grid grid-cols-1 gap-4">
+      <Select label="Pays" id="partnercountry" name="partnercountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
+    </div>
+  </div>
+
+  <div class="text-end my-8">
+    <Button type="submit" variant="primary" size="md" class='uppercase'>étape suivante</Button>
+  </div>
 </form>
 
 <!-- SCRIPT JS -->
 <script type="module">
 document.addEventListener('DOMContentLoaded', () => {
-
   const form = document.getElementById('create-form');
   if (!form) return;
 
   const STORAGE_KEY = 'create-entrepreneur-form';
 
-  const countrySelect = document.querySelector('select[name="birthcountry"]');
+  /* ===================== HELPERS ===================== */
+
+  const setRequired = (elements, required) => {
+    elements.forEach(el => {
+      if (!el) return;
+      required ? el.setAttribute('required', '') : el.removeAttribute('required');
+    });
+  };
+
+  const resetValues = elements => {
+    elements.forEach(el => {
+      if (!el) return;
+      if (el.type === 'radio' || el.type === 'checkbox') {
+        el.checked = false;
+      } else {
+        el.value = '';
+      }
+    });
+  };
+
+  /* ===================== FIELDS ===================== */
+
+  const countrySelect = form.querySelector('select[name="birthcountry"]');
   const departmentWrapper = document.getElementById('birthdepartment-wrapper');
   const departmentInput = document.getElementById('birthdepartment');
 
-  const nationalitySelect = document.querySelector('select[name="nationality"]');
-  const healthinsuranceWrapper = document.getElementById('healthinsurance-wrapper');
-  const healthinsuranceInput = document.getElementById('healthinsurance');
+  const nationalitySelect = form.querySelector('select[name="nationality"]');
+  const healthInsuranceWrapper = document.getElementById('healthinsurance-wrapper');
+  const healthInsuranceInput = document.getElementById('healthinsurance');
 
-  const healthinsuranceValue = document.querySelector('select[name="insuranceorganization"]');
-  const otherhealtinsuranceWrapper = document.getElementById('otherhealthinsurance-wrapper');
-  const otherhealtinsuranceInput = document.getElementById('otherhealthinsurance');
+  const insuranceSelect = form.querySelector('select[name="insuranceorganization"]');
+  const otherInsuranceWrapper = document.getElementById('otherhealthinsurance-wrapper');
+  const otherInsuranceInput = document.getElementById('otherhealthinsurance');
 
-  if (!countrySelect || !nationalitySelect || !healthinsuranceValue || !departmentWrapper || !healthinsuranceWrapper || !otherhealtinsuranceWrapper || !departmentInput || !healthinsuranceInput || !otherhealtinsuranceInput) return;
+  const situationSelect = form.querySelector('select[name="situation"]');
+  const partnerWrapper = document.getElementById('partner-wrapper');
 
-  /* ================= STORAGE ================= */
+  const partnerFonctionSelect = form.querySelector('select[name="partnerfonction"]');
+  const partnerInfoWrapper = document.getElementById('partnerinfo-wrapper');
+
+  const partnerAddressWrapper = document.getElementById('partneraddress-wrapper');
+
+  const partnerAddressRadios = [
+    ...form.querySelectorAll('input[name="partneraddress"]')
+  ];
+
+  /* ===================== PARTNER FIELDS ===================== */
+
+  const partnerFields = {
+    inputs: [
+      document.getElementById('partnerbirthname'),
+      document.getElementById('partnerfirstname'),
+      document.getElementById('partnername'),
+      document.getElementById('partnerbirthdate'),
+    ],
+    selects: [
+      ...form.querySelectorAll('select[name="partnergender"]'),
+      ...form.querySelectorAll('select[name="partnerbirthcountry"]'),
+      ...form.querySelectorAll('select[name="partnerbirthdepartment"]'),
+      ...form.querySelectorAll('select[name="partnernationality"]'),
+    ]
+  };
+
+  const partnerAddressFields = {
+    inputs: [
+      document.getElementById('partnertracknumber'),
+      document.getElementById('partnerway'),
+      document.getElementById('partnerzipcode'),
+      document.getElementById('partnercity'),
+      document.getElementById('partneradditionaladdress'),
+    ],
+    selects: [
+      ...form.querySelectorAll('select[name="partnertracktype"]'),
+      ...form.querySelectorAll('select[name="partnercountry"]'),
+      ...form.querySelectorAll('select[name="partnercomplementnumber"]')
+    ]
+  };
+
+  /* ===================== STORAGE ===================== */
 
   const saveForm = () => {
     const data = {};
-
-    new FormData(form).forEach((value, key) => {
-      data[key] = value;
-    });
-
+    new FormData(form).forEach((value, key) => (data[key] = value));
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   };
 
@@ -201,89 +337,163 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!saved) return;
 
     const data = JSON.parse(saved);
-
     Object.entries(data).forEach(([name, value]) => {
-      const field = form.querySelector(`[name="${name}"]`);
-      if (!field) return;
-
-      if (field.type === 'radio') {
-        const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
-        if (radio) radio.checked = true;
-      } else {
-        field.value = value;
-      }
+      const fields = form.querySelectorAll(`[name="${name}"]`);
+      fields.forEach(field => {
+        if (field.type === 'radio') {
+          field.checked = field.value === value;
+        } else {
+          field.value = value;
+        }
+      });
     });
   };
 
   restoreForm();
-
   form.addEventListener('input', saveForm);
   form.addEventListener('change', saveForm);
 
-  /* ================= TOGGLES ================= */
+  /* ===================== RESET PARTNER ===================== */
+
+  const resetPartner = () => {
+    resetValues([...partnerFields.inputs, ...partnerFields.selects]);
+    resetValues([...partnerAddressFields.inputs, ...partnerAddressFields.selects]);
+
+    setRequired(
+      [...partnerFields.inputs, ...partnerFields.selects],
+      false
+    );
+
+    setRequired(
+      [...partnerAddressFields.inputs, ...partnerAddressFields.selects],
+      false
+    );
+
+    partnerAddressRadios.forEach(r => {
+      r.checked = r.value === 'oui';
+    });
+
+    partnerAddressWrapper.classList.add('hidden', 'opacity-0');
+    partnerAddressWrapper.classList.remove('opacity-100');
+  };
+
+  /* ===================== TOGGLES ===================== */
 
   const toggleDepartment = () => {
-    if (countrySelect.value === 'FR') {
-      departmentWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-      departmentWrapper.classList.add('opacity-100', 'h-auto');
-      departmentInput.setAttribute('required', '');
-    } else {
-      departmentWrapper.classList.add('opacity-0', 'h-0');
-      departmentWrapper.classList.remove('opacity-100', 'h-auto');
-      setTimeout(() => departmentWrapper.classList.add('hidden'), 300);
-      departmentInput.removeAttribute('required');
+    const isFrance = countrySelect.value === 'FR';
+
+    departmentWrapper.classList.toggle('hidden', !isFrance);
+    departmentWrapper.classList.toggle('opacity-100', isFrance);
+    departmentWrapper.classList.toggle('opacity-0', !isFrance);
+
+    isFrance
+      ? departmentInput.setAttribute('required', '')
+      : (departmentInput.removeAttribute('required'), departmentInput.value = '');
+  };
+
+  const toggleHealthInsurance = () => {
+    const isFrench = nationalitySelect.value === 'FR';
+
+    healthInsuranceWrapper.classList.toggle('hidden', !isFrench);
+    healthInsuranceWrapper.classList.toggle('opacity-100', isFrench);
+    healthInsuranceWrapper.classList.toggle('opacity-0', !isFrench);
+
+    isFrench
+      ? healthInsuranceInput.setAttribute('required', '')
+      : (healthInsuranceInput.removeAttribute('required'), healthInsuranceInput.value = '');
+  };
+
+  const toggleOtherInsurance = () => {
+    const isOther = insuranceSelect.value === 'Autre';
+
+    otherInsuranceWrapper.classList.toggle('hidden', !isOther);
+    otherInsuranceWrapper.classList.toggle('opacity-100', isOther);
+    otherInsuranceWrapper.classList.toggle('opacity-0', !isOther);
+
+    isOther
+      ? otherInsuranceInput.setAttribute('required', '')
+      : (otherInsuranceInput.removeAttribute('required'), otherInsuranceInput.value = '');
+  };
+
+  const togglePartnerAddress = () => {
+    const showAddress = partnerAddressRadios.find(r => r.checked)?.value === 'non';
+
+    partnerAddressWrapper.classList.toggle('hidden', !showAddress);
+    partnerAddressWrapper.classList.toggle('opacity-0', !showAddress);
+    partnerAddressWrapper.classList.toggle('opacity-100', showAddress);
+
+    setRequired(
+      [...partnerAddressFields.inputs, ...partnerAddressFields.selects].filter(el => el.id !== 'partneradditionaladdress' && el.id !== 'partnercomplementnumber'),
+      showAddress
+    );
+
+    if (!showAddress) {
+      resetValues([...partnerAddressFields.inputs, ...partnerAddressFields.selects]);
     }
   };
 
-  const toggleHealthinsurance = () => {
-    if (nationalitySelect.value === 'FR') {
-      healthinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-      healthinsuranceWrapper.classList.add('opacity-100', 'h-auto');
-      healthinsuranceInput.setAttribute('required', '');
-    } else {
-      healthinsuranceWrapper.classList.add('opacity-0', 'h-0');
-      healthinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
-      setTimeout(() => healthinsuranceWrapper.classList.add('hidden'), 300);
-      healthinsuranceInput.removeAttribute('required');
-    }
+  const togglePartnerInfo = () => {
+    const isAucun = partnerFonctionSelect.value === 'Aucun';
+
+    partnerInfoWrapper.classList.toggle('hidden', isAucun);
+    partnerInfoWrapper.classList.toggle('opacity-0', isAucun);
+    partnerInfoWrapper.classList.toggle('opacity-100', !isAucun);
+
+    setRequired(
+      [...partnerFields.inputs, ...partnerFields.selects].filter(el => el.id !== 'partnername'),
+      !isAucun
+    );
+
+    if (isAucun) resetPartner();
   };
 
-  const toggleOtherhealthinsurance = () => {
-    if (healthinsuranceValue.value === 'Autre') {
-      otherhealtinsuranceWrapper.classList.remove('hidden', 'opacity-0', 'h-0');
-      otherhealtinsuranceWrapper.classList.add('opacity-100', 'h-auto');
-      otherhealtinsuranceInput.setAttribute('required', '');
-    } else {
-      otherhealtinsuranceWrapper.classList.add('opacity-0', 'h-0');
-      otherhealtinsuranceWrapper.classList.remove('opacity-100', 'h-auto');
-      setTimeout(() => otherhealtinsuranceWrapper.classList.add('hidden'), 300);
-      otherhealtinsuranceInput.removeAttribute('required');
+  const togglePartner = () => {
+    const showPartner = ['Marié', 'Pacsé', 'Concubinage'].includes(situationSelect.value);
+
+    partnerWrapper.classList.toggle('hidden', !showPartner);
+    partnerWrapper.classList.toggle('opacity-0', !showPartner);
+    partnerWrapper.classList.toggle('opacity-100', showPartner);
+
+    if (!showPartner) {
+      partnerFonctionSelect.value = 'Aucun';
+      resetPartner();
+      togglePartnerInfo(); // 🔥 SYNC VISUEL
+      return;
     }
+
+    // Quand on REVIENT sur Marié / Pacsé / Concubinage
+    togglePartnerInfo(); // 🔥 resynchronise l'affichage
   };
 
-  toggleDepartment();
-  toggleHealthinsurance();
-  toggleOtherhealthinsurance();
+  /* ===================== EVENTS ===================== */
 
   countrySelect.addEventListener('change', toggleDepartment);
-  nationalitySelect.addEventListener('change', toggleHealthinsurance);
-  healthinsuranceValue.addEventListener('change', toggleOtherhealthinsurance);
+  nationalitySelect.addEventListener('change', toggleHealthInsurance);
+  insuranceSelect.addEventListener('change', toggleOtherInsurance);
+  situationSelect.addEventListener('change', togglePartner);
+  partnerFonctionSelect.addEventListener('change', togglePartnerInfo);
+  partnerAddressRadios.forEach(r => r.addEventListener('change', togglePartnerAddress));
 
-  /* ================= FILTER INPUTS ================= */
+  /* ===================== FILTER INPUTS ===================== */
 
-  document.addEventListener("input", (e) => {
-    if (e.target.name === "zipcode")
-      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
+  document.addEventListener('input', e => {
+    if (['zipcode', 'partnerzipcode'].includes(e.target.name)) {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+    }
 
-    if (e.target.name === "tracknumber")
-      e.target.value = e.target.value.replace(/\D/g, "");
-
-    if (e.target.name === "phone")
-      e.target.value = e.target.value.replace(/\D/g, "");
-
-    if (e.target.name === "healthinsurance")
-      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 15);
+    if (['tracknumber', 'partnertracknumber', 'phone', 'healthinsurance'].includes(e.target.name)) {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    }
   });
 
+  /* ===================== INIT ===================== */
+
+  toggleDepartment();
+  toggleHealthInsurance();
+  toggleOtherInsurance();
+  togglePartner();
+  togglePartnerInfo();
+  togglePartnerAddress();
 });
 </script>
+

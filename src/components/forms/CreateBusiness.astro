@@ -3,6 +3,7 @@ import Button from '@components/ui/Button.astro';
 import Input from '@components/ui/form/Input.astro';
 import Radio from '@components/ui/form/Radio.astro';
 import Select from '@components/ui/form/Select.astro';
+import Date from '@components/ui/form/Date.astro';
 import Textarea from '@components/ui/form/Textarea.astro';
 import countries from 'public/data/countries.json';
 
@@ -22,11 +23,6 @@ const accreOptions = [
 ];
 
 const supportcontractOptions = [
-    { label: 'Oui', value: 'oui' },
-    { label: 'Non', value: 'non' },
-];
-
-const nbrofactivities = [
     { label: 'Oui', value: 'oui' },
     { label: 'Non', value: 'non' },
 ];
@@ -124,82 +120,97 @@ const formBackground = 'light';
 </div>
 
 <form id="create-form" action="/forms/create/recapitulatif">
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-        <div class="text-md font-semibold">Entrepreneur</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Radio label="Disposez-vous d'un contrat d'appui ?" id="supportcontract" name="supportcontract" options={supportcontractOptions} required background={formBackground} />
-            <Radio label="Demande d'ACRE de moins de 3 ans ?" id="accre" name="accre" options={accreOptions}  required background={formBackground} />
-            <Radio label="Avez-vous déjà eu une entreprise ?" id="existingsiren" name="existingsiren" options={existingsirenOptions}  required background={formBackground} />
-            <div id="siren-wrapper" class="hidden transition-all duration-300">
-                <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
-            </div>
-            <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder="" />
-            <div id="otheractivitydetail-wrapper" class="hidden transition-all duration-300">
-                <Input label="Précisez votre profession" id="otheractivitydetail" name="otheractivitydetail" required background={formBackground} />
-            </div>
-        </div>
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Entrepreneur</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <Radio label="Disposez-vous d'un contrat d'appui ?" id="supportcontract" name="supportcontract" options={supportcontractOptions} required background={formBackground} />
+      <Radio label="Demande d'ACRE de moins de 3 ans ?" id="accre" name="accre" options={accreOptions}  required background={formBackground} />
+      <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder="" />
+      <div id="otheractivitydetail-wrapper" class="hidden transition-all duration-300">
+        <Input label="Précisez votre profession" id="otheractivitydetail" name="otheractivitydetail" required background={formBackground} />
+      </div>
     </div>
+  </div>
+    
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Activité non salarié antérieure en France ou à l'étranger</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <Radio label="Avez-vous déjà eu une entreprise ?" id="previousselfemployedactivity" name="previousselfemployedactivity" options={existingsirenOptions}  required background={formBackground} />
+      <div id="siren-country-wrapper" class="hidden transition-all duration-300">
+        <Select label="Pays de l'activité antérieure" id="siren-country" name="siren-country" options={countryOptions} required background={formBackground} placeholder="" />
+      </div>
+      <div id="siren-wrapper" class="hidden transition-all duration-300">
+        <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
+      </div>
+      <div id="oldactivitydate-wrapper" class="hidden transition-all duration-300">
+        <Date label="Fin de l'activité exercée" id="oldactivitydate" name="oldactivitydate" required background={formBackground} />
+      </div>
+    </div>
+    <div id="oldactivity-wrapper" class="hidden transition-all duration-300">
+      <Input label="Description de l'activité exercée" id="oldactivity" name="oldactivity" required background={formBackground} />
+    </div>
+  </div>
 
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-        <div class="text-md font-semibold">Fiscalité</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions}  required background={formBackground} />
-            <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} placeholder="" />
-        </div>
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Fiscalité</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions}  required background={formBackground} />
+      <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} placeholder="" />
     </div>
+  </div>
 
-    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-        <div class="text-md font-semibold">Activités de l'entreprise</div>
-        <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class='text-sm' />
-        <div class="grid grid-cols-2 gap-4">
-            <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder="" />
-            <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder="" />
-            <Input label="Nom commercial (optionel)" id="businessname" name="businessname" background={formBackground} />
-            <div id="nbrofactivities-wrapper" class="hidden">
-                <Input type='number' min="0" max="5" label="Nombre d’activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
-            </div>
-        </div>
-        <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-4 hidden transition-all duration-300">
-            <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
-            <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
-        </div>
-        <div id="secondary-activities-container" class="space-y-4"></div>
-        <template id="secondary-activity-template">
-            <div class="grid grid-cols-4 gap-4">
-                <div class="col-span-3">
-                    <Textarea label="Description de l'activité secondaire" rows={1} required />
-                </div>
-                <Select label="Forme" options={formofsecondaryactivityOptions} required placeholder="" class="col-span-1" />
-            </div>
-        </template>
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Activités de l'entreprise</div>
+    <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class='text-sm' />
+    <div class="grid grid-cols-2 gap-2">
+      <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder="" />
+      <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder="" />
+      <Input label="Nom commercial (optionel)" id="businessname" name="businessname" background={formBackground} />
+      <div id="nbrofactivities-wrapper" class="hidden">
+        <Input type='number' min="0" max="5" label="Nombre d’activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
+      </div>
     </div>
+    <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-2 hidden transition-all duration-300">
+      <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
+      <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
+    </div>
+    <div id="secondary-activities-container" class="space-y-4"></div>
+    <template id="secondary-activity-template">
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 border border-primary/50 p-2 rounded-md shadow-sm">
+        <div class="sm:col-span-3">
+          <Textarea label="Description de l'activité secondaire" rows={3} required />
+        </div>
+        <Select label="Forme" options={formofsecondaryactivityOptions} required placeholder="" class="col-span-1" />
+      </div>
+    </template>
+  </div>
 
-    <div id="localaddress-wrapper" class="hidden space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4 transition-all duration-300">
-        <div class="text-md font-semibold">Adresse de l'établissement</div>
-        <div class="grid grid-cols-4 gap-4">
-            <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
-            <div class="col-span-3 grid grid-cols-2 gap-4">
-                <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
-                <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
-            </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
-            <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} />
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-            <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
-            <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
-        </div>
-        <div class="grid grid-cols-1 gap-4">
-            <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
-        </div>
+  <div id="localaddress-wrapper" class="hidden space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4 transition-all duration-300">
+    <div class="text-md font-semibold">Adresse de l'établissement</div>
+    <div class="grid grid-cols-4 gap-2">
+      <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
+      <div class="col-span-3 grid grid-cols-2 gap-2">
+        <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
+        <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
+      </div>
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
+      <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} />
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
+      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
+    </div>
+    <div class="grid grid-cols-1 gap-2">
+      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
+    </div>
+  </div>
 
-    <div class="flex justify-between my-8">
-        <Button href="/forms/create/entrepreneur" variant="primary" size="md" class="uppercase">étape précédente</Button>
-        <Button type='submit' variant="primary" size="md" class="uppercase">étape suivante</Button>
-    </div>
+  <div class="flex justify-between my-8">
+    <Button href="/forms/create/entrepreneur" variant="primary" size="md" class="uppercase">étape précédente</Button>
+    <Button type='submit' variant="primary" size="md" class="uppercase">étape suivante</Button>
+  </div>
 </form>
 
 <!-- SCRIPT JS -->
@@ -210,6 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!form) return;
 
   const STORAGE_KEY = 'create-business-form';
+
+  const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
+  const nbrofactivitiesInput = document.getElementById('nbrofactivies');
+  const container = document.getElementById('secondary-activities-container');
+  const template = document.getElementById('secondary-activity-template');
 
   /*** ================= STORAGE ================= ***/
   const saveForm = () => {
@@ -225,7 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!saved) return;
 
     const data = JSON.parse(saved);
+
+    // Restauration champs classiques
     Object.entries(data).forEach(([name, value]) => {
+      if (name.startsWith('secondaryActivities')) return; // on gère séparément
       const field = form.querySelector(`[name="${name}"]`);
       if (!field) return;
       if (field.type === 'radio') {
@@ -235,9 +254,24 @@ document.addEventListener('DOMContentLoaded', () => {
         field.value = value;
       }
     });
-  };
 
-  restoreForm();
+    // Restauration activités secondaires
+    const secondaryKeys = Object.keys(data).filter(k => k.startsWith('secondaryActivities'));
+    if (secondaryKeys.length) {
+      const count = secondaryKeys.reduce((max, key) => {
+        const match = key.match(/\[(\d+)\]/);
+        return match ? Math.max(max, parseInt(match[1])) : max;
+      }, -1) + 1;
+
+      nbrofactivitiesInput.value = count;
+      renderSecondaryActivities();
+
+      secondaryKeys.forEach(key => {
+        const field = form.querySelector(`[name="${key}"]`);
+        if (field) field.value = data[key];
+      });
+    }
+  };
 
   form.addEventListener('input', saveForm);
   form.addEventListener('change', saveForm);
@@ -259,30 +293,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   otherActivitySelect.addEventListener('change', toggleOtherActivityDetail);
-  toggleOtherActivityDetail();
 
+  const sirenCountryWrapper = document.getElementById('siren-country-wrapper');
   const sirenWrapper = document.getElementById('siren-wrapper');
-  const sirenInput = document.getElementById('siren');
-  const existingSirens = form.querySelectorAll('input[name="existingsiren"]');
+  const oldActivityWrapper = document.getElementById('oldactivity-wrapper');
+  const oldActivityDateWrapper = document.getElementById('oldactivitydate-wrapper');
 
-  const toggleSiren = (value) => {
-    if (!sirenWrapper || !sirenInput) return;
-    if (value === 'oui') {
-      sirenWrapper.classList.remove('hidden');
-      sirenInput.required = true;
-    } else {
-      sirenWrapper.classList.add('hidden');
-      sirenInput.value="";
-      sirenInput.required = false;
+  const sirenInput = document.getElementById('siren');
+  const oldActivityInput = document.getElementById('oldactivity');
+  const oldActivityDateInput = document.getElementById('oldactivitydate');
+  const sirenCountrySelect = form.querySelector('[name="siren-country"]');
+  const previousSelfEmployedActivity = form.querySelectorAll('input[name="previousselfemployedactivity"]');
+
+  const updatePreviousActivityFields = () => {
+    const radioValue = Array.from(previousSelfEmployedActivity).find(r => r.checked)?.value || 'non';
+    const countryValue = sirenCountrySelect?.value || '';
+
+    const showCountry = radioValue === 'oui';
+    sirenCountryWrapper?.classList.toggle('hidden', !showCountry);
+    if (!showCountry)
+    {
+      sirenCountrySelect.value = '';
+      sirenCountrySelect.required = false;
+    }
+
+    const showFRFields = showCountry && countryValue === 'FR';
+    sirenWrapper?.classList.toggle('hidden', !showFRFields);
+    oldActivityWrapper?.classList.toggle('hidden', !showFRFields);
+    oldActivityDateWrapper?.classList.toggle('hidden', !showFRFields);
+
+    sirenInput.required = showFRFields;
+    oldActivityInput.required = showFRFields;
+    oldActivityDateInput.required = showFRFields;
+
+    if (!showFRFields) {
+      sirenInput.value = '';
+      oldActivityInput.value = '';
+      oldActivityDateInput.value = '';
     }
   };
-  existingSirens.forEach(radio => {
-    radio.addEventListener('change', e => toggleSiren(e.target.value));
-    if (radio.checked) toggleSiren(radio.value);
-  });
-  if (sirenInput)
-    sirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
+  previousSelfEmployedActivity.forEach(radio => radio.addEventListener('change', updatePreviousActivityFields));
+  sirenCountrySelect?.addEventListener('change', updatePreviousActivityFields);
+
+  sirenInput?.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+  });
+
+  toggleOtherActivityDetail();
+  updatePreviousActivityFields();
+
+  /*** ================= ADRESSE / DOMICILIATION ================= ***/
   const formOfActivitySelect = form.querySelector('[name="formofactivity"]');
   const domiciliationSelect = form.querySelector('[name="domiciliation"]');
   const localWrapper = document.getElementById('localaddress-wrapper');
@@ -315,7 +376,10 @@ document.addEventListener('DOMContentLoaded', () => {
       localInputs.forEach(el => { if (el.dataset.optional !== 'true') el.required = true; });
     } else {
       localWrapper.classList.add('hidden');
-      localInputs.forEach(el => el.required = false);
+      localInputs.forEach(el => {
+        el.required = false;
+        el.value = '';
+    });
     }
   };
 
@@ -328,18 +392,54 @@ document.addEventListener('DOMContentLoaded', () => {
       domiciliationsirenWrapper.classList.add('hidden');
       domiciliationsirenInput.required = false;
       domiciliationnameInput.required = false;
+      domiciliationsirenInput.value = '';
+      domiciliationnameInput.value = '';
     }
   };
-  if (domiciliationsirenInput)
-    domiciliationsirenInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9); });
 
-  const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
-  const nbrofactivitiesInput = document.getElementById('nbrofactivies');
-  const container = document.getElementById('secondary-activities-container');
-  const template = document.getElementById('secondary-activity-template');
+  domiciliationsirenInput?.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+  });
+
+  /*** ================= ACTIVITÉS SECONDAIRES ================= ***/
+  const renderSecondaryActivities = () => {
+    const count = Number(nbrofactivitiesInput.value) || 0;
+
+    // Récupérer les valeurs existantes
+    const existingData = [];
+    container.querySelectorAll('.grid.grid-cols-4').forEach((el, i) => {
+      const desc = el.querySelector('textarea')?.value || '';
+      const form = el.querySelector('select')?.value || '';
+      existingData.push({ desc, form });
+    });
+
+    container.innerHTML = '';
+
+    for (let i = 0; i < count; i++) {
+      const clone = template.content.cloneNode(true);
+      const textarea = clone.querySelector('textarea');
+      const select = clone.querySelector('select');
+
+      textarea.name = `secondaryActivities[${i}][description]`;
+      textarea.id = `secondaryActivities_${i}_description`;
+
+      select.name = `secondaryActivities[${i}][form]`;
+      select.id = `secondaryActivities_${i}_form`;
+
+      // Restaurer la valeur existante si elle existe
+      if (existingData[i]) {
+        textarea.value = existingData[i].desc;
+        select.value = existingData[i].form;
+      }
+
+      textarea.addEventListener('input', saveForm);
+      select.addEventListener('change', saveForm);
+
+      container.appendChild(clone);
+    }
+  };
 
   const handleAddActivity = () => {
-    if (!nbrofactivitiesWrapper || !nbrofactivitiesInput) return;
     const isSecondaryAllowed = domiciliationSelect.value !== 'lmnp' && domiciliationSelect.value !== '';
     if (!isSecondaryAllowed) {
       nbrofactivitiesWrapper.classList.add('hidden');
@@ -354,24 +454,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSecondaryActivities();
   };
 
-  const renderSecondaryActivities = () => {
-    const count = Number(nbrofactivitiesInput.value) || 0;
-    container.innerHTML = '';
-    for (let i = 0; i < count; i++) {
-      const clone = template.content.cloneNode(true);
-      const textarea = clone.querySelector('textarea');
-      textarea.name = `secondaryActivities[${i}][description]`;
-      textarea.id = `secondaryActivities_${i}_description`;
-      const select = clone.querySelector('select');
-      select.name = `secondaryActivities[${i}][form]`;
-      select.id = `secondaryActivities_${i}_form`;
-      container.appendChild(clone);
-    }
-  };
-
   nbrofactivitiesInput.addEventListener('input', () => {
     let value = parseInt(nbrofactivitiesInput.value.replace(/\D/g, ''), 10);
-    if (isNaN(value)) { nbrofactivitiesInput.value = ''; return; }
+    if (isNaN(value)) value = 0;
     if (value < 0) value = 0;
     if (value > 5) value = 5;
     nbrofactivitiesInput.value = value;
@@ -379,17 +464,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   nbrofactivitiesInput.addEventListener('change', renderSecondaryActivities);
 
+  /*** ================= SYNC ================= ***/
   const syncForm = () => {
     handleLMNP();
     handleAddress();
     handleDomiciliationCenter();
     handleAddActivity();
   };
+
   formOfActivitySelect.addEventListener('change', syncForm);
   domiciliationSelect.addEventListener('change', syncForm);
 
+  /*** ================= INITIALISATION ================= ***/
+  restoreForm();
+  updatePreviousActivityFields();
   syncForm();
 
 });
 </script>
-

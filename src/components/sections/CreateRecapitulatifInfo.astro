@@ -60,12 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const entrepreneur = JSON.parse(localStorage.getItem(STORAGE_KEY_ENTREPRENEUR) || '{}');
     const business = JSON.parse(localStorage.getItem(STORAGE_KEY_BUSINESS) || '{}');
 
-    const capitalizeWords = v =>
-        (v || '')
-            .toLowerCase()
-            .split(' ')
-            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-            .join(' ');
+    const capitalizeWords = v => (v || '').toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
     const formatDateFR = (dateStr) => {
         if (!dateStr) return '-';
@@ -73,12 +68,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `${d}/${m}/${y}`;
     };
 
-    const createLine = (label, value) => `
-        <div class="grid grid-cols-2 gap-2 py-2 border-b border-gray-200">
+    const createLine = (label, values) => `
+        <div class="flex justify-between py-2 border-b border-gray-200">
             <span class="text-gray-600">${label}</span>
-            <span class="font-medium text-right">${value || '-'}</span>
+            <span class="font-medium text-right">${Array.isArray(values) ? values.filter(v => v).join('<br>') : values || '-'}</span>
         </div>
-    `;
+        `;
+
 
     const createSection = (title, rows) => {
         const section = document.createElement('div');
@@ -96,74 +92,134 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const displayRecap = () => {
         recapContainer.innerHTML = '';
+        const addressParts = [
+            `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`.trim(),
+            `${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`.trim()
+        ];
 
+        // ---------------- ENTREPRENEUR ----------------
         if (Object.keys(entrepreneur).length) {
-            recapContainer.appendChild(
-                createSection('Informations personnelles', [
-                    createLine('Genre', (capitalizeWords(entrepreneur.gender || ''))),
-                    createLine('Nom', (entrepreneur.name || '').toUpperCase()),
-                    createLine('Prénom', capitalizeWords(entrepreneur.firstname)),
-                    createLine('Email', entrepreneur.email),
-                    createLine('Téléphone', entrepreneur.phone),
-                    createLine('Adresse', `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}, ${entrepreneur.zipcode || ''} ${entrepreneur.city || ''}`),
-                    createLine('Date de naissance', formatDateFR(entrepreneur.birthdate)),
-                    createLine('Pays de naissance', formatCountry(entrepreneur.birthcountry)),
-                    createLine('Département de naissance', formatCountry(entrepreneur.birthdepartment)),
-                    createLine('Nationalité', formatNationality(entrepreneur.nationality)),
-                    createLine('Assurance santé', entrepreneur.insuranceorganization),
-                    createLine("N° Sécurité sociale", entrepreneur.healthinsurance),
-                ])
+
+            // INFORMATIONS PERSONELLES
+            const rows = [
+                createLine('Genre', capitalizeWords(entrepreneur.gender)),
+                createLine('Nom de naissance', (entrepreneur.birthname || '').toUpperCase()),
+            ];
+
+            if (entrepreneur.name)
+                rows.push(createLine("Nom d'usage", (entrepreneur.name || '').toUpperCase()));
+
+            rows.push(
+                createLine('Prénom', capitalizeWords(entrepreneur.firstname)),
+                createLine('Email', entrepreneur.email),
+                createLine('Téléphone', entrepreneur.phone),
+                createLine('Adresse', addressParts),
+                createLine('Date de naissance', formatDateFR(entrepreneur.birthdate)),
+                createLine('Pays de naissance', formatCountry(entrepreneur.birthcountry).toUpperCase()),
+                createLine('Ville de naissance', capitalizeWords(entrepreneur.birthcity)),
+                createLine('Département de naissance', formatCountry(entrepreneur.birthdepartment)),
+                createLine('Nationalité', formatNationality(entrepreneur.nationality)),
+                createLine('Assurance santé', entrepreneur.insuranceorganization === 'Autre' ? entrepreneur.otherhealthinsurance : entrepreneur.insuranceorganization),
+                createLine("N° Sécurité sociale", entrepreneur.healthinsurance),
+                createLine("Situation", entrepreneur.situation),
             );
+            recapContainer.appendChild(createSection("Inormation personnelles", rows));
+
+            // INFO CONJOINT
+            if (entrepreneur.partnerbirthname) {
+                const partnerAddress = [
+                    `${entrepreneur.partnertracknumber || ''} ${entrepreneur.partnercomplementnumber || ''} ${entrepreneur.partnertracktype || ''} ${entrepreneur.partnerway || ''} ${entrepreneur.partneradditionaladdress || ''}`.trim(),
+                    `${entrepreneur.partnerzipcode || ''} ${entrepreneur.partnercity || ''} ${formatCountry(entrepreneur.partnercountry) || ''}`.trim()
+                ];
+                const rows = [
+                    createLine('Genre', capitalizeWords(entrepreneur.partnergender)),
+                    createLine('Nom de naissance', (entrepreneur.partnerbirthname || '').toUpperCase())
+                ];
+
+                if (entrepreneur.partnername)
+                    rows.push(createLine("Nom d'usage", (entrepreneur.partnername || '').toUpperCase()));
+
+                rows.push(
+                    createLine('Prénom', capitalizeWords(entrepreneur.partnerfirstname)),
+                    createLine('Fonction', capitalizeWords(entrepreneur.partnerfonction)),
+                );
+
+                if (entrepreneur.partnerfonction != 'Aucun')
+                {
+                    rows.push(
+                        createLine('Date de naissance', formatDateFR(entrepreneur.partnerbirthdate)),
+                        createLine('Pays de naissance', formatCountry(entrepreneur.partnerbirthcountry)),
+                        createLine('Nationalité', formatNationality(entrepreneur.partnernationality)),
+                    )
+                }
+                if (!entrepreneur.partneraddress)
+                    rows.push(createLine('Adresse', partnerAddress));
+                else
+                    rows.push(createLine('Adresse', addressParts));
+                recapContainer.appendChild(createSection("Inormation partenaire", rows));
+            }
         }
 
+        // ---------------- BUSINESS ----------------
         if (Object.keys(business).length) {
-            recapContainer.appendChild(
-                createSection("Informations de l'entreprise", [
-                    createLine('SIREN', business.siren || 'non'),
-                    createLine('Profession actuelle', business.otheractivity === 'Autre' 
-                        ? business.otheractivitydetail || '-'
-                        : business.otheractivity
-                    ),
-                    createLine('Micro-entreprise', business.micro),
-                    createLine('Déclaration URSSAF', business.insuranceorganization),
-                    createLine("Contrat d'appui", business.supportcontract),
-                    createLine("Demande d'ACCRE", business.accre),
-                ])
+            const businessAddress = `${business.tracknumber || ''} ${business.complementnumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`;
+
+            // INFORMATION DE L'ENTREPRISE
+            let rows = [
+                createLine('Micro-entreprise', business.micro),
+            ];
+
+            if (business.siren)
+            {
+                rows.push(createLine('SIREN', business.siren));
+                rows.push(createLine('Fin activité antérieure', formatDateFR(business.oldactivitydate))),
+                rows.push(createLine('Ancienne activité', business.oldactivity))
+            }
+
+            rows.push(
+                createLine('Profession actuelle', business.otheractivity === 'Autre' ? business.otheractivitydetail || '-' : business.otheractivity),
+                createLine('Déclaration URSSAF', business.insuranceorganization),
+                createLine("Contrat d'appui", business.supportcontract),
+                createLine("Demande d'ACCRE", business.accre),
             );
-            recapContainer.appendChild(
-                createSection("Activités de l'entreprise", [
-                    createLine('Nom commercial', business.businessname),
-                    createLine('Forme activité', business.formofactivity),
-                    createLine('Adresse', `${business.tracknumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`),
-                    createLine('Domiciliation', business.domiciliation),
-                ])
-            );
+            recapContainer.appendChild(createSection("Information de l'entreprise", rows));
+
+            // ACTIVITES DE L'ENTREPRISE
+            rows = [
+                createLine('Nom commercial', business.businessname),
+                createLine('Forme activité', business.formofactivity),
+                createLine('Activité principale', business.activity),
+            ];
+
+            if (business.way)
+                rows.push(createLine('Adresse', businessAddress));
+            else
+                rows.push(createLine('Adresse', addressParts))
+            if (business.domiciliationname)
+                rows.push(createLine('Organisme de domiciliation', business.domiciliationname));
+            if (business.domiciliationsiren)
+                rows.push(createLine('Siren de domiciliation', business.domiciliationsiren));
+
+            recapContainer.appendChild(createSection("Activités de l'entreprise", rows));
+
+            // ACTIVITÉS SECONDAIRES
+            const secondary = [];
+            const n = parseInt(business.nbrofactivies || 0);
+            for (let i = 0; i < n; i++) {
+                const desc = business[`secondaryActivities[${i}][description]`];
+                const form = business[`secondaryActivities[${i}][form]`];
+                if (desc) secondary.push(`${desc} (${form})`);
+            }
+
+            if (secondary.length) {
+                recapContainer.appendChild(
+                    createSection("Activités secondaires", [
+                        createLine('Liste', secondary)
+                    ])
+                );
+            }
         }
-        console.log(entrepreneur, business);
     };
-
     displayRecap();
-
-    submitBtn.addEventListener('click', async () => {
-        try {
-            const response = await fetch('/api/send-formalite', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ entrepreneur, business })
-            });
-
-            if (!response.ok) throw new Error();
-
-            alert('Formalité envoyée avec succès !');
-
-            localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
-            localStorage.removeItem(STORAGE_KEY_BUSINESS);
-
-            window.location.href = '/forms/create/confirmation';
-        } catch (err) {
-            alert('Erreur lors de l’envoi. Merci de réessayer.');
-            console.error(err);
-        }
-    });
 });
 </script>
