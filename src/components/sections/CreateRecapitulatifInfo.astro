@@ -18,21 +18,30 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 ---
 
 <section class:list={[bgColor, paddingClass]}>
-    <div class="site-container px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <Stepper currentStep={3} id="stepper" />
-            </div>
-            <div class="md:col-span-2">
-                <h2 class="text-xl-2 font-semibold mb-6">Récapitulatif de vos informations</h2>
-                <div id="recap-container" class="space-y-6"></div>
-                <div class="flex justify-between my-8">
-                    <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
-                    <Button variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer ma formalité</Button>
-                </div>
-            </div>
-        </div>
+  <div class="site-container px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div><Stepper currentStep={3} id="stepper" /></div>
+
+      <div class="md:col-span-2">
+        <h3 class="text-xl-2 font-semibold mb-4">Récapitulatif de vos informations</h3>
+        <form id="recap-form">
+          <div id="recap-container" class="space-y-4 text-small mb-4"></div>
+
+          <div class="mb-4">
+            <label class="flex items-center space-x-2">
+              <input type="checkbox" id="certify" required class="w-4 h-4 text-primary border-gray-300 rounded">
+              <span class="text-sm text-gray-700">Je certifie que les informations fournies sont exactes.</span>
+            </label>
+          </div>
+
+          <div class="flex justify-between my-8">
+            <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+            <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality">Envoyez</Button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
 
 <script type="module">
@@ -69,12 +78,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const createLine = (label, values) => `
-        <div class="flex justify-between py-2 border-b border-gray-200">
-            <span class="text-gray-600">${label}</span>
-            <span class="font-medium text-right">${Array.isArray(values) ? values.filter(v => v).join('<br>') : values || '-'}</span>
+        <div class="flex justify-between border-b border-gray-200">
+            <span class="font-medium">${label}</span>
+            <span class="text-gray-600 text-right">${Array.isArray(values) ? values.filter(v => v).join('<br>') : values || '-'}</span>
         </div>
         `;
-
 
     const createSection = (title, rows) => {
         const section = document.createElement('div');
@@ -105,7 +113,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 createLine('Genre', capitalizeWords(entrepreneur.gender)),
                 createLine('Nom de naissance', (entrepreneur.birthname || '').toUpperCase()),
             ];
-
             if (entrepreneur.name)
                 rows.push(createLine("Nom d'usage", (entrepreneur.name || '').toUpperCase()));
 
@@ -115,15 +122,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 createLine('Téléphone', entrepreneur.phone),
                 createLine('Adresse', addressParts),
                 createLine('Date de naissance', formatDateFR(entrepreneur.birthdate)),
-                createLine('Pays de naissance', formatCountry(entrepreneur.birthcountry).toUpperCase()),
+                createLine('Pays de naissance', formatCountry(entrepreneur.birthcountry)),
                 createLine('Ville de naissance', capitalizeWords(entrepreneur.birthcity)),
-                createLine('Département de naissance', formatCountry(entrepreneur.birthdepartment)),
+                createLine('Département de naissance', entrepreneur.birthdepartment),
                 createLine('Nationalité', formatNationality(entrepreneur.nationality)),
-                createLine('Assurance santé', entrepreneur.insuranceorganization === 'Autre' ? entrepreneur.otherhealthinsurance : entrepreneur.insuranceorganization),
-                createLine("N° Sécurité sociale", entrepreneur.healthinsurance),
+                createLine('Assurance santé', entrepreneur.insuranceorganization === 'Autre' ? entrepreneur.otherhealthinsurance : entrepreneur.insuranceorganization)
+            );
+
+            if (entrepreneur.healthinsurance)
+                rows.push(createLine("N° Sécurité sociale", entrepreneur.healthinsurance));
+
+            rows.push(
                 createLine("Situation", entrepreneur.situation),
+                createLine('Profession actuelle', business.otheractivity === 'Autre' ? business.otheractivitydetail || '-' : business.otheractivity),
             );
             recapContainer.appendChild(createSection("Inormation personnelles", rows));
+
 
             // INFO CONJOINT
             if (entrepreneur.partnerbirthname) {
@@ -152,11 +166,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         createLine('Nationalité', formatNationality(entrepreneur.partnernationality)),
                     )
                 }
-                if (!entrepreneur.partneraddress)
+                if (entrepreneur.partneraddress === "non")
                     rows.push(createLine('Adresse', partnerAddress));
                 else
                     rows.push(createLine('Adresse', addressParts));
-                recapContainer.appendChild(createSection("Inormation partenaire", rows));
+                recapContainer.appendChild(createSection("Information du conjoint", rows));
             }
         }
 
@@ -164,32 +178,42 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (Object.keys(business).length) {
             const businessAddress = `${business.tracknumber || ''} ${business.complementnumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`;
 
+            let rows = [];
+            // INFORMATION SUR L'ANCIENNE ACTIVITE DEJA EXERCEE
+            if (business.previousselfemployedactivity === 'oui')
+            {
+                rows = [
+                    createLine("Pays de l'activité déjà exercée", formatCountry(business.sirencountry)),
+                    createLine("Date de fin de l'activité déjà exercée", formatDateFR(business.oldactivitydate)),
+                    createLine("Description de l'activité déjà exercée", business.oldactivity)
+                ];
+            }
+            if (business.sirencountry === "FR")
+                rows.push(createLine("Siren d'activité déjà exercée", business.siren));
+            if (business.previousselfemployedactivity === 'oui')
+                recapContainer.appendChild(createSection("Activité déjà exercée", rows));
+            
             // INFORMATION DE L'ENTREPRISE
-            let rows = [
-                createLine('Micro-entreprise', business.micro),
+            rows = [
+                createLine('Micro-entreprise', business.micro)
             ];
 
-            if (business.siren)
-            {
-                rows.push(createLine('SIREN', business.siren));
-                rows.push(createLine('Fin activité antérieure', formatDateFR(business.oldactivitydate))),
-                rows.push(createLine('Ancienne activité', business.oldactivity))
-            }
-
             rows.push(
-                createLine('Profession actuelle', business.otheractivity === 'Autre' ? business.otheractivitydetail || '-' : business.otheractivity),
                 createLine('Déclaration URSSAF', business.insuranceorganization),
                 createLine("Contrat d'appui", business.supportcontract),
                 createLine("Demande d'ACCRE", business.accre),
             );
-            recapContainer.appendChild(createSection("Information de l'entreprise", rows));
+            recapContainer.appendChild(createSection("Entreprise à créer", rows));
+
 
             // ACTIVITES DE L'ENTREPRISE
             rows = [
-                createLine('Nom commercial', business.businessname),
                 createLine('Forme activité', business.formofactivity),
                 createLine('Activité principale', business.activity),
             ];
+
+            if (business.businessname)
+                rows.push(createLine('Nom commercial', business.businessname));
 
             if (business.way)
                 rows.push(createLine('Adresse', businessAddress));
@@ -205,21 +229,65 @@ document.addEventListener('DOMContentLoaded', async () => {
             // ACTIVITÉS SECONDAIRES
             const secondary = [];
             const n = parseInt(business.nbrofactivies || 0);
+
             for (let i = 0; i < n; i++) {
-                const desc = business[`secondaryActivities[${i}][description]`];
-                const form = business[`secondaryActivities[${i}][form]`];
-                if (desc) secondary.push(`${desc} (${form})`);
+            const desc = business[`secondaryActivities[${i}][description]`];
+            const form = business[`secondaryActivities[${i}][form]`];
+
+            if (desc) secondary.push({ desc, form });
             }
 
             if (secondary.length) {
-                recapContainer.appendChild(
-                    createSection("Activités secondaires", [
-                        createLine('Liste', secondary)
-                    ])
-                );
+            const section = document.createElement('div');
+            section.className = 'bg-white rounded-sm p-4 shadow-xs';
+
+            section.innerHTML = `
+                <h3 class="text-lg font-semibold mb-4">Activités secondaires</h3>
+
+                <div class="space-y-4">
+                ${secondary.map(a => `
+                    <div class="border border-gray-400 bg-gray-50 rounded-sm overflow-hidden">
+                    
+                        <!-- Description -->
+                        <div class="p-3 text-sm bg-white">
+                            <p class="font-semibold mb-1">Description de l'activité</p>
+                            <p class="text-gray-700 whitespace-pre-line leading-relaxed">
+                            ${a.desc}
+                            </p>
+                        </div>
+
+                        <!-- Séparateur -->
+                        <div class="border-t border-gray-300"></div>
+
+                        <!-- Forme -->
+                        <div class="px-3 py-2 font-medium text-sm bg-gray-100 text-gray-700">
+                            Forme de l’activité : <span class="text-gray-600">${a.form}</span>
+                        </div>
+
+                    </div>
+                `).join('')}
+                </div>
+            `;
+
+            recapContainer.appendChild(section);
             }
         }
     };
     displayRecap();
+
+    // ===================== ENVOI =====================
+    const form = document.getElementById('recap-form');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const certify = document.getElementById('certify');
+        
+        if (!certify.checked) {
+            alert('Vous devez certifier que les informations fournies sont exactes.');
+            return;
+        }
+
+        console.log('Formulaire validé ✅', { entrepreneur, business });
+        alert('Formulaire validé et prêt à l’envoi !');
+    });
 });
 </script>

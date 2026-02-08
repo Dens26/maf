@@ -18,12 +18,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 ---
 
 <section class:list={[bgColor, paddingClass]}>
-    <div class="site-container px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="site-container px-2 sm:px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
                 <Stepper currentStep={2} id="stepper"/>
             </div>
-            <div class="md:col-span-2">
+            <div class="sm:col-span-2">
                 <Create />
             </div>
         </div>

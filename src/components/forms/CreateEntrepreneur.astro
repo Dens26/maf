@@ -128,7 +128,7 @@ const formBackground = 'light';
 
     <!-- Genre / Nom / Prénom -->
     <div class="grid grid-cols-5 gap-2 sm:gap-4">
-      <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1" autocomplete="sex" />
+      <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" />
       <div class="col-span-4 flex gap-2 sm:gap-4">
         <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase" autocomplete="family-name" />
         <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" autocomplete="given-name" />
@@ -138,14 +138,14 @@ const formBackground = 'light';
     <!-- Nom d'usage / Date / Pays / Département / Ville / Nationalité / Situation -->
     <div class="flex flex-wrap gap-2 sm:gap-4">
       <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase" autocomplete="family-name" /></div>
-      <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" /></div>
+      <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} autocomplete="country-of-birth" /></div>
       <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} autocomplete="bday" /></div>
       <div class="flex-1 min-w-[48%]"><Input label="Ville de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize" autocomplete="address-level2" /></div>
       <div id="birthdepartment-wrapper" class="hidden transition-all duration-300 flex-1 min-w-[48%]">
-        <Select label="Dépt. de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder="" />
+        <Select label="Dépt. de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} />
       </div>
-      <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" /></div>
-      <div class="flex-1 min-w-[48%]"><Select label="Situation familiale" id="situation" name="situation" options={situationOptions} required background={formBackground} placeholder="" /></div>
+      <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} autocomplete="nationality" /></div>
+      <div class="flex-1 min-w-[48%]"><Select label="Situation familiale" id="situation" name="situation" options={situationOptions} required background={formBackground} /></div>
     </div>
   </div>
 
@@ -154,8 +154,8 @@ const formBackground = 'light';
     <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
     <div class="grid grid-cols-12 gap-2 sm:gap-4">
       <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
-      <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
-      <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder="" /></div>
+      <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} /></div>
+      <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} /></div>
     </div>
     <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address"/>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
@@ -164,7 +164,7 @@ const formBackground = 'light';
     </div>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2"/>
-      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
+      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} autocomplete="country" />
     </div>
   </div>
 
@@ -172,7 +172,7 @@ const formBackground = 'light';
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Protection sociale</div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-      <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground} placeholder="" />
+      <Select label="Organisme d'assurance" id="insuranceorganization" name="insuranceorganization" options={insuranceorganizationOptions} required background={formBackground}/>
       <div id="otherhealthinsurance-wrapper" class="hidden transition-all duration-300">
         <Input label="Autre organisme d'assurance" id="otherhealthinsurance" name="otherhealthinsurance" required background={formBackground} />
       </div>
@@ -186,13 +186,13 @@ const formBackground = 'light';
   <div id="partner-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden transition-all duration-300">
     <div class="text-md font-semibold">Conjoint</div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-      <Select label="Rôle du conjoint dans l'entreprise" id="partnerfonction" name="partnerfonction" options={partnerFonctionOptions} required background={formBackground} placeholder="" />
+      <Select label="Rôle du conjoint dans l'entreprise" id="partnerfonction" name="partnerfonction" options={partnerFonctionOptions} required background={formBackground} />
     </div>
     <div id="partnerinfo-wrapper">
-      <div class="grid grid-cols-5 gap-2 sm:gap-4">
-        <Select label="Genre" id="partnergender" name="partnergender" options={genderOptions} required background={formBackground} placeholder='' class="col-span-1" autocomplete="sex" />
+      <div class="grid grid-cols-5 gap-2 sm:gap-4 mb-4">
+        <Select label="Genre" id="partnergender" name="partnergender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" />
         <div class="col-span-4 flex gap-2 sm:gap-4">
-          <Input label="Nom" id="partnerbirthname" name="partnerbirthname" required background={formBackground} class="uppercase flex-1" autocomplete="family-name" />
+          <Input label="Nom de naissance" id="partnerbirthname" name="partnerbirthname" required background={formBackground} class="uppercase flex-1" autocomplete="family-name" />
           <Input label="Prénom" id="partnerfirstname" name="partnerfirstname" required background={formBackground} class="capitalize flex-1" autocomplete="given-name" />
         </div>
       </div>
@@ -200,8 +200,8 @@ const formBackground = 'light';
       <div class="flex flex-wrap gap-2 sm:gap-4">
         <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="partnername" name="partnername" background={formBackground} class="uppercase" autocomplete="family-name" /></div>
         <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="partnerbirthdate" name="partnerbirthdate" required background={formBackground} autocomplete="bday" /></div>
-        <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="partnerbirthcountry" name="partnerbirthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" /></div>
-        <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="partnernationality" name="partnernationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" /></div>
+        <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="partnerbirthcountry" name="partnerbirthcountry" options={countryOptions} required background={formBackground} autocomplete="country-of-birth" /></div>
+        <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="partnernationality" name="partnernationality" options={nationalityOptions} required background={formBackground} autocomplete="nationality" /></div>
         <div class="flex-1 min-w-[48%]"><Radio label="Le conjoint réside-t-il à la même adresse que l’entrepreneur ?" id="partneraddress" name="partneraddress" options={partnerAddressOptions} required background={formBackground} /></div>
       </div>
     </div>
@@ -212,13 +212,13 @@ const formBackground = 'light';
     <div class="text-md font-semibold">Adresse du conjoint</div>
     <div class="grid grid-cols-12 gap-2 sm:gap-4">
       <div class="col-span-2"><Input label="N°" id="partnertracknumber" name="partnertracknumber" required background={formBackground} autocomplete="street-address" /></div>
-      <div class="col-span-3"><Select label="Indice" id="partnercomplementnumber" name="partnercomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
-      <div class="col-span-7"><Select label="Type de voie" id="partnertracktype" name="partnertracktype" options={tracktypeOptions} required background={formBackground} placeholder="" /></div>
+      <div class="col-span-3"><Select label="Indice" id="partnercomplementnumber" name="partnercomplementnumber" options={complementnumberOptions} data-optional="true" placeholder='' background={formBackground} /></div>
+      <div class="col-span-7"><Select label="Type de voie" id="partnertracktype" name="partnertracktype" options={tracktypeOptions} required background={formBackground} /></div>
     </div>
     <Input label="Nom de la voie" id="partnerway" name="partnerway" required background={formBackground} autocomplete="street-address"/>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Input label="Complément" id="partneradditionaladdress" name="partneradditionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2"/>
-      <Select label="Pays" id="partnercountry" name="partnercountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
+      <Select label="Pays" id="partnercountry" name="partnercountry" options={countryOptions} required background={formBackground} autocomplete="country" />
     </div>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Input label="Code postal" id="partnerzipcode" name="partnerzipcode" required background={formBackground} autocomplete="postal-code" />
@@ -265,6 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const countrySelect = form.querySelector('select[name="birthcountry"]');
   const departmentWrapper = document.getElementById('birthdepartment-wrapper');
   const departmentInput = document.getElementById('birthdepartment');
+  const country = document.getElementById('country');
+  const zipCode = document.getElementById('zipcode');
 
   const nationalitySelect = form.querySelector('select[name="nationality"]');
   const healthInsuranceWrapper = document.getElementById('healthinsurance-wrapper');
@@ -276,6 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const situationSelect = form.querySelector('select[name="situation"]');
   const partnerWrapper = document.getElementById('partner-wrapper');
+  const partnerCountry = document.getElementById('partnercountry');
+  const partnerZipCode = document.getElementById('partnerzipcode');
 
   const partnerFonctionSelect = form.querySelector('select[name="partnerfonction"]');
   const partnerInfoWrapper = document.getElementById('partnerinfo-wrapper');
@@ -461,6 +465,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ===================== EVENTS ===================== */
 
+  // Quand on change le pays
+  country.addEventListener('change', () => {
+    if (zipCode)
+      zipCode.value = '';
+  });
+
+  // Quand on change le pays partenaire
+  partnerCountry.addEventListener('change', () => {
+      if (partnerZipCode)
+        partnerZipCode.value = '';
+  });
+  
   countrySelect.addEventListener('change', toggleDepartment);
   nationalitySelect.addEventListener('change', toggleHealthInsurance);
   insuranceSelect.addEventListener('change', toggleOtherInsurance);
@@ -471,7 +487,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===================== FILTER INPUTS ===================== */
 
   document.addEventListener('input', e => {
-    if (['zipcode', 'partnerzipcode'].includes(e.target.name)) {
+    if (country.value === "FR" && e.target.name === "zipcode") {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+    }  
+
+    if (partnerCountry.value === "FR" && e.target.name === "partnerzipcode") {
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
     }
 
