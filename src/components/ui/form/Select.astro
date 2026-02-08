@@ -31,7 +31,7 @@ const {
     name,
     options,
     required = false,
-    placeholder = 'Select an option',
+    placeholder = '— Sélectionner —',
     background = 'base',
     class: className = '',
     autocomplete=''
@@ -44,7 +44,7 @@ const inputBgClass = getInputBackgroundColor(background);
 const inputTextClass = getInputTextColor(background);
 ---
 
-<div class="form-group">
+<div class="form-group -full">
     <label for={id} class={`block text-sm font-medium mb-1 ${labelClass}`}>
         {label}
         {required && <span class="text-red-500">*</span>}

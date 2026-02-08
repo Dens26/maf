@@ -34,7 +34,7 @@ export const statsLists: Record<string, StatsList> = {
         stats: [
             { value: 2026, label: "lancement du service" },
             { value: 100, label: "démarches traitées en ligne", suffix: " %" },
-            { value: 59, label: "tarif unique par formalité*", suffix: " €" },
+            { value: 59, label: "la création de votre EI*", suffix: " €" },
             { value: 48, label: "délai de réponse maximum", prefix: "< ", suffix: " h" }
         ]
     }

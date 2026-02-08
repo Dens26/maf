@@ -65,6 +65,7 @@ const formofsecondaryactivityOptions = [
 ];
 
 const complementnumberOptions = [
+    { label: '', value: '' },
     { label: 'Bis', value: 'bis' },
     { label: 'Ter', value: 'ter' },
     { label: 'Quater', value: 'quater' },
@@ -120,98 +121,92 @@ const formBackground = 'light';
 </div>
 
 <form id="create-form" action="/forms/create/recapitulatif">
-  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+
+  <!-- ENTREPRENEUR -->
+  <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Entrepreneur</div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
       <Radio label="Disposez-vous d'un contrat d'appui ?" id="supportcontract" name="supportcontract" options={supportcontractOptions} required background={formBackground} />
-      <Radio label="Demande d'ACRE de moins de 3 ans ?" id="accre" name="accre" options={accreOptions}  required background={formBackground} />
-      <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} placeholder="" />
+      <Radio label="Demande d'ACRE de moins de 3 ans ?" id="accre" name="accre" options={accreOptions} required background={formBackground} />
+      <Select label="Profession actuelle" id="otheractivity" name="otheractivity" options={otheractivityOptions} required background={formBackground} />
       <div id="otheractivitydetail-wrapper" class="hidden transition-all duration-300">
         <Input label="Précisez votre profession" id="otheractivitydetail" name="otheractivitydetail" required background={formBackground} />
       </div>
     </div>
   </div>
-    
-  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
-    <div class="text-md font-semibold">Activité non salarié antérieure en France ou à l'étranger</div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <Radio label="Avez-vous déjà eu une entreprise ?" id="previousselfemployedactivity" name="previousselfemployedactivity" options={existingsirenOptions}  required background={formBackground} />
-      <div id="siren-country-wrapper" class="hidden transition-all duration-300">
-        <Select label="Pays de l'activité antérieure" id="siren-country" name="siren-country" options={countryOptions} required background={formBackground} placeholder="" />
-      </div>
-      <div id="siren-wrapper" class="hidden transition-all duration-300">
-        <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
-      </div>
-      <div id="oldactivitydate-wrapper" class="hidden transition-all duration-300">
-        <Date label="Fin de l'activité exercée" id="oldactivitydate" name="oldactivitydate" required background={formBackground} />
-      </div>
-    </div>
-    <div id="oldactivity-wrapper" class="hidden transition-all duration-300">
-      <Input label="Description de l'activité exercée" id="oldactivity" name="oldactivity" required background={formBackground} />
+
+  <!-- ACTIVITÉ ANTÉRIEURE -->
+  <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold">Activité antérieure en France ou à l'étranger</div>
+    <Radio label="Avez-vous déjà eu une activité non salarié ?" id="previousselfemployedactivity" name="previousselfemployedactivity" options={existingsirenOptions} required background={formBackground} />
+    <div id="oldactivity-wrapper" class="hidden transition-all duration-300 flex flex-wrap gap-2 sm:gap-4">
+      <div id="sirencountry-wrapper" class="flex-1 min-w-[48%]"><Select label="Pays de l'activité" id="sirencountry" name="sirencountry" options={countryOptions} required background={formBackground} /></div>
+      <div id="siren-wrapper" class="hidden transition-all duration-300 flex-1 min-w-[48%]"><Input label="SIREN" id="siren" name="siren" required background={formBackground} /></div>
+      <div id="oldactivitydate-wrapper" class="flex-1 min-w-[48%]"><Date label="Fin de l'activité" id="oldactivitydate" name="oldactivitydate" required background={formBackground} /></div>
+      <div class="flex-1 min-w-[48%]"><Input label="Description de l'activité" id="oldactivity" name="oldactivity" required background={formBackground} /></div>
     </div>
   </div>
 
-  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+  <!-- FISCALITÉ -->
+  <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Fiscalité</div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-    <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions}  required background={formBackground} />
-      <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} placeholder="" />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+      <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions} required background={formBackground} />
+      <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} />
     </div>
   </div>
 
-  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+  <!-- ACTIVITÉS DE L'ENTREPRISE -->
+  <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Activités de l'entreprise</div>
-    <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class='text-sm' />
-    <div class="grid grid-cols-2 gap-2">
-      <Select label="Votre activité sera de forme" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} placeholder="" />
-      <Select label="L'activité sera exercée" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} placeholder="" />
-      <Input label="Nom commercial (optionel)" id="businessname" name="businessname" background={formBackground} />
+    <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class="text-sm" />
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Select label="Forme de l'activité" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} />
+      <Select label="Lieu de l'activité" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} />
+      <Input label="Nom commercial" id="businessname" name="businessname" background={formBackground} />
       <div id="nbrofactivities-wrapper" class="hidden">
-        <Input type='number' min="0" max="5" label="Nombre d’activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
+        <Input type="number" min="0" max="5" label="Activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
       </div>
     </div>
-    <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-2 hidden transition-all duration-300">
-      <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
+    <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-2 sm:gap-4 hidden transition-all duration-300">
       <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
+      <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
     </div>
-    <div id="secondary-activities-container" class="space-y-4"></div>
+    <div id="secondary-activities-container" class="space-y-2 sm:space-y-4"></div>
     <template id="secondary-activity-template">
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 border border-primary/50 p-2 rounded-md shadow-sm">
-        <div class="sm:col-span-3">
-          <Textarea label="Description de l'activité secondaire" rows={3} required />
-        </div>
-        <Select label="Forme" options={formofsecondaryactivityOptions} required placeholder="" class="col-span-1" />
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 border border-primary/50 p-2 rounded-md shadow-sm">
+        <div class="sm:col-span-3"><Textarea label="Description de l'activité secondaire" rows={3} required /></div>
+        <Select label="Forme de l'activité secondaire" options={formofsecondaryactivityOptions} required class="col-span-1" />
       </div>
     </template>
   </div>
 
-  <div id="localaddress-wrapper" class="hidden space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4 transition-all duration-300">
+  <!-- ADRESSE DE L'ÉTABLISSEMENT -->
+  <div id="localaddress-wrapper" class="hidden space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 transition-all duration-300">
     <div class="text-md font-semibold">Adresse de l'établissement</div>
-    <div class="grid grid-cols-4 gap-2">
-      <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" />
-      <div class="col-span-3 grid grid-cols-2 gap-2">
-        <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
-        <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder=""class="w-full" />
-      </div>
+    <div class="grid grid-cols-12 gap-2 sm:gap-4">
+      <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
+      <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
+      <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} /></div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
-      <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} />
+    <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address" />
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
+      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2" />
     </div>
-    <div class="grid grid-cols-2 gap-2">
-      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
-      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" />
-    </div>
-    <div class="grid grid-cols-1 gap-2">
-      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" />
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2" />
+      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} autocomplete="country" />
     </div>
   </div>
 
+  <!-- NAVIGATION -->
   <div class="flex justify-between my-8">
     <Button href="/forms/create/entrepreneur" variant="primary" size="md" class="uppercase">étape précédente</Button>
-    <Button type='submit' variant="primary" size="md" class="uppercase">étape suivante</Button>
+    <Button type="submit" variant="primary" size="md" class="uppercase">étape suivante</Button>
   </div>
 </form>
+
 
 <!-- SCRIPT JS -->
 <script type="module">
@@ -230,9 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /*** ================= STORAGE ================= ***/
   const saveForm = () => {
     const data = {};
-    new FormData(form).forEach((value, key) => {
-      data[key] = value;
-    });
+    new FormData(form).forEach((value, key) => { data[key] = value; });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   };
 
@@ -242,11 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = JSON.parse(saved);
 
-    // Restauration champs classiques
     Object.entries(data).forEach(([name, value]) => {
-      if (name.startsWith('secondaryActivities')) return; // on gère séparément
+      if (name.startsWith('secondaryActivities')) return;
       const field = form.querySelector(`[name="${name}"]`);
       if (!field) return;
+
       if (field.type === 'radio') {
         const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
         if (radio) radio.checked = true;
@@ -255,7 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Restauration activités secondaires
     const secondaryKeys = Object.keys(data).filter(k => k.startsWith('secondaryActivities'));
     if (secondaryKeys.length) {
       const count = secondaryKeys.reduce((max, key) => {
@@ -276,13 +268,14 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('input', saveForm);
   form.addEventListener('change', saveForm);
 
-  /*** ================= TOGGLES ================= ***/
+  /*** ================= AUTRES ACTIVITÉS ================= ***/
   const otherActivityWrapper = document.getElementById('otheractivitydetail-wrapper');
   const otherActivityInput = document.getElementById('otheractivitydetail');
   const otherActivitySelect = form.querySelector('[name="otheractivity"]');
 
   const toggleOtherActivityDetail = () => {
     if (!otherActivityWrapper || !otherActivityInput || !otherActivitySelect) return;
+
     if (otherActivitySelect.value === 'Autre') {
       otherActivityWrapper.classList.remove('hidden');
       otherActivityInput.required = true;
@@ -292,9 +285,11 @@ document.addEventListener('DOMContentLoaded', () => {
       otherActivityInput.value = '';
     }
   };
+
   otherActivitySelect.addEventListener('change', toggleOtherActivityDetail);
 
-  const sirenCountryWrapper = document.getElementById('siren-country-wrapper');
+  /*** ================= ACTIVITÉ ANTÉRIEURE ================= ***/
+  const sirenCountryWrapper = document.getElementById('sirencountry-wrapper');
   const sirenWrapper = document.getElementById('siren-wrapper');
   const oldActivityWrapper = document.getElementById('oldactivity-wrapper');
   const oldActivityDateWrapper = document.getElementById('oldactivitydate-wrapper');
@@ -302,46 +297,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const sirenInput = document.getElementById('siren');
   const oldActivityInput = document.getElementById('oldactivity');
   const oldActivityDateInput = document.getElementById('oldactivitydate');
-  const sirenCountrySelect = form.querySelector('[name="siren-country"]');
-  const previousSelfEmployedActivity = form.querySelectorAll('input[name="previousselfemployedactivity"]');
+  const sirenCountrySelect = form.querySelector('[name="sirencountry"]');
+  const previousSelfEmployedActivity = document.querySelectorAll(
+    'input[name="previousselfemployedactivity"]'
+  );
 
   const updatePreviousActivityFields = () => {
-    const radioValue = Array.from(previousSelfEmployedActivity).find(r => r.checked)?.value || 'non';
+    const radioValue =
+      Array.from(previousSelfEmployedActivity).find(r => r.checked)?.value || 'non';
+
+    const hasPreviousActivity = radioValue === 'oui';
     const countryValue = sirenCountrySelect?.value || '';
+    const showSiren = hasPreviousActivity && countryValue === 'FR';
 
-    const showCountry = radioValue === 'oui';
-    sirenCountryWrapper?.classList.toggle('hidden', !showCountry);
-    if (!showCountry)
-    {
+    // Affichage global
+    oldActivityWrapper.classList.toggle('hidden', !hasPreviousActivity);
+    sirenCountryWrapper.classList.toggle('hidden', !hasPreviousActivity);
+    oldActivityDateWrapper.classList.toggle('hidden', !hasPreviousActivity);
+
+    // Required
+    sirenCountrySelect.required = hasPreviousActivity;
+    oldActivityInput.required = hasPreviousActivity;
+    oldActivityDateInput.required = hasPreviousActivity;
+
+    // SIREN uniquement si France
+    sirenWrapper.classList.toggle('hidden', !showSiren);
+    sirenInput.required = showSiren;
+
+    // Nettoyage
+    if (!hasPreviousActivity) {
       sirenCountrySelect.value = '';
-      sirenCountrySelect.required = false;
-    }
-
-    const showFRFields = showCountry && countryValue === 'FR';
-    sirenWrapper?.classList.toggle('hidden', !showFRFields);
-    oldActivityWrapper?.classList.toggle('hidden', !showFRFields);
-    oldActivityDateWrapper?.classList.toggle('hidden', !showFRFields);
-
-    sirenInput.required = showFRFields;
-    oldActivityInput.required = showFRFields;
-    oldActivityDateInput.required = showFRFields;
-
-    if (!showFRFields) {
       sirenInput.value = '';
       oldActivityInput.value = '';
       oldActivityDateInput.value = '';
+    } else if (!showSiren) {
+      sirenInput.value = '';
     }
   };
 
-  previousSelfEmployedActivity.forEach(radio => radio.addEventListener('change', updatePreviousActivityFields));
+  previousSelfEmployedActivity.forEach(radio =>
+    radio.addEventListener('change', updatePreviousActivityFields)
+  );
+
   sirenCountrySelect?.addEventListener('change', updatePreviousActivityFields);
 
   sirenInput?.addEventListener('input', e => {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
   });
-
-  toggleOtherActivityDetail();
-  updatePreviousActivityFields();
 
   /*** ================= ADRESSE / DOMICILIATION ================= ***/
   const formOfActivitySelect = form.querySelector('[name="formofactivity"]');
@@ -354,6 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleLMNP = () => {
     let lmnpOption = domiciliationSelect.querySelector('option[value="lmnp"]');
+
     if (formOfActivitySelect.value === 'location_biens') {
       if (!lmnpOption) {
         lmnpOption = document.createElement('option');
@@ -370,16 +373,21 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const handleAddress = () => {
-    const needsAddress = domiciliationSelect.value !== 'personnel' && domiciliationSelect.value !== '';
+    const needsAddress =
+      domiciliationSelect.value !== 'personnel' &&
+      domiciliationSelect.value !== '';
+
     if (needsAddress) {
       localWrapper.classList.remove('hidden');
-      localInputs.forEach(el => { if (el.dataset.optional !== 'true') el.required = true; });
+      localInputs.forEach(el => {
+        if (el.dataset.optional !== 'true') el.required = true;
+      });
     } else {
       localWrapper.classList.add('hidden');
       localInputs.forEach(el => {
         el.required = false;
         el.value = '';
-    });
+      });
     }
   };
 
@@ -405,12 +413,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderSecondaryActivities = () => {
     const count = Number(nbrofactivitiesInput.value) || 0;
 
-    // Récupérer les valeurs existantes
     const existingData = [];
-    container.querySelectorAll('.grid.grid-cols-4').forEach((el, i) => {
-      const desc = el.querySelector('textarea')?.value || '';
-      const form = el.querySelector('select')?.value || '';
-      existingData.push({ desc, form });
+    container.querySelectorAll('.grid.grid-cols-4').forEach(el => {
+      existingData.push({
+        desc: el.querySelector('textarea')?.value || '',
+        form: el.querySelector('select')?.value || ''
+      });
     });
 
     container.innerHTML = '';
@@ -421,12 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const select = clone.querySelector('select');
 
       textarea.name = `secondaryActivities[${i}][description]`;
-      textarea.id = `secondaryActivities_${i}_description`;
-
       select.name = `secondaryActivities[${i}][form]`;
-      select.id = `secondaryActivities_${i}_form`;
 
-      // Restaurer la valeur existante si elle existe
       if (existingData[i]) {
         textarea.value = existingData[i].desc;
         select.value = existingData[i].form;
@@ -440,7 +444,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const handleAddActivity = () => {
-    const isSecondaryAllowed = domiciliationSelect.value !== 'lmnp' && domiciliationSelect.value !== '';
+    const isSecondaryAllowed =
+      domiciliationSelect.value !== 'lmnp' &&
+      domiciliationSelect.value !== '';
+
     if (!isSecondaryAllowed) {
       nbrofactivitiesWrapper.classList.add('hidden');
       nbrofactivitiesInput.required = false;
@@ -448,8 +455,10 @@ document.addEventListener('DOMContentLoaded', () => {
       container.innerHTML = '';
       return;
     }
+
     nbrofactivitiesWrapper.classList.remove('hidden');
     nbrofactivitiesInput.required = true;
+
     if (!nbrofactivitiesInput.value) nbrofactivitiesInput.value = 0;
     renderSecondaryActivities();
   };
@@ -457,12 +466,10 @@ document.addEventListener('DOMContentLoaded', () => {
   nbrofactivitiesInput.addEventListener('input', () => {
     let value = parseInt(nbrofactivitiesInput.value.replace(/\D/g, ''), 10);
     if (isNaN(value)) value = 0;
-    if (value < 0) value = 0;
-    if (value > 5) value = 5;
+    value = Math.min(Math.max(value, 0), 5);
     nbrofactivitiesInput.value = value;
     renderSecondaryActivities();
   });
-  nbrofactivitiesInput.addEventListener('change', renderSecondaryActivities);
 
   /*** ================= SYNC ================= ***/
   const syncForm = () => {
@@ -475,8 +482,9 @@ document.addEventListener('DOMContentLoaded', () => {
   formOfActivitySelect.addEventListener('change', syncForm);
   domiciliationSelect.addEventListener('change', syncForm);
 
-  /*** ================= INITIALISATION ================= ***/
+  /*** ================= INIT ================= ***/
   restoreForm();
+  toggleOtherActivityDetail();
   updatePreviousActivityFields();
   syncForm();
 

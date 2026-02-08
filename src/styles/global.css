@@ -76,7 +76,7 @@
     --spacing-large: clamp(3rem, 6vw + 1rem, 6rem);
 
     --container-small: 1000px;
-    --container-base: 1400px;
+    --container-base: 1200px;
 
     --border-radius-small: 0.5rem;
     --border-radius-base: 1rem;
