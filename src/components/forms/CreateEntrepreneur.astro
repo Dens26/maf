@@ -112,6 +112,7 @@ const formBackground = 'light';
 </div>
 
 <form id="create-form" action="/forms/create/business">
+
   <!-- Contact -->
   <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
     <div class="text-md font-semibold">Contact</div>
@@ -134,44 +135,40 @@ const formBackground = 'light';
       </div>
     </div>
 
-    <!-- Nom d'usage / Date de naissance / Pays / Département / Ville / Nationalité / Situation -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-      <Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase" autocomplete="family-name" />
-      <Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} autocomplete="bday" />
-      <Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" />
-      <div id="birthdepartment-wrapper" class="hidden transition-all duration-300">
-        <Select label="Département de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder="" />
+    <!-- Nom d'usage / Date / Pays / Département / Ville / Nationalité / Situation -->
+    <div class="flex flex-wrap gap-2 sm:gap-4">
+      <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase" autocomplete="family-name" /></div>
+      <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" /></div>
+      <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} autocomplete="bday" /></div>
+      <div class="flex-1 min-w-[48%]"><Input label="Ville de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize" autocomplete="address-level2" /></div>
+      <div id="birthdepartment-wrapper" class="hidden transition-all duration-300 flex-1 min-w-[48%]">
+        <Select label="Dépt. de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} placeholder="" />
       </div>
-      <Input label="Commune de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize" autocomplete="address-level2" />
-      <Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" />
-      <Select label="Situation matrimoniale" id="situation" name="situation" options={situationOptions} required background={formBackground} placeholder="" />
+      <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" /></div>
+      <div class="flex-1 min-w-[48%]"><Select label="Situation familiale" id="situation" name="situation" options={situationOptions} required background={formBackground} placeholder="" /></div>
     </div>
   </div>
 
   <!-- Adresse de l'entrepreneur -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
-    <div class="grid grid-cols-4 gap-2 sm:gap-4">
-      <Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} class="col-span-1" autocomplete="street-address" />
-      <div class="col-span-3 grid grid-cols-2 gap-2 sm:gap-4">
-        <Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
-        <Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder="" class="w-full" />
-      </div>
+    <div class="grid grid-cols-12 gap-2 sm:gap-4">
+      <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
+      <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
+      <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} placeholder="" /></div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-      <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address" />
-      <Input label="Complément d'adresse" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2" />
-    </div>
+    <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address"/>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
       <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
     </div>
-    <div class="grid grid-cols-1 gap-2 sm:gap-4">
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2"/>
       <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
     </div>
   </div>
 
-    <!-- Protection sociale -->
+  <!-- Protection sociale -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Protection sociale</div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
@@ -185,7 +182,7 @@ const formBackground = 'light';
     </div>
   </div>
 
-    <!-- Conjoint -->
+  <!-- Conjoint -->
   <div id="partner-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden transition-all duration-300">
     <div class="text-md font-semibold">Conjoint</div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
@@ -200,36 +197,32 @@ const formBackground = 'light';
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-        <Input label="Nom d'usage" id="partnername" name="partnername" background={formBackground} class="uppercase" autocomplete="family-name" />
-        <Date label="Date de naissance" id="partnerbirthdate" name="partnerbirthdate" required background={formBackground} autocomplete="bday" />
-        <Select label="Pays de naissance" id="partnerbirthcountry" name="partnerbirthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" />
-        <Select label="Nationalité" id="partnernationality" name="partnernationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" />
-        <Radio label="Le conjoint réside-t-il à la même adresse que l’entrepreneur ?" id="partneraddress" name="partneraddress" options={partnerAddressOptions}  required background={formBackground} />
+      <div class="flex flex-wrap gap-2 sm:gap-4">
+        <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="partnername" name="partnername" background={formBackground} class="uppercase" autocomplete="family-name" /></div>
+        <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="partnerbirthdate" name="partnerbirthdate" required background={formBackground} autocomplete="bday" /></div>
+        <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="partnerbirthcountry" name="partnerbirthcountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country-of-birth" /></div>
+        <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="partnernationality" name="partnernationality" options={nationalityOptions} required background={formBackground} placeholder="" autocomplete="nationality" /></div>
+        <div class="flex-1 min-w-[48%]"><Radio label="Le conjoint réside-t-il à la même adresse que l’entrepreneur ?" id="partneraddress" name="partneraddress" options={partnerAddressOptions} required background={formBackground} /></div>
       </div>
     </div>
   </div>
 
-    <!-- Adresse du conjoint -->
+  <!-- Adresse du conjoint -->
   <div id="partneraddress-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden transition-all duration-300">
     <div class="text-md font-semibold">Adresse du conjoint</div>
-    <div class="grid grid-cols-4 gap-2 sm:gap-4">
-      <Input label="N°" id="partnertracknumber" name="partnertracknumber" required background={formBackground} class="col-span-1" autocomplete="street-address" />
-      <div class="col-span-3 grid grid-cols-2 gap-2 sm:gap-4">
-        <Select label="Indice" id="partnercomplementnumber" name="partnercomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" class="w-full" />
-        <Select label="Type de voie" id="partnertracktype" name="partnertracktype" options={tracktypeOptions} required background={formBackground} placeholder="" class="w-full" />
-      </div>
+    <div class="grid grid-cols-12 gap-2 sm:gap-4">
+      <div class="col-span-2"><Input label="N°" id="partnertracknumber" name="partnertracknumber" required background={formBackground} autocomplete="street-address" /></div>
+      <div class="col-span-3"><Select label="Indice" id="partnercomplementnumber" name="partnercomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
+      <div class="col-span-7"><Select label="Type de voie" id="partnertracktype" name="partnertracktype" options={tracktypeOptions} required background={formBackground} placeholder="" /></div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-      <Input label="Nom de la voie" id="partnerway" name="partnerway" required background={formBackground} autocomplete="street-address" />
-      <Input label="Complément d'adresse" id="partneradditionaladdress" name="partneradditionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2" />
+    <Input label="Nom de la voie" id="partnerway" name="partnerway" required background={formBackground} autocomplete="street-address"/>
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Input label="Complément" id="partneradditionaladdress" name="partneradditionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2"/>
+      <Select label="Pays" id="partnercountry" name="partnercountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
     </div>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Input label="Code postal" id="partnerzipcode" name="partnerzipcode" required background={formBackground} autocomplete="postal-code" />
       <Input label="Ville" id="partnercity" name="partnercity" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
-    </div>
-    <div class="grid grid-cols-1 gap-2 sm:gap-4">
-      <Select label="Pays" id="partnercountry" name="partnercountry" options={countryOptions} required background={formBackground} placeholder="" autocomplete="country" />
     </div>
   </div>
 
@@ -237,6 +230,7 @@ const formBackground = 'light';
     <Button type="submit" variant="primary" size="md" class='uppercase'>étape suivante</Button>
   </div>
 </form>
+
 
 <!-- SCRIPT JS -->
 <script type="module">
