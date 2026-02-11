@@ -380,7 +380,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (needsAddress) {
       localWrapper.classList.remove('hidden');
       localInputs.forEach(el => {
-        if (el.dataset.optional !== 'true') el.required = true;
+        if (el.dataset.optional !== 'true' && el.id !== 'complementnumber' && el.id !== 'additionaladdress') {
+          el.required = true;
+        }
       });
     } else {
       localWrapper.classList.add('hidden');
