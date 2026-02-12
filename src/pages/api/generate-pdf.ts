@@ -5,13 +5,13 @@ import puppeteer from 'puppeteer';
 
 export const POST: APIRoute = async ({ request }) => {
 
-    const { html } = await request.json();
+  const { html } = await request.json();
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
-    // On injecte ton HTML client dans un vrai document complet
-    await page.setContent(`
+  // On injecte ton HTML client dans un vrai document complet
+  await page.setContent(`
     <!DOCTYPE html>
     <html>
     <head>
@@ -35,17 +35,17 @@ export const POST: APIRoute = async ({ request }) => {
     </html>
   `, { waitUntil: 'networkidle0' });
 
-    const pdf = await page.pdf({
-        format: 'A4',
-        printBackground: true
-    });
+  const pdf = await page.pdf({
+    format: 'A4',
+    printBackground: true
+  });
 
-    await browser.close();
+  await browser.close();
 
-    return new Response(Buffer.from(pdf), {
-        headers: {
-            'Content-Type': 'application/pdf',
-            'Content-Disposition': 'attachment; filename="recapitulatif.pdf"'
-        }
-    });
+  return new Response(Buffer.from(pdf), {
+    headers: {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename="recapitulatif.pdf"'
+    }
+  });
 };
