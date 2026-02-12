@@ -7,7 +7,9 @@ export const POST: APIRoute = async ({ request }) => {
 
   const { html } = await request.json();
 
-  const browser = await puppeteer.launch();
+ const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
   const page = await browser.newPage();
 
   // On injecte ton HTML client dans un vrai document complet
