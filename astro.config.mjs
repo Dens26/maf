@@ -13,6 +13,7 @@ dotenv.config();
 const site = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 
 export default defineConfig({
+  output: 'server', 
   adapter: vercel(),
   site,
   vite: {
