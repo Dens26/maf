@@ -2,26 +2,33 @@ export const prerender = false;
 import { type APIContext } from 'astro';
 import Mailjet from 'node-mailjet';
 
+// Connexion à Mailjet avec les clés d'environnement
 const mailjet = Mailjet.apiConnect(
   import.meta.env.MJ_APIKEY_PUBLIC,
   import.meta.env.MJ_APIKEY_PRIVATE
 );
 
+// Fonction simple pour échapper les caractères HTML
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export async function POST({ request }: APIContext) {
   const body = await request.json();
 
-  const {
-    name = '',
-    email = '',
-    phone = '',
-    company = '',
-    message = '',
-    service = '',
-    interests = '',
-    ['hear_about']: hearAbout = '', // attention au nom de la clé
-  } = body;
-
-  const interestText = Array.isArray(interests) ? interests.join(', ') : interests;
+  // On force toutes les valeurs en chaîne pour éviter undefined
+  const name = String(body.name || '');
+  const email = String(body.email || '');
+  const phone = String(body.phone || '');
+  const company = String(body.company || '');
+  const message = String(body.message || '');
+  const service = String(body.service || '');
+  const hearAbout = String(body.hear_about || '');
 
   const now = new Date().toLocaleString('fr-FR', {
     weekday: 'long',
@@ -36,81 +43,59 @@ export async function POST({ request }: APIContext) {
   <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
       <div style="text-align: center; margin-bottom: 20px;">
-        <img src="https://app.mon-assistant-formalites.db-dev.fr/images/logo.png" alt="Logo Mon Assistant Formalités" style="width: 100%; height: auto; max-width: none;" />
+        <img src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Logo Mon Assistant Formalités" style="width: 100%; height: auto; max-width: none;" />
       </div>
       <h2 style="color: #2c3e50;">📩 Nouvelle demande via le formulaire de contact</h2>
       <p><strong>Date :</strong> ${now}</p>
-      <p><strong>Nom :</strong> ${name}</p>
-      <p><strong>Email :</strong> <a href="mailto:${email}">${email}</a></p>
-      <p><strong>Téléphone :</strong> ${phone}</p>
-      <p><strong>Entreprise :</strong> ${company || 'Non renseignée'}</p>
-      <p><strong>Service demandé :</strong> ${service}</p>
-      <p><strong>Comment nous a-t-il connu :</strong> ${hearAbout}</p>
-      <p><strong>Centres d’intérêt :</strong> ${interestText}</p>
+      <p><strong>Nom :</strong> ${escapeHtml(name)}</p>
+      <p><strong>Email :</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+      <p><strong>Téléphone :</strong> ${escapeHtml(phone)}</p>
+      <p><strong>Entreprise :</strong> ${escapeHtml(company) || 'Non renseignée'}</p>
+      <p><strong>Service demandé :</strong> ${escapeHtml(service)}</p>
+      <p><strong>Comment nous a-t-il connu :</strong> ${escapeHtml(hearAbout)}</p>
       <p><strong>Message :</strong></p>
-      <blockquote style="margin: 15px 0; padding-left: 15px; border-left: 3px solid #ccc; color: #555;">${message.replace(/\n/g, '<br>')}</blockquote>
+      <blockquote style="margin: 15px 0; padding-left: 15px; border-left: 3px solid #ccc; color: #555;">
+        ${escapeHtml(message).replace(/\n/g, '<br>')}
+      </blockquote>
       <hr style="margin-top: 30px;"/>
-      <p style="font-size: 0.9em; color: #888;">Formulaire envoyé depuis <a href="https://app.mon-assistant-formalites.db-dev.fr/contact">mon-assistant-formalites.db-dev.fr</a></p>
+      <p style="font-size: 0.9em; color: #888;">
+        Formulaire envoyé depuis <a href="https://www.mon-assistant-formalites.fr/contact">mon-assistant-formalites.fr</a>
+      </p>
     </div>
   </div>
 `;
 
   try {
-    // 1. Envoi du mail complet à contact@...
+    // Envoi du mail via Mailjet
     await mailjet.post('send', { version: 'v3.1' }).request({
       Messages: [
         {
           From: {
-            Email: 'contact@mon-assistant-formalites.db-dev.fr',
+            Email: 'contact@mon-assistant-formalites.fr',
             Name: 'Mon Assistant Formalités',
           },
           To: [
             {
-              Email: 'contact@mon-assistant-formalites.db-dev.fr',
+              Email: 'contact@mon-assistant-formalites.fr',
               Name: 'Mon Assistant Formalités',
             },
           ],
           ReplyTo: {
-            Email: email, // email du client qui a soumis le formulaire
+            Email: email,
             Name: name,
           },
-          Subject: `Message de ${name} via le formulaire`,
+          Subject: `Message de ${escapeHtml(name)} via le formulaire`,
           HTMLPart: htmlContent,
+          
+          TrackOpens: "disabled",
+          TrackClicks: "disabled"
         },
       ],
     });
 
-    // 2. Envoi d’une notification simple à ta boîte perso
-    await mailjet.post('send', { version: 'v3.1' }).request({
-      Messages: [
-        {
-          From: {
-            Email: 'contact@mon-assistant-formalites.db-dev.fr',
-            Name: 'Mon Assistant Formalités',
-          },
-          To: [
-            {
-              Email: 'denis.bekaert@live.fr',
-              Name: 'Denis Bekaert',
-            },
-          ],
-          Subject: `Notification : nouvelle demande de ${name}`,
-          TextPart: `Une nouvelle demande a été envoyée via le formulaire de contact.\n\nNom : ${name}\nEmail : ${email}\nMessage : ${message.substring(0, 100)}...`,
-          HTMLPart: `<p>Une nouvelle demande a été envoyée via le formulaire de contact.</p>
-                     <p><strong>Nom :</strong> ${name}</p>
-                     <p><strong>Email :</strong> ${email}</p>
-                     <p><strong>Message :</strong> ${message.substring(0, 100)}...</p>`,
-        },
-      ],
-    });
-
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-    });
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
     console.error('Erreur Mailjet:', error);
-    return new Response(JSON.stringify({ error: 'Erreur serveur' }), {
-      status: 500,
-    });
+    return new Response(JSON.stringify({ error: 'Erreur serveur' }), { status: 500 });
   }
 }

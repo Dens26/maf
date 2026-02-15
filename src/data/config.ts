@@ -1,12 +1,12 @@
 export const siteConfig = {
   companyName: 'Mon Assistant Formalités',
-  siteUrl: 'https://mon-assistant-formalites.db-dev.fr',
+  siteUrl: 'https://www.mon-assistant-formalites.fr',
   Socials: {
       xSocial: 'en cours',
       // Github: 'https://github.com/withastro',
       // Instagram: 'https://www.instagram.com/astrodotbuild',
       LinkedIn: 'https://www.linkedin.com/mon-assistant-formalites',
-      Email: 'contact@mon-assistant-formalites.db-dev.fr',
+      Email: 'contact@mon-assistant-formalites.fr',
       Phone: '+33769924672',
       Location: 'Cornas, 07130 – France',
   }

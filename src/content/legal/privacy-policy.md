@@ -65,7 +65,7 @@ Conformément au RGPD, vous disposez des droits suivants :
 - **Droit d’opposition** ou de limitation du traitement
 - **Droit de retirer votre consentement** à tout moment
 
-📩 Pour exercer ces droits : [contact@mon-assistant-formalites.db-dev.fr](mailto:contact@mon-assistant-formalites.db-dev.fr)  
+📩 Pour exercer ces droits : [contact@mon-assistant-formalites.fr](mailto:contact@mon-assistant-formalites.fr)  
 
 ---
 
@@ -106,5 +106,5 @@ Cette politique de confidentialité est susceptible d’évoluer. La dernière m
 Pour toute question relative à la protection de vos données personnelles :
 
 **Mon Assistant Formalités**  
-📧 [contact@mon-assistant-formalites.db-dev.fr](mailto:contact@mon-assistant-formalites.db-dev.fr)  
+📧 [contact@mon-assistant-formalites.fr](mailto:contact@mon-assistant-formalites.fr)  
 📍 Cornas, 07130 – France

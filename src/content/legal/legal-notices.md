@@ -20,7 +20,7 @@ Le site **monassistantformalites.fr** est édité par :
 Statut : Entrepreneur Individuel (EI)  
 Représenté par : **Denis Bekaert**  
 Adresse : 16 impasse Chantoiseau, 07130 Cornas, France  
-Contact : [contact@mon-assistant-formalites.db-dev.fr](mailto:contact@mon-assistant-formalites.db-dev.fr)  
+Contact : [contact@mon-assistant-formalites.fr](mailto:contact@mon-assistant-formalites.fr)  
 SIREN : [à compléter]
 
 L’activité exercée ne relève ni du domaine juridique ni comptable et consiste exclusivement en l’accompagnement administratif de formalités liées aux entreprises individuelles.
@@ -59,7 +59,7 @@ Mon Assistant Formalités ne saurait être tenu responsable de l’usage fait de
 
 La gestion des données personnelles collectées via les formulaires du site (nom, prénom, email, données relatives à l’entreprise, etc.) est détaillée dans la [Politique de confidentialité](/legal/privacy-policy).
 
-Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression des données vous concernant. Pour exercer ces droits, vous pouvez écrire à [contact@mon-assistant-formalites.db-dev.fr](mailto:contact@mon-assistant-formalites.db-dev.fr).
+Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression des données vous concernant. Pour exercer ces droits, vous pouvez écrire à [contact@mon-assistant-formalites.fr](mailto:contact@mon-assistant-formalites.fr).
 
 ---
 

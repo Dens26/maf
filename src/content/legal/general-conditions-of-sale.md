@@ -10,7 +10,7 @@ seo:
 
 ## Article 1 – Présentation
 
-**Mon Assistant Formalités** est une entreprise individuelle, gérée par **Denis Bekaert**, située à Cornas (07130). Vous pouvez nous contacter par email à [contact@monassistantformalites.fr](mailto:contact@monassistantformalites.fr).
+**Mon Assistant Formalités** est une entreprise individuelle, gérée par **Denis Bekaert**, située à Cornas (07130). Vous pouvez nous contacter par email à [contact@mon-assistant-formalites.fr](mailto:contact@mon-assistant-formalites.fr).
 
 Cette structure propose un service d’**accompagnement administratif complet** dédié aux entrepreneurs, particulièrement ceux souhaitant créer, modifier ou cesser leur entreprise individuelle, incluant également les micro-entreprises.  
 
@@ -124,7 +124,7 @@ Les données personnelles recueillies dans le cadre des prestations sont stricte
 Aucune donnée personnelle n’est cédée, vendue ou communiquée à des tiers pour des finalités commerciales. La confidentialité des informations est une priorité.
 
 ### 8.3 Droits d’accès, modification et suppression  
-Conformément au RGPD, le client dispose d’un droit d’accès, de rectification et de suppression de ses données. Il peut exercer ces droits en nous contactant à [contact@monassistantformalites.fr](mailto:contact@monassistantformalites.fr).
+Conformément au RGPD, le client dispose d’un droit d’accès, de rectification et de suppression de ses données. Il peut exercer ces droits en nous contactant à [contact@mon-assistant-formalites.fr](mailto:contact@mon-assistant-formalites.fr).
 
 ### 8.4 Politique complète  
 Pour plus d’informations, veuillez consulter notre politique de confidentialité disponible sur la page [Mentions Légales](/legal/legal-notices).
