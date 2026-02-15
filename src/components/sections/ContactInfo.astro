@@ -31,9 +31,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
                 <h2 class:list={[textColor]}>Contact</h2>
-                <p class:list={[textColor]}>
-                    Une question sur vos formalités ?
-                </p>
+                <p class:list={[textColor]}>Une question sur vos formalités ?</p>
                 <p class:list={[textColor]}>N’hésitez pas à me contacter.</p>
                 <div class:list={['flex flex-col gap-2 mt-4', textColor]}>
                     <div class="flex items-center gap-2">
@@ -42,12 +40,6 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                             ${siteConfig.Socials.Email}
                         </a>
                     </div>
-                    <!-- <div class="flex items-center gap-2">
-                        <Phone aria-hidden="true" />
-                        <a href={`tel:${siteConfig.Socials.Phone}`}>
-                            ${siteConfig.Socials.Phone}
-                        </a>
-                    </div> -->
                     <div class="flex items-center gap-2">
                         <MapPin aria-hidden="true" />
                         <a

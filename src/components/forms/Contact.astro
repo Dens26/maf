@@ -2,7 +2,6 @@
 import Button from '@components/ui/Button.astro';
 import Input from '@components/ui/form/Input.astro';
 import Textarea from '@components/ui/form/Textarea.astro';
-import Radio from '@components/ui/form/Radio.astro';
 import Checkbox from '@components/ui/form/Checkbox.astro';
 import Select from '@components/ui/form/Select.astro';
 
@@ -13,30 +12,12 @@ const hearAboutOptions = [
     { label: 'Autre', value: 'other' },
 ];
 
-const interestOptions = [
-  { label: "Création d'entreprise", value: "creation" },
+const serviceOptions = [
+  { label: "Création", value: "creation" },
   { label: "Modification d'adresse", value: "modification-adresse" },
   { label: "Modification d'activité", value: "modification-activite" },
-  { label: "Cessation d'activité", value: "cessation" },
-  { label: "Corrections RNE", value: "correction-rne" },
-  { label: "Complétion données RNE", value: "completion-rne" },
-  { label: "Autres formalités", value: "autres" }
-];
-
-const serviceOptions = [
-  { label: "Demande de création", value: "creation" },
-  { label: "Demande de modification d'adresse", value: "modification-adresse" },
-  { label: "Demande de modification d'activité", value: "modification-activite" },
-  { label: "Demande de cessation", value: "cessation" },
-  { label: "Demande de correction", value: "correction-rne" },
-  { label: "Demande de complétion", value: "completion-rne" }
-];
-
-const budgetOptions = [
-    { label: '$5,000 - $10,000', value: '5-10k' },
-    { label: '$10,000 - $25,000', value: '10-25k' },
-    { label: '$25,000 - $50,000', value: '25-50k' },
-    { label: '$50,000+', value: '50k+' },
+  { label: "Correction", value: "correction-rne" },
+  { label: "Cessation", value: "cessation" },
 ];
 
 const formBackground = 'light';
@@ -53,19 +34,20 @@ const formBackground = 'light';
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Radio
-            label="Comment nous avez-vous connus ?"
+        <Select
+            label="Comment avez-vous connu MAF ?"
             id="hear_about"
             name="hear_about"
             options={hearAboutOptions}
             required
             background={formBackground}
         />
-        <Checkbox
-            label="Centres d'intérêt"
-            id="interests"
-            name="interests"
-            options={interestOptions}
+        <Select
+            label="Quelle prestation vous intéresse ?"
+            id="service"
+            name="service"
+            options={serviceOptions}
+            required
             background={formBackground}
         />
     </div>
@@ -79,27 +61,6 @@ const formBackground = 'light';
         required
         background={formBackground}
     />
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Select
-            label="Quelle prestation vous intéresse ?"
-            id="service"
-            name="service"
-            options={serviceOptions}
-            required
-            placeholder="Choose a service"
-            background={formBackground}
-        />
-        <!-- <Select
-            label="Budget Range"
-            id="budget"
-            name="budget"
-            options={budgetOptions}
-            required
-            placeholder="Select your budget"
-            background={formBackground}
-        /> -->
-    </div>
 
     <div class="mt-6">
         <Button type='submit'>Envoyer</Button>
