@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { type APIContext } from 'astro';
 import { saveToken } from '@utils/tokenStore';
 import { sendCreateNotification } from "@utils/mailService";
-// import { createFormality } from '@utils/bdd';
+import { checkDuplicateFormality, createFormality } from '@utils/supabase';
 
 export async function POST({ request }: APIContext) {
   try {
@@ -12,6 +12,7 @@ export async function POST({ request }: APIContext) {
 
     const typeFormaliteId = Number(formData.get('typeFormaliteId')) || 1;
     const name = formData.get('name')?.toString() || '';
+    const siren = formData.get('siren')?.toString() || '';
     const email = formData.get('email')?.toString() || '';
     const phone = formData.get('phone')?.toString() || '';
     const city = formData.get('city')?.toString() || '';
@@ -30,15 +31,39 @@ export async function POST({ request }: APIContext) {
 
     saveToken(token, pdfBase64);
 
-    await sendCreateNotification({
+    const result = await checkDuplicateFormality(email, name, typeFormaliteId)
+
+    if (result.status === 'error_db')
+      return new Response(JSON.stringify({ error: "error_db" }), { status: 500 });
+  
+    if (result.status === 'duplicate')
+      return new Response(JSON.stringify({ error: "duplicate", statut: result.statut }), { status: 400 });
+
+    // Enregistrement dans Supabase
+    await createFormality({
+      typeFormaliteId,
       name,
+      siren,
       email,
       phone,
+      city,
+      zipcode,
       pdf: {
         filename: pdfFile.name,
         base64: pdfBase64,
       }
     });
+
+    // Envoi du mail notification
+    // await sendCreateNotification({
+    //   name,
+    //   email,
+    //   phone,
+    //   pdf: {
+    //     filename: pdfFile.name,
+    //     base64: pdfBase64,
+    //   }
+    // });
 
     return new Response(JSON.stringify({ success: true, token }), { status: 200 });
 

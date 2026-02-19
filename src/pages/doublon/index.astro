@@ -1,0 +1,57 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Button from '@components/ui/Button.astro';
+
+const seoTitle = 'Demande déjà en cours - Mon Assistant Formalités';
+const seoDescription = 'Une demande est déjà en cours de traitement.';
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <div class="w-full min-h-[80vh] flex items-center justify-center bg-muted/30">
+        <div class="site-container mx-auto px-4 py-base">
+            <div class="max-w-2xl mx-auto">
+                <!-- Carte principale -->
+                <div class="rounded-3xl bg-card border shadow-lg p-12 text-center">
+                    <!-- Badge statut -->
+                    <div class="mb-6 flex justify-center">
+                        <div class="px-4 py-1.5 rounded-full bg-primary/15 text-primary text-sm font-medium">
+                            Demande active
+                        </div>
+                    </div>
+
+                    <!-- Titre -->
+                    <h1 class="text-3xl font-bold mb-6">Une demande est déjà enregistrée</h1>
+
+                    <!-- Bloc information -->
+                    <div class="mb-8 space-y-4 text-base leading-relaxed">
+                        <p>Une demande pour cette formalité a déjà été enregistrée avec les informations fournies.</p>
+
+                        <div class="rounded-xl bg-muted p-6 border border-border">
+                            <p class="font-medium mb-2">Statut actuel :</p>
+                            <p id="statut-placeholder">Chargement...</p>
+                        </div>
+
+                        <p>Afin d’éviter tout doublon ou traitement inutile, il n’est pas possible de soumettre une nouvelle demande tant que celle-ci n’est pas finalisée.</p>
+                    </div>
+
+                    <!-- Bouton principal -->
+                    <div class="flex justify-center mb-8">
+                        <Button href="/" variant="primary" size="md"> Retour à l’accueil </Button>
+                    </div>
+
+                    <!-- Aide -->
+                    <div class="border-t border-border pt-6 text-sm text-muted-foreground">
+                        Si vous pensez qu’il s’agit d’une erreur ou si vous avez besoin d’informations complémentaires, vous pouvez <a href="/contact" class="text-primary underline">me contacter</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const statut = params.get('statut') || 'en attente de validation';
+    document.getElementById('statut-placeholder').textContent =
+        statut === '1' ? 'en attente de validation' : statut === '2'? 'en cours de traitement' : 'à vérifier auprès de l’administrateur';
+</script>

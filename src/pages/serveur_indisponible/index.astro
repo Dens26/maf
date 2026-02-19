@@ -1,0 +1,39 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Button from '@components/ui/Button.astro';
+
+const seoTitle = 'Serveur indisponible - Mon Assistant Formalités';
+const seoDescription = "Le serveur ne répond pas actuellement. Revenez plus tard ou retournez à l'accueil.";
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <div class="w-full min-h-[80vh] flex items-center justify-center">
+        <div class="site-container mx-auto px-4 py-base text-center">
+            <div class="max-w-2xl mx-auto">
+                <!-- Gros code d'erreur -->
+                <h1 class="mb-4 text-9xl font-extrabold text-primary" data-aos="fade-up">500</h1>
+
+                <!-- Titre clair -->
+                <h2 class="mb-6 text-3xl font-semibold" data-aos="fade-up" data-aos-delay="100">
+                    Serveur temporairement indisponible
+                </h2>
+
+                <!-- Texte explicatif avec liens intégrés -->
+                <p class="text-base mb-8" data-aos="fade-up" data-aos-delay="200">
+                    Désolé, il semble qu’un dysfonctionnement se soit produit et que le serveur ne réponde pas pour le moment.
+                </p>
+                <p class="text-base mb-12" data-aos="fade-up" data-aos-delay="300">
+                    Pas d’inquiétude ! Vous pouvez revenir au <a href="/forms/create/recapitulatif" class="text-primary underline">récapitulatif</a> pour régénérer votre demande, ou retourner à la <a href="/" class="text-primary underline">page d’accueil</a>
+                </p>
+
+                <!-- Un seul bouton principal pour action claire -->
+                <div class="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="400">
+                    <Button href="/forms/create/recapitulatif" variant="primary" size="md">Revenir au récapitulatif</Button>
+                </div>
+                <p class="text-small mb-12" data-aos="fade-up" data-aos-delay="300">
+                    Si le problème persiste, n’hésitez pas à <a href="/contact" class="text-primary underline">me contacter</a> pour obtenir de l’aide.
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>

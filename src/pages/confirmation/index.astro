@@ -3,15 +3,13 @@ export const prerender = false;
 import Layout from '@layouts/Layout.astro';
 import Button from '@components/ui/Button.astro';
 import { consumeToken } from '@utils/tokenStore';
-const token = Astro.url.searchParams.get("token");
+const token = Astro.url.searchParams.get('token');
 
-if (!token)
-  return Astro.redirect('/');
+if (!token) return Astro.redirect('/');
 
 const pdf = consumeToken(token);
 
-if (!pdf)
-  return Astro.redirect('/');
+if (!pdf) return Astro.redirect('/');
 
 const seoTitle = 'Demande envoyée | Mon Assistant Formalités';
 const seoDescription = 'Votre demande a bien été transmise. Nous revenons vers vous rapidement par email.';
@@ -20,29 +18,32 @@ const seoDescription = 'Votre demande a bien été transmise. Nous revenons vers
 <Layout title={seoTitle} description={seoDescription}>
     <div class="w-full min-h-[80vh] flex items-center bg-gray-50">
         <div class="site-container mx-auto px-4 py-base text-center">
-            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-                <h1 class="mb-6 text-3xl md:text-4xl font-bold text-primary" data-aos="fade-up">
-                    Merci pour votre confiance
-                </h1>
-
-                <p class="text-base mb-4" data-aos="fade-up" data-aos-delay="100">
-                    Votre demande a bien été transmise.
-                </p>
-
-                <p class="text-base mb-16" data-aos="fade-up" data-aos-delay="200">
-                    Un email de confirmation contenant votre récapitulatif PDF vous a été envoyé.
-                </p>
-                <p class="text-base mb-4 italic font-light" data-aos="fade-up" data-aos-delay="200">
-                    Vous pouvez également le télécharger directement ci-dessous.
-                </p>
-
-                <div data-aos="fade-up" data-aos-delay="300" class="mb-16">
-                    <Button id="downloadPdf" variant="primary" size="lg" aria-label="Téléchargez le récapitulatif PDF"> Téléchargez le récapitulatif PDF </Button>
+            <div class="max-w-2xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
+                <!-- Badge succès -->
+                <div class="mb-6 flex justify-center">
+                    <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl">✓</div>
                 </div>
 
-                <p class="text-small text-gray-500" data-aos="fade-up" data-aos-delay="250">
-                    Si vous ne recevez pas l’email dans les prochaines minutes, pensez à vérifier votre dossier spam.
-                </p>
+                <!-- Titre -->
+                <h1 class="mb-4 text-3xl md:text-4xl font-extrabold text-primary" data-aos="fade-up">Merci pour votre confiance</h1>
+
+                <!-- Message principal -->
+                <p class="text-lg mb-4" data-aos="fade-up" data-aos-delay="100">Votre demande a bien été transmise.</p>
+
+                <p class="text-base mb-8" data-aos="fade-up" data-aos-delay="150">Un email de confirmation contenant votre récapitulatif PDF vous a été envoyé.</p>
+
+                <p class="text-base mb-6 italic font-light" data-aos="fade-up" data-aos-delay="200">Vous pouvez également le télécharger directement ci-dessous.</p>
+
+                <!-- Bouton téléchargement -->
+                <div class="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="250">
+                    <Button id="downloadPdf" variant="primary" size="lg" aria-label="Téléchargez le récapitulatif PDF">📄 Télécharger le récapitulatif PDF</Button>
+                </div>
+
+                <!-- Message supplémentaire -->
+                <p class="text-sm text-gray-500" data-aos="fade-up" data-aos-delay="300">Si vous ne recevez pas l’email dans les prochaines minutes, pensez à vérifier votre dossier spam.</p>
+
+                <!-- Retour ou action secondaire -->
+                <div class="mt-8"><Button href="/" variant="primary" size="md">Retour à l’accueil</Button></div>
             </div>
         </div>
     </div>
