@@ -1,0 +1,67 @@
+---
+export const prerender = false;
+import Layout from '@layouts/Layout.astro';
+import Button from '@components/ui/Button.astro';
+import { consumeToken } from '@utils/tokenStore';
+const token = Astro.url.searchParams.get("token");
+
+if (!token)
+  return Astro.redirect('/');
+
+const pdf = consumeToken(token);
+
+if (!pdf)
+  return Astro.redirect('/');
+
+const seoTitle = 'Demande envoyée | Mon Assistant Formalités';
+const seoDescription = 'Votre demande a bien été transmise. Nous revenons vers vous rapidement par email.';
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <div class="w-full min-h-[80vh] flex items-center bg-gray-50">
+        <div class="site-container mx-auto px-4 py-base text-center">
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+                <h1 class="mb-6 text-3xl md:text-4xl font-bold text-primary" data-aos="fade-up">
+                    Merci pour votre confiance
+                </h1>
+
+                <p class="text-base mb-4" data-aos="fade-up" data-aos-delay="100">
+                    Votre demande a bien été transmise.
+                </p>
+
+                <p class="text-base mb-16" data-aos="fade-up" data-aos-delay="200">
+                    Un email de confirmation contenant votre récapitulatif PDF vous a été envoyé.
+                </p>
+                <p class="text-base mb-4 italic font-light" data-aos="fade-up" data-aos-delay="200">
+                    Vous pouvez également le télécharger directement ci-dessous.
+                </p>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="mb-16">
+                    <Button id="downloadPdf" variant="primary" size="lg" aria-label="Téléchargez le récapitulatif PDF"> Téléchargez le récapitulatif PDF </Button>
+                </div>
+
+                <p class="text-small text-gray-500" data-aos="fade-up" data-aos-delay="250">
+                    Si vous ne recevez pas l’email dans les prochaines minutes, pensez à vérifier votre dossier spam.
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const button = document.getElementById('downloadPdf');
+        const pdfData = sessionStorage.getItem('generatedPdf');
+
+        if (!button || !pdfData) return;
+
+        button.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = pdfData;
+            link.download = 'recapitulatif-demande.pdf';
+            link.click();
+        });
+
+        sessionStorage.removeItem('generatedPdf');
+    });
+</script>

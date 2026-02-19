@@ -487,17 +487,17 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===================== FILTER INPUTS ===================== */
 
   document.addEventListener('input', e => {
-    if (country.value === "FR" && e.target.name === "zipcode") {
+    if (country.value === "FR" && e.target.name === "zipcode")
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
-    }  
 
-    if (partnerCountry.value === "FR" && e.target.name === "partnerzipcode") {
+    if (partnerCountry.value === "FR" && e.target.name === "partnerzipcode")
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
-    }
 
-    if (['tracknumber', 'partnertracknumber', 'phone', 'healthinsurance'].includes(e.target.name)) {
+    if (['tracknumber', 'partnertracknumber', 'phone'].includes(e.target.name))
       e.target.value = e.target.value.replace(/\D/g, '');
-    }
+
+    if (e.target.name === "healthinsurance")
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
   });
 
   /* ===================== INIT ===================== */

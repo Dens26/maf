@@ -17,37 +17,33 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 ---
 
 <section class:list={[bgColor, paddingClass]}>
-  <div class="site-container px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="site-container px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <Stepper currentStep={3} id="stepper" />
+            </div>
 
-      <div>
-        <Stepper currentStep={3} id="stepper" />
-      </div>
+            <div class="md:col-span-2">
+                <h3 class="text-xl-2 font-semibold mb-4">Récapitulatif de vos informations</h3>
 
-      <div class="md:col-span-2">
-        <h3 class="text-xl-2 font-semibold mb-4">Récapitulatif de vos informations</h3>
+                <form id="recap-form">
+                    <div id="recap-container" class="space-y-4 text-small mb-4"></div>
 
-        <form id="recap-form">
-          <div id="recap-container" class="space-y-4 text-small mb-4"></div>
+                    <div class="mb-4">
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" id="certify" required class="w-4 h-4 text-primary border-gray-300 rounded" />
+                            <span class="text-sm text-gray-700">Je certifie que les informations fournies sont exactes et accepte que ma demande soit transmise pour traitement.</span>
+                        </label>
+                    </div>
 
-          <div class="mb-4">
-            <label class="flex items-center space-x-2">
-              <input type="checkbox" id="certify" required class="w-4 h-4 text-primary border-gray-300 rounded" />
-              <span class="text-sm text-gray-700">
-                Je certifie que les informations fournies sont exactes et accepte que ma demande soit transmise pour traitement.
-              </span>
-            </label>
-          </div>
-
-          <div class="flex justify-between my-8">
-            <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
-            <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality" >Envoyer</Button>
-          </div>
-        </form>
-      </div>
-
+                    <div class="flex justify-between my-8">
+                        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+                        <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer</Button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -99,24 +95,20 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         };
 
         const createLine = (label, values) => `
-    <div class="flex justify-between border-b border-gray-200 py-1">
-      <span class="font-medium">${label}</span>
-      <span class="text-gray-600 text-right">
-        ${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || '-'}
-      </span>
-    </div>
-  `;
+        <div class="flex justify-between border-b border-gray-200 py-1">
+            <span class="font-medium">${label}</span>
+            <span class="text-gray-600 text-right">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || '-'}</span>
+        </div>
+        `;
 
         const createSection = (title, rows) => {
             const section = document.createElement('div');
             section.className = 'bg-white rounded-sm p-4 shadow-xs';
 
             section.innerHTML = `
-      <h3 class="text-lg font-semibold mb-4">${title}</h3>
-      <div class="space-y-1">
-        ${rows.join('')}
-      </div>
-    `;
+            <h3 class="text-lg font-semibold mb-4">${title}</h3>
+            <div class="space-y-1">${rows.join('')}</div>
+            `;
 
             return section;
         };
@@ -150,9 +142,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     createLine('Ville de naissance', capitalizeWords(entrepreneur.birthcity)),
                     createLine('Département de naissance', entrepreneur.birthdepartment),
                     createLine('Nationalité', formatNationality(entrepreneur.nationality)),
-                    createLine(
-                        'Assurance santé',
-                        entrepreneur.insuranceorganization === 'Autre'
+                    createLine('Assurance santé', entrepreneur.insuranceorganization === 'Autre'
                             ? entrepreneur.otherhealthinsurance
                             : entrepreneur.insuranceorganization,
                     ),
@@ -163,9 +153,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 rows.push(
                     createLine('Situation', entrepreneur.situation),
-                    createLine(
-                        'Profession actuelle',
-                        business.otheractivity === 'Autre'
+                    createLine('Profession actuelle', business.otheractivity === 'Autre'
                             ? business.otheractivitydetail || '-'
                             : business.otheractivity,
                     ),
@@ -265,48 +253,38 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     section.className = 'bg-white rounded-sm p-4 shadow-xs';
 
                     section.innerHTML = `
-                <h3 class="text-lg font-semibold mb-4">Activités secondaires</h3>
+                    <h3 class="text-lg font-semibold mb-4">Activités secondaires</h3>
+                    <div class="space-y-4">
+                        ${secondary.map((a) => `
+                        <div class="border border-gray-400 bg-gray-50 rounded-sm overflow-hidden">
+                            
+                            <!-- Description -->
+                            <div class="p-3 text-sm bg-white">
+                                <p class="font-semibold mb-1">Description de l'activité</p>
+                                <p class="text-gray-700 whitespace-pre-line leading-relaxed">${a.desc}</p>
+                            </div>
 
-                <div class="space-y-4">
-                ${secondary
-                    .map(
-                        (a) => `
-                    <div class="border border-gray-400 bg-gray-50 rounded-sm overflow-hidden">
-                        
-                        <!-- Description -->
-                        <div class="p-3 text-sm bg-white">
-                            <p class="font-semibold mb-1">Description de l'activité</p>
-                            <p class="text-gray-700 whitespace-pre-line leading-relaxed">
-                            ${a.desc}
-                            </p>
-                        </div>
+                            <!-- Séparateur -->
+                            <div class="border-t border-gray-300"></div>
 
-                        <!-- Séparateur -->
-                        <div class="border-t border-gray-300"></div>
+                            <!-- Forme -->
+                            <div class="px-3 py-2 font-medium text-sm bg-gray-100 text-gray-700">
+                                Forme de l’activité : <span class="text-gray-600">${a.form}</span>
+                            </div>
 
-                        <!-- Forme -->
-                        <div class="px-3 py-2 font-medium text-sm bg-gray-100 text-gray-700">
-                            Forme de l’activité : <span class="text-gray-600">${a.form}</span>
-                        </div>
-
+                            </div>
+                        `,).join('')}
                     </div>
-                `,
-                    )
-                    .join('')}
-                </div>
-            `;
-                    recapContainer.appendChild(section);
+                    `;
+                recapContainer.appendChild(section);
                 }
             }
             // OBSERVATION
             if (business.observation != '') {
-                const rows = [
-                    createLine('Précision utile à votre demande', business.observation),
-                ];
+                const rows = [createLine('Précision utile à votre demande', business.observation)];
                 recapContainer.appendChild(createSection('Information complémentaire', rows));
             }
         };
-        console.log(business);
 
         displayRecap();
 
@@ -317,52 +295,63 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
             const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
-            submitBtn.textContent = "Génération du PDF...";
+            submitBtn.textContent = 'Génération du PDF...';
 
             try {
                 submitBtn.disabled = true;
-                submitBtn.textContent = "Génération du PDF...";
+                submitBtn.textContent = 'Génération du PDF...';
 
                 const pdfBlob = generateRecapPdf(recapContainer, { download: false });
 
-                if (!(pdfBlob instanceof Blob) || pdfBlob.size === 0) {
-                    throw new Error("Le PDF généré est vide ou invalide.");
-                }
+                if (!(pdfBlob instanceof Blob) || pdfBlob.size === 0)
+                    throw new Error('Le PDF généré est vide ou invalide.');
+        
+                // Convertir en base64 pour stockage temporaire
+                const reader = new FileReader();
 
-                submitBtn.textContent = "Envoi en cours...";
+                reader.onloadend = () => {
+                sessionStorage.setItem("generatedPdf", reader.result);
+                };
 
+                reader.readAsDataURL(pdfBlob);
+
+                submitBtn.textContent = 'Envoi en cours...';
+
+                // Gestion de la création
                 const formData = new FormData();
-                formData.append("name", entrepreneur.name);
-                formData.append("email", entrepreneur.email);
-                formData.append("phone", entrepreneur.phone);
-                formData.append("observation", business.observation);
-                formData.append("pdf", pdfBlob, "recap.pdf");
+                formData.append('typeFormaliteId', '1');
+                formData.append('name', entrepreneur.name);
+                formData.append('email', entrepreneur.email);
+                formData.append('phone', entrepreneur.phone);
+                formData.append('city', entrepreneur.city);
+                formData.append('zipcode', entrepreneur.zipcode);
+                formData.append('pdf', pdfBlob, 'recap.pdf');
 
-                const response = await fetch("/api/create", {
-                    method: "POST",
+                console.log(formData)
+
+                const response = await fetch('/api/create', {
+                    method: 'POST',
                     body: formData,
                 });
 
                 const data = await response.json();
 
-                if (!response.ok) {
+                if (!response.ok)
                     throw new Error(data.error || "Erreur lors de l'envoi du mail.");
-                }
 
                 // ✅ Succès total
-                submitBtn.textContent = "Envoyé ✔";
-                localStorage.clear();
-                window.location.href = "/merci";
-
+                submitBtn.textContent = 'Envoyé ✔';
+                // localStorage.clear();
+                
+                window.location.href = `/confirmation?token=${data.token}`;
             } catch (e) {
                 console.error(e);
 
                 submitBtn.disabled = false;
-                submitBtn.textContent = "Envoyer";
+                submitBtn.textContent = 'Envoyer';
 
-                alert(e.message || "Une erreur est survenue.");
+                alert(e.message || 'Une erreur est survenue.');
             }
         });
-
     });
 </script>
