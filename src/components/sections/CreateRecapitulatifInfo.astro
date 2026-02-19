@@ -31,14 +31,26 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                     <div class="mb-4">
                         <label class="flex items-center space-x-2">
-                            <input type="checkbox" id="certify" required class="w-4 h-4 text-primary border-gray-300 rounded" />
-                            <span class="text-sm text-gray-700">Je certifie que les informations fournies sont exactes et accepte que ma demande soit transmise pour traitement.</span>
+                            <input
+                                type="checkbox"
+                                id="certify"
+                                required
+                                class="w-4 h-4 text-primary border-gray-300 rounded"
+                            />
+                            <span class="text-sm text-gray-700"
+                                >Je certifie que les informations fournies sont exactes et accepte que ma demande soit
+                                transmise pour traitement.</span
+                            >
                         </label>
                     </div>
 
                     <div class="flex justify-between my-8">
-                        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
-                        <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer</Button>
+                        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase"
+                            >Étape précédente</Button
+                        >
+                        <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality"
+                            >Envoyer</Button
+                        >
                     </div>
                 </form>
             </div>
@@ -142,7 +154,9 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     createLine('Ville de naissance', capitalizeWords(entrepreneur.birthcity)),
                     createLine('Département de naissance', entrepreneur.birthdepartment),
                     createLine('Nationalité', formatNationality(entrepreneur.nationality)),
-                    createLine('Assurance santé', entrepreneur.insuranceorganization === 'Autre'
+                    createLine(
+                        'Assurance santé',
+                        entrepreneur.insuranceorganization === 'Autre'
                             ? entrepreneur.otherhealthinsurance
                             : entrepreneur.insuranceorganization,
                     ),
@@ -153,7 +167,9 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 rows.push(
                     createLine('Situation', entrepreneur.situation),
-                    createLine('Profession actuelle', business.otheractivity === 'Autre'
+                    createLine(
+                        'Profession actuelle',
+                        business.otheractivity === 'Autre'
                             ? business.otheractivitydetail || '-'
                             : business.otheractivity,
                     ),
@@ -255,7 +271,9 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     section.innerHTML = `
                     <h3 class="text-lg font-semibold mb-4">Activités secondaires</h3>
                     <div class="space-y-4">
-                        ${secondary.map((a) => `
+                        ${secondary
+                            .map(
+                                (a) => `
                         <div class="border border-gray-400 bg-gray-50 rounded-sm overflow-hidden">
                             
                             <!-- Description -->
@@ -273,10 +291,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                             </div>
 
                             </div>
-                        `,).join('')}
+                        `,
+                            )
+                            .join('')}
                     </div>
                     `;
-                recapContainer.appendChild(section);
+                    recapContainer.appendChild(section);
                 }
             }
             // OBSERVATION
@@ -290,6 +310,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
         /* SUBMIT → GENERATE PDF */
 
+        console.log(business);
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -305,12 +326,12 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 if (!(pdfBlob instanceof Blob) || pdfBlob.size === 0)
                     throw new Error('Le PDF généré est vide ou invalide.');
-        
+
                 // Convertir en base64 pour stockage temporaire
                 const reader = new FileReader();
 
                 reader.onloadend = () => {
-                sessionStorage.setItem("generatedPdf", reader.result);
+                    sessionStorage.setItem('generatedPdf', reader.result);
                 };
 
                 reader.readAsDataURL(pdfBlob);
@@ -321,36 +342,39 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 const formData = new FormData();
                 formData.append('typeFormaliteId', '1');
                 formData.append('name', entrepreneur.name);
+                formData.append('siren', business.siren);
                 formData.append('email', entrepreneur.email);
                 formData.append('phone', entrepreneur.phone);
                 formData.append('city', entrepreneur.city);
                 formData.append('zipcode', entrepreneur.zipcode);
                 formData.append('pdf', pdfBlob, 'recap.pdf');
 
-                console.log(formData)
-
                 const response = await fetch('/api/create', {
                     method: 'POST',
                     body: formData,
                 });
-
                 const data = await response.json();
 
-                if (!response.ok)
-                    throw new Error(data.error || "Erreur lors de l'envoi du mail.");
+                console.log(response.status)
+                if (!response.ok) {
+                    if (response.status === 500) {
+                        window.location.href = '/serveur_indisponible';
+                        return;
+                    }
+                    if (response.status === 400) {
+                        window.location.href = `/doublon?statut=${data.statut}`;
+                        return;
+                    }
+                    throw new Error(data.error || 'Erreur lors de l’envoi');
+                }
 
                 // ✅ Succès total
                 submitBtn.textContent = 'Envoyé ✔';
                 // localStorage.clear();
-                
+
                 window.location.href = `/confirmation?token=${data.token}`;
             } catch (e) {
-                console.error(e);
-
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Envoyer';
-
-                alert(e.message || 'Une erreur est survenue.');
+                window.location.href = '/serveur_indisponible';
             }
         });
     });
