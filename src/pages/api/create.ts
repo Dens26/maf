@@ -1,45 +1,67 @@
 export const prerender = false;
 
 import { v4 as uuidv4 } from 'uuid';
-import { type APIContext } from 'astro';
+import type { APIContext } from 'astro';
 import { saveToken } from '@utils/tokenStore';
 import { sendCreateNotification } from "@utils/mailService";
 import { checkDuplicateFormality, createFormality } from '@utils/supabase';
 
+const MAX_PDF_SIZE = 5_000_000; // 5MB
+
 export async function POST({ request }: APIContext) {
   try {
-    const formData = await request.formData();
+    const body = await request.json();
 
-    const typeFormaliteId = Number(formData.get('typeFormaliteId')) || 1;
-    const name = formData.get('name')?.toString() || '';
-    const siren = formData.get('siren')?.toString() || '';
-    const email = formData.get('email')?.toString() || '';
-    const phone = formData.get('phone')?.toString() || '';
-    const city = formData.get('city')?.toString() || '';
-    const zipcode = formData.get('zipcode')?.toString() || '';
-    const pdfFile = formData.get('pdf') as File | null;
+    const {
+      typeFormaliteId,
+      name,
+      siren,
+      email,
+      phone,
+      city,
+      zipcode,
+      pdf
+    } = body;
 
-    if (!pdfFile || pdfFile.type !== "application/pdf" || pdfFile.size > 5_000_000) {
-      return new Response(JSON.stringify({
-        error: "Fichier PDF invalide ou trop volumineux (max 5MB)"
-      }), { status: 400 });
+    // ✅ Validation minimale
+    if (!typeFormaliteId || !name || !email || !pdf) {
+      return jsonResponse({ error: "Champs obligatoires manquants" }, 400);
     }
 
-    const buffer = Buffer.from(await pdfFile.arrayBuffer());
+    // ✅ Vérification PDF base64
+    let pdfBuffer: Buffer;
+    try {
+      pdfBuffer = Buffer.from(pdf, 'base64');
+    } catch {
+      return jsonResponse({ error: "PDF invalide (base64 incorrect)" }, 400);
+    }
+
+    if (pdfBuffer.length === 0 || pdfBuffer.length > MAX_PDF_SIZE) {
+      return jsonResponse(
+        { error: "Fichier PDF invalide ou trop volumineux (max 5MB)" },
+        400
+      );
+    }
+
     const token = uuidv4();
-    const pdfBase64 = buffer.toString('base64');
 
-    saveToken(token, pdfBase64);
+    // Sauvegarde temporaire pour téléchargement ultérieur
+    saveToken(token, pdf);
 
-    const result = await checkDuplicateFormality(email, name, typeFormaliteId)
+    // Vérification doublon
+    const result = await checkDuplicateFormality(email, name, typeFormaliteId);
 
     if (result.status === 'error_db')
-      return new Response(JSON.stringify({ error: "error_db" }), { status: 500 });
-  
-    if (result.status === 'duplicate')
-      return new Response(JSON.stringify({ error: "duplicate", statut: result.statut }), { status: 400 });
+      return jsonResponse({ error: "error_db" }, 500);
 
-    // Enregistrement dans Supabase
+    if (result.status === 'duplicate')
+      return jsonResponse(
+        { error: "duplicate", statut: result.statut },
+        400
+      );
+
+    // Enregistrement Supabase
+    try {
     await createFormality({
       typeFormaliteId,
       name,
@@ -49,27 +71,42 @@ export async function POST({ request }: APIContext) {
       city,
       zipcode,
       pdf: {
-        filename: pdfFile.name,
-        base64: pdfBase64,
+        filename: "recap.pdf",
+        base64: pdf,
       }
     });
+  }catch(err) {
+  return jsonResponse({ error: "Erreur insertion Supabase", detail: err }, 500);
+}
 
-    // Envoi du mail notification
+    // Envoi du mail notification (désactivé temporairement)
     // await sendCreateNotification({
     //   name,
     //   email,
     //   phone,
     //   pdf: {
-    //     filename: pdfFile.name,
-    //     base64: pdfBase64,
+    //     filename: "recap.pdf",
+    //     base64: pdf,
     //   }
     // });
 
-    return new Response(JSON.stringify({ success: true, token }), { status: 200 });
+    return jsonResponse({ success: true, token }, 200);
 
   } catch (error) {
     console.error("🔥 ERREUR API CREATE :", error);
-
-    return new Response(JSON.stringify({ error: "Erreur serveur", detail: String(error) }), { status: 500 });
+    return jsonResponse(
+      { error: "Erreur serveur", detail: String(error) },
+      500
+    );
   }
+}
+
+// Helper pour réponses JSON homogènes
+function jsonResponse(data: unknown, status: number) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
 }
