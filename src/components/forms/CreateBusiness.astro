@@ -120,7 +120,7 @@ const formBackground = 'light';
     <h3 class="text-xl-2 font-semibold mb-4">Informations Entreprise</h3>
 </div>
 
-<form id="create-form" action="/forms/create/recapitulatif">
+<form id="create-form" method="GET" action="/forms/create/recapitulatif">
 
   <!-- ENTREPRENEUR -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
@@ -220,6 +220,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form = document.getElementById('create-form');
   if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // 🚨 ultra important
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    localStorage.setItem('create-business-form', JSON.stringify(data));
+
+    window.location.href = '/forms/create/recapitulatif';
+  });
 
   const STORAGE_KEY = 'create-business-form';
 

@@ -1,7 +1,9 @@
-import { jsPDF } from "jspdf";
+const { jsPDF } = window.jspdf;
 
-export function generateRecapPdf(recapContainer, options = { download: true }) {
-    const download = options.download;
+export function generateRecapPdf(
+    recapContainer, options= { download: true }
+) {
+    const { download } = options;
 
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -33,7 +35,7 @@ export function generateRecapPdf(recapContainer, options = { download: true }) {
     y += 15;
 
     /* CONTENT */
-    const sections = recapContainer.querySelectorAll("h3");
+    const sections = recapContainer.querySelectorAll<HTMLHeadingElement>("h3");
 
     sections.forEach((sectionTitle) => {
         if (y > pageHeight - 30) {
@@ -56,10 +58,10 @@ export function generateRecapPdf(recapContainer, options = { download: true }) {
         const sectionDiv = sectionTitle.parentElement;
         if (!sectionDiv) return;
 
-        const rows = sectionDiv.querySelectorAll(".flex");
+        const rows = sectionDiv.querySelectorAll<HTMLDivElement>(".flex");
 
         rows.forEach((row) => {
-            const spans = row.querySelectorAll("span");
+            const spans = row.querySelectorAll<HTMLSpanElement>("span");
             if (spans.length < 2) return;
 
             const label = spans[0].innerText.trim();
@@ -115,6 +117,7 @@ export function generateRecapPdf(recapContainer, options = { download: true }) {
         );
     }
 
+    // 🔥 IMPORTANT : gestion selon option
     if (download) {
         doc.save(`recap-${dossierNumber}.pdf`);
         return null;

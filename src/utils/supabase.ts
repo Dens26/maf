@@ -32,19 +32,20 @@ type CreateFormalityParams = {
 export async function createFormality({ typeFormaliteId, name, siren, email, phone, city, zipcode, pdf }: CreateFormalityParams) {
     try {
         const demandeId = randomUUID()
+        const pdfPath = `pdfs/${demandeId}_${pdf.filename}`
 
-        // sauvegarde PDF
-        const dir = path.join(process.cwd(), 'public', 'pdfs')
-        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+        // Upload PDF dans Supabase Storage
+        const { error: uploadError } = await supabase.storage
+            .from('pdfs')       // nom du bucket
+            .upload(pdfPath, Buffer.from(pdf.base64, 'base64'), {
+                contentType: 'application/pdf',
+                upsert: false
+            })
 
-        const pdfPath = path.join('pdfs', `${demandeId}_${pdf.filename}`)
-        fs.writeFileSync(
-            path.join(process.cwd(), 'public', pdfPath),
-            Buffer.from(pdf.base64, 'base64')
-        )
+        if (uploadError) throw uploadError
 
-        // insertion Supabase
-        const { error } = await supabase.from('demandes').insert([
+        // Création de la demande dans la base
+        const { error: dbError } = await supabase.from('demandes').insert([
             {
                 demandeid: demandeId,
                 email,
@@ -53,14 +54,14 @@ export async function createFormality({ typeFormaliteId, name, siren, email, pho
                 typeformaliteid: typeFormaliteId,
                 statutpaiementid: 1,   // en_attente
                 statutformaliteid: 1,  // en_attente
-                pdf: pdfPath,
+                pdf: pdfPath,          // on stocke juste le chemin dans Storage
                 phone,
                 city,
                 zipcode
             }
         ])
 
-        if (error) throw error
+        if (dbError) throw dbError
 
     } catch (err) {
         console.error('ERREUR CREATE FORMALITY :', err)
