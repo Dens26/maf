@@ -44,40 +44,7 @@ const isCurrentPage = (link: string) => {
                                     >
                                         {item.name}
                                     </a>
-                                    {/* {item.children && (
-                                        <button
-                                            type="button"
-                                            class="sr-only"
-                                            aria-expanded="false"
-                                            aria-label={item.name}
-                                        />
-                                    )} */}
                                 </div>
-                                {/* {item.children && (
-                                    <ul
-                                        class:list={[
-                                            'submenu absolute mt-2 bg-nav-submenu-bg border-black border rounded-md min-w-[200px] transition-all duration-200 opacity-0 invisible overflow-hidden z-50',
-                                            index === headerMenu.length - 1 ? 'right-0' : 'left-0',
-                                        ]}
-                                    >
-                                        {item.children.map((child) => (
-                                            <li>
-                                                <a
-                                                    href={child.link}
-                                                    class:list={[
-                                                        'block px-4 text-small py-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nav-text-active',
-                                                        isCurrentPage(child.link)
-                                                            ? 'text-nav-text-current font-semibold'
-                                                            : 'text-nav-text hover:text-nav-text-hover',
-                                                    ]}
-                                                    aria-current={isCurrentPage(child.link) ? 'page' : undefined}
-                                                >
-                                                    {child.name}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )} */}
                             </li>
                         ))
                     }
@@ -121,54 +88,13 @@ const isCurrentPage = (link: string) => {
                                             >
                                                 {item.name}
                                             </a>
-                                            {/* {item.children && (
-                                                <button
-                                                    class:list={[
-                                                        'mobile-submenu-button p-2 -mr-2 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
-                                                        isCurrentPage(item.link)
-                                                            ? 'text-nav-mobile-text-current'
-                                                            : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
-                                                    ]}
-                                                    aria-label={`Toggle ${item.name} submenu`}
-                                                    aria-expanded="false"
-                                                >
-                                                    <ChevronDown
-                                                        size={16}
-                                                        class="transform transition-transform duration-200"
-                                                    />
-                                                </button>
-                                            )} */}
                                         </div>
-                                        {/* {item.children && (
-                                            <ul class="mobile-submenu ml-4 mt-2 space-y-2 hidden" role="menu">
-                                                {item.children.map((child) => (
-                                                    <li role="none">
-                                                        <a
-                                                            href={child.link}
-                                                            class:list={[
-                                                                'block py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-nav-mobile-text-active',
-                                                                isCurrentPage(child.link)
-                                                                    ? 'text-nav-mobile-text-current font-semibold'
-                                                                    : 'text-nav-mobile-text hover:text-nav-mobile-text-hover',
-                                                            ]}
-                                                            role="menuitem"
-                                                            aria-current={
-                                                                isCurrentPage(child.link) ? 'page' : undefined
-                                                            }
-                                                        >
-                                                            {child.name}
-                                                        </a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )} */}
                                     </div>
                                 </li>
                             ))
                         }
                     </ul>
 
-                    {/* Updated mobile CTA button styling */}
                     <div class="mt-8 pb-8">
                         <Button href={ctaButton.link} variant="ghostLight">{ctaButton.name} </Button>
                     </div>

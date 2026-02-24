@@ -1,7 +1,5 @@
 // src/utils/supabase.ts
 import { createClient } from '@supabase/supabase-js'
-import fs from 'fs'
-import path from 'path'
 import { randomUUID } from 'crypto'
 
 // Initialisation du client Supabase (service_role = backend only)
@@ -32,6 +30,7 @@ type CreateFormalityParams = {
 export async function createFormality({ typeFormaliteId, name, siren, email, phone, city, zipcode, pdf }: CreateFormalityParams) {
     try {
         const demandeId = randomUUID()
+        const pdfName = `${demandeId}_${pdf.filename}`
         const pdfPath = `pdfs/${demandeId}_${pdf.filename}`
 
         // Upload PDF dans Supabase Storage
@@ -52,9 +51,9 @@ export async function createFormality({ typeFormaliteId, name, siren, email, pho
                 name,
                 siren,
                 typeformaliteid: typeFormaliteId,
-                statutpaiementid: 1,   // en_attente
-                statutformaliteid: 1,  // en_attente
-                pdf: pdfPath,          // on stocke juste le chemin dans Storage
+                statutpaiementid: 1,
+                statutformaliteid: 1,
+                pdf: pdfName,
                 phone,
                 city,
                 zipcode
@@ -85,7 +84,7 @@ export async function checkDuplicateFormality(email: string, name: string, typeF
             .eq('email', email)
             .eq('name', name)
             .eq('typeformaliteid', typeFormaliteId)
-            .in('statutformaliteid', [1, 2]) // en_attente ou en_traitement
+            .in('statutformaliteid', [1, 2])
             .maybeSingle()
 
         if (error) return { status: 'error_db', error }
@@ -96,6 +95,75 @@ export async function checkDuplicateFormality(email: string, name: string, typeF
         return { status: 'error_db', error: err }
     }
 }
+
+/**
+ * Retourne toute les formalités avec le statut passé en paramètre
+ * @param statutFormaliteId
+ * @returns 
+ */
+export async function getFormalitiesByStatus(statutFormaliteId: number) {
+    const { data, error } = await supabase
+        .from('demandes')
+        .select(`id, demandeid, email, name, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, phone, city, zipcode, datecreation`)
+        .eq('statutformaliteid', statutFormaliteId)
+        .order('datecreation', { ascending: false })
+
+    if (error) {
+        console.error('ERREUR GET FORMALITIES :', error)
+        return []
+    }
+
+    return data
+}
+
+/**
+ * Génère un lien temporaire pour télécharger un PDF depuis Supabase Storage
+ * @param pdfPath
+ * @param expires
+ */
+export async function getPdfSignedUrl(pdfPath: string, expires = 60) {
+    try {
+        const { data, error } = await supabase
+            .storage
+            .from('pdfs')          // bucket
+            .createSignedUrl(pdfPath, expires)
+
+        if (error) throw error
+        if (!data.signedUrl) throw new Error('Impossible de générer le lien signé')
+
+        return data.signedUrl
+    } catch (err) {
+        console.error('ERREUR GET PDF SIGNED URL :', err)
+        throw err
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Récupération d'une formalité par demandeId

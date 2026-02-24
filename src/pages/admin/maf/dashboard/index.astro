@@ -1,0 +1,381 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { supabase, getFormalitiesByStatus } from '@utils/supabase';
+import Button from '@components/ui/Button.astro';
+
+const seoTitle = 'Dashboard Admin';
+const seoDescription = 'Gérez toutes les demandes reçues via Mon Assistant Formalités.';
+
+// 🔐 Auth
+const token = Astro.cookies.get('sb-access-token')?.value;
+if (!token) return Astro.redirect('/admin/maf/login');
+const {
+    data: { user },
+} = await supabase.auth.getUser(token);
+if (!user) return Astro.redirect('/admin/maf/login');
+
+// Récupération du statut de la formalité via ID
+const formalityStatutParam = Number(Astro.url.searchParams.get('statut')) || 1;
+const allowedStatuts = [1, 2, 3, 4, 5];
+const formalityStatutId = allowedStatuts.includes(formalityStatutParam) ? formalityStatutParam : 1;
+
+// Labels
+const FORMALITY_TYPE_LABELS: Record<number, string> = {
+    1: 'Création',
+    2: 'Déménagement',
+    3: 'Activités',
+    4: 'Correction',
+    5: 'Cessation',
+};
+
+type PaymentStatusConfig = {
+    label: string;
+    color: string;
+};
+
+const FORMALITY_PAYMENT: Record<number, PaymentStatusConfig> = {
+    1: { label: 'Non envoyé', color: 'text-orange-500' },
+    2: { label: 'Envoyé ...', color: 'text-blue-500' },
+    3: { label: 'Accepté', color: 'text-green-500' },
+    4: { label: 'Echoué', color: 'text-red-500' },
+    5: { label: 'Expiré', color: 'text-purple-500' },
+    6: { label: 'Annulé', color: 'text-gray-500' }
+};
+
+// 📡 Récupération
+const formalities = await getFormalitiesByStatus(formalityStatutId);
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+    <div class="w-full min-h-screen pt-28 px-6">
+        
+        <!-- Header de page -->
+        <div class="mb-10">
+            <h1 class="text-3xl font-bold">Dashboard Admin</h1>
+        </div>
+
+        <!-- Barre actions + filtres -->
+        <div class="flex justify-between items-center flex-wrap gap-4 mb-8">           
+
+            <!-- DESKTOP (>= md) -->
+            <div class="hidden md:flex gap-2 flex-wrap">
+                <Button href="?statut=1" variant={formalityStatutId === 1 ? 'primary' : 'neutral'} size="md">En attente</Button>
+                <Button href="?statut=2" variant={formalityStatutId === 2 ? 'primary' : 'neutral'} size="md">En traitement</Button>
+                <Button href="?statut=3" variant={formalityStatutId === 3 ? 'primary' : 'neutral'} size="md">Terminé</Button>
+                <Button href="?statut=4" variant={formalityStatutId === 4 ? 'primary' : 'neutral'} size="md">Rejetée</Button>
+                <Button href="?statut=5" variant={formalityStatutId === 5 ? 'primary' : 'neutral'} size="md">Annulée</Button>
+            </div>
+
+            <!-- MOBILE (< md) -->
+            <div class="relative md:hidden">
+                <Button id="statusDropdownBtn" variant='primary' class='cursor-pointer'>Filtrer par : </Button>
+
+                <div id="statusDropdownMenu" class="hidden absolute mt-2 w-full bg-white border rounded-lg shadow-md z-20">
+                    <a href="?statut=1" class="block px-4 py-2 hover:bg-gray-100">En attente</a>
+                    <a href="?statut=2" class="block px-4 py-2 hover:bg-gray-100">En traitement</a>
+                    <a href="?statut=3" class="block px-4 py-2 hover:bg-gray-100">Terminé</a>
+                    <a href="?statut=4" class="block px-4 py-2 hover:bg-gray-100">Rejetée</a>
+                    <a href="?statut=5" class="block px-4 py-2 hover:bg-gray-100">Annulée</a>
+                </div>
+            </div>
+
+            <div>
+                <Button id="logout-btn" variant="alert" size="md" class='cursor-pointer'>Déconnexion</Button>
+            </div>
+        </div>
+
+        <!-- Tableau DESKTOP (>= md) -->
+        <div class="hidden md:block w-full overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
+            <table id="formalities-table" class="w-full divide-y divide-gray-200 text-sm">    
+
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="datecreation">Date <span class="sort-indicator">▲▼</span></th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="name">Nom <span class="sort-indicator">▲▼</span></th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="typeformaliteid">Formalité <span class="sort-indicator">▲▼</span></th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">Paiement <span class="sort-indicator">▲▼</span> </th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">PDF</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-100">
+                    {formalities.length === 0 ? (
+                        <tr>
+                            <td colspan="6" class="px-6 py-10 text-center text-gray-500">Aucune demande dans cette catégorie.</td>
+                        </tr>
+                    ) : (
+                        formalities.map(d => (
+                            <tr data-id={d.demandeid} data-payment-status={d.statutpaiementid} class="hover:bg-gray-50 transition">
+                                
+                                <td class="px-6 py-2 whitespace-nowrap text-gray-500" data-sort={new Date(d.datecreation).getTime()}>{new Date(d.datecreation).toLocaleDateString('fr-FR')}</td>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name}</td>
+                                <td class="px-6 py-2 whitespace-nowrap text-gray-700" data-sort={d.typeformaliteid}>{FORMALITY_TYPE_LABELS[d.typeformaliteid] ?? "Inconnu"}</td>
+                                <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`} data-sort={d.statutpaiementid}>{FORMALITY_PAYMENT[d.statutpaiementid]?.label ?? "Inconnu"}</td>
+                                <td class="px-6 py-2 whitespace-nowrap">
+                                    <button class="text-blue-600 hover:underline cursor-pointer" data-pdf={d.pdf}>pdf-{d.id}</button>
+                                </td>
+                                <td class="px-6 py-2 whitespace-nowrap relative">
+                                    <Button variant="primary" size="sm" class="action-btn cursor-pointer">...</Button>
+                                </td>
+                            </tr>
+                        ))
+                    )}
+                </tbody>
+
+            </table>
+        </div>
+
+        <!-- TABLEAU MOBILE (< md) -->
+        <div class="md:hidden space-y-4 mb-12">
+            {formalities.length === 0 ? (
+                <div class="p-6 bg-white rounded-xl border text-center text-gray-500">
+                    Aucune demande dans cette catégorie.
+                </div>
+            ) : (
+                formalities.map(d => (
+                    <div class="bg-white rounded-xl border shadow-sm p-4 space-y-3">
+                        
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-small text-gray-500">{new Date(d.datecreation).toLocaleDateString('fr-FR')}</p>
+                                <p class="font-semibold text-gray-900">{d.name}</p>
+                            </div>
+                            <button class="text-blue-600 text-sm cursor-pointer" data-pdf={d.pdf}>PDF</button>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Formalité</span>
+                            <span class="font-medium text-gray-800">{FORMALITY_TYPE_LABELS[d.typeformaliteid] ?? "Inconnu"}</span>
+                        </div>
+
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-500">Paiement</span>
+                            <span class={`font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`}>{FORMALITY_PAYMENT[d.statutpaiementid]?.label ?? "Inconnu"}</span>
+                        </div>
+                        
+                    </div>
+                ))
+            )}
+        </div>
+    </div>
+</Layout>
+
+<script type="module">
+    
+    /*** MENU FLOTANT ***/
+    const body = document.body;
+    let currentMenu = null;
+    let currentRow = null;
+
+    const PAYMENT_ACTIONS = {
+        1: ['envoyer'],                // non_genere
+        2: ['annuler', 'relancer'],    // envoyee
+        3: ['rembourser'],             // accepte
+        4: ['relancer', 'annuler'],    // echouee
+        5: ['relancer', 'annuler'],    // expiree
+        6: ['envoyer']                 // annulee
+    };
+
+    const ACTION_LABELS = {
+        envoyer: 'Envoyer le paiement',
+        relancer: 'Relancer le paiement',
+        annuler: 'Annuler le paiement',
+        rembourser: 'Rembourser'
+    };
+
+    // Création du menu flotant
+    function createActionMenu() {
+        const menu = document.createElement('div');
+        menu.className = 'action-menu hidden absolute bg-white border rounded-lg shadow-md z-50';
+        menu.style.minWidth = '170px';
+
+        body.appendChild(menu);
+        return menu;
+    }
+
+    currentMenu = createActionMenu();
+
+    // Click du bouton "..."
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+
+            const tr = btn.closest('tr');
+            currentRow = tr;
+
+            const status = Number(tr.dataset.paymentStatus);
+            const allowedActions = PAYMENT_ACTIONS[status] || [];
+
+            // 🔥 Vide le menu avant de régénérer
+            currentMenu.innerHTML = '';
+
+            // Génère uniquement les actions autorisées
+            allowedActions.forEach(actionKey => {
+                const button = document.createElement('button');
+                button.className = 'w-full text-small text-left hover:bg-gray-100 action-option';
+                button.dataset.action = actionKey;
+                button.textContent = ACTION_LABELS[actionKey];
+                currentMenu.appendChild(button);
+            });
+
+            // Si aucune action -> ne pas afficher
+            if (allowedActions.length === 0) {
+                return;
+            }
+
+            // Positionnement
+            const rect = btn.getBoundingClientRect();
+            currentMenu.style.top = `${rect.bottom + window.scrollY}px`;
+            currentMenu.style.left = `${rect.left + window.scrollX}px`;
+
+            currentMenu.classList.remove('hidden');
+        });
+    });
+
+    // Click de l'action
+    currentMenu.addEventListener('click', e => {
+        if (!currentRow) return;
+        const opt = e.target.closest('.action-option');
+        if (!opt) return;
+
+        const action = opt.dataset.action;
+        const id = currentRow?.dataset.id;
+            
+        // Désactive le bouton cliqué pour éviter double action
+        opt.disabled = true;
+        opt.classList.add('opacity-50', 'pointer-events-none');
+
+        // 👉 ici tu mets ton fetch ou ta logique métier
+        alert(`Action "${action}" pour la ligne ${id}`);
+
+        currentMenu.classList.add('hidden');
+    });
+
+    // Click extérieur / fermé
+    document.addEventListener('click', () => {
+        if (currentMenu) currentMenu.classList.add('hidden');
+    });
+
+
+    /*** Téléchargement du pdf ***/
+    document.querySelectorAll('button[data-pdf]').forEach((btn) =>
+        btn.addEventListener('click', async () => {
+            const fileName = btn.dataset.pdf
+
+            if (!fileName) return
+
+            try {
+                const res = await fetch(`/api/get-pdf?file=${encodeURIComponent(fileName)}`)
+
+                if (!res.ok)
+                    throw new Error('Impossible de récupérer le PDF')
+
+                const { signedUrl } = await res.json()
+                window.open(signedUrl, '_blank')
+            } catch (err) {
+                console.error(err)
+                alert('Impossible de télécharger le PDF pour le moment.')
+            }
+        })
+    );
+
+    /*** Tri avec indicateur visuel ***/
+    const table = document.getElementById('formalities-table');
+    let currentSortColumn = null;
+    let sortAsc = true;
+
+    table.querySelectorAll('th.sortable').forEach((th) => {
+        th.addEventListener('click', () => {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const columnIndex = th.cellIndex;
+
+            // Détecter changement de colonne pour reset le sens
+            if (currentSortColumn !== th) {
+                sortAsc = true;
+                currentSortColumn = th;
+            }
+
+            // Tri
+            rows.sort((a, b) => {
+                const aValue = a.querySelector(`td:nth-child(${columnIndex + 1})`).dataset.sort;
+                const bValue = b.querySelector(`td:nth-child(${columnIndex + 1})`).dataset.sort;
+                if (!isNaN(aValue) && !isNaN(bValue))
+                    return sortAsc ? Number(aValue) - Number(bValue) : Number(bValue) - Number(aValue);
+                return sortAsc ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            });
+
+            rows.forEach((r) => tbody.appendChild(r));
+
+            // Mettre à jour l'indicateur
+            table.querySelectorAll('th.sortable .sort-indicator').forEach((si) => (si.textContent = '▲▼'));
+            th.querySelector('.sort-indicator').textContent = sortAsc ? '▲' : '▼';
+
+            sortAsc = !sortAsc;
+        });
+    });
+    
+
+    /*** Bouton de déconnexion ***/
+    const btn = document.getElementById('logout-btn');
+
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        // ✅ désactive le bouton pour éviter plusieurs clics
+        btn.disabled = true;
+        btn.textContent = 'Déconnexion…';
+
+        try {
+            const res = await fetch('/api/admin/logout');
+            const data = await res.json();
+
+            if (data.success)
+            window.location.href = '/admin/maf/login';
+            else {
+                btn.disabled = false;
+                btn.textContent = 'Déconnexion';
+            }
+        } catch (err) {
+            console.error('Erreur logout :', err);
+            btn.disabled = false;
+            btn.textContent = 'Déconnexion';
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("statusDropdownBtn");
+        const menu = document.getElementById("statusDropdownMenu");
+
+        if (!btn || !menu) return;
+
+        // Toggle menu
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
+
+        // Fermer si clic extérieur
+        document.addEventListener("click", (e) => {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add("hidden");
+            }
+        });
+
+        // 👉 ICI on met ton code
+        const current = new URLSearchParams(window.location.search).get("statut");
+
+        const labels = {
+            1: "En attente",
+            2: "En traitement",
+            3: "Terminé",
+            4: "Rejetée",
+            5: "Annulée"
+        };
+
+        if (current && labels[current]) {
+            btn.textContent = "Filtré par : " + labels[current];
+        }
+    });
+    
+</script>

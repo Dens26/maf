@@ -112,9 +112,8 @@ const formBackground = 'light';
 </div>
 
 <form id="create-form" action="/forms/create/business">
-
   <!-- Contact -->
-  <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+   <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
     <div class="text-md font-semibold">Contact</div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
       <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase" autocomplete="email" />
@@ -128,7 +127,7 @@ const formBackground = 'light';
 
     <!-- Genre / Nom / Prénom -->
     <div class="grid grid-cols-5 gap-2 sm:gap-4">
-      <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" />
+      <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" placeholder='' />
       <div class="col-span-4 flex gap-2 sm:gap-4">
         <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase" autocomplete="family-name" />
         <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" autocomplete="given-name" />
@@ -154,17 +153,17 @@ const formBackground = 'light';
     <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
     <div class="grid grid-cols-12 gap-2 sm:gap-4">
       <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
-      <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} /></div>
+      <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=''/></div>
       <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} /></div>
     </div>
     <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address"/>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
-      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
-      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
-    </div>
-    <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2"/>
       <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} autocomplete="country" />
+    </div>
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
+      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
     </div>
   </div>
 
@@ -189,13 +188,13 @@ const formBackground = 'light';
       <Select label="Rôle du conjoint dans l'entreprise" id="partnerfonction" name="partnerfonction" options={partnerFonctionOptions} required background={formBackground} />
     </div>
     <div id="partnerinfo-wrapper">
-      <div class="grid grid-cols-5 gap-2 sm:gap-4 mb-4">
-        <Select label="Genre" id="partnergender" name="partnergender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" />
-        <div class="col-span-4 flex gap-2 sm:gap-4">
-          <Input label="Nom de naissance" id="partnerbirthname" name="partnerbirthname" required background={formBackground} class="uppercase flex-1" autocomplete="family-name" />
-          <Input label="Prénom" id="partnerfirstname" name="partnerfirstname" required background={formBackground} class="capitalize flex-1" autocomplete="given-name" />
-        </div>
+      <div class="grid grid-cols-5 gap-2 sm:gap-4">
+      <Select label="Genre" id="partnergender" name="partnergender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" placeholder=''/>
+      <div class="col-span-4 flex gap-2 sm:gap-4">
+        <Input label="Nom naissance" id="partnerbirthname" name="partnerbirthname" required background={formBackground} class="uppercase" autocomplete="family-name" />
+        <Input label="Prénom" id="partnerfirstname" name="partnerfirstname" required background={formBackground} class="capitalize" autocomplete="given-name" />
       </div>
+    </div>
 
       <div class="flex flex-wrap gap-2 sm:gap-4">
         <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="partnername" name="partnername" background={formBackground} class="uppercase" autocomplete="family-name" /></div>
@@ -488,10 +487,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===================== FILTER INPUTS ===================== */
 
   document.addEventListener('input', e => {
-    if (country.value === "FR" && e.target.name === "zipcode")
+    if (country.value === "FR"  || country.value === "" && e.target.name === "zipcode")
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
 
-    if (partnerCountry.value === "FR" && e.target.name === "partnerzipcode")
+    if (partnerCountry.value === "FR" || partnerCountry.value === "" && e.target.name === "partnerzipcode")
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
 
     if (['tracknumber', 'partnertracknumber', 'phone'].includes(e.target.name))

@@ -1,0 +1,73 @@
+---
+import Button from '@components/ui/Button.astro';
+import Layout from '@layouts/Layout.astro';
+import { supabase } from '@utils/supabase';
+
+// Si l'utilisateur est déjà connecté, rediriger côté serveur
+const token = Astro.cookies.get('sb-access-token')?.value;
+if (token) {
+  const { data: { user } } = await supabase.auth.getUser(token);
+  if (user) return Astro.redirect('/admin/maf/dashboard');
+}
+---
+
+<Layout title="Connexion Admin">
+  <div class="min-h-[80vh] flex items-center justify-center">
+    <form id="login-form" class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-6 text-center">Connexion Admin</h1>
+
+      <input type="email" name="email" placeholder="Email" required class="w-full mb-4 px-4 py-2 border rounded-lg text-small"/>
+      <input type="password" name="password" placeholder="Mot de passe" required class="w-full mb-6 px-4 py-2 border rounded-lg text-small"/>
+
+      <div data-aos="fade-up" data-aos-delay="300" class="flex justify-center">
+        <Button type="submit" variant="primary" size="lg">Se connecter</Button>
+      </div>
+      <p id="login-error" class="text-red-500 mt-2 hidden"></p>
+    </form>
+  </div>
+</Layout>
+
+<script type="module">
+const form = document.getElementById('login-form');
+const errorMsg = document.getElementById('login-error');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorMsg.classList.add('hidden');
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Connexion…';
+
+  const formData = new FormData(form);
+  const payload = {
+    email: formData.get('email'),
+    password: formData.get('password')
+  };
+
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      window.location.href = data.redirect;
+    } else {
+      errorMsg.textContent = data.message || 'Erreur de connexion';
+      errorMsg.classList.remove('hidden');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Se connecter';
+    }
+  } catch (err) {
+    console.error(err);
+    errorMsg.textContent = 'Erreur de connexion, réessayez.';
+    errorMsg.classList.remove('hidden');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Se connecter';
+  }
+});
+</script>
