@@ -487,10 +487,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===================== FILTER INPUTS ===================== */
 
   document.addEventListener('input', e => {
-    if (country.value === "FR"  || country.value === "" && e.target.name === "zipcode")
+    if (e.target.name === "zipcode" && (country.value === "FR" || country.value === ""))
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
 
-    if (partnerCountry.value === "FR" || partnerCountry.value === "" && e.target.name === "partnerzipcode")
+    if (e.target.name === "partnerzipcode" && (partnerCountry.value === "FR" || partnerCountry.value === ""))
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
 
     if (['tracknumber', 'partnertracknumber', 'phone'].includes(e.target.name))

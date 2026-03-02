@@ -257,19 +257,20 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
             return section;
         };
+        const address = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`;
+
+        const addressParts = [
+            `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`.trim(),
+            `${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`.trim(),
+        ];
 
         /* DISPLAY RECAP */
-
         const displayRecap = () => {
             recapContainer.innerHTML = '';
 
-            const addressParts = [
-                `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`.trim(),
-                `${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`.trim(),
-            ];
-
             // ---------------- ENTREPRENEUR ----------------
             if (Object.keys(entrepreneur).length) {
+
                 // INFORMATIONS PERSONELLES
                 const rows = [
                     createLine('Genre', capitalizeWords(entrepreneur.gender)),
@@ -438,7 +439,6 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 recapContainer.appendChild(createSection('Informations complémentaire', rows));
             }
         };
-        console.log(business)
 
         displayRecap();
 
@@ -478,12 +478,14 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 const payload = {
                     typeFormaliteId: 1,
-                    name: entrepreneur.name,
-                    siren: business.siren,
                     email: entrepreneur.email,
                     phone: entrepreneur.phone,
+                    name: entrepreneur.birthname,
+                    firstname: entrepreneur.firstname,
+                    address: address, 
                     city: entrepreneur.city,
                     zipcode: entrepreneur.zipcode,
+                    siren: business.siren,
                     pdf: pdfBase64,
                 };
 
@@ -499,7 +501,6 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 const data = await response.json();
 
-                console.log(response.status);
                 if (!response.ok) {
                     if (response.status === 500) {
                         window.location.href = '/serveur_indisponible';

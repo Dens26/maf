@@ -1,6 +1,6 @@
 // src/utils/supabase.ts
 import { createClient } from '@supabase/supabase-js'
-import { randomUUID } from 'crypto'
+import { randomBytes } from 'crypto'
 
 // Initialisation du client Supabase (service_role = backend only)
 export const supabase = createClient(
@@ -8,28 +8,64 @@ export const supabase = createClient(
     import.meta.env.SUPABASE_SERVICE_ROLE_KEY as string
 )
 
+type InvoiceUpdateData = {
+    invoiceId: string | null
+    invoiceNumber: string | null
+    invoiceUrl: string | null
+    invoicePdf: string | null
+}
+
 // Types pour la création d'une formalité
 type CreateFormalityParams = {
     typeFormaliteId: number
-    name: string
-    siren?: string
     email: string
-    phone?: string
-    city?: string
-    zipcode?: string
+    phone: string
+    name: string
+    firstname: string
+    address: string
+    zipcode: string
+    city: string
+    siren?: string
+    stripeCustomerId?: string
     pdf: {
         filename: string
         base64: string
     }
+}
+// Labels
+const FORMALITY_TYPE_LABELS: Record<number, string> = {
+    1: 'CR', // Création
+    2: 'MO', // Déménagement
+    3: 'AC', // Activité
+    4: 'CO', // Correction
+    5: 'CE', // Cessation
+};
+
+// Fonction de génération du numéro de formalité
+function generateDemandeId(typeFormaliteId: number) {
+    const brand = 'MAF';
+    const prefix = FORMALITY_TYPE_LABELS[typeFormaliteId] ?? 'XX';
+
+    // Date format YYMMDD
+    const now = new Date();
+    const year = String(now.getFullYear()).slice(-2);
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const datePart = `${year}${month}${day}`;
+
+    // 7 caractères alphanumériques aléatoires
+    const randomPart = parseInt(randomBytes(4).toString('hex'), 16).toString(36).toUpperCase().substring(0, 7);
+
+    return `${brand}${prefix}-${datePart}-${randomPart}`;
 }
 
 /**
  * Création d'une formalité
  * @param param0 
  */
-export async function createFormality({ typeFormaliteId, name, siren, email, phone, city, zipcode, pdf }: CreateFormalityParams) {
+export async function createFormality({ typeFormaliteId, email, phone, name, firstname, address, zipcode, city, siren, stripeCustomerId, pdf }: CreateFormalityParams) {
     try {
-        const demandeId = randomUUID()
+        const demandeId = generateDemandeId(typeFormaliteId)
         const pdfName = `${demandeId}_${pdf.filename}`
         const pdfPath = `pdfs/${demandeId}_${pdf.filename}`
 
@@ -47,16 +83,19 @@ export async function createFormality({ typeFormaliteId, name, siren, email, pho
         const { error: dbError } = await supabase.from('demandes').insert([
             {
                 demandeid: demandeId,
-                email,
-                name,
-                siren,
                 typeformaliteid: typeFormaliteId,
+                email,
+                phone,
+                name,
+                firstname,
+                address,
+                zipcode,
+                city,
+                siren,
                 statutpaiementid: 1,
                 statutformaliteid: 1,
+                stripe_customerid: stripeCustomerId,
                 pdf: pdfName,
-                phone,
-                city,
-                zipcode
             }
         ])
 
@@ -104,7 +143,7 @@ export async function checkDuplicateFormality(email: string, name: string, typeF
 export async function getFormalitiesByStatus(statutFormaliteId: number) {
     const { data, error } = await supabase
         .from('demandes')
-        .select(`id, demandeid, email, name, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, phone, city, zipcode, datecreation`)
+        .select(`id, demandeid, stripe_customerid, email, name, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, phone, city, zipcode, datecreation`)
         .eq('statutformaliteid', statutFormaliteId)
         .order('datecreation', { ascending: false })
 
@@ -114,6 +153,70 @@ export async function getFormalitiesByStatus(statutFormaliteId: number) {
     }
 
     return data
+}
+
+/**
+ * Mise à jour de l'id stripe_customerid
+ * @param demandeId 
+ * @param customerId 
+ * @returns 
+ */
+export async function updateFormalityStripeCustomerId(demandeId: string, stripeCustomerId: string) {
+    const { error } = await supabase
+        .from('demandes')
+        .update({ stripe_customerid: stripeCustomerId })
+        .eq('demandeid', demandeId);
+
+    if (error) {
+        console.error('ERREUR UPDATE STRIPE CUSTOMER ID :', error);
+        throw error;
+    }
+
+    return { success: true };
+}
+
+/**
+ * Met à jour le statut de paiement d'une demande
+ * @param demandeId UUID de la demande
+ * @param statutPaiementId ID du nouveau statut de paiement
+ */
+export async function updatePaymentStatus(demandeId: string, statutPaiementId: number) {
+    try {
+        const { error } = await supabase
+            .from('demandes')
+            .update({ statutpaiementid: statutPaiementId })
+            .eq('demandeid', demandeId)
+
+        if (error) {
+            console.error('ERREUR updatePaymentStatus Supabase:', error)
+            throw error
+        }
+
+        return { success: true }
+    } catch (err) {
+        console.error('ERREUR updatePaymentStatus:', err)
+        throw err
+    }
+}
+
+export async function updateInvoiceData(
+    demandeId: string,
+    data: InvoiceUpdateData
+) {
+    const { error } = await supabase
+        .from('demandes')
+        .update({
+            stripe_invoice_id: data.invoiceId,
+            stripe_invoice_number: data.invoiceNumber,
+            stripe_invoice_url: data.invoiceUrl,
+            stripe_invoice_pdf: data.invoicePdf,
+        })
+        .eq('demandeid', demandeId)
+
+    if (error) {
+        console.error('❌ Erreur updateInvoiceData:', error)
+        throw new Error('Erreur mise à jour données facture')
+    }
 }
 
 /**
@@ -162,15 +265,12 @@ export async function getPdfSignedUrl(pdfPath: string, expires = 60) {
 
 
 
-
-
-
 /**
  * Récupération d'une formalité par demandeId
  * @param demandeId 
  * @returns 
  */
-export async function getFormality(demandeId: string) {
+export async function getFormalityByDemandeId(demandeId: string) {
     const { data, error } = await supabase
         .from('demandes')
         .select(`

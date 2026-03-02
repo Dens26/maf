@@ -69,7 +69,9 @@ Les paiements par d’autres moyens ne sont pas acceptés, sauf accord explicite
 ### 4.3 Politique de remboursement  
 En raison du caractère personnalisé et immédiat des prestations, ainsi que du démarrage rapide des démarches, aucun remboursement ne pourra être accordé après validation de la commande, sauf en cas d’erreur manifeste imputable à Mon Assistant Formalités.
 
-Cette politique vise à garantir la disponibilité et la qualité du service, en évitant les annulations tardives qui perturbent la gestion des dossiers.
+Dans ce cas, un remboursement partiel pourra être effectué, après déduction éventuelle de frais administratifs raisonnables correspondant à 10 % du montant payé, pour couvrir les coûts liés au traitement et à la gestion du dossier.
+
+Cette politique vise à garantir la disponibilité et la qualité du service, tout en limitant les annulations tardives susceptibles de perturber la gestion des formalités.
 
 ---
 

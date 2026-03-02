@@ -14,12 +14,15 @@ export async function POST({ request }: APIContext) {
 
     const {
       typeFormaliteId,
-      name,
-      siren,
       email,
       phone,
-      city,
+      name,
+      firstname,
+      address,
       zipcode,
+      city,
+      siren,
+      stripeCustomerId,
       pdf
     } = body;
 
@@ -55,29 +58,30 @@ export async function POST({ request }: APIContext) {
       return jsonResponse({ error: "error_db" }, 500);
 
     if (result.status === 'duplicate')
-      return jsonResponse(
-        { error: "duplicate", statut: result.statut },
-        400
-      );
+      return jsonResponse({ error: "duplicate", statut: result.statut }, 400);
 
     // Enregistrement Supabase
     try {
-    await createFormality({
-      typeFormaliteId,
-      name,
-      siren,
-      email,
-      phone,
-      city,
-      zipcode,
-      pdf: {
-        filename: "recap.pdf",
-        base64: pdf,
-      }
-    });
-  }catch(err) {
-  return jsonResponse({ error: "Erreur insertion Supabase", detail: err }, 500);
-}
+      await createFormality({
+        typeFormaliteId,
+        email,
+        phone,
+        name,
+        firstname,
+        address,
+        zipcode,
+        city,
+        siren,
+        stripeCustomerId,
+        pdf: {
+          filename: "recap.pdf",
+          base64: pdf,
+        }
+      });
+    } catch (error) {
+      console.error('Erreur create.ts:', error)
+      return jsonResponse({ error: "Erreur insertion Supabase", detail: error }, 500);
+    }
 
     // Envoi du mail notification (désactivé temporairement)
     // await sendCreateNotification({

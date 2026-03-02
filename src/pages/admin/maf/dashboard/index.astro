@@ -39,7 +39,8 @@ const FORMALITY_PAYMENT: Record<number, PaymentStatusConfig> = {
     3: { label: 'Accepté', color: 'text-green-500' },
     4: { label: 'Echoué', color: 'text-red-500' },
     5: { label: 'Expiré', color: 'text-purple-500' },
-    6: { label: 'Annulé', color: 'text-gray-500' }
+    6: { label: 'Annulé', color: 'text-gray-500' },
+    7: { label: 'Rembourssé', color: 'text-gray-500' }
 };
 
 // 📡 Récupération
@@ -207,7 +208,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             const status = Number(tr.dataset.paymentStatus);
             const allowedActions = PAYMENT_ACTIONS[status] || [];
 
-            // 🔥 Vide le menu avant de régénérer
+            // Vide le menu avant de régénérer
             currentMenu.innerHTML = '';
 
             // Génère uniquement les actions autorisées
@@ -234,20 +235,69 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
     });
 
     // Click de l'action
-    currentMenu.addEventListener('click', e => {
+    currentMenu.addEventListener('click', async e => {
         if (!currentRow) return;
+
         const opt = e.target.closest('.action-option');
+
         if (!opt) return;
 
         const action = opt.dataset.action;
-        const id = currentRow?.dataset.id;
-            
-        // Désactive le bouton cliqué pour éviter double action
+        const demandeId = currentRow.dataset.id;
+
         opt.disabled = true;
         opt.classList.add('opacity-50', 'pointer-events-none');
 
-        // 👉 ici tu mets ton fetch ou ta logique métier
-        alert(`Action "${action}" pour la ligne ${id}`);
+        try {
+            // Envoie de la facture + paiement stripe
+            if (action === 'envoyer') {
+
+                // Appel à ton endpoint pour générer le paiement Stripe
+                const result = await fetch('/api/stripe/create-invoice', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ demandeId: demandeId })
+                });
+
+                const data = await result.json();
+                if (!result.ok) throw new Error(data.error || 'Erreur paiement');
+
+                location.reload();
+            }
+
+            // Relance d'un lien de paiement stripe
+            if (action === 'relancer') {
+                const result = await fetch('/api/stripe/remind-invoice', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ demandeId: demandeId })
+                });
+                const data = await result.json();
+                if (!result.ok) throw new Error(data.error || 'Erreur relance');
+
+                alert('Relance envoyée avec succès !');
+            }
+
+            // Annulation d'un lien de paiement stripe
+            if (action === 'annuler') {
+                const result = await fetch(`/api/stripe/cancel-invoice`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ demandeId: demandeId })
+                });
+                const data = await result.json();
+
+                if (!result.ok) throw new Error(data.error || "Erreur lors de l'anulation");
+
+                location.reload();
+            }
+
+        } catch (err) {
+            console.error('catch ', err);
+            alert(`Erreur lors de l'action ${action}`);
+            opt.disabled = false;
+            opt.classList.remove('opacity-50', 'pointer-events-none');
+        }
 
         currentMenu.classList.add('hidden');
     });

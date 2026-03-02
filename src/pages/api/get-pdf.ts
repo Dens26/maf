@@ -1,5 +1,5 @@
 import type { APIContext } from 'astro'
-import { getPdfSignedUrl } from '@utils/supabase'
+import { getPdfSignedUrl } from '@utils/supabase.server'
 
 export async function GET({ request }: APIContext) {
     try {
@@ -8,6 +8,7 @@ export async function GET({ request }: APIContext) {
         if (!file) return new Response(JSON.stringify({ error: 'Fichier manquant' }), { status: 400 })
 
         const signedUrl = await getPdfSignedUrl(`pdfs/${file}`)
+
         return new Response(JSON.stringify({ signedUrl }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
