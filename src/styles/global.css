@@ -602,6 +602,7 @@
         line-height: 1.6rem;
         margin-bottom: 0.5rem;
         margin-top: 1rem;
+        color: var(--color-primary);
     }
 
     .legal-text ul {

@@ -1,0 +1,93 @@
+---
+import Layout from '@layouts/Layout.astro';
+import InnerHero from '@components/sections/InnerHero.astro';
+
+/* Contenu du Hero */
+const heroContent = {
+    title: 'À propos de Mon Assistant Formalités',
+    description: 'Un accompagnement administratif pensé pour vous, dédié aux entrepreneurs individuels',
+    overlayOpacity: 0.8,
+};
+
+const founder = {
+    name: 'Denis Bekaert',
+    headshot: '/images/denis.jpg',
+    jobTitle: 'Entrepreneur individuel',
+    service: 'Accompagnement administratif pour le Guichet Unique',
+    linkedin: 'https://www.linkedin.com',
+    linkedinUsername: 'Mon Assistant Formalités',
+    email: 'contact@mon-assistant-formalites.fr',
+};
+---
+
+<Layout title="À propos - Mon Assistant Formalités">
+    <InnerHero content={heroContent} />
+
+    <article class="site-container--small px-4 mx-auto legal-text prose pb-base">
+        <!-- Présentation du fondateur -->
+        <div class="flex items-center space-x-6 mb-12">
+            <img src={founder.headshot} alt={founder.name} class="w-24 h-24 rounded-full object-cover" />
+            <div>
+                <h1 class="my-4">{founder.name}</h1>
+                <p class="text-sm text-body-base/80">{founder.jobTitle}</p>
+                <p class="text-sm text-body-base/80">{founder.service}</p>
+                <p class="mt-1 text-sm">
+                    <a href={founder.linkedin} target="_blank" class="text-accent hover:underline">LinkedIn</a> - <a href={`mailto:${founder.email}`} class="text-accent hover:underline">E-mail</a>
+                </p>
+            </div>
+        </div>
+
+
+        <h2>Un service dédié aux entrepreneurs individuels</h2>
+        <p><strong>Mon Assistant Formalités</strong> est un service d’accompagnement administratif créé pour l’<strong>entreprise individuelle Denis Bekaert</strong>.</p>
+        <p>Il est spécialement conçu pour les <strong>entrepreneurs individuels</strong> souhaitant simplifier leurs démarches: création, modification ou cessation d’activité, notamment via le <strong>Guichet Unique</strong>.</p>
+        <p>Ce service s’adresse aux indépendants qui veulent sécuriser leurs formalités, gagner du temps et avancersereinement, sans se perdre dans des procédures complexes.</p>
+
+
+        <h2>Mon expertise et parcours</h2>
+        <p>Fort d’une <strong>expérience concrète dans les formalités d’entreprise</strong>, j’ai acquis une connaissance approfondie des besoins des entrepreneurs et des démarches administratives.</p>
+        <p>Mon expérience au sein de l’<strong>INPI</strong> m’a permis d’accompagner quotidiennement les utilisateurs du Guichet Unique, anticiper les erreurs fréquentes et proposer des solutions adaptées à chaque situation.</p>
+        <p>Titulaire d’un <strong>baccalauréat professionnel en comptabilité</strong> et d’expériences en <strong>développement web</strong>, je dirige mon entreprise individuelle afin de fournir un service fiable, clair et structuré auxindépendants.</p>
+
+
+        <h2>Méthodologie et fonctionnement</h2>
+        <ul>
+            <li>Analyse de la situation de l’entrepreneur et de la formalité à réaliser</li>
+            <li>Collecte et vérification des informations nécessaires</li>
+            <li>Accompagnement personnalisé dans la réalisation des démarches</li>
+            <li>Restitution des informations de manière claire et transparente</li>
+        </ul>
+        <p>Chaque intervention vise à <strong>sécuriser les démarches</strong> tout en laissant l’entrepreneur pleinement acteur de ses formalités.</p>
+
+
+        <h2>Principes et valeurs</h2>
+        <ul>
+            <li><strong>Rigueur</strong> : traitement précis des informations et démarches</li>
+            <li><strong>Pédagogie</strong> : explications claires à chaque étape</li>
+            <li><strong>Disponibilité</strong> : accompagnement constant et accessible</li>
+            <li><strong>Transparence</strong> : communication ouverte sur les démarches et le périmètre d’intervention</li>
+        </ul>
+
+
+        <h2>Domaines d’intervention</h2>
+        <ul>
+            <li>Création d’entreprise individuelle</li>
+            <li>Modifications administratives (adresse, activité, données RNE)</li>
+            <li>Cessation d’activité</li>
+            <li>Assistance à l’utilisation du Guichet Unique</li>
+        </ul>
+
+
+        <h2>Pourquoi choisir Mon Assistant Formalités</h2>
+        <ul>
+            <li>Gagner du temps sur vos démarches administratives</li>
+            <li>Profiter d’un accompagnement humain, clair et accessible</li>
+            <li>Bénéficier d’une solution intermédiaire entre le « tout faire seul » et le recours à des structures juridiques classiques</li>
+        </ul>
+        <p>L’objectif est de <strong>décharger les indépendants des contraintes administratives</strong> pour qu’ils puissent se concentrer sur le développement de leur activité principale.</p>
+
+        <h3>Information importante</h3>
+        <p>Mon Assistant Formalités n’est ni un cabinet d’avocats, ni un cabinet d’expertise comptable.</p>
+        <p>Le service fournit un accompagnement administratif et informatif conforme à la réglementation en vigueur. Pour toute question juridique ou fiscale spécifique, il est recommandé de consulter un professionnel habilité.</p>
+    </article>
+</Layout>
