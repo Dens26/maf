@@ -85,15 +85,15 @@ export async function POST({ request }: APIContext) {
     }
 
     // Envoi du mail notification (désactivé temporairement)
-    // await sendCreateNotification({
-    //   name,
-    //   email,
-    //   phone,
-    //   pdf: {
-    //     filename: "recap.pdf",
-    //     base64: pdf,
-    //   }
-    // });
+    await sendCreateNotification({
+      name,
+      email,
+      phone,
+      pdf: {
+        filename: "recap.pdf",
+        base64: pdf,
+      }
+    });
 
     return jsonResponse({ success: true, token }, 200);
 
