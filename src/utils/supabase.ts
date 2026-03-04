@@ -1,6 +1,5 @@
 // src/utils/supabase.ts
 import { createClient } from '@supabase/supabase-js'
-import { randomBytes } from 'crypto'
 
 // Initialisation du client Supabase (service_role = backend only)
 export const supabase = createClient(
@@ -13,98 +12,6 @@ type InvoiceUpdateData = {
     invoiceNumber: string | null
     invoiceUrl: string | null
     invoicePdf: string | null
-}
-
-// Types pour la création d'une formalité
-type CreateFormalityParams = {
-    typeFormaliteId: number
-    email: string
-    phone: string
-    name: string
-    firstname: string
-    address: string
-    zipcode: string
-    city: string
-    siren?: string
-    stripeCustomerId?: string
-    pdf: {
-        filename: string
-        base64: string
-    }
-}
-// Labels
-const FORMALITY_TYPE_LABELS: Record<number, string> = {
-    1: 'CR', // Création
-    2: 'MO', // Déménagement
-    3: 'AC', // Activité
-    4: 'CO', // Correction
-    5: 'CE', // Cessation
-};
-
-// Fonction de génération du numéro de formalité
-function generateDemandeId(typeFormaliteId: number) {
-    const brand = 'MAF';
-    const prefix = FORMALITY_TYPE_LABELS[typeFormaliteId] ?? 'XX';
-
-    // Date format YYMMDD
-    const now = new Date();
-    const year = String(now.getFullYear()).slice(-2);
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const datePart = `${year}${month}${day}`;
-
-    // 7 caractères alphanumériques aléatoires
-    const randomPart = parseInt(randomBytes(4).toString('hex'), 16).toString(36).toUpperCase().substring(0, 7);
-
-    return `${brand}${prefix}-${datePart}-${randomPart}`;
-}
-
-/**
- * Création d'une formalité
- * @param param0 
- */
-export async function createFormality({ typeFormaliteId, email, phone, name, firstname, address, zipcode, city, siren, stripeCustomerId, pdf }: CreateFormalityParams) {
-    try {
-        const demandeId = generateDemandeId(typeFormaliteId)
-        const pdfName = `${demandeId}_${pdf.filename}`
-        const pdfPath = `pdfs/${demandeId}_${pdf.filename}`
-
-        // Upload PDF dans Supabase Storage
-        const { error: uploadError } = await supabase.storage
-            .from('pdfs')       // nom du bucket
-            .upload(pdfPath, Buffer.from(pdf.base64, 'base64'), {
-                contentType: 'application/pdf',
-                upsert: false
-            })
-
-        if (uploadError) throw uploadError
-
-        // Création de la demande dans la base
-        const { error: dbError } = await supabase.from('demandes').insert([
-            {
-                demandeid: demandeId,
-                typeformaliteid: typeFormaliteId,
-                email,
-                phone,
-                name,
-                firstname,
-                address,
-                zipcode,
-                city,
-                siren,
-                statutpaiementid: 1,
-                statutformaliteid: 1,
-                stripe_customerid: stripeCustomerId,
-                pdf: pdfName,
-            }
-        ])
-
-        if (dbError) throw dbError
-
-    } catch (err) {
-        console.error('ERREUR CREATE FORMALITY :', err)
-        throw err
-    }
 }
 
 /**
@@ -143,7 +50,7 @@ export async function checkDuplicateFormality(email: string, name: string, typeF
 export async function getFormalitiesByStatus(statutFormaliteId: number) {
     const { data, error } = await supabase
         .from('demandes')
-        .select(`id, demandeid, stripe_customerid, email, name, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, phone, city, zipcode, datecreation`)
+        .select(`id, demandeid, stripe_customerid, email, name, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, phone, city, zipcode, datecreation, numero_formalite`)
         .eq('statutformaliteid', statutFormaliteId)
         .order('datecreation', { ascending: false })
 

@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import type { APIContext } from 'astro';
 import { saveToken } from '@utils/tokenStore';
 import { sendCreateNotification } from "@utils/mailService";
-import { checkDuplicateFormality, createFormality } from '@utils/supabase';
+import { checkDuplicateFormality } from '@utils/supabase';
+import { createFormality } from '@utils/supabase.server';
 
 const MAX_PDF_SIZE = 5_000_000; // 5MB
 
@@ -13,6 +14,7 @@ export async function POST({ request }: APIContext) {
     const body = await request.json();
 
     const {
+      demandeId,
       typeFormaliteId,
       email,
       phone,
@@ -22,12 +24,11 @@ export async function POST({ request }: APIContext) {
       zipcode,
       city,
       siren,
-      stripeCustomerId,
       pdf
     } = body;
 
     // ✅ Validation minimale
-    if (!typeFormaliteId || !name || !email || !pdf) {
+    if (!demandeId || !typeFormaliteId || !name || !email || !pdf) {
       return jsonResponse({ error: "Champs obligatoires manquants" }, 400);
     }
 
@@ -63,6 +64,7 @@ export async function POST({ request }: APIContext) {
     // Enregistrement Supabase
     try {
       await createFormality({
+        demandeId,
         typeFormaliteId,
         email,
         phone,
@@ -72,7 +74,6 @@ export async function POST({ request }: APIContext) {
         zipcode,
         city,
         siren,
-        stripeCustomerId,
         pdf: {
           filename: "recap.pdf",
           base64: pdf,

@@ -19,18 +19,18 @@ const formalityStatutParam = Number(Astro.url.searchParams.get('statut')) || 1;
 const allowedStatuts = [1, 2, 3, 4, 5];
 const formalityStatutId = allowedStatuts.includes(formalityStatutParam) ? formalityStatutParam : 1;
 
-// Labels
-const FORMALITY_TYPE_LABELS: Record<number, string> = {
-    1: 'Création',
-    2: 'Déménagement',
-    3: 'Activités',
-    4: 'Correction',
-    5: 'Cessation',
-};
-
 type PaymentStatusConfig = {
     label: string;
     color: string;
+};
+
+// Labels
+const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
+    1: { label: 'Création', color: 'text-blue-500' },
+    2: { label: 'Déménagement', color: 'text-green-500' },
+    3: { label: 'Activités', color: 'text-orange-500' },
+    4: { label: 'Correction', color: 'text-purple-500' },
+    5: { label: 'Cessation', color: 'text-red-500' },
 };
 
 const FORMALITY_PAYMENT: Record<number, PaymentStatusConfig> = {
@@ -95,6 +95,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="name">Nom <span class="sort-indicator">▲▼</span></th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="typeformaliteid">Formalité <span class="sort-indicator">▲▼</span></th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">Paiement <span class="sort-indicator">▲▼</span> </th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">N° formalité <span class="sort-indicator">▲▼</span> </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">PDF</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
@@ -107,12 +108,13 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                         </tr>
                     ) : (
                         formalities.map(d => (
-                            <tr data-id={d.demandeid} data-payment-status={d.statutpaiementid} class="hover:bg-gray-50 transition">
+                            <tr data-id={d.demandeid} data-payment-status={d.statutpaiementid} data-formality-status={d.statutformaliteid} class="hover:bg-gray-50 transition">
                                 
                                 <td class="px-6 py-2 whitespace-nowrap text-gray-500" data-sort={new Date(d.datecreation).getTime()}>{new Date(d.datecreation).toLocaleDateString('fr-FR')}</td>
                                 <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name}</td>
-                                <td class="px-6 py-2 whitespace-nowrap text-gray-700" data-sort={d.typeformaliteid}>{FORMALITY_TYPE_LABELS[d.typeformaliteid] ?? "Inconnu"}</td>
+                                <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`} data-sort={d.typeformaliteid}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</td>
                                 <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`} data-sort={d.statutpaiementid}>{FORMALITY_PAYMENT[d.statutpaiementid]?.label ?? "Inconnu"}</td>
+                                <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900" data-sort={d.numero_formalite}>{d.numero_formalite}</td>
                                 <td class="px-6 py-2 whitespace-nowrap">
                                     <button class="text-blue-600 hover:underline cursor-pointer" data-pdf={d.pdf}>pdf-{d.id}</button>
                                 </td>
@@ -142,12 +144,12 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                                 <p class="text-small text-gray-500">{new Date(d.datecreation).toLocaleDateString('fr-FR')}</p>
                                 <p class="font-semibold text-gray-900">{d.name}</p>
                             </div>
-                            <button class="text-blue-600 text-sm cursor-pointer" data-pdf={d.pdf}>PDF</button>
+                            <button class="text-gray-600 text-sm cursor-pointer" data-pdf={d.pdf}>⬇️ PDF</button>
                         </div>
 
                         <div class="flex justify-between text-sm">
                             <span class="text-gray-500">Formalité</span>
-                            <span class="font-medium text-gray-800">{FORMALITY_TYPE_LABELS[d.typeformaliteid] ?? "Inconnu"}</span>
+                            <span class={`font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</span>
                         </div>
 
                         <div class="flex justify-between text-sm">
@@ -170,19 +172,37 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
     let currentRow = null;
 
     const PAYMENT_ACTIONS = {
-        1: ['envoyer'],                // non_genere
-        2: ['annuler', 'relancer'],    // envoyee
-        3: ['rembourser'],             // accepte
-        4: ['relancer', 'annuler'],    // echouee
-        5: ['relancer', 'annuler'],    // expiree
-        6: ['envoyer']                 // annulee
+        1: ['envoyer'],                 // non_genere
+        2: ['relancer', 'annuler'],     // envoyee
+        3: ['rembourser'],              // accepte
+        4: ['relancer', 'annuler'],     // echouee
+        5: ['relancer', 'annuler'],     // expiree
+        6: ['envoyer'],                 // annulee
+        7: []                           // rembourse
     };
 
     const ACTION_LABELS = {
         envoyer: 'Envoyer le paiement',
         relancer: 'Relancer le paiement',
         annuler: 'Annuler le paiement',
-        rembourser: 'Rembourser'
+        rembourser: 'Rembourser',
+
+        demarrer: 'Démarrer la formalité',
+        terminer: 'Formalité Terminée',
+        rejeter: 'Formalité rejetée',
+        annuler: 'Annuler la formalité'
+    };
+
+    const ACTION_STYLES = {
+        envoyer: 'text-blue-600',
+        relancer: 'text-blue-600',
+        annuler: 'text-red-600',
+        rembourser: 'text-red-600',
+
+        demarrer: 'text-green-600',
+        terminer: 'text-green-600',
+        rejeter: 'text-red-600',
+        annuler: 'text-red-600'
     };
 
     // Création du menu flotant
@@ -205,23 +225,63 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             const tr = btn.closest('tr');
             currentRow = tr;
 
-            const status = Number(tr.dataset.paymentStatus);
-            const allowedActions = PAYMENT_ACTIONS[status] || [];
+            const paymentStatus = Number(tr.dataset.paymentStatus);
+            const formalityStatus = Number(tr.dataset.formalityStatus);
+
+            const paymentActions = PAYMENT_ACTIONS[paymentStatus] || [];
+            const formalityActions = [];
 
             // Vide le menu avant de régénérer
             currentMenu.innerHTML = '';
 
-            // Génère uniquement les actions autorisées
-            allowedActions.forEach(actionKey => {
-                const button = document.createElement('button');
-                button.className = 'w-full text-small text-left hover:bg-gray-100 action-option';
-                button.dataset.action = actionKey;
-                button.textContent = ACTION_LABELS[actionKey];
-                currentMenu.appendChild(button);
-            });
+            // Démarrer si paiement accepté ET formalité en attente
+            if (paymentStatus === 3 && formalityStatus === 1) {
+                formalityActions.push('demarrer');
+            }
 
-            // Si aucune action -> ne pas afficher
-            if (allowedActions.length === 0) {
+            // Terminer si formalité en traitement
+            if (formalityStatus === 2) {
+                formalityActions.push('terminer', 'rejeter', 'annuler');
+            }
+
+            currentMenu.innerHTML = '';
+
+            const baseClass = 'w-full text-small text-left hover:bg-gray-100 action-option px-3 py-2';
+
+            // --- ACTIONS PAIEMENT ---
+            if (paymentActions.length > 0 && (formalityStatus != 2 && formalityStatus != 3)) {
+                paymentActions.forEach(actionKey => {
+                    const styleClass = ACTION_STYLES[actionKey] || 'text-gray-700';
+                    const button = document.createElement('button');
+                    button.className = `${baseClass} ${styleClass}`;
+                    button.dataset.action = actionKey;
+                    button.dataset.type = 'payment';
+                    button.textContent = ACTION_LABELS[actionKey];
+                    currentMenu.appendChild(button);
+                });
+            }
+
+            // Séparateur si nécessaire
+            if (formalityStatus === 1 && paymentActions.length > 0 && formalityActions.length > 0) {
+                const separator = document.createElement('div');
+                separator.className = 'border-t my-1';
+                currentMenu.appendChild(separator);
+            }
+
+            // --- ACTIONS FORMALITÉ ---
+            if (formalityActions.length > 0 ) {
+                formalityActions.forEach(actionKey => {
+                    const styleClass = ACTION_STYLES[actionKey] || 'text-gray-700';
+                    const button = document.createElement('button');
+                    button.className = `${baseClass} ${styleClass}`;
+                    button.dataset.action = actionKey;
+                    button.dataset.type = 'formality';
+                    button.textContent = ACTION_LABELS[actionKey];
+                    currentMenu.appendChild(button);
+                });
+            }
+
+            if (paymentActions.length === 0 && formalityActions.length === 0) {
                 return;
             }
 
@@ -233,6 +293,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             currentMenu.classList.remove('hidden');
         });
     });
+
 
     // Click de l'action
     currentMenu.addEventListener('click', async e => {
@@ -290,6 +351,32 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                 if (!result.ok) throw new Error(data.error || "Erreur lors de l'anulation");
 
                 location.reload();
+            }
+
+            // Actions formalité
+            const formaliteActionsList = ['demarrer', 'terminer', 'rejeter', 'annuler'];
+
+            if (formaliteActionsList.includes(action)) {
+                try {
+                    const result = await fetch(`/api/supabase/update-formality-status`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ demandeId: demandeId, action })
+                    });
+                    const data = await result.json();
+
+                    if (!result.ok) throw new Error(data.error || "Erreur lors de la mise à jour du statut de la formalité");
+
+                    /* !!!!!!!! ENVOYER MAIL AU CLIENT !!!!!!!!! */
+
+                    location.reload();
+
+                } catch (err) {
+                    console.error(err);
+                    alert(`Erreur lors de l'action ${action}`);
+                    opt.disabled = false;
+                    opt.classList.remove('opacity-50', 'pointer-events-none');
+                }
             }
 
         } catch (err) {
