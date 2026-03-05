@@ -1,5 +1,5 @@
 ---
-import Stepper from '@components/forms/Stepper.astro';
+import Stepper from '@components/forms/create/Stepper.astro';
 import { getBackgroundColor, getPaddingClass } from '@utils/styleUtils';
 import Button from '@components/ui/Button.astro';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
@@ -103,15 +103,15 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         img.src = "/images/logo.png";
         await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; });
 
-        const logoWidth = 100;
+        const logoWidth = 130;
         const ratio = img.height / img.width;
         const logoHeight = logoWidth * ratio;
 
         doc.addImage(img, "PNG", pageWidth/2 - logoWidth/2, y, logoWidth, logoHeight);
 
-        y += 12;
+        y += 14;
 
-        doc.setFontSize(14);
+        doc.setFontSize(12);
         doc.setTextColor(33, 33, 33);
         doc.text('Récapitulatif de demande de création', pageWidth / 2, y, { align: 'center' });
 
@@ -161,13 +161,34 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     const spans = row.querySelectorAll('span');
                     if (spans.length < 2) return;
 
-                    const label = spans[0].innerText.trim();
-                    const value = spans[1].innerText.trim() || '-';
+                    const label = spans[0].innerText.trim() || '';
+                    const value = spans[1].innerText.trim() || '';
 
                     const labelWidth = 65;
                     const valueWidth = pageWidth - 40 - labelWidth;
+                    const fullWidth = pageWidth - 40;
                     const lineHeight = 4.5;
 
+                    // CAS 1 : label vide → affichage pleine largeur
+                    if (!label) {
+
+                        const splitValue = doc.splitTextToSize(value, fullWidth);
+
+                        const rowHeight = splitValue.length * lineHeight;
+
+                        if (y + rowHeight > pageHeight - 20) {
+                            doc.addPage();
+                            y = 20;
+                        }
+
+                        doc.setFont('helvetica', 'normal');
+                        doc.text(splitValue, 20, y);
+
+                        y += rowHeight + 3;
+                        return;
+                    }
+
+                    // CAS 2 : affichage normal en 2 colonnes
                     const splitLabel = doc.splitTextToSize(label, labelWidth - 5);
                     const splitValue = doc.splitTextToSize(value, valueWidth);
 
@@ -187,22 +208,82 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     y += rowHeight + 2;
                 });
             } else {
-                // Sections comme "Activités secondaires" sans .flex
-                const text = sectionDiv.innerText.replace(sectionTitle.innerText, '').trim();
-                if (text) {
-                    const splitText = doc.splitTextToSize(text, pageWidth - 40);
-                    splitText.forEach((line) => {
-                        if (y > pageHeight - 20) {
+                // Cas spécial : Activités secondaires avec blocs
+                const activityBlocks = sectionDiv.querySelectorAll('.border');
+
+                if (activityBlocks.length > 0) {
+
+                    activityBlocks.forEach((block, index) => {
+
+                        const title = block.querySelector('.font-semibold')?.innerText.trim() || 'Activité';
+                        const desc = block.querySelector('.text-gray-700')?.innerText.trim() || '';
+                        const form = block.querySelector('.bg-gray-100 span')?.innerText.trim() || '';
+
+                        const lineHeight = 4.5;
+
+                        const splitDesc = doc.splitTextToSize(desc, pageWidth - 40);
+                        const splitForm = doc.splitTextToSize(`Forme de l'activité : ${form}`, pageWidth - 40);
+
+                        const blockHeight =
+                            lineHeight + // titre
+                            splitDesc.length * lineHeight +
+                            splitForm.length * lineHeight +
+                            10;
+
+                        if (y + blockHeight > pageHeight - 25) {
                             doc.addPage();
                             y = 20;
                         }
-                        doc.text(line, 20, y);
-                        y += rowHeight + 2;
+
+                        // numéro activité
+                        doc.setFont('helvetica', 'bold');
+                        doc.setFontSize(12);
+                        doc.setTextColor(53, 87, 193);
+                        doc.text(`Activité secondaire ${index + 1}`, 20, y);
+                        y += 6;
+
+                        // description title
+                        doc.setFontSize(10);
+                        doc.setTextColor(33, 33, 33);
+                        doc.setFont('helvetica', 'bold');
+                        doc.text(title, 20, y);
+                        y += 5;
+
+                        // description
+                        doc.setFont('helvetica', 'normal');
+                        doc.text(splitDesc, 20, y);
+                        y += splitDesc.length * lineHeight + 3;
+
+                        // forme
+                        doc.setFont('helvetica', 'italic', 'bold');
+                        doc.text(splitForm, 20, y);
+                        y += splitForm.length * lineHeight + 6;
+
+                        // séparation visuelle
+                        doc.setDrawColor(200);
+                        doc.line(20, y, pageWidth - 20, y);
+                        y += 6;
+
                     });
-                    y += 6;
+
+                } else {
+
+                    // fallback si jamais ce n'est pas une section structurée
+                    const text = sectionDiv.innerText.replace(sectionTitle.innerText, '').trim();
+                    if (text) {
+                        const splitText = doc.splitTextToSize(text, pageWidth - 40);
+                        splitText.forEach((line) => {
+                            if (y > pageHeight - 20) {
+                                doc.addPage();
+                                y = 20;
+                            }
+                            doc.text(line, 20, y);
+                            y += 4.5;
+                        });
+                        y += 6;
+                    }
                 }
             }
-
             y += 6;
         });
 
@@ -233,10 +314,10 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
             doc.setTextColor(120);
-            doc.text(`Certifié conforme par le déclarant le ${today}`, pageWidth / 2, pageHeight - 20, { align: "center" });
 
             // Footer habituel
-            doc.text('Document généré automatiquement par Mon Assistant Formalités', pageWidth / 2, pageHeight - 10, { align: 'center' });
+            doc.text('Document généré automatiquement par Mon Assistant Formalités', pageWidth / 2, pageHeight - 15, { align: 'center' });
+            doc.text(`Certifié conforme par le déclarant le ${today}`, pageWidth / 2, pageHeight - 10, { align: "center" });
             doc.text(`Page ${i} / ${totalPages}`, pageWidth - 20, pageHeight - 10, { align: 'right' });
         }
 
@@ -291,10 +372,10 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             return `${d}/${m}/${y}`;
         };
 
-        const createLine = (label, values) => `
+        const createLine = (label, values, way = 'right') => `
         <div class="flex justify-between border-b border-gray-200 py-1">
             <span class="font-medium">${label}</span>
-            <span class="text-gray-600 text-right">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || '-'}</span>
+            <span class="text-gray-600 text-${way}">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
         </div>
         `;
 
@@ -427,7 +508,8 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 // ACTIVITES DE L'ENTREPRISE
                 rows = [
-                    createLine("Description de l'activité", business.activity),
+                    createLine("Description de l'activité", ''),
+                    createLine("", business.activity, 'left'),
                     createLine("Forme de l'activité", business.formofactivity),
                 ];
 
@@ -486,7 +568,9 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             }
             // OBSERVATION
             if (business.observation != '') {
-                const rows = [createLine('Précision utile à votre demande', business.observation)];
+                const rows = [createLine('Précision utile à votre demande', '')];
+                rows.push(createLine('', business.observation, 'left'));
+
                 recapContainer.appendChild(createSection('Informations complémentaire', rows));
             }
         };

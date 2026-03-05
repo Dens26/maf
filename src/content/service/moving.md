@@ -8,7 +8,7 @@ duration: "48h en moyenne"
 order: 2
 publish: true
 
-link: "/forms/moving"
+link: "/forms/moving/address"
 text: "Modifiez votre adresse"
 
 seo:
@@ -118,8 +118,3 @@ La moindre erreur dans la déclaration d’adresse peut entraîner un rejet du d
 - Vérification des informations,
 - Rédaction et dépôt auprès du Guichet Unique,
 - Suivi personnalisé jusqu’à validation.
-
----
-
-Vous déménagez ou transférez votre activité ?  
-📩 [Contactez-moi](/contact) pour un accompagnement réactif et professionnel.
