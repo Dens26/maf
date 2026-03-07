@@ -1,12 +1,12 @@
-// src/utils/supabase.ts
 import { createClient } from '@supabase/supabase-js'
 
-// Initialisation du client Supabase (service_role = backend only)
+/* SUPABASE CLIENT */
 export const supabase = createClient(
     import.meta.env.PUBLIC_SUPABASE_URL as string,
     import.meta.env.SUPABASE_SERVICE_ROLE_KEY as string
 )
 
+/* TYPES */
 type InvoiceUpdateData = {
     invoiceId: string | null
     invoiceNumber: string | null
@@ -14,15 +14,67 @@ type InvoiceUpdateData = {
     invoicePdf: string | null
 }
 
+/* GETTERS / SELECT */
+
 /**
- * Vérifie si une demande est déjà en attente ou en cours de traitement
- * pour le même email, le même nom et le même type de formalité.
+ * Récupération d'une formalité par demandeId
+ * @param demandeId 
+ * @returns 
+ */
+export async function getFormalityByDemandeId(demandeId: string) {
+    const { data, error } = await supabase
+        .from('demandes')
+        .select(`
+            *,
+            type_formalite: typeformaliteid(nom),
+            statut_paiement: statutpaiementid(nom),
+            statut_formalite: statutformaliteid(nom)
+        `)
+        .eq('demandeid', demandeId)
+        .single()
+
+    if (error) {
+        console.error('ERREUR GET FORMALITY :', error)
+        return null
+    }
+
+    return data
+}
+
+/**
+ * Retourne toutes les formalités avec un statut donné
+ * @param statutFormaliteId 
+ * @returns 
+ */
+export async function getFormalitiesByStatus(statutFormaliteId: number) {
+    const { data, error } = await supabase
+        .from('demandes')
+        .select(`id, demandeid, stripe_customerid, email, phone, name, firstname, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, city, zipcode, datecreation, ref_inpi`)
+        .eq('statutformaliteid', statutFormaliteId)
+        .order('datecreation', { ascending: false })
+
+    if (error) {
+        console.error('ERREUR GET FORMALITIES :', error)
+        return []
+    }
+
+    return data
+}
+
+/* VALIDATIONS  */
+
+/**
+ * Vérifie si une demande est déjà en attente ou en cours
  * @param email 
  * @param name 
  * @param typeFormaliteId 
  * @returns 
  */
-export async function checkDuplicateFormality(email: string, name: string, typeFormaliteId: number) {
+export async function checkDuplicateFormality(
+    email: string,
+    name: string,
+    typeFormaliteId: number
+) {
     try {
         const { data, error } = await supabase
             .from('demandes')
@@ -35,6 +87,7 @@ export async function checkDuplicateFormality(email: string, name: string, typeF
 
         if (error) return { status: 'error_db', error }
         if (data) return { status: 'duplicate', demandeId: data.demandeid, statut: data.statutformaliteid }
+
         return { status: 'empty' }
 
     } catch (err) {
@@ -42,52 +95,41 @@ export async function checkDuplicateFormality(email: string, name: string, typeF
     }
 }
 
-/**
- * Retourne toute les formalités avec le statut passé en paramètre
- * @param statutFormaliteId
- * @returns 
- */
-export async function getFormalitiesByStatus(statutFormaliteId: number) {
-    const { data, error } = await supabase
-        .from('demandes')
-        .select(`id, demandeid, stripe_customerid, email, name, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, phone, city, zipcode, datecreation, numero_formalite`)
-        .eq('statutformaliteid', statutFormaliteId)
-        .order('datecreation', { ascending: false })
-
-    if (error) {
-        console.error('ERREUR GET FORMALITIES :', error)
-        return []
-    }
-
-    return data
-}
+/*  UPDATE  */
 
 /**
- * Mise à jour de l'id stripe_customerid
+ * Mise à jour du stripe_customerid
  * @param demandeId 
- * @param customerId 
+ * @param stripeCustomerId 
  * @returns 
  */
-export async function updateFormalityStripeCustomerId(demandeId: string, stripeCustomerId: string) {
+export async function updateFormalityStripeCustomerId(
+    demandeId: string,
+    stripeCustomerId: string
+) {
     const { error } = await supabase
         .from('demandes')
         .update({ stripe_customerid: stripeCustomerId })
-        .eq('demandeid', demandeId);
+        .eq('demandeid', demandeId)
 
     if (error) {
-        console.error('ERREUR UPDATE STRIPE CUSTOMER ID :', error);
-        throw error;
+        console.error('ERREUR UPDATE STRIPE CUSTOMER ID :', error)
+        throw error
     }
 
-    return { success: true };
+    return { success: true }
 }
 
 /**
- * Met à jour le statut de paiement d'une demande
- * @param demandeId UUID de la demande
- * @param statutPaiementId ID du nouveau statut de paiement
+ * Mise à jour du statut de paiement
+ * @param demandeId 
+ * @param statutPaiementId 
+ * @returns 
  */
-export async function updatePaymentStatus(demandeId: string, statutPaiementId: number) {
+export async function updatePaymentStatus(
+    demandeId: string,
+    statutPaiementId: number
+) {
     try {
         const { error } = await supabase
             .from('demandes')
@@ -100,12 +142,18 @@ export async function updatePaymentStatus(demandeId: string, statutPaiementId: n
         }
 
         return { success: true }
+
     } catch (err) {
         console.error('ERREUR updatePaymentStatus:', err)
         throw err
     }
 }
 
+/**
+ * Mise à jour des données de facture Stripe
+ * @param demandeId 
+ * @param data 
+ */
 export async function updateInvoiceData(
     demandeId: string,
     data: InvoiceUpdateData
@@ -127,78 +175,7 @@ export async function updateInvoiceData(
 }
 
 /**
- * Génère un lien temporaire pour télécharger un PDF depuis Supabase Storage
- * @param pdfPath
- * @param expires
- */
-export async function getPdfSignedUrl(pdfPath: string, expires = 60) {
-    try {
-        const { data, error } = await supabase
-            .storage
-            .from('pdfs')          // bucket
-            .createSignedUrl(pdfPath, expires)
-
-        if (error) throw error
-        if (!data.signedUrl) throw new Error('Impossible de générer le lien signé')
-
-        return data.signedUrl
-    } catch (err) {
-        console.error('ERREUR GET PDF SIGNED URL :', err)
-        throw err
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Récupération d'une formalité par demandeId
- * @param demandeId 
- * @returns 
- */
-export async function getFormalityByDemandeId(demandeId: string) {
-    const { data, error } = await supabase
-        .from('demandes')
-        .select(`
-      *,
-      type_formalite: typeformaliteid(nom),
-      statut_paiement: statutpaiementid(nom),
-      statut_formalite: statutformaliteid(nom)
-    `)
-        .eq('demandeid', demandeId)
-        .single()
-
-    if (error) {
-        console.error('ERREUR GET FORMALITY :', error)
-        return null
-    }
-
-    return data
-}
-
-/**
- * Mise à jour du statut de paiement
+ * Mise à jour du statut de paiement (version simple)
  * @param demandeId 
  * @param statutPaiementId 
  */
@@ -223,4 +200,49 @@ export async function updateStatutFormalite(demandeId: string, statutFormaliteId
         .eq('demandeid', demandeId)
 
     if (error) console.error('ERREUR UPDATE STATUT FORMALITE :', error)
+}
+
+/**
+ * Mise à jour du numéro de formalité ref_inpi
+ * @param demandeId
+ * @param refInpi
+ */
+export async function updateRefInpi(demandeId: string, refInpi: string) {
+    const { error } = await supabase
+        .from('demandes')
+        .update({ ref_inpi: refInpi })
+        .eq('demandeid', demandeId)
+
+    if (error) {
+        console.error('ERREUR UPDATE REF INPI :', error)
+        return { success: false, error }
+    }
+
+    return { success: true }
+}
+
+/* STORAGE  */
+
+/**
+ * Génère un lien temporaire pour télécharger un PDF
+ * @param pdfPath 
+ * @param expires 
+ * @returns 
+ */
+export async function getPdfSignedUrl(pdfPath: string, expires = 60) {
+    try {
+        const { data, error } = await supabase
+            .storage
+            .from('pdfs')
+            .createSignedUrl(pdfPath, expires)
+
+        if (error) throw error
+        if (!data.signedUrl) throw new Error('Impossible de générer le lien signé')
+
+        return data.signedUrl
+
+    } catch (err) {
+        console.error('ERREUR GET PDF SIGNED URL :', err)
+        throw err
+    }
 }

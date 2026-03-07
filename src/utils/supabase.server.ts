@@ -18,7 +18,7 @@ type CreateFormalityParams = {
   zipcode: string
   city: string
   siren?: string
-  numero_formalite?: string
+  ref_inpi?: string
   pdf: {
     filename: string
     base64: string
@@ -78,7 +78,7 @@ export async function createFormality({ demandeId, typeFormaliteId, email, phone
         typeformaliteid: typeFormaliteId,
         email,
         phone,
-        name,
+        name : name.toUpperCase(),
         firstname,
         address,
         zipcode,
@@ -86,7 +86,7 @@ export async function createFormality({ demandeId, typeFormaliteId, email, phone
         siren,
         statutpaiementid: 1,
         statutformaliteid: 1,
-        numero_formalite: 'non définie',
+        ref_inpi: 'non définie',
         pdf: pdfName,
       }
     ])

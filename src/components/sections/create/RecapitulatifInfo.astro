@@ -31,26 +31,20 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                     <div class="mb-4">
                         <label class="flex items-center space-x-2">
-                            <input
-                                type="checkbox"
-                                id="certify"
-                                required
-                                class="w-4 h-4 text-primary border-gray-300 rounded"
-                            />
-                            <span class="text-sm text-gray-700"
-                                >Je certifie que les informations fournies sont exactes et accepte que ma demande soit
-                                transmise pour traitement.</span
-                            >
+
+                            <input type="checkbox" id="certify" required class="w-4 h-4 text-primary border-gray-300 rounded"/>
+                            <span class="text-sm text-gray-700">
+                                Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les 
+                                <a href="/legal/conditions-generales-de-vente" target="_blank" class="text-blue-600 underline">Conditions Générales</a> de Mon Assistant Formalités.  
+                                Je consens à ce que ma demande soit transmise pour traitement.
+                            </span>
+                            
                         </label>
                     </div>
 
                     <div class="flex justify-between my-8">
-                        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase"
-                            >Étape précédente</Button
-                        >
-                        <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality"
-                            >Envoyer</Button
-                        >
+                        <Button href="/forms/create/business" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+                        <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer</Button>
                     </div>
                 </form>
             </div>
@@ -317,7 +311,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
             // Footer habituel
             doc.text('Document généré automatiquement par Mon Assistant Formalités', pageWidth / 2, pageHeight - 15, { align: 'center' });
-            doc.text(`Certifié conforme par le déclarant le ${today}`, pageWidth / 2, pageHeight - 10, { align: "center" });
+            doc.text(`Certifié conforme par le déclarant le ${today} après acceptation des CGV`, pageWidth / 2, pageHeight - 10, { align: "center" });
             doc.text(`Page ${i} / ${totalPages}`, pageWidth - 20, pageHeight - 10, { align: 'right' });
         }
 

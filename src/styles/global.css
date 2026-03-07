@@ -632,33 +632,41 @@
 
     .service-text h3 {
         font-size: 1.25rem;
-        margin-top: 1rem;
+        margin-top: 1.25rem;
         margin-bottom: 1rem;
+        color: var(--color-primary-dark);
     }
 
     .service-text h4 {
         font-size: 0.75rem;
         line-height: 1rem;
         margin-bottom: 0.5rem;
+        font-weight: 400;
+        color: var(--color-primary-dark);
+        font-style: italic;
     }
 
     .service-text h5 {
         font-size: 0.75rem;
         line-height: 1rem;
         margin-bottom: 1rem;
+        font-weight: 400;
+        color: var(--color-primary-dark);
+        font-style: italic;
     }
 
     .service-text ul {
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         line-height: 1rem;
         margin-bottom: 1rem;
         /* line-height: 1.6; */
     }
 
     .service-text li {
-        font-size: 0.875rem;
-        line-height: 1rem;
+        font-size: 0.8rem;
+        line-height: 0.85rem;
         margin-bottom: 1rem;
+        margin-left: 1rem;
         /* line-height: 1.6; */
     }
 

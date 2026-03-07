@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import InnerHero from '@components/sections/InnerHero.astro';
+import Button from '@components/ui/Button.astro';
 
 const seoTitle = 'Méthode d’accompagnement';
 const seoDescription = 'Un accompagnement clair et structuré pour simplifier vos formalités';
@@ -13,64 +14,67 @@ const heroContent = {
 
 <Layout title={seoTitle} description={seoDescription}>
     <InnerHero content={heroContent} />
+
     <div class="site-container mx-auto px-4 py-8">
-        <article class="site-container--small mx-auto px-4 prose relative z-10 pb-base">
-            <div class="mb-12 text-center">
-                <h1>{seoTitle}</h1>
-                <p class="text-gray-600 max-w-xl mx-auto">{seoDescription}</p>
+        <article class="site-container--small mx-auto px-4 prose relative z-10 pb-base service-text">
+
+            <!-- Intro -->
+            <div class="mb-4">
+                <h2>Comment se déroule la procédure ?</h2>
+                <p class="text-gray-600 max-w-xl">
+                    Avec <strong>Mon Assistant Formalités</strong>, soyez accompagné pour démarrer votre formalité en toute sérénité, sans erreur et sans stress.
+                </p>
+                <!-- Bouton après intro -->
+                <div class="mt-4 text-center">
+                    <Button href='/services' variant="primary" size="md" class="uppercase" id="start-intro">Commencer maintenant</Button>
+                </div>
             </div>
 
             <section class="mt-8 space-y-12">
                 <div>
-                    <h3>1. Prise de contact et devis</h3>
-                    <p>
-                        Vous me contactez pour me présenter votre besoin.<br />
-                        Je vous fournis un devis clair et détaillé, précisant les prestations et les tarifs.<br />
-                        Le paiement s’effectue avant le début du traitement.<br />
-                        Toutes les informations pour régler vous seront transmises avec le devis.
-                    </p>
+                    <h3>1. Envoi de votre demande</h3>
+                    <p>Vous complétez simplement le formulaire correspondant à votre formalité directement sur le site. Les informations demandées permettent de préparer correctement votre dossier avant toute démarche administrative.</p>
+                    <ul>
+                        <li>Un PDF récapitulatif de votre demande est automatiquement généré.</li>
+                        <li>Ce document vous est envoyé par mail afin que vous puissiez vérifier les informations transmises.</li>
+                        <li>MAF reçoit également ce document pour effectuer un premier contrôle du dossier.</li>
+                    </ul>
                 </div>
 
                 <div>
-                    <h3>2. Analyse de votre dossier</h3>
-                    <p>
-                        Vous me transmettez tous les documents et informations nécessaires.<br />
-                        Toutes vos données sont traitées de manière strictement confidentielle, conformément à ma politique
-                        de confidentialité.
-                    </p>
+                    <h3>2. Vérification de votre dossier</h3>
+                    <p>Après réception de votre demande, votre dossier est analysé afin de vérifier que les informations nécessaires à la formalité sont bien présentes et cohérentes.</p>
+                    <ul>
+                        <li>Si les éléments sont complets, une facture vous est envoyée par email.</li>
+                        <li>Si certaines informations doivent être précisées, vous pouvez être recontacté.</li>
+                        <li>Aucune démarche administrative n’est engagée avant validation du paiement.</li>
+                    </ul>
                 </div>
 
                 <div>
                     <h3>3. Traitement de la formalité</h3>
-                    <p>
-                        Je prends en charge la formalité avec rigueur et professionnalisme.
-                    </p>
+                    <p>Une fois le paiement confirmé, votre dossier est préparé et transmis auprès des organismes compétents via le Guichet Unique des formalités des entreprises.</p>
+                    <p>MAF s’occupe de la constitution du dossier, de sa transmission et du suivi auprès des organismes concernés (INSEE, Greffe, CMA, MSA, etc.), selon la nature de votre formalité.</p>
                 </div>
 
                 <div>
                     <h3>4. Confirmation et suivi</h3>
-                    <p>
-                        Une fois la formalité déposée, vous recevez une confirmation (copie du dépôt, récépissé ou
-                        justificatif transmis par l’organisme concerné).<br />
-                        Je reste disponible pour toute question ou demande de suivi complémentaire.
-                    </p>
+                    <p>Une fois votre formalité déposée, vous recevez les documents ou justificatifs transmis par l’administration (copie du dépôt, synthèse, récépissé ou attestation selon les cas).</p>
+                    <p>MAF assure également le suivi de votre dossier et reste disponible pour répondre à vos questions jusqu’à la validation ou la clôture de la procédure.</p>
                 </div>
 
                 <div>
                     <h3>5. Délais</h3>
-                    <p>
-                        Je m’engage à traiter votre dossier dans les meilleurs délais, généralement sous 48 heures
-                        ouvrées.<br />
-                    </p>
+                    <p>Les dossiers sont généralement traités sous <strong>48 heures</strong> à partir de la réception complète de vos informations et du paiement.</p>
+                    <p>Ce délai correspond au traitement de votre dossier par MAF. Les délais de traitement des organismes officiels peuvent ensuite varier selon la formalité et l’administration concernée.</p>
                 </div>
             </section>
 
+            <!-- Bouton final -->
             <div class="mt-12 text-center">
-                <p>
-                    N’hésitez pas à <a href="/contact">me contacter</a> si vous avez la moindre question sur cette procédure. Je suis là pour
-                    vous accompagner simplement et efficacement.
-                </p>
+                <Button href='/services' variant="primary" size="md" class="uppercase" id="start-end">Commencer maintenant</Button>
             </div>
+
         </article>
     </div>
 </Layout>

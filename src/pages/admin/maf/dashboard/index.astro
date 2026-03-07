@@ -35,7 +35,7 @@ const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
 
 const FORMALITY_PAYMENT: Record<number, PaymentStatusConfig> = {
     1: { label: 'Non envoyé', color: 'text-orange-500' },
-    2: { label: 'Envoyé ...', color: 'text-blue-500' },
+    2: { label: 'Envoyée', color: 'text-blue-500' },
     3: { label: 'Accepté', color: 'text-green-500' },
     4: { label: 'Echoué', color: 'text-red-500' },
     5: { label: 'Expiré', color: 'text-purple-500' },
@@ -111,10 +111,10 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                             <tr data-id={d.demandeid} data-payment-status={d.statutpaiementid} data-formality-status={d.statutformaliteid} class="hover:bg-gray-50 transition">
                                 
                                 <td class="px-6 py-2 whitespace-nowrap text-gray-500" data-sort={new Date(d.datecreation).getTime()}>{new Date(d.datecreation).toLocaleDateString('fr-FR')}</td>
-                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name}</td>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name} {d.firstname}</td>
                                 <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`} data-sort={d.typeformaliteid}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</td>
                                 <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`} data-sort={d.statutpaiementid}>{FORMALITY_PAYMENT[d.statutpaiementid]?.label ?? "Inconnu"}</td>
-                                <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900" data-sort={d.numero_formalite}>{d.numero_formalite}</td>
+                                <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900" data-sort={d.ref_inpi}>{d.ref_inpi}</td>
                                 <td class="px-6 py-2 whitespace-nowrap">
                                     <button class="text-blue-600 hover:underline cursor-pointer" data-pdf={d.pdf}>pdf-{d.id}</button>
                                 </td>
@@ -142,14 +142,20 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-small text-gray-500">{new Date(d.datecreation).toLocaleDateString('fr-FR')}</p>
-                                <p class="font-semibold text-gray-900">{d.name}</p>
+                                <p class="font-semibold text-gray-800">{d.name} {d.firstname}</p>
                             </div>
                             <button class="text-gray-600 text-sm cursor-pointer" data-pdf={d.pdf}>⬇️ PDF</button>
                         </div>
 
                         <div class="flex justify-between text-sm">
-                            <span class="text-gray-500">Formalité</span>
-                            <span class={`font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</span>
+                            <div>
+                                <span class="text-gray-500">Formalité : </span>
+                                <span class={`font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-500">réf. INPI : </span>
+                                <span class='font-medium text-gray-800'>{d.ref_inpi}</span>
+                            </div>
                         </div>
 
                         <div class="flex justify-between text-sm">
@@ -172,37 +178,41 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
     let currentRow = null;
 
     const PAYMENT_ACTIONS = {
-        1: ['envoyer'],                 // non_genere
-        2: ['relancer', 'annuler'],     // envoyee
-        3: ['rembourser'],              // accepte
-        4: ['relancer', 'annuler'],     // echouee
-        5: ['relancer', 'annuler'],     // expiree
-        6: ['envoyer'],                 // annulee
+        1: ['envoyer_paiement'],                 // non_genere
+        2: ['relancer_paiement', 'annuler_paiement'],     // envoyee
+        3: ['rembourser_paiement'],              // accepte
+        4: ['relancer_paiement', 'annuler_paiement'],     // echouee
+        5: ['relancer_paiement', 'annuler_paiement'],     // expiree
+        6: ['envoyer_paiement'],                 // annulee
         7: []                           // rembourse
     };
 
     const ACTION_LABELS = {
-        envoyer: 'Envoyer le paiement',
-        relancer: 'Relancer le paiement',
-        annuler: 'Annuler le paiement',
-        rembourser: 'Rembourser',
+        envoyer_paiement: 'Envoyer le paiement',
+        relancer_paiement: 'Relancer le paiement',
+        annuler_paiement: 'Annuler le paiement',
+        rembourser_paiement: 'Rembourser',
 
-        demarrer: 'Démarrer la formalité',
-        terminer: 'Formalité Terminée',
-        rejeter: 'Formalité rejetée',
-        annuler: 'Annuler la formalité'
+        demarrer_formalite: 'Démarrer la formalité',
+        terminer_formalite: 'Formalité Terminée',
+        rejeter_formalite: 'Formalité rejetée',
+        annuler_formalite: 'Annuler la formalité',
+
+        reference_inpi: 'Ajouter réf. INPI'
     };
 
     const ACTION_STYLES = {
-        envoyer: 'text-blue-600',
-        relancer: 'text-blue-600',
-        annuler: 'text-red-600',
-        rembourser: 'text-red-600',
+        envoyer_paiement: 'text-blue-600',
+        relancer_paiement: 'text-blue-600',
+        annuler_paiement: 'text-red-600',
+        rembourser_paiement: 'text-red-600',
 
-        demarrer: 'text-green-600',
-        terminer: 'text-green-600',
-        rejeter: 'text-red-600',
-        annuler: 'text-red-600'
+        demarrer_formalite: 'text-green-600',
+        terminer_formalite: 'text-green-600',
+        rejeter_formalite: 'text-red-600',
+        annuler_formalite: 'text-red-600',
+
+        reference_inpi: 'text-blue-600',
     };
 
     // Création du menu flotant
@@ -240,8 +250,13 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             }
 
             // Terminer si formalité en traitement
+            if (formalityStatus === 1 && paymentStatus != 2) {
+                formalityActions.push('annuler_formalite');
+            }
+
+            // Terminer si formalité en traitement
             if (formalityStatus === 2) {
-                formalityActions.push('terminer', 'rejeter', 'annuler');
+                formalityActions.push('terminer_formalite', 'rejeter_formalite', 'annuler_formalite', 'reference_inpi');
             }
 
             currentMenu.innerHTML = '';
@@ -311,7 +326,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
         try {
             // Envoie de la facture + paiement stripe
-            if (action === 'envoyer') {
+            if (action === 'envoyer_paiement') {
 
                 // Appel à ton endpoint pour générer le paiement Stripe
                 const result = await fetch('/api/stripe/create-invoice', {
@@ -327,7 +342,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             }
 
             // Relance d'un lien de paiement stripe
-            if (action === 'relancer') {
+            if (action === 'relancer_paiement') {
                 const result = await fetch('/api/stripe/remind-invoice', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -340,7 +355,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             }
 
             // Annulation d'un lien de paiement stripe
-            if (action === 'annuler') {
+            if (action === 'annuler_paiement') {
                 const result = await fetch(`/api/stripe/cancel-invoice`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -354,7 +369,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             }
 
             // Actions formalité
-            const formaliteActionsList = ['demarrer', 'terminer', 'rejeter', 'annuler'];
+            const formaliteActionsList = ['demarrer_formalite', 'terminer_formalite', 'rejeter_formalite', 'annuler_formalite'];
 
             if (formaliteActionsList.includes(action)) {
                 try {
@@ -377,6 +392,30 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                     opt.disabled = false;
                     opt.classList.remove('opacity-50', 'pointer-events-none');
                 }
+            }
+
+            // Ajouter la référence INPI
+            if (action === 'reference_inpi') {
+
+                const refInpi = prompt("Saisir la référence INPI :");
+
+                // Si l'utilisateur annule ou ne saisit rien
+                if (!refInpi) return;
+
+                const result = await fetch(`/api/supabase/update-ref-inpi`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        demandeId: demandeId,
+                        ref_inpi: refInpi
+                    })
+                });
+
+                const data = await result.json();
+
+                if (!result.ok) throw new Error(data.error || "Erreur lors de la mise à jour");
+
+                location.reload();
             }
 
         } catch (err) {

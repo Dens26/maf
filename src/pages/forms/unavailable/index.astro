@@ -1,0 +1,16 @@
+---
+import Layout from "@layouts/Layout.astro"
+import InnerHero from "@components/sections/InnerHero.astro"
+import Unavailable from "@components/sections/Unavailable.astro"
+
+const heroContent = {
+    title: "Non disponible",
+    description: "Formulaire prochainement disponible"
+}
+
+---
+
+<Layout title="Unavailable" description="Formulaire prochainement disponible">
+    <InnerHero content={heroContent} />
+    <Unavailable background="base" padding="responsive" />
+</Layout>

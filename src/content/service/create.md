@@ -3,7 +3,7 @@ name: "Création d'entreprise"
 description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
 icon: "/images/create-company.jpg"
 category: "Formalités de création"
-priceRange: "à partir de 69€"
+priceRange: "à partir de 59€"
 duration: "48h en moyenne"
 order: 1
 publish: true
@@ -17,87 +17,91 @@ seo:
   icon: "/icons/create-company.jpg"
 ---
 
-# Créer son entreprise individuelle : mode d’emploi
+# Créer son entreprise individuelle
 
 Créer une entreprise individuelle peut rapidement devenir complexe à cause des formalités administratives.  
-Avec **Mon Assistant Formalités**, bénéficiez d’un **accompagnement clair et complet** pour démarrer votre activité en toute sérénité.
+Avec **Mon Assistant Formalités (MAF)**, bénéficiez d’un **accompagnement clair et complet** pour démarrer votre activité en toute sérénité.
+
+
+## Pourquoi une déclaration est nécessaire ?
+
+Pour devenir **auto-entrepreneur** (ou micro-entrepreneur), vous devez obligatoirement effectuer une **déclaration de début d’activité** auprès du Guichet Unique.  
+- Cette formalité permet d’obtenir votre **numéro SIRET**, indispensable pour exercer légalement votre activité (artisanale, commerciale ou libérale).
 
 ---
 
 ## Ce que comprend la prestation
 
-- Constitution du **dossier complet** pour le Guichet Unique
-- Transmission et suivi du dépôt auprès des organismes (INSEE, GREFFE, CMA, .)
-- Réponse à vos questions tout au long de la procédure
+- Vérification des informations envoyées via le formulaire de création interne
+- Constitution du **dossier complet** pour le Guichet Unique  
+- Transmission et suivi du dépôt auprès des organismes valideurs (INSEE, Greffe, CMA, MSA, ...)  
+- Réponse à vos questions tout au long de la procédure  
 
 ---
 
-## Pourquoi une déclaration est nécessaire ?
+## Déroulement de la procédure
 
-Pour devenir **auto-entrepreneur** (ou micro-entrepreneur), vous devez obligatoirement effectuer une **déclaration de début d’activité** auprès du Guichet Unique.  
-C’est cette formalité qui vous permet d’obtenir votre **numéro SIRET**, indispensable pour exercer légalement votre activité (artisanale, commerciale ou libérale).
+Vous complétez vos informations directement via le formulaire en ligne.  
+- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier chez MAF.  
+- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.  
 
----
-
-## Ce que je vous propose en plus
-
-Un accompagnement **pratique et humain**, réalisé lors d’un **rendez-vous téléphonique personnalisé**, pour :
-
-- **Préparer et envoyer votre dossier complet**
-- Répondre à **toutes vos questions** administratives ou pratiques
-- Assurer un **suivi du dépôt jusqu’à l’obtention du SIREN**
-- Gérer les éventuels **régularisations**
+Après validation des informations par nos soins:
+- une **facture vous est envoyée**, et le traitement de la formalité ne commence **qu’après règlement complet**.  
+- Une fois le paiement validé, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation.  
 
 ---
 
-## Tarifs et délais
+## Tarifs et délai de traitement
 
-- Le service est proposé à partir de **69€ TTC**.  
-- Ce tarif couvre exclusivement **ma prestation d’accompagnement et de constitution du dossier**.  
-- Des frais supplémentaires peuvent être demandés par les organismes valideurs (INSEE, GREFFE, CMA, etc.).
+Le service est proposé à partir de **59 € TTC**.  
+- Ce tarif couvre uniquement **la prestation d’accompagnement et de constitution du dossier**.  
+- Une **avance de 10 € TTC** est incluse pour couvrir les éventuelles régularisations.  
+- ⚠️ Des frais supplémentaires peuvent être demandés par les organismes valideurs (INSEE, TCO, CMA, MSA, etc.) et restent à la charge du client.
 
-#### Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents. Ce délai ne comprend pas le temps de traitement des organismes officiels, qui peut varier.
+**Exemple :** Pour une création d’entreprise, le tarif total payé sera **69 €** :  
+- 59 € pour la prestation  
+- 10 € d’avance pour les régularisations  
 
+Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents.  
+- Ce délai ne comprend pas le temps de traitement des organismes officiels, qui peut varier.
 ---
 
-## Suivi et corrections
+## Suivi et régularisation
 
-- Je gère personnellement le **suivi de votre dossier jusqu’à sa validation ou son rejet final** par l’administration compétente.  
-- En cas de demande de régularisation, je vous informe des éléments à corriger ou compléter.  
-- **Toute correction liée à des informations inexactes, partielles ou omises par le déclarant** pourra faire l’objet d’un **supplément**.
+MAF gère personnellement le **suivi de votre dossier** jusqu’à sa validation ou son rejet final par l’administration.  
 
-#### ⚠️ En cas de **rejet définitif du dossier**, celui-ci sera considéré comme **clos**. Aucune nouvelle procédure ne sera engagée sans commande distincte.  
-##### **Ma responsabilité ne saurait être engagée** en cas de rejet lié à une situation préexistante, une incohérence ou une information erronée communiquée par le déclarant.
+- Les régularisations demandées par l’administration sont **décomptées de votre avance**, jusqu’à un maximum de **15 €**.  
+- Le solde non utilisé sera **remboursé en fin de formalité**.  
+- En cas de dépassement exceptionnel, la différence pourra être facturée au client.  
+- Si une erreur est imputable à MAF, elle sera prise en charge sans impact sur votre avance.
+
+### ⚠️ Rejet définitif
+
+En cas de **rejet définitif du dossier**, celui-ci sera considéré comme **clos** :
+
+- Aucune nouvelle procédure ne sera engagée sans commande distincte.
+- **Aucun remboursement**, hormis le solde éventuel de votre avance, ne pourra être effectué.
+- **MAF ne pourra en aucun cas être tenu responsable**, que le rejet résulte :
+- - d’informations inexactes ou incomplètes fournies par le déclarant,  
+- - de décisions, délais ou actions des organismes valideurs (INSEE, Greffe, Guichet Unique, etc.).
 
 ---
 
 ## Éléments reçus après validation ou refus de la demande sur le Guichet Unique
 
-Une fois la demande traitée par le Guichet Unique, vous recevrez une **attestation d’immatriculation au RNE** ainsi qu’un **avis de situation au répertoire SIRENE** (si disponible), ou une **notification de refus**.
+Une fois la demande traitée par le Guichet Unique, vous recevrez :  
+- En cas de **validation** :
+- - Votre synthèse version définitive
+- - Une **attestation d’immatriculation au RNE**
+- - Un **avis de situation au répertoire SIRENE** (si disponible), avec attribution de votre **numéro SIRET**.  
 
-- En cas de **validation**, un numéro SIRET vous est attribué, ce qui vous permet de débuter légalement votre activité.
-  - **L’attestation d’immatriculation au RNE** est systématiquement fournie.
-  - **L’avis de situation au répertoire SIRENE** pourra également être transmis, sauf si vos données sont en diffusion restreinte.
-- En cas de **refus**, le dossier est considéré comme **clos**, sauf commande explicite d’un nouveau dépôt.
+- En cas de **refus** : 
+- - Un retour vous informant de l'objet du rejet.
 
-#### ⚠️ **Attention** :
-#### - En cas de **diffusion restreinte** de vos données dans le répertoire SIRENE, je ne pourrai pas vous fournir l’avis de situation — il devra être téléchargé directement via votre espace personnel.
-#### - Je vous accompagne pour comprendre les retours éventuels de l’administration, mais **je ne suis pas responsable en cas de refus**.
-###### - Aucune nouvelle tentative ne sera engagée sans une **nouvelle commande**.
-
----
-
-## Les grandes étapes
-
-Lancez votre entreprise individuelle en toute sérénité grâce à un accompagnement clair, humain et personnalisé.
-
-### Comment obtenir votre SIRET ?
-
-1. Prise de contact via le formulaire ou par e-mail
-2. Échange personnalisé pour recueillir vos informations
-3. Réalisation et dépôt de votre déclaration au Guichet Unique
-4. Suivi du dossier jusqu’à la validation ou le rejet de la demande
-5. Transmission des documents officiels (attestation RNE, SIRET)
+### ⚠️ Attention
+- En cas de **diffusion restreinte** de vos données dans le répertoire SIRENE, l’avis de situation devra être téléchargé directement via votre espace personnel.  
+- MAF peut vous accompagner pour comprendre les retours éventuels, mais **n’est pas responsable en cas de refus**.  
+- Aucune nouvelle tentative ne sera engagée sans **nouvelle commande**.
 
 ---
 
@@ -105,7 +109,17 @@ Lancez votre entreprise individuelle en toute sérénité grâce à un accompagn
 
 - Un **interlocuteur unique** pour un suivi personnalisé  
 - Une **démarche claire, expliquée** à chaque étape  
-- Assistance par mail (et téléphone si nécessaire) jusqu’à la validation du dossier  
 - Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
 - Aucun abonnement, aucun frais caché : **tarif unique clair** dès le départ  
 - Accompagnement humain, basé en France
+
+---
+
+## Note importante
+
+En remplissant le formulaire et en passant votre commande:
+- Vous reconnaissez avoir pris connaissance et accepté nos [Conditions Générales](/legal/conditions-generales-de-vente), incluant:
+- - les règles concernant les régularisations, 
+- - le rejet définitif et la limitation de responsabilité.
+ 
+La validation finale de votre commande se fait via la **case à cocher obligatoire** avant paiement.
