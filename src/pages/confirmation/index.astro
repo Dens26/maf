@@ -16,31 +16,45 @@ const seoDescription = 'Votre demande a bien été transmise. Nous revenons vers
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-    <div class="w-full min-h-[80vh] flex items-center bg-gray-50">
+    <div class="w-full min-h-[80vh] flex items-center bg-gray-50 mt-16">
         <div class="site-container mx-auto px-4 py-base text-center">
             <div class="max-w-2xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
                 <!-- Badge succès -->
                 <div class="mb-6 flex justify-center">
-                    <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl">✓</div>
+                    <div
+                        class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl"
+                    >
+                        ✓
+                    </div>
                 </div>
 
                 <!-- Titre -->
-                <h1 class="mb-4 text-3xl md:text-4xl font-extrabold text-primary" data-aos="fade-up">Merci pour votre confiance</h1>
+                <h1 class="mb-4 text-3xl md:text-4xl font-extrabold text-primary" data-aos="fade-up">
+                    Merci pour votre confiance
+                </h1>
 
                 <!-- Message principal -->
                 <p class="text-lg mb-4" data-aos="fade-up" data-aos-delay="100">Votre demande a bien été transmise.</p>
 
-                <p class="text-base mb-8" data-aos="fade-up" data-aos-delay="150">Un email de confirmation contenant votre récapitulatif PDF vous a été envoyé.</p>
+                <p class="text-base mb-8" data-aos="fade-up" data-aos-delay="150">
+                    Un email de confirmation contenant votre récapitulatif PDF vous a été envoyé.
+                </p>
 
-                <p class="text-base mb-6 italic font-light" data-aos="fade-up" data-aos-delay="200">Vous pouvez également le télécharger directement ci-dessous.</p>
+                <p class="text-base mb-6 italic font-light" data-aos="fade-up" data-aos-delay="200">
+                    Vous pouvez également le télécharger directement ci-dessous.
+                </p>
 
                 <!-- Bouton téléchargement -->
                 <div class="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="250">
-                    <Button id="downloadPdf" variant="primary" size="lg" aria-label="Téléchargez le récapitulatif PDF">📄 Télécharger le récapitulatif PDF</Button>
+                    <Button id="downloadPdf" variant="primary" size="lg" aria-label="Téléchargez le récapitulatif PDF"
+                        >📄 Télécharger le récapitulatif PDF</Button
+                    >
                 </div>
 
                 <!-- Message supplémentaire -->
-                <p class="text-sm text-gray-500" data-aos="fade-up" data-aos-delay="300">Si vous ne recevez pas l’email dans les prochaines minutes, pensez à vérifier votre dossier spam.</p>
+                <p class="text-sm text-gray-500" data-aos="fade-up" data-aos-delay="300">
+                    Si vous ne recevez pas l’email dans les prochaines minutes, pensez à vérifier votre dossier spam.
+                </p>
 
                 <!-- Retour ou action secondaire -->
                 <div class="mt-8"><Button href="/" variant="primary" size="md">Retour à l’accueil</Button></div>
@@ -51,18 +65,22 @@ const seoDescription = 'Votre demande a bien été transmise. Nous revenons vers
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const button = document.getElementById('downloadPdf');
-        const pdfData = sessionStorage.getItem('generatedPdf');
+        try {
+            const button = document.getElementById('downloadPdf');
+            const pdfData = sessionStorage.getItem('generatedPdf');
 
-        if (!button || !pdfData) return;
+            if (!button || !pdfData) return;
 
-        button.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.href = pdfData;
-            link.download = 'recapitulatif-demande.pdf';
-            link.click();
-        });
+            button.addEventListener('click', () => {
+                const link = document.createElement('a');
+                link.href = pdfData;
+                link.download = 'recapitulatif-demande.pdf';
+                link.click();
+            });
 
-        sessionStorage.removeItem('generatedPdf');
+            sessionStorage.removeItem('generatedPdf');
+        } catch {
+            window.location.href = '/';
+        }
     });
 </script>

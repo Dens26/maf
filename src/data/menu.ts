@@ -2,7 +2,7 @@
 
 export const headerMenu = [
     // { name: 'Theme Info', link: '/theme-info' },
-    { name: 'A propos', link: '/team/denis' },
+    { name: 'A propos', link: '/a-propos' },
     { name: 'Services', link: '/services' },
     { name: 'Articles', link: '/blog' },
     // { name: 'Style-Guide', link: '/style-guide', showArrow: false,
@@ -22,8 +22,8 @@ export const footerMenu = [
 ];
 
 export const legalMenu = [
-    { name: 'Politique de confidentialité', link: '/legal/privacy-policy' },
-    { name: "Conditions Générales de ventes", link: '/legal/general-conditions-of-sale' },
-    { name: "Mentions légales", link: '/legal/legal-notices' }
+    { name: 'Politique de confidentialité', link: '/legal/politique-de-confidentialite' },
+    { name: "Conditions Générales de Vente", link: '/legal/conditions-generales-de-vente' },
+    { name: "Mentions légales", link: '/legal/mentions-legales' }
 ];
 

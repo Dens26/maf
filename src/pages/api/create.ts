@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import type { APIContext } from 'astro';
 import { saveToken } from '@utils/tokenStore';
 import { sendCreateNotification } from "@utils/mailService";
-import { checkDuplicateFormality, createFormality } from '@utils/supabase';
+import { checkDuplicateFormality } from '@utils/supabase';
+import { createFormality } from '@utils/supabase.server';
 
 const MAX_PDF_SIZE = 5_000_000; // 5MB
 
@@ -13,18 +14,21 @@ export async function POST({ request }: APIContext) {
     const body = await request.json();
 
     const {
+      demandeId,
       typeFormaliteId,
-      name,
-      siren,
       email,
       phone,
-      city,
+      name,
+      firstname,
+      address,
       zipcode,
+      city,
+      siren,
       pdf
     } = body;
 
     // ✅ Validation minimale
-    if (!typeFormaliteId || !name || !email || !pdf) {
+    if (!demandeId || !typeFormaliteId || !name || !email || !pdf) {
       return jsonResponse({ error: "Champs obligatoires manquants" }, 400);
     }
 
@@ -55,40 +59,41 @@ export async function POST({ request }: APIContext) {
       return jsonResponse({ error: "error_db" }, 500);
 
     if (result.status === 'duplicate')
-      return jsonResponse(
-        { error: "duplicate", statut: result.statut },
-        400
-      );
+      return jsonResponse({ error: "duplicate", statut: result.statut }, 400);
 
     // Enregistrement Supabase
     try {
-    await createFormality({
-      typeFormaliteId,
+      await createFormality({
+        demandeId,
+        typeFormaliteId,
+        email,
+        phone,
+        name,
+        firstname,
+        address,
+        zipcode,
+        city,
+        siren,
+        pdf: {
+          filename: "recap.pdf",
+          base64: pdf,
+        }
+      });
+    } catch (error) {
+      console.error('Erreur create.ts:', error)
+      return jsonResponse({ error: "Erreur insertion Supabase", detail: error }, 500);
+    }
+
+    // Envoi du mail notification (désactivé temporairement)
+    await sendCreateNotification({
       name,
-      siren,
       email,
       phone,
-      city,
-      zipcode,
       pdf: {
         filename: "recap.pdf",
         base64: pdf,
       }
     });
-  }catch(err) {
-  return jsonResponse({ error: "Erreur insertion Supabase", detail: err }, 500);
-}
-
-    // Envoi du mail notification (désactivé temporairement)
-    // await sendCreateNotification({
-    //   name,
-    //   email,
-    //   phone,
-    //   pdf: {
-    //     filename: "recap.pdf",
-    //     base64: pdf,
-    //   }
-    // });
 
     return jsonResponse({ success: true, token }, 200);
 

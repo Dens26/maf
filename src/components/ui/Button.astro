@@ -1,7 +1,7 @@
 ---
 export interface Props {
   href?: string;
-  variant?: 'primary' | 'secondary' | 'accent' | 'ghostLight' | 'ghostDark';
+  variant?: 'primary' | 'secondary' | 'accent' | 'ghostLight' | 'ghostDark' | 'alert' | 'neutral';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   class?: string;
@@ -31,6 +31,10 @@ const variants = {
   accent: 'bg-accent text-white hover:opacity-90 focus-visible:ring-accent hover:ring-2 hover:ring-accent hover:ring-offset-2',
   ghostLight: 'text-white ring-2 ring-white focus-visible:ring-white hover:ring-2 hover:ring-black hover:ring-offset-2',
   ghostDark: 'text-body-base ring-2 ring-text focus-visible:ring-text hover:ring-2 hover:ring-black hover:ring-offset-2',
+
+  // Ajout denis
+  alert: 'bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-500 hover:ring-2 hover:ring-red-500 hover:ring-offset-2',
+  neutral: 'bg-gray-400 text-gray-900 hover:bg-gray-300 focus-visible:ring-gray-300 hover:ring-2 hover:ring-gray-300 hover:ring-offset-2',
 };
 
 const sizes = {

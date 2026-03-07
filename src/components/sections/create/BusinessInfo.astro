@@ -1,6 +1,6 @@
 ---
-import Create from '@components/forms/CreateEntrepreneur.astro';
-import Stepper from '@components/forms/Stepper.astro';
+import Create from '@components/forms/create/Business.astro';
+import Stepper from '@components/forms/create/Stepper.astro';
 import { getBackgroundColor, getPaddingClass } from '@utils/styleUtils';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
 
@@ -21,7 +21,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
     <div class="site-container px-2 sm:px-4">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
-                <Stepper currentStep={1} id="stepper"/>
+                <Stepper currentStep={2} id="stepper"/>
             </div>
             <div class="sm:col-span-2">
                 <Create />

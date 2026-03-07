@@ -11,7 +11,10 @@ dotenv.config();
 const site = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
 
 export default defineConfig({
-  adapter: vercel(),
+  output: "server",
+  adapter: vercel({
+    imageService: true
+  }),
   site,
   vite: {
     plugins: [tailwindcss()],
@@ -40,11 +43,10 @@ export default defineConfig({
     changefreq: 'weekly',
     priority: 0.7,
     lastmod: new Date(),
-    filter: (page) => !page.includes('/404'), // Only exclude 404 page
-    entryLimit: 10000, // Increase entry limit if you have many pages
+    filter: (page) => !page.includes('/404'),
+    entryLimit: 10000,
   })],
   image: {
-    // Allow all remote patterns (https and http)
     remotePatterns: [
       {
         protocol: "https"

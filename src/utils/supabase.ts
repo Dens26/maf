@@ -1,116 +1,35 @@
-// src/utils/supabase.ts
 import { createClient } from '@supabase/supabase-js'
-import fs from 'fs'
-import path from 'path'
-import { randomUUID } from 'crypto'
 
-// Initialisation du client Supabase (service_role = backend only)
+/* SUPABASE CLIENT */
 export const supabase = createClient(
     import.meta.env.PUBLIC_SUPABASE_URL as string,
     import.meta.env.SUPABASE_SERVICE_ROLE_KEY as string
 )
 
-// Types pour la création d'une formalité
-type CreateFormalityParams = {
-    typeFormaliteId: number
-    name: string
-    siren?: string
-    email: string
-    phone?: string
-    city?: string
-    zipcode?: string
-    pdf: {
-        filename: string
-        base64: string
-    }
+/* TYPES */
+type InvoiceUpdateData = {
+    invoiceId: string | null
+    invoiceNumber: string | null
+    invoiceUrl: string | null
+    invoicePdf: string | null
 }
 
-/**
- * Création d'une formalité
- * @param param0 
- */
-export async function createFormality({ typeFormaliteId, name, siren, email, phone, city, zipcode, pdf }: CreateFormalityParams) {
-    try {
-        const demandeId = randomUUID()
-        const pdfPath = `pdfs/${demandeId}_${pdf.filename}`
-
-        // Upload PDF dans Supabase Storage
-        const { error: uploadError } = await supabase.storage
-            .from('pdfs')       // nom du bucket
-            .upload(pdfPath, Buffer.from(pdf.base64, 'base64'), {
-                contentType: 'application/pdf',
-                upsert: false
-            })
-
-        if (uploadError) throw uploadError
-
-        // Création de la demande dans la base
-        const { error: dbError } = await supabase.from('demandes').insert([
-            {
-                demandeid: demandeId,
-                email,
-                name,
-                siren,
-                typeformaliteid: typeFormaliteId,
-                statutpaiementid: 1,   // en_attente
-                statutformaliteid: 1,  // en_attente
-                pdf: pdfPath,          // on stocke juste le chemin dans Storage
-                phone,
-                city,
-                zipcode
-            }
-        ])
-
-        if (dbError) throw dbError
-
-    } catch (err) {
-        console.error('ERREUR CREATE FORMALITY :', err)
-        throw err
-    }
-}
-
-/**
- * Vérifie si une demande est déjà en attente ou en cours de traitement
- * pour le même email, le même nom et le même type de formalité.
- * @param email 
- * @param name 
- * @param typeFormaliteId 
- * @returns 
- */
-export async function checkDuplicateFormality(email: string, name: string, typeFormaliteId: number) {
-    try {
-        const { data, error } = await supabase
-            .from('demandes')
-            .select('demandeid, statutformaliteid')
-            .eq('email', email)
-            .eq('name', name)
-            .eq('typeformaliteid', typeFormaliteId)
-            .in('statutformaliteid', [1, 2]) // en_attente ou en_traitement
-            .maybeSingle()
-
-        if (error) return { status: 'error_db', error }
-        if (data) return { status: 'duplicate', demandeId: data.demandeid, statut: data.statutformaliteid }
-        return { status: 'empty' }
-
-    } catch (err) {
-        return { status: 'error_db', error: err }
-    }
-}
+/* GETTERS / SELECT */
 
 /**
  * Récupération d'une formalité par demandeId
  * @param demandeId 
  * @returns 
  */
-export async function getFormality(demandeId: string) {
+export async function getFormalityByDemandeId(demandeId: string) {
     const { data, error } = await supabase
         .from('demandes')
         .select(`
-      *,
-      type_formalite: typeformaliteid(nom),
-      statut_paiement: statutpaiementid(nom),
-      statut_formalite: statutformaliteid(nom)
-    `)
+            *,
+            type_formalite: typeformaliteid(nom),
+            statut_paiement: statutpaiementid(nom),
+            statut_formalite: statutformaliteid(nom)
+        `)
         .eq('demandeid', demandeId)
         .single()
 
@@ -123,7 +42,140 @@ export async function getFormality(demandeId: string) {
 }
 
 /**
+ * Retourne toutes les formalités avec un statut donné
+ * @param statutFormaliteId 
+ * @returns 
+ */
+export async function getFormalitiesByStatus(statutFormaliteId: number) {
+    const { data, error } = await supabase
+        .from('demandes')
+        .select(`id, demandeid, stripe_customerid, email, phone, name, firstname, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, city, zipcode, datecreation, ref_inpi`)
+        .eq('statutformaliteid', statutFormaliteId)
+        .order('datecreation', { ascending: false })
+
+    if (error) {
+        console.error('ERREUR GET FORMALITIES :', error)
+        return []
+    }
+
+    return data
+}
+
+/* VALIDATIONS  */
+
+/**
+ * Vérifie si une demande est déjà en attente ou en cours
+ * @param email 
+ * @param name 
+ * @param typeFormaliteId 
+ * @returns 
+ */
+export async function checkDuplicateFormality(
+    email: string,
+    name: string,
+    typeFormaliteId: number
+) {
+    try {
+        const { data, error } = await supabase
+            .from('demandes')
+            .select('demandeid, statutformaliteid')
+            .eq('email', email)
+            .eq('name', name)
+            .eq('typeformaliteid', typeFormaliteId)
+            .in('statutformaliteid', [1, 2])
+            .maybeSingle()
+
+        if (error) return { status: 'error_db', error }
+        if (data) return { status: 'duplicate', demandeId: data.demandeid, statut: data.statutformaliteid }
+
+        return { status: 'empty' }
+
+    } catch (err) {
+        return { status: 'error_db', error: err }
+    }
+}
+
+/*  UPDATE  */
+
+/**
+ * Mise à jour du stripe_customerid
+ * @param demandeId 
+ * @param stripeCustomerId 
+ * @returns 
+ */
+export async function updateFormalityStripeCustomerId(
+    demandeId: string,
+    stripeCustomerId: string
+) {
+    const { error } = await supabase
+        .from('demandes')
+        .update({ stripe_customerid: stripeCustomerId })
+        .eq('demandeid', demandeId)
+
+    if (error) {
+        console.error('ERREUR UPDATE STRIPE CUSTOMER ID :', error)
+        throw error
+    }
+
+    return { success: true }
+}
+
+/**
  * Mise à jour du statut de paiement
+ * @param demandeId 
+ * @param statutPaiementId 
+ * @returns 
+ */
+export async function updatePaymentStatus(
+    demandeId: string,
+    statutPaiementId: number
+) {
+    try {
+        const { error } = await supabase
+            .from('demandes')
+            .update({ statutpaiementid: statutPaiementId })
+            .eq('demandeid', demandeId)
+
+        if (error) {
+            console.error('ERREUR updatePaymentStatus Supabase:', error)
+            throw error
+        }
+
+        return { success: true }
+
+    } catch (err) {
+        console.error('ERREUR updatePaymentStatus:', err)
+        throw err
+    }
+}
+
+/**
+ * Mise à jour des données de facture Stripe
+ * @param demandeId 
+ * @param data 
+ */
+export async function updateInvoiceData(
+    demandeId: string,
+    data: InvoiceUpdateData
+) {
+    const { error } = await supabase
+        .from('demandes')
+        .update({
+            stripe_invoice_id: data.invoiceId,
+            stripe_invoice_number: data.invoiceNumber,
+            stripe_invoice_url: data.invoiceUrl,
+            stripe_invoice_pdf: data.invoicePdf,
+        })
+        .eq('demandeid', demandeId)
+
+    if (error) {
+        console.error('❌ Erreur updateInvoiceData:', error)
+        throw new Error('Erreur mise à jour données facture')
+    }
+}
+
+/**
+ * Mise à jour du statut de paiement (version simple)
  * @param demandeId 
  * @param statutPaiementId 
  */
@@ -148,4 +200,49 @@ export async function updateStatutFormalite(demandeId: string, statutFormaliteId
         .eq('demandeid', demandeId)
 
     if (error) console.error('ERREUR UPDATE STATUT FORMALITE :', error)
+}
+
+/**
+ * Mise à jour du numéro de formalité ref_inpi
+ * @param demandeId
+ * @param refInpi
+ */
+export async function updateRefInpi(demandeId: string, refInpi: string) {
+    const { error } = await supabase
+        .from('demandes')
+        .update({ ref_inpi: refInpi })
+        .eq('demandeid', demandeId)
+
+    if (error) {
+        console.error('ERREUR UPDATE REF INPI :', error)
+        return { success: false, error }
+    }
+
+    return { success: true }
+}
+
+/* STORAGE  */
+
+/**
+ * Génère un lien temporaire pour télécharger un PDF
+ * @param pdfPath 
+ * @param expires 
+ * @returns 
+ */
+export async function getPdfSignedUrl(pdfPath: string, expires = 60) {
+    try {
+        const { data, error } = await supabase
+            .storage
+            .from('pdfs')
+            .createSignedUrl(pdfPath, expires)
+
+        if (error) throw error
+        if (!data.signedUrl) throw new Error('Impossible de générer le lien signé')
+
+        return data.signedUrl
+
+    } catch (err) {
+        console.error('ERREUR GET PDF SIGNED URL :', err)
+        throw err
+    }
 }
