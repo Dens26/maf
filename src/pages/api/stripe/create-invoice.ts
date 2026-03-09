@@ -1,6 +1,6 @@
 import type { APIContext } from 'astro'
 import Stripe from 'stripe'
-import { getFormalityByDemandeId } from '@utils/supabase'
+import { getFormalityByDemandeId, updateFormalityStripeCustomerId } from '@utils/supabase'
 
 const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY as string, {
     apiVersion: '2026-02-25.clover',
@@ -23,15 +23,6 @@ const FORMALITY_LABELS: Record<number, string> = {
     4: 'Correction',
     5: 'Cessation',
 }
-
-const STATUS = {
-    SENT: 2,
-    PAID: 3,
-    FAILED: 4,
-    EXPIRED: 5,
-    CANCELED: 6,
-    REFUND: 7
-} as const
 
 export async function POST({ request }: APIContext) {
     try {
@@ -63,6 +54,7 @@ export async function POST({ request }: APIContext) {
         } = formality
 
         const amount = FORMALITY_PRICES[typeId]
+        const advanceAmount = 1000
         const label = FORMALITY_LABELS[typeId]
 
         if (!email || !amount || !label) {
@@ -75,9 +67,7 @@ export async function POST({ request }: APIContext) {
             limit: 1,
         })
 
-        const customer =
-            existingCustomers.data[0] ??
-            (await stripe.customers.create({
+        const customer = existingCustomers.data[0] ?? (await stripe.customers.create({
                 email,
                 name: `${firstname ?? ''} ${name ?? ''}`.trim(),
                 preferred_locales: ['fr'],
@@ -89,6 +79,7 @@ export async function POST({ request }: APIContext) {
                     country: 'FR',
                 },
             }))
+        updateFormalityStripeCustomerId(demandeId, customer.id)
 
         // Création item de facture
         await stripe.invoiceItems.create({
@@ -96,6 +87,13 @@ export async function POST({ request }: APIContext) {
             amount,
             currency: 'eur',
             description: `Formalité ${label} n° ${demandeId}`,
+        })
+
+        await stripe.invoiceItems.create({
+            customer: customer.id,
+            amount: advanceAmount,
+            currency: 'eur',
+            description: `Avance pour formalité ${label} n° ${demandeId}`,
         })
 
         // 5️⃣ Création facture (sans auto_advance)
@@ -119,6 +117,7 @@ export async function POST({ request }: APIContext) {
 
         // Réponse API
         return new Response(JSON.stringify({ success: true, invoiceId: finalizedInvoice.id, invoiceUrl: finalizedInvoice.hosted_invoice_url }), { status: 200 })
+        
     } catch (error) {
         console.error('Erreur create-invoice:', error)
         return jsonError('Erreur serveur lors de la création de facture', 500)

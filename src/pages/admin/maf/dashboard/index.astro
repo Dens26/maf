@@ -34,13 +34,13 @@ const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
 };
 
 const FORMALITY_PAYMENT: Record<number, PaymentStatusConfig> = {
-    1: { label: 'Non envoyé', color: 'text-orange-500' },
+    1: { label: 'Non envoyé', color: 'text-gray-700' },
     2: { label: 'Envoyée', color: 'text-blue-500' },
     3: { label: 'Accepté', color: 'text-green-500' },
     4: { label: 'Echoué', color: 'text-red-500' },
     5: { label: 'Expiré', color: 'text-purple-500' },
-    6: { label: 'Annulé', color: 'text-gray-500' },
-    7: { label: 'Rembourssé', color: 'text-gray-500' }
+    6: { label: 'Annulé', color: 'text-red-500' },
+    7: { label: 'Remboursé', color: 'text-orange-500' }
 };
 
 // 📡 Récupération
@@ -91,32 +91,36 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="datecreation">Date <span class="sort-indicator">▲▼</span></th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="name">Nom <span class="sort-indicator">▲▼</span></th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="typeformaliteid">Formalité <span class="sort-indicator">▲▼</span></th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">Paiement <span class="sort-indicator">▲▼</span> </th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">N° formalité <span class="sort-indicator">▲▼</span> </th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">PDF</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="datecreation">Date <span class="sort-indicator">▲▼</span></th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="name">Nom <span class="sort-indicator">▲▼</span></th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="typeformaliteid">Formalité <span class="sort-indicator">▲▼</span></th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">Paiement <span class="sort-indicator">▲▼</span> </th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Montant facturé</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Montant remboursé</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider sortable cursor-pointer" data-column="statutpaiementid">N° formalité <span class="sort-indicator">▲▼</span> </th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">PDF</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
 
                 <tbody class="divide-y divide-gray-100">
                     {formalities.length === 0 ? (
                         <tr>
-                            <td colspan="6" class="px-6 py-10 text-center text-gray-500">Aucune demande dans cette catégorie.</td>
+                            <td colspan="9" class="px-6 py-10 text-center text-gray-500">Aucune demande dans cette catégorie.</td>
                         </tr>
                     ) : (
                         formalities.map(d => (
-                            <tr data-id={d.demandeid} data-payment-status={d.statutpaiementid} data-formality-status={d.statutformaliteid} class="hover:bg-gray-50 transition">
+                            <tr data-id={d.demandeid} data-name={d.name} data-firstname={d.firstname} data-payment-status={d.statutpaiementid} data-formality-status={d.statutformaliteid} data-ref_inpi={d.ref_inpi} class="hover:bg-gray-50 transition">
                                 
-                                <td class="px-6 py-2 whitespace-nowrap text-gray-500" data-sort={new Date(d.datecreation).getTime()}>{new Date(d.datecreation).toLocaleDateString('fr-FR')}</td>
-                                <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name} {d.firstname}</td>
-                                <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`} data-sort={d.typeformaliteid}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</td>
-                                <td class={`px-6 py-2 whitespace-nowrap font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`} data-sort={d.statutpaiementid}>{FORMALITY_PAYMENT[d.statutpaiementid]?.label ?? "Inconnu"}</td>
-                                <td class="px-6 py-2 whitespace-nowrap font-medium text-gray-900" data-sort={d.ref_inpi}>{d.ref_inpi}</td>
-                                <td class="px-6 py-2 whitespace-nowrap">
-                                    <button class="text-blue-600 hover:underline cursor-pointer" data-pdf={d.pdf}>pdf-{d.id}</button>
+                                <td class="px-6 py-2 text-center whitespace-nowrap text-gray-500" data-sort={new Date(d.datecreation).getTime()}>{new Date(d.datecreation).toLocaleDateString('fr-FR')}</td>
+                                <td class="px-6 py-4 text-center whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name} {d.firstname}</td>
+                                <td class={`px-6 py-2 text-center whitespace-nowrap font-medium ${FORMALITY_TYPE[d.typeformaliteid]?.color ?? 'text-gray-400'}`} data-sort={d.typeformaliteid}>{FORMALITY_TYPE[d.typeformaliteid]?.label ?? "Inconnu"}</td>
+                                <td class={`px-6 py-2 text-center whitespace-nowrap font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`} data-sort={d.statutpaiementid}>{FORMALITY_PAYMENT[d.statutpaiementid]?.label ?? "Inconnu"}</td>
+                                <td class={`px-6 py-2 text-center whitespace-nowrap font-medium ${FORMALITY_PAYMENT[d.statutpaiementid]?.color ?? 'text-gray-400'}`}>{(d.amount_paid/100).toFixed(2)} €</td>
+                                <td class="px-6 py-4 text-center whitespace-nowrap font-medium text-orange-500">{(d.amount_refunded/100).toFixed(2)} €</td>
+                                <td class="px-6 py-2 text-center whitespace-nowrap font-medium text-gray-900" data-sort={d.ref_inpi}>{d.ref_inpi}</td>
+                                <td class="px-6 py-2 text-center whitespace-nowrap">
+                                    <button class="text-blue-600 text-center hover:underline cursor-pointer" data-pdf={d.pdf}>pdf-{d.id}</button>
                                 </td>
                                 <td class="px-6 py-2 whitespace-nowrap relative">
                                     <Button variant="primary" size="sm" class="action-btn cursor-pointer">...</Button>
@@ -178,20 +182,20 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
     let currentRow = null;
 
     const PAYMENT_ACTIONS = {
-        1: ['envoyer_paiement'],                 // non_genere
-        2: ['relancer_paiement', 'annuler_paiement'],     // envoyee
-        3: ['rembourser_paiement'],              // accepte
-        4: ['relancer_paiement', 'annuler_paiement'],     // echouee
-        5: ['relancer_paiement', 'annuler_paiement'],     // expiree
-        6: ['envoyer_paiement'],                 // annulee
+        1: ['envoyer_facture'],                 // non_genere
+        2: ['relancer_facture', 'annuler_facture'],     // envoyee
+        3: ['rembourser_facture'],              // accepte
+        4: ['relancer_facture', 'annuler_facture'],     // echouee
+        5: ['relancer_facture', 'annuler_facture'],     // expiree
+        6: ['envoyer_facture'],                 // annulee
         7: []                           // rembourse
     };
 
     const ACTION_LABELS = {
-        envoyer_paiement: 'Envoyer le paiement',
-        relancer_paiement: 'Relancer le paiement',
-        annuler_paiement: 'Annuler le paiement',
-        rembourser_paiement: 'Rembourser',
+        envoyer_facture: 'Envoyer la facture',
+        relancer_facture: 'Relancer la facture',
+        annuler_facture: 'Annuler la facture',
+        rembourser_facture: 'Rembourser la facture',
 
         demarrer_formalite: 'Démarrer la formalité',
         terminer_formalite: 'Formalité Terminée',
@@ -202,10 +206,10 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
     };
 
     const ACTION_STYLES = {
-        envoyer_paiement: 'text-blue-600',
-        relancer_paiement: 'text-blue-600',
-        annuler_paiement: 'text-red-600',
-        rembourser_paiement: 'text-red-600',
+        envoyer_facture: 'text-blue-600',
+        relancer_facture: 'text-blue-600',
+        annuler_facture: 'text-red-600',
+        rembourser_facture: 'text-red-600',
 
         demarrer_formalite: 'text-green-600',
         terminer_formalite: 'text-green-600',
@@ -234,7 +238,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
             const tr = btn.closest('tr');
             currentRow = tr;
-
+        
             const paymentStatus = Number(tr.dataset.paymentStatus);
             const formalityStatus = Number(tr.dataset.formalityStatus);
 
@@ -246,7 +250,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
             // Démarrer si paiement accepté ET formalité en attente
             if (paymentStatus === 3 && formalityStatus === 1) {
-                formalityActions.push('demarrer');
+                formalityActions.push('demarrer_formalite');
             }
 
             // Terminer si formalité en traitement
@@ -259,12 +263,10 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                 formalityActions.push('terminer_formalite', 'rejeter_formalite', 'annuler_formalite', 'reference_inpi');
             }
 
-            currentMenu.innerHTML = '';
-
             const baseClass = 'w-full text-small text-left hover:bg-gray-100 action-option px-3 py-2';
 
             // --- ACTIONS PAIEMENT ---
-            if (paymentActions.length > 0 && (formalityStatus != 2 && formalityStatus != 3)) {
+            if (paymentActions.length > 0) {
                 paymentActions.forEach(actionKey => {
                     const styleClass = ACTION_STYLES[actionKey] || 'text-gray-700';
                     const button = document.createElement('button');
@@ -277,7 +279,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             }
 
             // Séparateur si nécessaire
-            if (formalityStatus === 1 && paymentActions.length > 0 && formalityActions.length > 0) {
+            if (paymentActions.length > 0 && formalityActions.length > 0) {
                 const separator = document.createElement('div');
                 separator.className = 'border-t my-1';
                 currentMenu.appendChild(separator);
@@ -320,13 +322,15 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
         const action = opt.dataset.action;
         const demandeId = currentRow.dataset.id;
+        const ref_inpi = currentRow.dataset.ref_inpi;
+        const name = currentRow.dataset.name + ' ' + currentRow.dataset.firstname;
 
         opt.disabled = true;
         opt.classList.add('opacity-50', 'pointer-events-none');
 
         try {
             // Envoie de la facture + paiement stripe
-            if (action === 'envoyer_paiement') {
+            if (action === 'envoyer_facture') {
 
                 // Appel à ton endpoint pour générer le paiement Stripe
                 const result = await fetch('/api/stripe/create-invoice', {
@@ -338,11 +342,20 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                 const data = await result.json();
                 if (!result.ok) throw new Error(data.error || 'Erreur paiement');
 
+                // Envoie du mail de demande de PJ
+                const response = await fetch('/api/mailjet/request-documents', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ demandeId: demandeId })
+                });
+
                 location.reload();
             }
 
             // Relance d'un lien de paiement stripe
-            if (action === 'relancer_paiement') {
+            if (action === 'relancer_facture') {
                 const result = await fetch('/api/stripe/remind-invoice', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -351,7 +364,59 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                 const data = await result.json();
                 if (!result.ok) throw new Error(data.error || 'Erreur relance');
 
-                alert('Relance envoyée avec succès !');
+                location.reload();
+            }
+
+            // Annulation d'un lien de paiement stripe
+            if (action === 'annuler_facture') {
+                const result = await fetch(`/api/stripe/cancel-invoice`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ demandeId: demandeId })
+                });
+                const data = await result.json();
+
+                if (!result.ok) throw new Error(data.error || "Erreur lors de l'anulation");
+
+                location.reload();
+            }
+
+            // Remboursement d'une partie
+            if (action === 'rembourser_facture') {
+                let input = prompt("Saisir le montant du remboursement en centimes :");
+
+                // Si l'utilisateur annule ou ne saisit rien
+                if (!input) return;
+
+                // Vérifier que c'est un nombre entier positif
+                const amount = parseInt(input, 10);
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Montant invalide. Veuillez saisir un nombre positif en centimes.");
+                    return;
+                }
+
+                // Confirmation avant envoi
+                const confirmMsg = `Remboursement de ${(amount / 100).toFixed(2)} € ${name}, référence INPI ${ref_inpi}. Voulez-vous continuer ?`;
+                if (!confirm(confirmMsg)) return;
+
+                try {
+                    const result = await fetch('/api/stripe/refund-invoice', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            demandeId: demandeId,
+                            amount: amount
+                        })
+                    });
+
+                    const data = await result.json();
+                    if (!result.ok) throw new Error(data.error || 'Erreur lors du remboursement');
+
+                    location.reload();
+                } catch (err) {
+                    console.error(err);
+                    alert("Erreur :", err.message || "Impossible d'envoyer le remboursement");
+                }
             }
 
             // Annulation d'un lien de paiement stripe
@@ -373,6 +438,10 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
             if (formaliteActionsList.includes(action)) {
                 try {
+                    if (action === 'terminer_formalite' || action === 'rejeter_formalite'){
+                        alert('Veuillez renseigner la référence INPI afin de valider votre action');
+                        return;
+                    }
                     const result = await fetch(`/api/supabase/update-formality-status`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },

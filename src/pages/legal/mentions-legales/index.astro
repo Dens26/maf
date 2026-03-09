@@ -10,28 +10,29 @@ const heroContent = {
 };
 
 /* Date de dernière mise à jour */
-const formattedDate = '13 juillet 2025';
+const formattedDate = '8 mars 2026';
 ---
 
 <Layout title="Mentions légales - Mon Assistant Formalités" description={heroContent.description}>
     <InnerHero content={heroContent} />
 
     <article class="site-container--small px-4 mx-auto legal-text prose pb-base">
+
+        <!-- Date de mise à jour -->
         <div class="mt-12 mb-8">
             <p class="text-sm text-body-base/80">Dernière mise à jour: {formattedDate}</p>
         </div>
 
+        <!-- Titre principal -->
         <h1>Mentions légales</h1>
         <p>
             Conformément aux dispositions des articles 6-III et 19 de la loi n°2004-575 du 21 juin 2004 pour la Confiance dans l'Économie Numérique (LCEN), les utilisateurs du site 
-            <strong>monassistantformalites.fr</strong>
-             sont informés des présentes mentions légales.
+            <strong>monassistantformalites.fr</strong> sont informés des présentes mentions légales.
         </p>
 
+        <!-- Article 1 : Éditeur du site -->
         <h2>1. Éditeur du site</h2>
-        <p>
-            Le site <strong>monassistantformalites.fr</strong> est édité par :
-        </p>
+        <p>Le site <strong>monassistantformalites.fr</strong> est édité par :</p>
         <p>
             <strong>Mon Assistant Formalités</strong><br />
             Statut : Entrepreneur Individuel<br />
@@ -42,6 +43,7 @@ const formattedDate = '13 juillet 2025';
         </p>
         <p>L’activité exercée ne relève ni du domaine juridique ni comptable et consiste exclusivement en l’accompagnement administratif de formalités liées aux entreprises individuelles.</p>
 
+        <!-- Article 2 : Hébergeur -->
         <h2>2. Hébergeur</h2>
         <p>
             Le site est hébergé par :<br />
@@ -50,57 +52,52 @@ const formattedDate = '13 juillet 2025';
             Site web : <a href="https://vercel.com" target="_blank" rel="noopener">https://vercel.com</a>
         </p>
         <p>
-    Le nom de domaine <strong>monassistantformalites.fr</strong> est enregistré et géré via o2switch.
-</p>
+            Le nom de domaine <strong>monassistantformalites.fr</strong> est enregistré et géré via o2switch.
+        </p>
 
+        <!-- Article 3 : Propriété intellectuelle -->
         <h2>3. Propriété intellectuelle</h2>
         <p>
-            L’ensemble du contenu présent sur le site (textes, images, icônes, logos, graphismes, documents
-            téléchargeables, etc.) est la propriété exclusive de <strong>Mon Assistant Formalités</strong>, sauf
-            mentions contraires.
+            L’ensemble du contenu présent sur le site (textes, images, icônes, logos, graphismes, documents téléchargeables, etc.) est la propriété exclusive de <strong>Mon Assistant Formalités</strong>, sauf mentions contraires.
         </p>
         <p>
-            Toute reproduction, distribution, modification ou adaptation, même partielle, sans autorisation préalable et
-            écrite, est strictement interdite et constitue une contrefaçon au sens des articles L.335-2 et suivants du
-            Code de la propriété intellectuelle.
+            Toute reproduction, distribution, modification ou adaptation, même partielle, sans autorisation préalable et écrite, est strictement interdite et constitue une contrefaçon au sens des articles L.335-2 et suivants du Code de la propriété intellectuelle.
         </p>
 
+        <!-- Article 4 : Responsabilité -->
         <h2>4. Responsabilité</h2>
         <p>
-            L’éditeur du site s’efforce de fournir des informations aussi précises et actualisées que possible.
-            Toutefois, des erreurs ou omissions peuvent survenir. L'utilisateur est donc invité à vérifier l'exactitude
-            des informations et à signaler toute erreur éventuelle via le formulaire de contact.
+            L’éditeur du site s’efforce de fournir des informations aussi précises et actualisées que possible. Toutefois, des erreurs ou omissions peuvent survenir. L'utilisateur est donc invité à vérifier l'exactitude des informations et à signaler toute erreur éventuelle via le formulaire de contact.
         </p>
         <p>
-            Mon Assistant Formalités ne saurait être tenu responsable de l’usage fait des informations publiées sur le
-            site, ni d’éventuelles interruptions ou dysfonctionnements du site.
+            Mon Assistant Formalités ne saurait être tenu responsable de l’usage fait des informations publiées sur le site, ni d’éventuelles interruptions ou dysfonctionnements du site.
         </p>
 
+        <!-- Article 5 : Données personnelles et services tiers -->
         <h2>5. Données personnelles</h2>
         <p>
-            La gestion des données personnelles collectées via les formulaires du site (nom, prénom, email, données
-            relatives à l’entreprise, etc.) est détaillée dans la
+            La gestion des données personnelles collectées via les formulaires du site (nom, prénom, email, données relatives à l’entreprise, etc.) est détaillée dans la
             <a href="/legal/privacy-policy">Politique de confidentialité</a>.
         </p>
         <p>
-            Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés,
-            vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression des données vous
-            concernant. Pour exercer ces droits, vous pouvez écrire à <a
-                href="mailto:contact@mon-assistant-formalites.fr">contact@mon-assistant-formalites.fr</a
-            >.
+            Les emails de contact ou de suivi de prestations peuvent être envoyés via <strong>Mailjet</strong>. Les paiements et facturations sont traités par <strong>Stripe</strong>, qui peut également envoyer des emails de confirmation ou facturation. Mon Assistant Formalités ne conserve aucune information bancaire.
+        </p>
+        <p>
+            Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d’un droit d’accès, de rectification, d’opposition et de suppression des données vous concernant. Pour exercer ces droits, vous pouvez écrire à <a href="mailto:contact@mon-assistant-formalites.fr">contact@mon-assistant-formalites.fr</a>.
         </p>
 
+        <!-- Article 6 : Liens externes -->
         <h2>6. Liens externes</h2>
         <p>
-            Le site peut contenir des liens vers des sites tiers. Mon Assistant Formalités ne peut en aucun cas être
-            tenu responsable du contenu, de la politique de confidentialité ou du fonctionnement de ces sites.
+            Le site peut contenir des liens vers des sites tiers. Mon Assistant Formalités ne peut en aucun cas être tenu responsable du contenu, de la politique de confidentialité ou du fonctionnement de ces sites.
         </p>
 
+        <!-- Article 7 : Crédits -->
         <h2>7. Crédits</h2>
         <p>
             Site conçu, développé et maintenu par :<br />
-            <strong>Denis Bekaert</strong> – <a href="https://portfolio.db-dev.fr" target="_blank" rel="noopener"
-                >db-dev</a>
+            <strong>Denis Bekaert</strong> – <a href="https://portfolio.db-dev.fr" target="_blank" rel="noopener">db-dev</a>
         </p>
+
     </article>
 </Layout>

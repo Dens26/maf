@@ -8,7 +8,7 @@ const store = new Map<string, TokenEntry>();
 export function saveToken(token: string, pdf: string) {
     store.set(token, {
         pdf,
-        expiresAt: Date.now() + 1000 * 60 * 10
+        expiresAt: Date.now() + 1000 * 60 * 5
     });
 }
 

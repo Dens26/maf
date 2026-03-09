@@ -86,7 +86,6 @@ export async function createFormality({ demandeId, typeFormaliteId, email, phone
         siren,
         statutpaiementid: 1,
         statutformaliteid: 1,
-        ref_inpi: 'non définie',
         pdf: pdfName,
       }
     ])

@@ -4,89 +4,127 @@ import InnerHero from '@components/sections/InnerHero.astro';
 
 /* Contenu du Hero */
 const heroContent = {
-  title: 'Politique de confidentialité',
-  description: 'Découvrez comment Mon Assistant Formalités collecte, utilise et protège vos données personnelles, en conformité avec le RGPD.',
-  overlayOpacity: 0.8,
+    title: 'Politique de confidentialité',
+    description:
+        'Découvrez comment Mon Assistant Formalités collecte, utilise et protège vos données personnelles, en conformité avec le RGPD.',
+    overlayOpacity: 0.8,
 };
 
 /* Date de dernière mise à jour */
-const formattedDate = '13 juillet 2025';
+const formattedDate = '8 mars 2026';
 ---
 
 <Layout title="Politique de confidentialité - Mon Assistant Formalités" description={heroContent.description}>
-  <InnerHero content={heroContent} />
+    <InnerHero content={heroContent} />
 
-  <article class="site-container--small px-4 mx-auto legal-text prose pb-base">
-    <div class="mt-12 mb-8">
-      <p class="text-sm text-body-base/80">Dernière mise à jour: {formattedDate}</p>
-    </div>
+    <article class="site-container--small px-4 mx-auto legal-text prose pb-base">
+        <!-- Date de mise à jour -->
+        <div class="mt-12 mb-8">
+            <p class="text-sm text-body-base/80">Dernière mise à jour: {formattedDate}</p>
+        </div>
 
-    <h1>Politique de confidentialité</h1>
-    <p>
-      Chez <strong>Mon Assistant Formalités</strong>, la protection de vos données personnelles est une priorité. Cette politique décrit les types de données collectées, leur usage, les conditions de conservation, ainsi que vos droits, en conformité avec le RGPD.
-    </p>
+        <!-- Titre principal -->
+        <h1>Politique de confidentialité</h1>
+        <p>
+            Chez <strong>Mon Assistant Formalités</strong>, la protection de vos données personnelles est une priorité.
+            Cette politique décrit les types de données collectées, leur usage, les conditions de conservation, ainsi que vos droits, en conformité avec le RGPD.
+        </p>
 
-    <h2>1. Données collectées</h2>
-    <h3>1.1 Données personnelles</h3>
-    <ul>
-      <li><strong>Identité et contact</strong> : nom, prénom, adresse e-mail, numéro de téléphone, adresse postale</li>
-      <li><strong>Informations professionnelles</strong> : statut juridique, SIREN/SIRET, adresse de l’établissement</li>
-      <li><strong>Contenus échangés</strong> : messages, demandes de contact, informations transmises dans le cadre d’une mission</li>
-    </ul>
-    <h3>1.2 Moyens de collecte</h3>
-    <ul>
-      <li>Les formulaires présents sur le site</li>
-      <li>Vos échanges par e-mail ou téléphone</li>
-      <li>Des outils de mesure d’audience (cookies anonymisés)</li>
-    </ul>
+        <!-- Article 1 -->
+        <h2>1. Données collectées</h2>
 
-    <h2>2. Finalités de traitement</h2>
-    <ul>
-      <li>Répondre à vos demandes et échanges</li>
-      <li>Réaliser les prestations administratives demandées</li>
-      <li>Vous transmettre des informations utiles concernant votre activité ou nos services</li>
-      <li>Respecter nos obligations légales et réglementaires</li>
-    </ul>
+        <!-- 1.1 Données personnelles -->
+        <h3>1.1 Données personnelles</h3>
+        <ul>
+            <li><strong>Identité et contact</strong> : nom, prénom, adresse e-mail, numéro de téléphone, adresse postale</li>
+            <li><strong>Informations professionnelles</strong> : statut juridique, SIREN/SIRET, adresse de l’établissement</li>
+            <li><strong>Contenus échangés</strong> : messages, demandes de contact, informations transmises dans le cadre d’une mission</li>
+        </ul>
 
-    <h2>3. Partage des données</h2>
-    <p>Vos données ne sont <strong>jamais vendues</strong>. Elles peuvent être partagées avec des tiers uniquement dans les cas suivants :</p>
-    <ul>
-      <li>Dans le cadre d’une mission nécessitant le dépôt de documents (ex. Guichet Unique)</li>
-      <li>Pour répondre à une obligation légale</li>
-      <li>Avec votre consentement explicite et éclairé</li>
-    </ul>
+        <!-- 1.2 Moyens de collecte -->
+        <h3>1.2 Moyens de collecte</h3>
+        <ul>
+            <li>Les formulaires présents sur le site</li>
+            <li>Vos échanges par e-mail ou téléphone</li>
+            <li>Des outils de mesure d’audience (cookies anonymisés)</li>
+        </ul>
 
-    <h2>4. Vos droits</h2>
-    <ul>
-      <li><strong>Droit d’accès</strong> à vos données personnelles</li>
-      <li><strong>Droit de rectification</strong> en cas d’erreur ou d’inexactitude</li>
-      <li><strong>Droit à l’effacement</strong> (« droit à l’oubli »)</li>
-      <li><strong>Droit d’opposition</strong> ou de limitation du traitement</li>
-      <li><strong>Droit de retirer votre consentement</strong> à tout moment</li>
-    </ul>
-    <p>📩 Pour exercer ces droits : <a href="mailto:contact@mon-assistant-formalites.fr">contact@mon-assistant-formalites.fr</a></p>
+        <!-- Article 2 -->
+        <h2>2. Finalités de traitement</h2>
+        <ul>
+            <li>Répondre à vos demandes et échanges</li>
+            <li>Réaliser les prestations administratives demandées</li>
+            <li>Vous transmettre des informations utiles concernant votre activité ou nos services</li>
+            <li>Respecter nos obligations légales et réglementaires</li>
+        </ul>
 
-    <h2>5. Sécurité des données</h2>
-    <p>Nous mettons en œuvre des mesures techniques et organisationnelles appropriées afin de garantir la confidentialité, l’intégrité et la disponibilité de vos données (accès restreint, sauvegardes, sécurité logicielle, etc.).</p>
+        <!-- Article 3 -->
+        <h2>3. Partage des données</h2>
+        <p>
+            Vos données ne sont <strong>jamais vendues</strong>. Elles peuvent être partagées avec des tiers uniquement dans les cas suivants :
+        </p>
+        <ul>
+            <li>Dans le cadre d’une mission nécessitant le dépôt de documents (ex. Guichet Unique)</li>
+            <li>Pour répondre à une obligation légale</li>
+            <li>Avec votre consentement explicite et éclairé</li>
+            <li>
+                Emails envoyés via Mailjet ou paiements/facturation gérés par Stripe, Mon Assistant Formalités ne
+                conservant aucune information bancaire
+            </li>
+        </ul>
 
-    <h2>6. Cookies</h2>
-    <p>Notre site utilise des <strong>cookies</strong> strictement nécessaires à son bon fonctionnement ainsi que des cookies de mesure d’audience, anonymes et non traçants. Vous pouvez configurer votre navigateur pour bloquer les cookies ou être informé de leur utilisation.</p>
+        <!-- Article 4 -->
+        <h2>4. Vos droits</h2>
+        <ul>
+            <li><strong>Droit d’accès</strong> à vos données personnelles</li>
+            <li><strong>Droit de rectification</strong> en cas d’erreur ou d’inexactitude</li>
+            <li><strong>Droit à l’effacement</strong> (« droit à l’oubli »)</li>
+            <li><strong>Droit d’opposition</strong> ou de limitation du traitement</li>
+            <li><strong>Droit de retirer votre consentement</strong> à tout moment</li>
+        </ul>
+        <p>
+            📩 Pour exercer ces droits : <a href="mailto:contact@mon-assistant-formalites.fr">contact@mon-assistant-formalites.fr</a>
+        </p>
 
-    <h2>7. Public concerné</h2>
-    <p>Nos services s’adressent exclusivement à un public <strong>majeur</strong>. Aucune collecte intentionnelle de données personnelles concernant des mineurs n’est réalisée.</p>
+        <!-- Article 5 -->
+        <h2>5. Sécurité des données</h2>
+        <p>
+            Nous mettons en œuvre des mesures techniques et organisationnelles appropriées afin de garantir la confidentialité, l’intégrité et la disponibilité de vos données (accès restreint, sauvegardes, sécurité logicielle, etc.).
+        </p>
 
-    <h2>8. Durée de conservation</h2>
-    <p>Les données personnelles sont conservées uniquement le temps nécessaire à la réalisation des finalités pour lesquelles elles ont été collectées, sauf obligations légales contraires.</p>
+        <!-- Article 6 -->
+        <h2>6. Cookies</h2>
+        <p>
+            Notre site utilise des <strong>cookies</strong> strictement nécessaires à son bon fonctionnement ainsi que des cookies de mesure d’audience, anonymes et non traçants.
+            Vous pouvez configurer votre navigateur pour bloquer les cookies ou être informé de leur utilisation.
+        </p>
 
-    <h2>9. Modifications</h2>
-    <p>Cette politique de confidentialité est susceptible d’évoluer. La dernière mise à jour date du <strong>13 juillet 2025</strong>. Toute modification significative sera signalée sur le site.</p>
+        <!-- Article 7 -->
+        <h2>7. Public concerné</h2>
+        <p>
+            Nos services s’adressent exclusivement à un public <strong>majeur</strong>. Aucune collecte intentionnelle de données personnelles concernant des mineurs n’est réalisée.
+        </p>
 
-    <h2>10. Contact</h2>
-    <p>
-      Pour toute question relative à la protection de vos données personnelles :<br/>
-      <strong>Mon Assistant Formalités</strong><br/>
-      📧 <a href="mailto:contact@mon-assistant-formalites.fr">contact@mon-assistant-formalites.fr</a><br/>
-      📍 Cornas, 07130 – France
-    </p>
-  </article>
+        <!-- Article 8 -->
+        <h2>8. Durée de conservation</h2>
+        <p>
+            Les données personnelles sont conservées uniquement le temps nécessaire à la réalisation des finalités pour lesquelles elles ont été collectées, sauf obligations légales contraires.
+        </p>
+
+        <!-- Article 9 -->
+        <h2>9. Modifications</h2>
+        <p>
+            Cette politique de confidentialité est susceptible d’évoluer. La dernière mise à jour date du <strong>{formattedDate}</strong>.
+            Toute modification significative sera signalée sur le site.
+        </p>
+
+        <!-- Article 10 -->
+        <h2>10. Contact</h2>
+        <p>
+            Pour toute question relative à la protection de vos données personnelles :
+            <br /><strong>Mon Assistant Formalités</strong><br />
+            📧 <a href="mailto:contact@mon-assistant-formalites.fr">contact@mon-assistant-formalites.fr</a><br />
+            📍 Cornas, 07130 – France
+        </p>
+    </article>
 </Layout>
