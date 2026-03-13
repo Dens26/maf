@@ -1,6 +1,6 @@
 import type { APIContext } from 'astro'
 import Stripe from 'stripe'
-import { getFormalityByDemandeId } from '@utils/supabase'
+import { getFormalityByDemandeId, updateFormalityStripeCustomerId } from '@utils/supabase'
 
 const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY as string, {
     apiVersion: '2026-02-25.clover',
@@ -23,15 +23,6 @@ const FORMALITY_LABELS: Record<number, string> = {
     4: 'Correction',
     5: 'Cessation',
 }
-
-const STATUS = {
-    SENT: 2,
-    PAID: 3,
-    FAILED: 4,
-    EXPIRED: 5,
-    CANCELED: 6,
-    REFUND: 7
-} as const
 
 export async function POST({ request }: APIContext) {
     try {
@@ -63,6 +54,7 @@ export async function POST({ request }: APIContext) {
         } = formality
 
         const amount = FORMALITY_PRICES[typeId]
+        const advanceAmount = 1000
         const label = FORMALITY_LABELS[typeId]
 
         if (!email || !amount || !label) {
@@ -72,35 +64,46 @@ export async function POST({ request }: APIContext) {
         // Récupération ou création client Stripe
         const existingCustomers = await stripe.customers.list({
             email,
-            limit: 1,
-        })
+            limit: 10, // plusieurs clients possible avec le même email
+        });
 
-        const customer =
-            existingCustomers.data[0] ??
-            (await stripe.customers.create({
-                email,
-                name: `${firstname ?? ''} ${name ?? ''}`.trim(),
-                preferred_locales: ['fr'],
-                metadata: { demandeId },
-                address: {
-                    line1: address,
-                    postal_code: zipcode,
-                    city,
-                    country: 'FR',
-                },
-            }))
+        const customer = existingCustomers.data.find(c => 
+            c.name?.trim() === `${firstname ?? ''} ${name ?? ''}`.trim()
+        );
+
+        const finalCustomer = customer ?? await stripe.customers.create({
+            email,
+            name: `${firstname ?? ''} ${name ?? ''}`.trim(),
+            preferred_locales: ['fr'],
+            metadata: { demandeId },
+            address: {
+                line1: address,
+                postal_code: zipcode,
+                city,
+                country: 'FR',
+            },
+        });
+
+        await updateFormalityStripeCustomerId(demandeId, finalCustomer.id);
 
         // Création item de facture
         await stripe.invoiceItems.create({
-            customer: customer.id,
+            customer: finalCustomer.id,
             amount,
             currency: 'eur',
             description: `Formalité ${label} n° ${demandeId}`,
         })
 
+        await stripe.invoiceItems.create({
+            customer: finalCustomer.id,
+            amount: advanceAmount,
+            currency: 'eur',
+            description: `Avance pour formalité ${label} n° ${demandeId}`,
+        })
+
         // 5️⃣ Création facture (sans auto_advance)
         const invoice = await stripe.invoices.create({
-            customer: customer.id,
+            customer: finalCustomer.id,
             collection_method: 'send_invoice',
             days_until_due: 7,
             auto_advance: false, // ⚠️ on désactive l'automatique
@@ -119,6 +122,7 @@ export async function POST({ request }: APIContext) {
 
         // Réponse API
         return new Response(JSON.stringify({ success: true, invoiceId: finalizedInvoice.id, invoiceUrl: finalizedInvoice.hosted_invoice_url }), { status: 200 })
+        
     } catch (error) {
         console.error('Erreur create-invoice:', error)
         return jsonError('Erreur serveur lors de la création de facture', 500)

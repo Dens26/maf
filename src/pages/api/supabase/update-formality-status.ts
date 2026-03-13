@@ -9,19 +9,19 @@ export const POST: APIRoute = async ({ request }) => {
             return new Response(JSON.stringify({ error: 'Paramètres manquants' }), { status: 400 });
 
         // 1️⃣ Récupérer la demande complète
-        const demande = await getFormalityByDemandeId(demandeId);
+        const formality = await getFormalityByDemandeId(demandeId);
 
-        if (!demande)
+        if (!formality)
             return new Response(JSON.stringify({ error: 'Demande introuvable' }), { status: 404 });
 
-        const paymentStatus = demande.statutpaiementid;
-        const currentFormalityStatus = demande.statutformaliteid;
+        const paymentStatus = formality.statutpaiementid;
+        const currentFormalityStatus = formality.statutformaliteid;
 
         let newStatus: number | null = null;
 
         // 2️⃣ Gestion des transitions métier
         switch (action) {
-            case "demarrer":
+            case "demarrer_formalite":
                 // Paiement obligatoire validé
                 if (paymentStatus !== 3)
                     return new Response(JSON.stringify({ error: 'Paiement non validé' }), { status: 403 });
@@ -33,23 +33,23 @@ export const POST: APIRoute = async ({ request }) => {
                 newStatus = 2; // en traitement
                 break;
 
-            case "terminer":
+            case "terminer_formalite":
                 // Seulement si formalité en traitement
-                if (currentFormalityStatus !== 2)
+                if (currentFormalityStatus !== 2 || !formality.ref_inpi)
                     return new Response(JSON.stringify({ error: 'Transition invalide' }), { status: 400 });
 
                 newStatus = 3; // terminée
                 break;
 
-            case "rejeter":
+            case "rejeter_formalite":
                 // Seulement si formalité en traitement
-                if (currentFormalityStatus !== 2)
+                if (currentFormalityStatus !== 2 || !formality.ref_inpi)
                     return new Response(JSON.stringify({ error: 'Transition invalide' }), { status: 400 });
 
                 newStatus = 4; // rejetée
                 break;
 
-            case "annuler":
+            case "annuler_formalite":
                 // Annulation possible si en traitement ou en attente
                 if (![1, 2].includes(currentFormalityStatus))
                     return new Response(JSON.stringify({ error: 'Transition invalide' }), { status: 400 });

@@ -53,6 +53,7 @@ export async function POST({ request }: APIContext) {
                     invoiceNumber: fullInvoice.number || null,
                     invoiceUrl: fullInvoice.hosted_invoice_url || null,
                     invoicePdf: fullInvoice.invoice_pdf || null,
+                    amountPaid: fullInvoice.amount_due || null,
                 })
                 break
             case 'invoice.sent':
@@ -74,6 +75,7 @@ export async function POST({ request }: APIContext) {
                     invoiceNumber: null,
                     invoiceUrl: null,
                     invoicePdf: null,
+                    amountPaid: null,
                 })
                 break
             case 'invoice.updated':

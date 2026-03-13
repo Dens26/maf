@@ -7,7 +7,7 @@ import { sendCreateNotification } from "@utils/mailService";
 import { checkDuplicateFormality } from '@utils/supabase';
 import { createFormality } from '@utils/supabase.server';
 
-const MAX_PDF_SIZE = 5_000_000; // 5MB
+const MAX_PDF_SIZE = 1_000_000; // 5MB
 
 export async function POST({ request }: APIContext) {
   try {
@@ -86,6 +86,7 @@ export async function POST({ request }: APIContext) {
 
     // Envoi du mail notification (désactivé temporairement)
     await sendCreateNotification({
+      firstname,
       name,
       email,
       phone,

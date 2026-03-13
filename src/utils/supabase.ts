@@ -12,6 +12,7 @@ type InvoiceUpdateData = {
     invoiceNumber: string | null
     invoiceUrl: string | null
     invoicePdf: string | null
+    amountPaid: number | null
 }
 
 /* GETTERS / SELECT */
@@ -49,7 +50,7 @@ export async function getFormalityByDemandeId(demandeId: string) {
 export async function getFormalitiesByStatus(statutFormaliteId: number) {
     const { data, error } = await supabase
         .from('demandes')
-        .select(`id, demandeid, stripe_customerid, email, phone, name, firstname, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, city, zipcode, datecreation, ref_inpi`)
+        .select(`id, demandeid, stripe_customer_id, email, phone, name, firstname, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, city, zipcode, datecreation, ref_inpi, amount_paid, amount_refunded`)
         .eq('statutformaliteid', statutFormaliteId)
         .order('datecreation', { ascending: false })
 
@@ -109,7 +110,7 @@ export async function updateFormalityStripeCustomerId(
 ) {
     const { error } = await supabase
         .from('demandes')
-        .update({ stripe_customerid: stripeCustomerId })
+        .update({ stripe_customer_id: stripeCustomerId })
         .eq('demandeid', demandeId)
 
     if (error) {
@@ -148,6 +149,34 @@ export async function updatePaymentStatus(
         throw err
     }
 }
+/**
+ * Mise à jour du montant remboursé
+ * @param demandeId 
+ * @param amountRefunded 
+ * @returns 
+ */
+export async function updateAmountRefunded(
+    demandeId: string,
+    amountRefunded: number
+) {
+    try {
+        const { error } = await supabase
+            .from('demandes')
+            .update({ amount_refunded: amountRefunded })
+            .eq('demandeid', demandeId)
+
+        if (error) {
+            console.error('ERREUR updatePaymentStatus Supabase:', error)
+            throw error
+        }
+
+        return { success: true }
+
+    } catch (err) {
+        console.error('ERREUR updatePaymentStatus:', err)
+        throw err
+    }
+}
 
 /**
  * Mise à jour des données de facture Stripe
@@ -165,6 +194,7 @@ export async function updateInvoiceData(
             stripe_invoice_number: data.invoiceNumber,
             stripe_invoice_url: data.invoiceUrl,
             stripe_invoice_pdf: data.invoicePdf,
+            amount_paid: data.amountPaid,
         })
         .eq('demandeid', demandeId)
 

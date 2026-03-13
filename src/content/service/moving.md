@@ -51,12 +51,15 @@ Un oubli ou une déclaration incorrecte peut entraîner :
 ## Déroulement de la procédure
 
 Vous complétez vos informations directement via le formulaire en ligne.  
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier chez MAF.  
-- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.  
+- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier chez MAF.
+- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.
 
-Après validation des informations par nos soins:
-- une **facture vous est envoyée**, et le traitement de la formalité ne commence **qu’après règlement complet**.  
-- Une fois le paiement validé, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation.  
+Après validation des informations par nos soins:  
+- Une **facture vous est envoyée** ainsi qu'un **mail de demande de pièces justificatives** (procuration, pièce d’identité, justificatif d’adresse, etc.).
+- Une fois le paiement validé et toutes les pièces reçues, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation finale.
+- Si certaines informations ou documents sont manquants, vous recevrez un **mail de demande de pièces complémentaires** pour compléter votre dossier.
+
+##### ⚠️ Le traitement de la formalité ne commence **qu’après règlement complet**
 
 ---
 
@@ -64,18 +67,23 @@ Après validation des informations par nos soins:
 
 Le service est proposé à partir de **69 € TTC**.  
 - Ce tarif couvre uniquement **la prestation d’accompagnement et de constitution du dossier**.  
-- Une **avance de 10 € TTC** est incluse pour couvrir les éventuelles régularisations.  
+- Une **avance de 10 € TTC** est incluse pour couvrir les éventuelles régularisations.
 
 **Exemple :** Pour un changement d'adresse, le tarif total payé sera **79 €** :  
-- 69 € pour la prestation  
-- 10 € d’avance pour les régularisations  
+- **69 €** pour la prestation  
+- **10 €** d’avance pour les régularisations
 
-Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents.  
+##### ⚠️ Le solde non utilisé de votre avance vous sera remboursé après validation du dossier.
 
-#### ⚠️ Des frais supplémentaires peuvent être demandés par les organismes valideurs (INSEE, TCO, CMA, MSA, etc.) et restent à la charge du client.
-##### ⚠️ Le solde restant de votre avance vous sera remboursé après validation du dossier.
+### Frais administratifs
 
-##### ⚠️ Ce délai ne comprend pas le temps de traitement des organismes officiels, qui peut varier.
+Des frais administratifs supplémentaires, consultables sur [le site officiel du Guichet Unique](https://formalites.entreprises.gouv.fr/tarifs.php), peuvent être demandés par les organismes compétents (INSEE, TCO, CMA, MSA, etc.) et **restent à la charge du client**.
+
+### Délais de traitement
+
+Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents.
+
+##### ⚠️ Ce délai correspond au traitement de votre dossier par MAF et ne comprend pas le temps de traitement des organismes officiels, qui peut varier.
 
 ---
 
@@ -97,6 +105,8 @@ En cas de **rejet définitif du dossier**, celui-ci sera considéré comme **clo
 - **MAF ne pourra en aucun cas être tenu responsable**, que le rejet résulte :
 - - d’informations inexactes ou incomplètes fournies par le déclarant,  
 - - de décisions, délais ou actions des organismes valideurs (INSEE, Greffe, Guichet Unique, etc.).
+
+##### ⚠️ Certains organismes valideurs peuvent procéder à un remboursement de leurs propres frais en cas de rejet. Ces remboursements, lorsqu’ils existent, sont traités directement par l’organisme concerné. **MAF n’intervient pas dans cette procédure et ne peut être tenu responsable de leur traitement ou de leur obtention.**
 
 ---
 
