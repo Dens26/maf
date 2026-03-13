@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
-import { sendRequestDocuments } from "@utils/mailService";
+import { sendCanceledFormalityNotification, sendCompletedFormalityNotification, sendRejectedFormalityNotification } from "@utils/mailService";
 import { getFormalityByDemandeId } from '@utils/supabase';
 
 
@@ -10,7 +10,8 @@ export async function POST({ request }: APIContext) {
         const body = await request.json();
 
         const {
-            demandeId
+            demandeId,
+            action
         } = body;
 
         // Récupération formalité
@@ -21,8 +22,20 @@ export async function POST({ request }: APIContext) {
             return jsonResponse({ error: 'Formalité introuvable' }, 400);
         }
 
-        // Envoi du mail notification (désactivé temporairement)
-        await sendRequestDocuments(formality.demandeid, formality.firstname, formality.name, formality.email);
+        // Envoi du mail notification
+        switch (action){
+            case 'terminer_formalite' :
+                await sendCompletedFormalityNotification(formality.demandeid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
+                break;
+            case 'rejeter_formalite' :
+                await sendRejectedFormalityNotification(formality.demandeid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
+                break;
+            case 'annuler_formalite' :
+                await sendCanceledFormalityNotification(formality.demandeid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
+                break;
+            default :
+                return new Response(JSON.stringify({ error: 'Action inconnue' }), { status: 400 });
+        }
 
         return jsonResponse({ success: true }, 200);
 

@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
-import { sendRequestDocuments } from "@utils/mailService";
+import { sendRefundNotification } from "@utils/mailService";
 import { getFormalityByDemandeId } from '@utils/supabase';
 
 
@@ -10,7 +10,8 @@ export async function POST({ request }: APIContext) {
         const body = await request.json();
 
         const {
-            demandeId
+            demandeId,
+            amount
         } = body;
 
         // Récupération formalité
@@ -22,7 +23,7 @@ export async function POST({ request }: APIContext) {
         }
 
         // Envoi du mail notification (désactivé temporairement)
-        await sendRequestDocuments(formality.demandeid, formality.firstname, formality.name, formality.email);
+        await sendRefundNotification(formality.demandeid, formality.firstname, formality.name, amount, formality.email);
 
         return jsonResponse({ success: true }, 200);
 

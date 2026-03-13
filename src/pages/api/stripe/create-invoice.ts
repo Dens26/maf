@@ -64,33 +64,38 @@ export async function POST({ request }: APIContext) {
         // Récupération ou création client Stripe
         const existingCustomers = await stripe.customers.list({
             email,
-            limit: 1,
-        })
+            limit: 10, // plusieurs clients possible avec le même email
+        });
 
-        const customer = existingCustomers.data[0] ?? (await stripe.customers.create({
-                email,
-                name: `${firstname ?? ''} ${name ?? ''}`.trim(),
-                preferred_locales: ['fr'],
-                metadata: { demandeId },
-                address: {
-                    line1: address,
-                    postal_code: zipcode,
-                    city,
-                    country: 'FR',
-                },
-            }))
-        updateFormalityStripeCustomerId(demandeId, customer.id)
+        const customer = existingCustomers.data.find(c => 
+            c.name?.trim() === `${firstname ?? ''} ${name ?? ''}`.trim()
+        );
+
+        const finalCustomer = customer ?? await stripe.customers.create({
+            email,
+            name: `${firstname ?? ''} ${name ?? ''}`.trim(),
+            preferred_locales: ['fr'],
+            metadata: { demandeId },
+            address: {
+                line1: address,
+                postal_code: zipcode,
+                city,
+                country: 'FR',
+            },
+        });
+
+        await updateFormalityStripeCustomerId(demandeId, finalCustomer.id);
 
         // Création item de facture
         await stripe.invoiceItems.create({
-            customer: customer.id,
+            customer: finalCustomer.id,
             amount,
             currency: 'eur',
             description: `Formalité ${label} n° ${demandeId}`,
         })
 
         await stripe.invoiceItems.create({
-            customer: customer.id,
+            customer: finalCustomer.id,
             amount: advanceAmount,
             currency: 'eur',
             description: `Avance pour formalité ${label} n° ${demandeId}`,
@@ -98,7 +103,7 @@ export async function POST({ request }: APIContext) {
 
         // 5️⃣ Création facture (sans auto_advance)
         const invoice = await stripe.invoices.create({
-            customer: customer.id,
+            customer: finalCustomer.id,
             collection_method: 'send_invoice',
             days_until_due: 7,
             auto_advance: false, // ⚠️ on désactive l'automatique

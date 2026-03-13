@@ -110,7 +110,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                         </tr>
                     ) : (
                         formalities.map(d => (
-                            <tr data-id={d.demandeid} data-name={d.name} data-firstname={d.firstname} data-payment-status={d.statutpaiementid} data-formality-status={d.statutformaliteid} data-ref_inpi={d.ref_inpi} class="hover:bg-gray-50 transition">
+                            <tr data-id={d.demandeid} data-name={d.name} data-firstname={d.firstname} data-email={d.email} data-payment-status={d.statutpaiementid} data-formality-status={d.statutformaliteid} data-ref_inpi={d.ref_inpi} class="hover:bg-gray-50 transition">
                                 
                                 <td class="px-6 py-2 text-center whitespace-nowrap text-gray-500" data-sort={new Date(d.datecreation).getTime()}>{new Date(d.datecreation).toLocaleDateString('fr-FR')}</td>
                                 <td class="px-6 py-4 text-center whitespace-nowrap font-medium text-gray-900" data-sort={d.name}>{d.name} {d.firstname}</td>
@@ -122,7 +122,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                                 <td class="px-6 py-2 text-center whitespace-nowrap">
                                     <button class="text-blue-600 text-center hover:underline cursor-pointer" data-pdf={d.pdf}>pdf-{d.id}</button>
                                 </td>
-                                <td class="px-6 py-2 whitespace-nowrap relative">
+                                <td class="text-center px-6 py-2 whitespace-nowrap relative">
                                     <Button variant="primary" size="sm" class="action-btn cursor-pointer">...</Button>
                                 </td>
                             </tr>
@@ -202,7 +202,8 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
         rejeter_formalite: 'Formalité rejetée',
         annuler_formalite: 'Annuler la formalité',
 
-        reference_inpi: 'Ajouter réf. INPI'
+        reference_inpi: '🔢 Ajouter réf. INPI',
+        envoyer_mail: '✉️ Envoyer un mail'
     };
 
     const ACTION_STYLES = {
@@ -217,6 +218,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
         annuler_formalite: 'text-red-600',
 
         reference_inpi: 'text-blue-600',
+        envoyer_mail: 'text-blue-600',
     };
 
     // Création du menu flotant
@@ -238,9 +240,11 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
             const tr = btn.closest('tr');
             currentRow = tr;
-        
-            const paymentStatus = Number(tr.dataset.paymentStatus);
+            
+            let paymentStatus = null
             const formalityStatus = Number(tr.dataset.formalityStatus);
+            if (formalityStatus != 5)
+                paymentStatus = Number(tr.dataset.paymentStatus);
 
             const paymentActions = PAYMENT_ACTIONS[paymentStatus] || [];
             const formalityActions = [];
@@ -260,7 +264,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
             // Terminer si formalité en traitement
             if (formalityStatus === 2) {
-                formalityActions.push('terminer_formalite', 'rejeter_formalite', 'annuler_formalite', 'reference_inpi');
+                formalityActions.push('terminer_formalite', 'rejeter_formalite', 'annuler_formalite', 'reference_inpi', 'envoyer_mail');
             }
 
             const baseClass = 'w-full text-small text-left hover:bg-gray-100 action-option px-3 py-2';
@@ -304,8 +308,8 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
             // Positionnement
             const rect = btn.getBoundingClientRect();
-            currentMenu.style.top = `${rect.bottom + window.scrollY}px`;
-            currentMenu.style.left = `${rect.left + window.scrollX}px`;
+            currentMenu.style.top = `${rect.bottom + window.scrollY + 10}px`;
+            currentMenu.style.left = `${rect.left + window.scrollX - 160}px`;
 
             currentMenu.classList.remove('hidden');
         });
@@ -324,6 +328,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
         const demandeId = currentRow.dataset.id;
         const ref_inpi = currentRow.dataset.ref_inpi;
         const name = currentRow.dataset.name + ' ' + currentRow.dataset.firstname;
+        const email = currentRow.dataset.email
 
         opt.disabled = true;
         opt.classList.add('opacity-50', 'pointer-events-none');
@@ -343,7 +348,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                 if (!result.ok) throw new Error(data.error || 'Erreur paiement');
 
                 // Envoie du mail de demande de PJ
-                const response = await fetch('/api/mailjet/request-documents', {
+                await fetch('/api/mailjet/request-documents', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -368,6 +373,7 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
             }
 
             // Annulation d'un lien de paiement stripe
+            // Envoie de mail d'annulation
             if (action === 'annuler_facture') {
                 const result = await fetch(`/api/stripe/cancel-invoice`, {
                     method: 'POST',
@@ -412,6 +418,18 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                     const data = await result.json();
                     if (!result.ok) throw new Error(data.error || 'Erreur lors du remboursement');
 
+                    // Envoie du mail de notification du remboursement
+                    await fetch('/api/mailjet/refund-invoice', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            demandeId: demandeId,
+                            amount: (amount / 100).toFixed(2).toString() 
+                        })
+                    });
+
                     location.reload();
                 } catch (err) {
                     console.error(err);
@@ -419,26 +437,12 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
                 }
             }
 
-            // Annulation d'un lien de paiement stripe
-            if (action === 'annuler_paiement') {
-                const result = await fetch(`/api/stripe/cancel-invoice`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ demandeId: demandeId })
-                });
-                const data = await result.json();
-
-                if (!result.ok) throw new Error(data.error || "Erreur lors de l'anulation");
-
-                location.reload();
-            }
-
             // Actions formalité
             const formaliteActionsList = ['demarrer_formalite', 'terminer_formalite', 'rejeter_formalite', 'annuler_formalite'];
 
             if (formaliteActionsList.includes(action)) {
                 try {
-                    if (action === 'terminer_formalite' || action === 'rejeter_formalite'){
+                    if ((action === 'terminer_formalite' || action === 'rejeter_formalite') && !ref_inpi){
                         alert('Veuillez renseigner la référence INPI afin de valider votre action');
                         return;
                     }
@@ -451,7 +455,19 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
                     if (!result.ok) throw new Error(data.error || "Erreur lors de la mise à jour du statut de la formalité");
 
-                    /* !!!!!!!! ENVOYER MAIL AU CLIENT !!!!!!!!! */
+                    // Envoi du mail de confirmation
+                    try{
+                        const result = await fetch('/api/mailjet/formality-notification', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ demandeId: demandeId, action: action })
+                        });
+                        if (!result.ok) throw new Error(data.error || "Erreur lors de l'envoi du mail de confirmation");
+                    } catch (err) {
+                        console.error('Erreur lors de la requête mailjet:', err);
+                    }
 
                     location.reload();
 
@@ -486,6 +502,10 @@ const formalities = await getFormalitiesByStatus(formalityStatutId);
 
                 location.reload();
             }
+
+            // Envoi d'un email
+            if (action === 'envoyer_mail')
+                window.location.href = `mailto:${email}`;
 
         } catch (err) {
             console.error('catch ', err);

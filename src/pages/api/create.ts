@@ -86,6 +86,7 @@ export async function POST({ request }: APIContext) {
 
     // Envoi du mail notification (désactivé temporairement)
     await sendCreateNotification({
+      firstname,
       name,
       email,
       phone,
