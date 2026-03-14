@@ -498,6 +498,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (e.target.name === "healthinsurance")
       e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
+
+    if (e.target.name === "city")
+      e.target.value = e.target.value.replace(/\d/g, '');
   });
 
   /* ===================== INIT ===================== */

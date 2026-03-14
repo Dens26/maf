@@ -368,7 +368,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
         const createLine = (label, values, way = 'right') => `
         <div class="flex justify-between border-b border-gray-200 py-1">
-            <span class="font-medium">${label}</span>
+            <span class="font-medium mr-1">${label}</span>
             <span class="text-gray-600 text-${way}">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
         </div>
         `;
@@ -386,10 +386,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         };
         const address = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`;
 
-        const addressParts = [
-            `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`.trim(),
-            `${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`.trim(),
-        ];
+        const addressParts = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''} ${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`;
 
         /* DISPLAY RECAP */
         const displayRecap = () => {
@@ -439,10 +436,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 // INFO CONJOINT
                 if (entrepreneur.partnerbirthname) {
-                    const partnerAddress = [
-                        `${entrepreneur.partnertracknumber || ''} ${entrepreneur.partnercomplementnumber || ''} ${entrepreneur.partnertracktype || ''} ${entrepreneur.partnerway || ''} ${entrepreneur.partneradditionaladdress || ''}`.trim(),
-                        `${entrepreneur.partnerzipcode || ''} ${entrepreneur.partnercity || ''} ${formatCountry(entrepreneur.partnercountry) || ''}`.trim(),
-                    ];
+                    const partnerAddress = `${entrepreneur.partnertracknumber || ''} ${entrepreneur.partnercomplementnumber || ''} ${entrepreneur.partnertracktype || ''} ${entrepreneur.partnerway || ''} ${entrepreneur.partneradditionaladdress || ''} ${entrepreneur.partnerzipcode || ''} ${entrepreneur.partnercity || ''} ${formatCountry(entrepreneur.partnercountry) || ''}`;
                     const rows = [
                         createLine('Genre', capitalizeWords(entrepreneur.partnergender)),
                         createLine('Nom de naissance', (entrepreneur.partnerbirthname || '').toUpperCase()),
@@ -471,7 +465,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
             // ---------------- BUSINESS ----------------
             if (Object.keys(business).length) {
-                const businessAddress = `${business.tracknumber || ''} ${business.complementnumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`;
+                const businessAddress = `${business.tracknumber || ''} ${business.complementnumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.additionaladdress} ${business.zipcode || ''} ${business.city || ''} ${formatCountry(business.country) || ''} `;
 
                 let rows = [];
                 // INFORMATION SUR L'ANCIENNE ACTIVITE DEJA EXERCEE
@@ -487,17 +481,23 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     recapContainer.appendChild(createSection('Activité déjà exercée', rows));
 
                 // INFORMATION DE L'ENTREPRISE
-                rows = [createLine('Micro-entreprise', business.micro)];
-
-                rows.push(
+                rows = [
+                    createLine('Versement libératoire', business.versementliberatoire),
+                    createLine('Micro-entreprise', business.micro),
                     createLine('Déclaration URSSAF', business.insuranceorganization),
                     createLine("Contrat d'appui", business.supportcontract),
                     createLine("Demande d'ACCRE", business.accre),
-                );
+                ];
+                console.log(business)
+
                 if (business.domiciliationname)
                     rows.push(createLine('Organisme de domiciliation', business.domiciliationname));
                 if (business.domiciliationsiren)
                     rows.push(createLine('Siren de domiciliation', business.domiciliationsiren));
+                if (business.correspondance === 'oui')
+                    rows.push(createLine('Adresse de correspondance', businessAddress));
+                else
+                    rows.push(createLine('Adresse de correspondance', addressParts));
                 recapContainer.appendChild(createSection("Informations de l'entreprise à créer", rows));
 
                 // ACTIVITES DE L'ENTREPRISE
@@ -561,11 +561,22 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 }
             }
             // OBSERVATION
+            let rows = [];
+            if (business.diffusioninsee == 'oui')
+                rows.push(createLine('','Vous avez exercé votre droit d’opposition à la diffusion publique des informations relatives à votre entreprise au répertoire sirene de l’INSEE'));
+            else
+                rows.push(createLine('',"Vous n'avez pas exercé votre droit d’opposition à la diffusion publique des informations relatives à votre entreprise au répertoire sirene de l’INSEE"));
+
+            if (business.prospection == 'oui')
+                rows.push(createLine('','Vous avez consenti à la mise à disposition de vos données personnelles à des fins de prospection'));
+            else
+                rows.push(createLine('',"Vous n'avez pas consenti à la mise à disposition de vos données personnelles à des fins de prospection"));
+
             if (business.observation != '') {
-                const rows = [createLine('Précision utile à votre demande', '')];
+                rows.push(createLine('Précision utile à votre demande', ''));
                 rows.push(createLine('', business.observation, 'left'));
 
-                recapContainer.appendChild(createSection('Informations complémentaire', rows));
+                recapContainer.appendChild(createSection('Informations complémentaires', rows));
             }
         };
 

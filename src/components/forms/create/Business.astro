@@ -6,6 +6,7 @@ import Select from '@components/ui/form/Select.astro';
 import Date from '@components/ui/form/Date.astro';
 import Textarea from '@components/ui/form/Textarea.astro';
 import countries from 'public/data/countries.json';
+import Checkbox from '@components/ui/form/Checkbox.astro';
 
 const existingsirenOptions = [
     { label: 'Oui', value: 'oui' },
@@ -30,6 +31,11 @@ const supportcontractOptions = [
 const turnoverOptions = [
     { label: 'Mensuel', value: 'mensuel' },
     { label: 'Trimestriel', value: 'trimestriel' },
+];
+
+const versementliberatoireOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' }
 ];
 
 const otheractivityOptions = [
@@ -149,8 +155,9 @@ const formBackground = 'light';
 
   <!-- FISCALITÉ -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
-    <div class="text-md font-semibold">Fiscalité</div>
+    <div class="text-md font-semibold">Fiscalité <a class="info-link" target="_blank" href="https://www.impots.gouv.fr/professionnel/je-choisis-le-regime-du-micro-entrepreneur-auto-entrepeneur" title="En savoir plus sur la fiscalité">ℹ️</a> </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+      <Radio label="Option pour le versement libératoire" id="versementliberatoire" name="versementliberatoire" options={versementliberatoireOptions} required background={formBackground} />
       <Radio label="Souhaitez-vous le régime micro ?" id="micro" name="micro" options={microOptions} required background={formBackground} />
       <Select label="Périodicité de déclaration CA" id="insuranceorganization" name="insuranceorganization" options={turnoverOptions} required background={formBackground} />
     </div>
@@ -184,6 +191,10 @@ const formBackground = 'light';
   <!-- ADRESSE DE L'ÉTABLISSEMENT -->
   <div id="localaddress-wrapper" class="hidden space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 transition-all duration-300">
     <div class="text-md font-semibold">Adresse de l'établissement</div>
+    <div>
+        <Checkbox label="Je souhaite que cette adresse soit utilisée comme adresse de correspondance" value="oui" id="correspondance" name="correspondance" background={formBackground} />
+        <p class="text-sm text-primary mt-1">⚠️ Par défaut, l’adresse de correspondance est celle de l’entrepreneur. Cochez cette case uniquement si vous voulez utiliser une adresse différente.</p>
+    </div>
     <div class="grid grid-cols-12 gap-2 sm:gap-4">
       <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
       <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
@@ -203,6 +214,8 @@ const formBackground = 'light';
   <!-- OBSERVATION -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Informations complémentaires</div>
+    <Checkbox label="Je demande la non-diffusion publique des informations relatives à mon entreprise dans le répertoire Sirene de l’INSEE" value="oui" id="diffusioninsee" name="diffusioninsee" background={formBackground} />
+    <Checkbox label="Je consens à la mise à disposition de mes données personnelles à des fins de prospection" value="oui" id="prospection" name="prospection" background={formBackground} />
     <Textarea rows={5} label="Précision utile à votre demande" id="observation" name="observation" background={formBackground} class="text-sm" />
   </div>
 
@@ -260,6 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (field.type === 'radio') {
         const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
         if (radio) radio.checked = true;
+      } else if (field.type === 'checkbox') {
+        field.checked = value === field.value;
       } else {
         field.value = value;
       }
@@ -397,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (needsAddress) {
       localWrapper.classList.remove('hidden');
       localInputs.forEach(el => {
-        if (el.dataset.optional !== 'true' && el.id !== 'complementnumber' && el.id !== 'additionaladdress') {
+        if (el.dataset.optional !== 'true' && el.id !== 'complementnumber' && el.id !== 'additionaladdress' && el.id !== 'correspondance') {
           el.required = true;
         }
       });
@@ -500,6 +515,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   formOfActivitySelect.addEventListener('change', syncForm);
   domiciliationSelect.addEventListener('change', syncForm);
+
+  document.addEventListener('input', e => {
+    if (e.target.name === "zipcode" && (country.value === "FR" || country.value === ""))
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+
+    if (e.target.name === "partnerzipcode" && (partnerCountry.value === "FR" || partnerCountry.value === ""))
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+
+    if (['tracknumber', 'partnertracknumber', 'phone'].includes(e.target.name))
+      e.target.value = e.target.value.replace(/\D/g, '');
+
+    if (e.target.name === "healthinsurance")
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
+
+    if (e.target.name === "city")
+      e.target.value = e.target.value.replace(/\d/g, '');
+  });
 
   /*** ================= INIT ================= ***/
   restoreForm();

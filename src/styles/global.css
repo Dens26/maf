@@ -670,6 +670,17 @@
         /* line-height: 1.6; */
     }
 
+    .info-link {
+    margin-left: 4px;
+    font-size: 0.9em;
+    text-decoration: none;
+    opacity: 0.7;
+    }
+
+    .info-link:hover {
+    opacity: 1;
+}
+
 }
 
 @layer utilities {

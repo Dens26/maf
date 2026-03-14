@@ -74,6 +74,7 @@ export async function getFormalitiesByStatus(statutFormaliteId: number) {
 export async function checkDuplicateFormality(
     email: string,
     name: string,
+    firstname: string,
     typeFormaliteId: number
 ) {
     try {
@@ -82,6 +83,7 @@ export async function checkDuplicateFormality(
             .select('demandeid, statutformaliteid')
             .eq('email', email)
             .eq('name', name)
+            .eq('firstname', firstname)
             .eq('typeformaliteid', typeFormaliteId)
             .in('statutformaliteid', [1, 2])
             .maybeSingle()

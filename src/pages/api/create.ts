@@ -53,7 +53,7 @@ export async function POST({ request }: APIContext) {
     saveToken(token, pdf);
 
     // Vérification doublon
-    const result = await checkDuplicateFormality(email, name, typeFormaliteId);
+    const result = await checkDuplicateFormality(email, name, firstname, typeFormaliteId);
 
     if (result.status === 'error_db')
       return jsonResponse({ error: "error_db" }, 500);

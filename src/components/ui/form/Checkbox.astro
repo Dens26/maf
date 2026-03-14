@@ -11,6 +11,7 @@ interface Props {
     label: string;
     id: string;
     name: string;
+    value?: string;
     options?: Option[];  // Make options optional to support single checkbox use case
     required?: boolean;
     background?: ThemeColor;
@@ -20,7 +21,8 @@ interface Props {
 const { 
     label, 
     id,
-    name, 
+    name,
+    value,
     options,
     required = false,
     background = 'base',
@@ -76,6 +78,7 @@ const inputTextClass = getInputTextColor(background);
                 type="checkbox"
                 id={id}
                 name={name}
+                value={value}
                 required={required}
                 class={`
                     h-4 w-4 
