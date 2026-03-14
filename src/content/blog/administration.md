@@ -1,10 +1,13 @@
 ---
-title: "Quelles sont les obligations administratives annuelles d’une EI ?"
+title: "Obligations administratives annuelles d’une EI ?"
 excerpt: "Découvrez les principales obligations administratives qu'un entrepreneur individuel doit respecter chaque année."
 featuredImage: "./images/administration.jpg"
 publishDate: "2025-05-15"
 publish: true
 categories: ["Formalities"]
+
+link: "/services"
+text: "Commencer maintenant"
 
 seo:
   title: "Quelles sont les obligations administratives annuelles d’une EI ?"
@@ -12,66 +15,84 @@ seo:
   image: "./images/administration.jpg"
 ---
 
-## Quelles sont les obligations administratives annuelles d’une EI ?
+## Quelles sont les obligations administratives annuelles d’une entreprise individuelle ?
 
-Même si l’entreprise individuelle (EI) est un statut simplifié, elle n’échappe pas à certaines obligations administratives annuelles. Voici un récapitulatif des démarches à connaître pour rester en règle.
+L’entreprise individuelle est souvent perçue comme une structure simple à gérer. Toutefois, certaines **obligations administratives et déclaratives doivent être respectées chaque année** afin de maintenir la conformité de l’activité.
 
----
-
-### 1. Déclaration de revenus
-
-Chaque année, vous devez déclarer les revenus générés par votre activité :
-
-- **Micro-entreprise** : déclaration du chiffre d’affaires via votre espace personnel sur [impots.gouv.fr](https://www.impots.gouv.fr/). Le fisc applique ensuite un abattement forfaitaire.
-- **EI au régime réel** : vous devez établir un **compte de résultat**, puis déclarer le **bénéfice réel** dans votre déclaration 2042-C PRO.
-
-💡 Si vous avez opté pour le **versement libératoire de l’impôt**, cela ne vous dispense pas de la déclaration.
+Voici les principales démarches à connaître.
 
 ---
 
-### 2. Déclaration de TVA (si assujetti)
+### 1. Déclarer les revenus de l’activité
 
-- Si vous êtes **sous franchise en base** (cas fréquent en micro), aucune déclaration de TVA n’est requise.
-- Si vous êtes assujetti : déclarations **mensuelles ou trimestrielles** à effectuer selon votre régime (réel simplifié ou réel normal).
+Chaque année, les revenus issus de l’entreprise doivent être déclarés à l’administration fiscale.
 
----
+Selon le régime choisi :
 
-### 3. Paiement des cotisations sociales
+- **Micro-entreprise** : le chiffre d’affaires est déclaré à l’administration fiscale, qui applique un **abattement forfaitaire** pour déterminer le revenu imposable.  
+- **Entreprise individuelle au régime réel** : le bénéfice réel doit être déterminé à partir des éléments comptables de l’activité, puis déclaré dans la déclaration de revenus.
 
-- En **micro-entreprise** : déclaration du chiffre d’affaires chaque mois ou trimestre pour calculer vos cotisations.
-- En **EI classique** : les cotisations sont calculées sur le bénéfice réel, avec **déclarations sociales** à faire via l’Urssaf.
+Dans les deux cas, ces informations sont intégrées à la déclaration fiscale annuelle.
 
----
-
-### 4. Tenue d’une comptabilité (selon le régime)
-
-- Micro : comptabilité **très simplifiée** (livre des recettes, registre des achats pour certaines activités).
-- Régime réel : comptabilité **complète** obligatoire (livres comptables, bilan, compte de résultat...).
+##### ⚠️ L’option pour le **versement libératoire de l’impôt** ne dispense pas de la déclaration des revenus.
 
 ---
 
-### 5. Assurance professionnelle (si obligatoire)
+### 2. Déclarer la TVA lorsque l’entreprise y est assujettie
 
-Certaines activités imposent une **attestation d’assurance** à jour (responsabilité civile pro, décennale, etc.). Pensez à la renouveler.
+Certaines entreprises individuelles sont soumises à la taxe sur la valeur ajoutée (TVA).
+
+Selon la situation :
+
+- Si l’entreprise bénéficie de la **franchise en base de TVA**, aucune déclaration n’est nécessaire.  
+- Si l’entreprise est **assujettie à la TVA**, des déclarations doivent être réalisées périodiquement (mensuelles, trimestrielles ou annuelles selon le régime).
+
+##### 💡 Ces déclarations permettent de reverser la TVA collectée à l’administration fiscale.
 
 ---
 
-### 6. Mise à jour des informations en cas de changement
+### 3. Déclarer et payer les cotisations sociales
 
-Vous devez déclarer toute **modification** (activité, nom commercial, adresse...) via le **Guichet Unique INPI**. Cela peut être nécessaire plusieurs fois par an, mais c’est une **vigilance annuelle essentielle** à prévoir.
+Les entrepreneurs individuels doivent également déclarer leurs revenus auprès des organismes sociaux afin de calculer les cotisations dues.
+
+Selon le régime :
+
+- En **micro-entreprise**, le chiffre d’affaires est déclaré mensuellement ou trimestriellement.  
+- En **entreprise individuelle au régime réel**, les cotisations sont calculées à partir du bénéfice déclaré.
+
+##### 💡 Ces déclarations sont généralement réalisées via les services en ligne de l’Urssaf.
 
 ---
 
-### Et si vous ne respectez pas ces obligations ?
+### 4. Tenir une comptabilité adaptée au régime
 
-Des **pénalités financières** ou une radiation peuvent survenir. Il est donc essentiel de respecter le calendrier administratif.
+Les obligations comptables varient selon le régime fiscal de l’entreprise.
 
-📆 Besoin d’aide pour vos obligations annuelles ?
+- **Micro-entreprise** : tenue d’une comptabilité simplifiée (livre des recettes et, dans certains cas, registre des achats).  
+- **Régime réel** : tenue d’une comptabilité complète comprenant notamment un bilan et un compte de résultat.
 
-Chez **Mon Assistant Formalités**, je vous accompagne pour :
+##### ⚠️ La conservation des documents comptables est également obligatoire pendant plusieurs années.
 
-- vous assurer de la conformité de vos déclarations,
-- réaliser les formalités en temps voulu,
-- éviter les oublis ou erreurs qui pourraient coûter cher.
+---
 
-👉 [Prenez contact avec moi](/contact) pour rester serein toute l’année.
+### 5. Vérifier les assurances professionnelles
+
+Certaines activités nécessitent une **assurance professionnelle obligatoire** (responsabilité civile professionnelle, assurance décennale, etc.).
+
+##### ⚠️ Il est important de vérifier régulièrement que ces assurances sont à jour et adaptées à l’activité exercée.
+
+---
+
+### 6. Mettre à jour les informations de l’entreprise si nécessaire
+
+En cas de changement dans la vie de l’entreprise (activité, adresse, nom commercial, etc.), une **déclaration de modification** doit être réalisée.
+
+Depuis 2023, ces formalités sont effectuées via le **Guichet unique de l’INPI**, qui centralise les démarches administratives des entreprises.
+
+---
+
+### Rester en conformité avec les obligations administratives
+
+Le respect des obligations administratives permet d’éviter des pénalités ou des difficultés dans la gestion de l’entreprise.
+
+Il est donc important de suivre régulièrement ces démarches et de veiller à la mise à jour des informations de l’entreprise lorsque cela est nécessaire.

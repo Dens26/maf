@@ -1,63 +1,111 @@
 ---
-title: "Créer son entreprise individuelle : Guide complet pour démarrer"
-excerpt: "Découvrez les étapes essentielles pour créer votre entreprise individuelle facilement et en toute sérénité"
+title: "Créer son entreprise individuelle"
+excerpt: "Découvrez les étapes essentielles pour créer votre entreprise individuelle."
 featuredImage: "./images/create-company.jpg"
 publishDate: "2025-05-01"
 publish: true
 categories: ["Formalities"]
 
+link: "/forms/create/entrepreneur"
+text: "Commencer ma création"
+
 seo:
-  title: "Créer son entreprise individuelle : Guide complet pour démarrer"
-  description: "Découvrez les étapes essentielles pour créer votre entreprise individuelle facilement et en toute sérénité."
+  title: "Créer son entreprise individuelle"
+  description: "Découvrez les étapes essentielles pour créer votre entreprise individuelle et démarrer votre activité."
   image: "./images/create-company.jpg"
 ---
 
-## Créer son entreprise individuelle : Guide complet
+## Comment créer une entreprise individuelle ?
 
-Créer une entreprise individuelle (EI) est une étape importante pour se lancer en tant qu’entrepreneur. Ce statut simplifié convient particulièrement aux personnes souhaitant démarrer une activité en nom propre, sans créer de société.
+Créer une entreprise individuelle (EI) permet de démarrer une activité professionnelle en nom propre, sans constituer de société.
 
-### Étapes essentielles pour créer votre EI
+Ce statut est souvent choisi pour sa **simplicité de fonctionnement** et pour la rapidité des démarches de création.
 
-### 1. Choisir votre activité et vérifier la réglementation
-   - Assurez-vous que votre activité est compatible avec le statut d’entreprise individuelle.  
-   - Certaines activités sont réglementées et nécessitent des qualifications spécifiques.
-
-1. **Déterminer le régime fiscal et social**  
-   - Micro-entreprise (régime simplifié) ou régime réel d’imposition.  
-   - Faites votre choix en fonction du chiffre d’affaires prévisionnel, des charges et des besoins.
-
-2. **Choisir un nom commercial (facultatif)**  
-   - Vous pouvez exercer sous votre nom personnel ou adopter un nom commercial pour votre communication.
-
-3. **Effectuer la déclaration via le Guichet Unique (INPI)**  
-   - Depuis 2023, toutes les formalités de création se font en ligne via le Guichet Unique de l’INPI:
- - [https://www.guichet-entreprises.fr](https://guichet-unique.inpi.fr/companies)  
-   - Cette plateforme centralise et simplifie vos démarches administratives.
-
-4. **Obtenir votre numéro SIREN / SIRET**  
-   - Après validation, l’INSEE vous attribue vos identifiants indispensables pour l’exercice de votre activité.
-
-5. **Souscrire aux assurances professionnelles**  
-   - Certaines activités imposent une assurance responsabilité civile professionnelle (RC Pro).  
-   - Vérifiez vos obligations selon votre secteur.
-
-### Pourquoi faire appel à un mandataire pour vos formalités ?
-
-La création d’une entreprise individuelle peut s’avérer complexe, notamment avec les évolutions récentes de la plateforme officielle et des réglementations. En tant que mandataire spécialisé, je vous accompagne pour :
-
-- Rédiger et déposer vos formalités sans erreur,  
-- Gagner du temps et éviter les oublis,  
-- Vous assurer de la conformité réglementaire,  
-- Bénéficier d’un suivi personnalisé dans toutes les étapes.
-
-Vous pourrez ainsi vous concentrer pleinement sur le développement de votre activité, en toute sérénité.
+Avant de lancer votre activité, plusieurs étapes administratives doivent être réalisées afin d’enregistrer officiellement votre entreprise.
 
 ---
 
-Pour toute question ou pour démarrer vos démarches, n’hésitez pas à me contacter.
+### 1. Définir l’activité de l’entreprise
 
+La première étape consiste à déterminer précisément l’activité que vous souhaitez exercer.
 
+Certaines activités sont **réglementées** et peuvent nécessiter :
 
-<Layout>
-    <SplitPanel content={aboutSection} imagePosition="right" background="light" padding="base" />
-</Layout>
+- un diplôme ou une qualification professionnelle  
+- une autorisation administrative  
+- une inscription auprès d’un organisme spécifique
+
+##### ⚠️ Il est important de vérifier ces éléments avant d’effectuer la déclaration de création.
+
+---
+
+### 2. Choisir le régime fiscal et social
+
+L’entreprise individuelle peut relever de différents régimes fiscaux.
+
+Les deux situations les plus fréquentes sont :
+
+- **le régime micro-entreprise**, qui prévoit des obligations administratives simplifiées  
+- **le régime réel d’imposition**, avec une comptabilité plus complète
+
+Le choix dépend notamment du **chiffre d’affaires prévisionnel**, du niveau de charges et de la nature de l’activité.
+
+---
+
+### 3. Choisir un nom commercial (facultatif)
+
+Par défaut, une entreprise individuelle exerce sous le **nom de la personne physique** qui la crée.
+
+Il est toutefois possible d’utiliser un **nom commercial** pour communiquer auprès des clients.
+
+Ce nom peut être déclaré lors de la création de l’entreprise ou ajouté ultérieurement.
+
+---
+
+### 4. Déclarer la création via le Guichet Unique (INPI)
+
+Depuis 2023, toutes les formalités de création d’entreprise sont réalisées via le **Guichet unique de l’INPI**.
+
+La déclaration se fait en ligne sur :  
+https://procedures.inpi.fr
+
+La démarche consiste notamment à :
+
+- créer un compte sur la plateforme  
+- compléter le formulaire de création d’entreprise  
+- indiquer les informations relatives à l’activité  
+- joindre les éventuels justificatifs nécessaires
+
+Une fois la déclaration validée, les informations sont transmises aux organismes concernés.
+
+---
+
+### 5. Obtenir les identifiants de l’entreprise
+
+Après l’enregistrement du dossier, l’INSEE attribue à l’entreprise :
+
+- un **numéro SIREN**, qui identifie l’entreprise  
+- un **numéro SIRET**, qui identifie l’établissement  
+- un **code APE**, correspondant à l’activité principale
+
+Ces informations permettent d’exercer officiellement l’activité.
+
+---
+
+### 6. Vérifier les obligations complémentaires
+
+Selon l’activité exercée, certaines démarches peuvent être nécessaires après la création :
+
+- souscription d’une **assurance professionnelle**  
+- ouverture d’un **compte bancaire dédié à l’activité**  
+- mise en place d’outils de gestion ou de facturation
+
+Ces éléments permettent d’organiser le fonctionnement administratif de l’entreprise.
+
+---
+
+### Créer son entreprise dans de bonnes conditions
+
+La création d’une entreprise individuelle implique plusieurs démarches administratives qui doivent être réalisées avec précision afin d’éviter tout retard ou demande de correction.
+
+Un accompagnement peut permettre de sécuriser la formalité et de s’assurer que l’ensemble des informations transmises est conforme à la situation de l’entrepreneur.

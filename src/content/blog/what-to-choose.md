@@ -6,6 +6,9 @@ publishDate: "2025-04-15"
 publish: true
 categories: ["Formalities"]
 
+link: "/services"
+text: "Commencer maintenant"
+
 seo:
   title: "Micro-entreprise ou EI classique : que choisir ?"
   description: "Vous hésitez entre la micro-entreprise et l'entreprise individuelle classique ? Voici les points clés pour faire un choix adapté à votre situation en 2025."

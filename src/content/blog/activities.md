@@ -1,70 +1,110 @@
 ---
-title: "Modifier l’activité ou le nom commercial de son EI : mode d’emploi"
-excerpt: "Vous souhaitez modifier l’activité déclarée ou changer le nom commercial de votre entreprise individuelle ? Voici les étapes à suivre."
+title: "Modifier l’activité de son EI"
+excerpt: "Découvrez comment déclarer la modification d’activité ou le changement de nom commercial de votre entreprise individuelle."
 featuredImage: "./images/activities.jpg"
 publishDate: "2025-06-01"
 publish: true
 categories: ["Formalities"]
 
+link: "/forms/unavailable"
+# link: "/forms/activities"
+text: "Ajouter vos activités"
+
 seo:
-  title: "Modifier l’activité ou le nom commercial de son EI : mode d’emploi"
-  description: "Vous souhaitez modifier l’activité déclarée ou changer le nom commercial de votre entreprise individuelle ? Voici les étapes à suivre."
+  title: "Modifier l’activité ou le nom commercial de son EI"
+  description: "Découvrez les démarches pour modifier l’activité déclarée ou le nom commercial de votre entreprise individuelle."
   image: "./images/activities.jpg"
 ---
 
-## Modifier l’activité ou le nom commercial de son EI : mode d’emploi
+## Comment modifier l’activité de son entreprise individuelle ?
 
-Dans la vie d’une entreprise individuelle (EI), il peut arriver que vous souhaitiez **faire évoluer votre activité principale** ou **changer le nom sous lequel vous exercez**. Voici ce qu’il faut savoir sur ces démarches.
+Au cours de la vie d’une entreprise individuelle, il peut être nécessaire de **faire évoluer l’activité déclarée** ou de **modifier le nom commercial utilisé** pour communiquer auprès des clients.
 
----
+Ces changements doivent être déclarés afin de maintenir les informations de l’entreprise à jour dans les registres administratifs.
 
-### Modifier l’activité déclarée de son EI
-
-Changer d’activité nécessite une mise à jour de votre dossier administratif. Cela peut concerner :
-
-- un **ajout d’activité complémentaire**,
-- une **modification** de l’activité principale,
-- ou un **changement total d’activité**.
-
-**Exemples :**
-- Un graphiste qui ajoute la formation à ses prestations,
-- Un artisan qui abandonne la pose de parquet pour se spécialiser en carrelage.
-
-📍 **À faire via le Guichet Unique de l’INPI**, depuis janvier 2023, pour toute formalité de modification. 
-
-Vous devrez fournir :
-- le nouveau code APE (ou description de l’activité),
-- le justificatif si l’activité est réglementée (diplôme, attestation, etc.).
-
-**Attention** : certaines activités nécessitent des autorisations ou qualifications. Mieux vaut être bien accompagné.
+Chez **Mon Assistant Formalités**, je vous accompagne pour réaliser ces démarches et mettre à jour correctement votre dossier d’entreprise.
 
 ---
 
-### Changer son nom commercial
+### 1. Pourquoi modifier l’activité de son entreprise ?
 
-Le **nom commercial** est le nom sous lequel vous communiquez. Il est facultatif mais utile pour votre image de marque.
+L’activité déclarée correspond à la nature des prestations ou des services exercés par l’entreprise.
 
-Vous pouvez le **créer**, le **modifier** ou le **supprimer** à tout moment.
+Une modification peut être nécessaire dans plusieurs situations :
 
-**À faire également via le Guichet Unique INPI.** 
+- ajout d’une **activité complémentaire**  
+- évolution de l’**activité principale**  
+- changement d’orientation de l’entreprise
 
-💡 Ce changement ne modifie pas votre nom légal, qui reste celui de la personne physique titulaire de l’EI.
+Par exemple :
+
+- un graphiste qui propose également des **prestations de formation**,  
+- un artisan qui se spécialise dans une **activité différente de son activité initiale**.
+
+##### ⚠️ Lorsque l’activité évolue, il est important de mettre à jour ces informations afin que les registres administratifs reflètent correctement la réalité de l’activité exercée.
+
+---
+
+### 2. Déclarer la modification via le Guichet Unique (INPI)
+
+Depuis 2023, toutes les formalités d’entreprise sont réalisées via le **Guichet unique de l’INPI**.
+
+La déclaration se fait en ligne sur :  
+https://procedures.inpi.fr
+
+La démarche consiste généralement à :
+
+- Se connecter à son espace sur le Guichet unique  
+- Sélectionner une **formalités de modification d’entreprise**  
+- Indiquer la nouvelle activité ou les activités ajoutées  
+- Joindre les justificatifs nécessaires lorsque l’activité est réglementée
+
+##### 💡 Certaines activités nécessitent en effet **des diplômes, qualifications ou autorisations spécifiques**.
+
+---
+
+### 3. Modifier ou créer un nom commercial
+
+Le **nom commercial** correspond au nom sous lequel l’entreprise se présente auprès de ses clients.
+
+Il est facultatif mais peut être utilisé pour développer l’identité commerciale de l’activité.
+
+Il est possible de :
+
+- créer un nom commercial  
+- modifier un nom existant  
+- supprimer un nom commercial déclaré
+
+Cette modification doit également être déclarée via le **Guichet unique de l’INPI** afin de mettre à jour les informations administratives de l’entreprise.
+
+##### ⚠️ Ce changement ne modifie pas le nom juridique de l’entreprise, qui reste celui de la personne physique titulaire de l’entreprise individuelle.
+
+---
+
+### 4. Les conséquences de la modification
+
+Une fois la formalité validée :
+
+- les informations de l’entreprise sont mises à jour dans les registres officiels  
+- les organismes administratifs reçoivent automatiquement l’information  
+- les nouvelles activités peuvent être prises en compte dans votre dossier administratif
+
+##### ⚠️ Il est important que les informations déclarées soient exactes afin d’éviter toute demande de correction.
 
 ---
 
 ### Pourquoi se faire accompagner ?
 
-Même si la procédure est en ligne, **des erreurs de déclaration peuvent entraîner des refus ou des retards**.
+Selon la nature de la modification, certaines vérifications peuvent être nécessaires (activité réglementée, cohérence avec l’activité principale, justificatifs à fournir).
 
-👉 En tant que **mandataire spécialisé**, je m’occupe de tout :
+**En tant que mandataire administratif**, je peux vous accompagner pour :
 
-- vérification de la faisabilité,
-- rédaction conforme de la demande,
-- dépôt et suivi du dossier sur le Guichet Unique,
-- en toute simplicité et sans stress.
+- vérifier les informations à déclarer  
+- préparer correctement votre dossier  
+- effectuer la formalité de modification auprès du Guichet unique
 
 ---
 
-Vous envisagez une évolution de votre activité ou une nouvelle identité commerciale ?
+### Vous souhaitez faire évoluer votre activité ?
 
-📩 [Contactez-moi](/contact) pour une assistance rapide et personnalisée.
+Si votre entreprise évolue ou si vous souhaitez modifier le nom commercial utilisé pour votre activité, il est important que cette modification soit correctement déclarée afin de maintenir votre situation administrative à jour.

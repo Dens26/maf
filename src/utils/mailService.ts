@@ -16,6 +16,14 @@ type SendCreateNotificationParams = {
     };
 };
 
+/**
+ * Envoi de la confirmation de la demande de création d'entreprise
+ * @param firstname 
+ * @param name 
+ * @param email 
+ * @param phone 
+ * @param pdf 
+ */
 export async function sendCreateNotification({ firstname, name, email, phone, pdf }: SendCreateNotificationParams) {
 
     const now = new Date().toLocaleString('fr-FR');
@@ -97,8 +105,13 @@ export async function sendCreateNotification({ firstname, name, email, phone, pd
     });
 }
 
-
-
+/**
+ * Envoi de confirmation de prise en charge de la demande et demande de pièces justificatives
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param email 
+ */
 export async function sendRequestDocuments(demandeid : string, firstname: string, name : string, email : string) {
     
     const htmlContent = `
@@ -150,6 +163,14 @@ export async function sendRequestDocuments(demandeid : string, firstname: string
     });
 }
 
+/**
+ * Envoi d'un mail d'annulation de facture
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param invoiceNumber 
+ * @param email 
+ */
 export async function sendCanceledInvoice(demandeid : string, firstname: string, name : string, invoiceNumber: string, email : string) {
     
     const htmlContent = `
@@ -190,6 +211,14 @@ export async function sendCanceledInvoice(demandeid : string, firstname: string,
     });
 }
 
+/**
+ * Envoi d'un mail de confirmation de remboursement
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param amount 
+ * @param email 
+ */
 export async function sendRefundNotification(demandeid : string, firstname: string, name : string, amount: string, email : string) {
     
     const htmlContent = `
@@ -218,6 +247,14 @@ export async function sendRefundNotification(demandeid : string, firstname: stri
     });
 }
 
+/**
+ * Envoi d'un mail d'information pour la confirmation de validation du dossier
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param ref_inpi 
+ * @param email 
+ */
 export async function sendCompletedFormalityNotification(demandeid : string, firstname: string, name : string, ref_inpi: string, email : string) {
     
     const htmlContent = `
@@ -239,7 +276,7 @@ export async function sendCompletedFormalityNotification(demandeid : string, fir
             <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
                 <p>Pour rappel :</p>
                 <p style="margin-top: 10px; font-weight: bold; color: #1d4ed8;">
-                    Tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
+                    Pour tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
                     Selon les délais de traitement de votre établissement bancaire, ce remboursement peut apparaître sur votre compte dans les prochains jours.
                 </p>
             </div>
@@ -265,6 +302,14 @@ export async function sendCompletedFormalityNotification(demandeid : string, fir
     });
 }
 
+/**
+ * Envoi d'un mail d'information pour le rejet d'une formalité
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param ref_inpi 
+ * @param email 
+ */
 export async function sendRejectedFormalityNotification(demandeid : string, firstname: string, name : string, ref_inpi: string, email : string) {
     
     const htmlContent = `
@@ -283,7 +328,7 @@ export async function sendRejectedFormalityNotification(demandeid : string, firs
             <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
                 <p>Pour rappel :</p>
                 <p style="margin-top: 10px; font-weight: bold; color: #1d4ed8;">
-                    Tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
+                    Pour tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
                     Selon les délais de traitement de votre établissement bancaire, ce remboursement peut apparaître sur votre compte dans les prochains jours.
                 </p>
             </div>
@@ -308,6 +353,14 @@ export async function sendRejectedFormalityNotification(demandeid : string, firs
     });
 }
 
+/**
+ * Envoi d'un mail d'information pour l'annulation d'une formalité
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param ref_inpi 
+ * @param email 
+ */
 export async function sendCanceledFormalityNotification(demandeid : string, firstname: string, name : string, ref_inpi: string, email : string) {
     
     const htmlContent = `
@@ -330,7 +383,7 @@ export async function sendCanceledFormalityNotification(demandeid : string, firs
             <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
                 <p>Pour rappel :</p>
                 <p style="margin-top: 10px; font-weight: bold; color: #1d4ed8;">
-                    Tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
+                    Pour tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
                     Selon les délais de traitement de votre établissement bancaire, ce remboursement peut apparaître sur votre compte dans les prochains jours.
                 </p>
             </div>
