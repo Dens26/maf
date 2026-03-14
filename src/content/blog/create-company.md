@@ -2,12 +2,12 @@
 title: "Créer son entreprise individuelle"
 excerpt: "Découvrez les étapes essentielles pour créer votre entreprise individuelle."
 featuredImage: "./images/create-company.jpg"
-publishDate: "2025-05-01"
+publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/forms/create/entrepreneur"
-text: "Commencer ma création"
+link: "/services/create"
+text: "Voir la fiche"
 
 seo:
   title: "Créer son entreprise individuelle"

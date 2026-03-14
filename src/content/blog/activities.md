@@ -2,13 +2,12 @@
 title: "Modifier l’activité de son EI"
 excerpt: "Découvrez comment déclarer la modification d’activité ou le changement de nom commercial de votre entreprise individuelle."
 featuredImage: "./images/activities.jpg"
-publishDate: "2025-06-01"
+publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/forms/unavailable"
-# link: "/forms/activities"
-text: "Ajouter vos activités"
+link: "/services/activities"
+text: "Voir la fiche"
 
 seo:
   title: "Modifier l’activité ou le nom commercial de son EI"
