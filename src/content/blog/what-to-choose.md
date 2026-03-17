@@ -1,93 +1,93 @@
 ---
 title: "Micro-entreprise ou EI classique : que choisir ?"
-excerpt:  "Vous hésitez entre la micro-entreprise et l'entreprise individuelle classique ? Voici les points clés pour faire un choix adapté à votre situation."
+excerpt:  "Vous hésitez entre la micro-entreprise et l'entreprise individuelle classique ? Voici les principales différences à connaître."
 featuredImage: "./images/what-to-choose.jpg"
 publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/services"
-text: "Voir les services"
+link: "/services/create"
+text: "Voir la fiche de création"
 
 seo:
-  title: "Micro-entreprise ou EI classique : que choisir ?"
-  description: "Vous hésitez entre la micro-entreprise et l'entreprise individuelle classique ? Voici les points clés pour faire un choix adapté à votre situation en 2025."
+  title: "Micro-entreprise ou EI classique : quelles différences ?"
+  description: "Découvrez les principales différences entre la micro-entreprise et l’entreprise individuelle au régime réel."
   image: "./images/what-to-choose.jpg"
 ---
 
-## Micro-entreprise ou EI classique : que choisir ?
+## Micro-entreprise ou entreprise individuelle au régime réel : quelles différences ?
 
-Lorsqu’on souhaite créer une **entreprise individuelle (EI)**, il existe principalement deux régimes :  
-le **régime micro-entreprise** (simplifié et très utilisé) et le **régime réel d’imposition**, souvent appelé EI classique.  
-Chez **MAF**, on vous accompagne pour faire le bon choix dès le départ.
+Lorsqu’une activité est exercée en **entreprise individuelle (EI)**, deux régimes fiscaux peuvent s’appliquer :  
+le **régime micro-entreprise**, souvent appelé régime micro, et le **régime réel d’imposition**.
 
----
-
-### Points communs
-
-Il s'agit du **même statut juridique : l’entreprise individuelle**.  
-La différence majeure porte sur **le régime fiscal et social** applicable à votre activité.
+Ces régimes ne correspondent pas à deux statuts juridiques différents : il s’agit toujours d’une **entreprise individuelle**, mais avec des règles fiscales et comptables différentes.
 
 ---
 
-### Micro-entreprise : simplicité et allègement
+### 1. Les points communs
 
-Le régime micro est pensé pour démarrer facilement, avec des formalités et obligations allégées.
+Dans les deux cas :
 
-**Avantages :**
+- l’entreprise est exercée **en nom propre** par une personne physique  
+- il n’y a **pas de création de société**  
+- l’activité est déclarée via le **Guichet unique de l’INPI**  
+- un **numéro SIREN et SIRET** est attribué lors de la création
 
-- Comptabilité simplifiée : pas de bilan comptable, pas de TVA facturée tant que vous restez en dessous des seuils  
-- Déclaration et paiement des cotisations sociales simplifiés (mensuels ou trimestriels)  
-- Charges sociales calculées uniquement sur le chiffre d’affaires encaissé  
-- Option possible pour le **versement libératoire de l’impôt sur le revenu** (sous conditions de revenus)
-
-**Limites :**
-
-- Plafonds de chiffre d’affaires à respecter (en 2025) :  
-  - 77 700 € pour les prestations de service  
-  - 188 700 € pour la vente de marchandises  
-- Pas de déduction possible des charges réelles (loyer, matériel, frais…)  
-- Pas toujours adapté pour les activités nécessitant beaucoup d’investissement ou avec des marges faibles
+La principale différence concerne les **modalités de calcul de l’impôt, des cotisations sociales et les obligations comptables**.
 
 ---
 
-### EI au régime réel : plus de gestion, mais plus de souplesse
+### 2. Le régime micro-entreprise
 
-Ce régime est conseillé si votre activité implique :
+Le régime micro-entreprise prévoit des obligations administratives simplifiées.
 
-- Des charges professionnelles élevées  
-- Des investissements importants  
-- Un chiffre d’affaires dépassant les seuils de la micro-entreprise
+Caractéristiques principales :
 
-**Avantages :**
+- comptabilité simplifiée (livre des recettes et, selon l’activité, registre des achats)  
+- calcul des cotisations sociales basé sur le **chiffre d’affaires encaissé**  
+- application d’un **abattement forfaitaire** pour déterminer le revenu imposable  
+- franchise possible de TVA lorsque certains seuils ne sont pas dépassés
 
-- Possibilité de déduire toutes les charges réelles liées à l’activité (loyer, fournitures, amortissements…)  
-- TVA facturée et récupérable (si vous y êtes assujetti)  
-- Plus adapté aux activités avec marges faibles ou fluctuations importantes
+Ce régime est soumis à des **plafonds de chiffre d’affaires**.
 
-**Inconvénients :**
+À titre indicatif, les seuils généralement applicables sont :
 
-- Comptabilité complète obligatoire (bilan, compte de résultat)  
-- Déclarations fiscales plus complexes  
-- Cotisations sociales calculées sur le résultat réel (bénéfice) et non sur le chiffre d’affaires
+- 77 700 € pour les prestations de service  
+- 188 700 € pour les activités de vente de marchandises
 
----
-
-### Quel régime choisir ?
-
-Le choix dépend de plusieurs critères : **votre activité, vos charges, vos ambitions de développement**.
-
-- ✅ Vous démarrez seul avec peu de frais et un chiffre d’affaires limité : la **micro-entreprise** est souvent la meilleure option.  
-- ✅ Vous prévoyez d’investir, d’embaucher ou de dépasser les plafonds : l’**EI au régime réel** sera plus adapté.
-
-💡 **Chez Mon Assistant Formalités**, nous vous aidons à choisir le régime le mieux adapté à votre situation, avec un accompagnement transparent et personnalisé.
+##### ⚠️ Ces montants peuvent évoluer en fonction des révisions législatives et réglementaires. Il est recommandé de vérifier les **seuils en vigueur** sur le site officiel de l’administration : https://entreprendre.service-public.fr/vosdroits/F23267
 
 ---
 
-### Besoin d’aide pour créer votre entreprise individuelle ?
+### 3. L’entreprise individuelle au régime réel
 
-Que vous optiez pour la micro-entreprise ou l’EI classique, **je m’occupe de toutes vos formalités** : création via le guichet unique, choix du régime fiscal et social, accompagnement dans les démarches.
+Lorsque l’entreprise ne relève pas du régime micro, elle est soumise au **régime réel d’imposition**.
 
-👉 [Demander un accompagnement](/contact)
+Caractéristiques principales :
+
+- tenue d’une **comptabilité complète**  
+- établissement d’un **bilan et d’un compte de résultat**  
+- calcul du résultat réel de l’activité  
+- possibilité de **déduire les charges professionnelles réelles** (loyer, matériel, frais, amortissements…)
+
+L’entreprise peut également être **assujettie à la TVA**, qui doit alors être déclarée et reversée à l’administration fiscale.
 
 ---
+
+### 4. Comprendre les différences entre les deux régimes
+
+Les deux régimes se distinguent principalement par :
+
+- le mode de **calcul de l’impôt et des cotisations sociales**  
+- le niveau **d’obligations comptables**  
+- l’existence ou non de **plafonds de chiffre d’affaires**
+
+Le régime applicable dépend notamment de la situation de l’entrepreneur et du fonctionnement de l’activité.
+
+---
+
+### Déclarer la création ou la modification d’une entreprise individuelle
+
+La création d’une entreprise individuelle ou la modification de son régime s’effectue via le **Guichet unique de l’INPI**, qui centralise les formalités administratives des entreprises.
+
+Ces démarches doivent être correctement renseignées afin d’assurer la mise à jour des informations dans les registres officiels.

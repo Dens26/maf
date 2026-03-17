@@ -3,7 +3,7 @@ export const prerender = false;
 import { v4 as uuidv4 } from 'uuid';
 import type { APIContext } from 'astro';
 import { saveToken } from '@utils/tokenStore';
-import { sendCreateNotification } from "@utils/mailService";
+import { sendNotification } from "@utils/mailService";
 import { checkDuplicateFormality } from '@utils/supabase';
 import { createFormality } from '@utils/supabase.server';
 
@@ -27,6 +27,7 @@ export async function POST({ request }: APIContext) {
       pdf
     } = body;
 
+    console.log('here')
     // ✅ Validation minimale
     if (!demandeId || !typeFormaliteId || !name || !email || !pdf) {
       return jsonResponse({ error: "Champs obligatoires manquants" }, 400);
@@ -85,11 +86,12 @@ export async function POST({ request }: APIContext) {
     }
 
     // Envoi du mail notification (désactivé temporairement)
-    await sendCreateNotification({
+    await sendNotification({
       firstname,
       name,
       email,
       phone,
+      typeFormaliteId,
       pdf: {
         filename: "recap.pdf",
         base64: pdf,

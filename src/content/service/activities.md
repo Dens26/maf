@@ -21,18 +21,19 @@ seo:
 # Modifier l’activité de son entreprise individuelle
 
 Changer d’activité principale ou en ajouter une nouvelle implique une **mise à jour obligatoire de votre déclaration d’entreprise**.  
-Avec **Mon Assistant Formalités**, bénéficiez d’un accompagnement fiable pour assurer la conformité de votre démarche auprès du Guichet Unique.
+Avec **Mon Assistant Formalités (MAF)**, bénéficiez d’un **accompagnement clair et complet** pour assurer la conformité de votre démarche auprès du Guichet Unique.
 
+---
 
 ## Pourquoi une déclaration est nécessaire ?
 
-La déclaration du changement d’activité est **obligatoire** pour toute entreprise individuelle.
+La déclaration du changement d’activité est **obligatoire** pour toute entreprise individuelle.  
 
-Elle permet de maintenir à jour votre situation au sein des registres officiels (RNE, SIRENE) et garantit la **validité de vos documents administratifs** (avis de situation, attestation d’immatriculation, etc.).
+Elle permet de maintenir à jour votre situation au sein des registres officiels (RNE, SIRENE) et garantit la **validité de vos documents administratifs** (avis de situation, attestation d’immatriculation, etc.).  
 
-Un oubli ou une déclaration incorrecte peut entraîner :
-- Des **courriers envoyés à la mauvaise adresse**
-- Un **rejet d'une demande de prestation ou d'aide**
+Un oubli ou une déclaration incorrecte peut entraîner :  
+- Des **courriers envoyés à la mauvaise adresse**  
+- Un **rejet d'une demande de prestation ou d'aide**  
 - Des **sanctions administratives** en cas de contrôle
 
 ##### ⚠️ Sans mise à jour, certaines démarches (comme la clôture d’activité ou la modification d’objet) peuvent devenir plus complexes.
@@ -41,23 +42,32 @@ Un oubli ou une déclaration incorrecte peut entraîner :
 
 ## Ce que comprend la prestation
 
-- Identification de la **nature de la modification** (Adjonction, suppression, mise à jour)
-- Constitution du **dossier conforme** au Guichet Unique
-- Transmission et suivi du dépôt auprès des organismes (INSEE, GREFFE, CMA, etc.)
+- Identification de la **nature de la modification** (Adjonction, suppression, mise à jour)  
+- Constitution du **dossier complet** pour le Guichet Unique  
+- Préparation et transmission de la formalité auprès des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.)  
+- Suivi du dossier administratif  
 - Réponse à vos questions tout au long de la procédure
 
 ---
 
 ## Déroulement de la procédure
 
-Vous complétez vos informations directement via le formulaire en ligne.  
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier chez MAF.
+Vous complétez vos informations directement via le formulaire en ligne.
+
+- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier à MAF.  
 - Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.
 
-Après validation des informations par nos soins:  
-- Une **facture vous est envoyée** ainsi qu'un **mail de demande de pièces justificatives** (procuration, pièce d’identité, justificatif d’adresse, etc.).
-- Une fois le paiement validé et toutes les pièces reçues, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation finale.
-- Si certaines informations ou documents sont manquants, vous recevrez un **mail de demande de pièces complémentaires** pour compléter votre dossier.
+Après validation des informations par nos soins :  
+
+- Une **facture vous est envoyée**  
+- Vous recevez également un **mail de demande de pièces justificatives** (procuration, pièce d’identité, justificatif d’adresse, etc.)
+
+Une fois le paiement validé et les documents reçus :  
+
+- MAF prépare le dossier administratif  
+- La formalité est déposée sur le **Guichet Unique**  
+
+Si certaines informations ou documents sont manquants, vous recevrez un **mail de demande de pièces complémentaires**.
 
 ##### ⚠️ Le traitement de la formalité ne commence **qu’après règlement complet**
 
@@ -65,66 +75,126 @@ Après validation des informations par nos soins:
 
 ## Tarifs et délai de traitement
 
-Le service est proposé à partir de **69 € TTC**.  
-- Ce tarif couvre uniquement **la prestation d’accompagnement et de constitution du dossier**.  
-- Une **avance de 10 € TTC** est incluse pour couvrir les éventuelles régularisations.
+La prestation d’accompagnement administratif est proposée à partir de **69 € TTC**.
 
-**Exemple :** Pour un changement d'adresse, le tarif total payé sera **79 €** :  
-- 69 € pour la prestation  
-- 10 € d’avance pour les régularisations
+À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.
 
-##### ⚠️ Le solde non utilisé de votre avance vous sera remboursé après validation du dossier.
+Ces frais de gestion permettent de couvrir d’éventuelles **régularisations administratives demandées par les organismes valideurs** (Greffe, CMA, MSA, etc.).  
 
-### Frais administratifs
+MAF prend en charge ces régularisations **dans la limite de 10 € par formalité**.
 
-Des frais administratifs supplémentaires peuvent être demandés par les organismes compétents (INSEE, TCO, CMA, MSA, etc.) et restent à la charge du client.
+**Exemple :**
 
-Les tarifs applicables aux formalités administratives sont fixés par ces organismes et peuvent être consultés sur le site officiel du Guichet Unique : [consulter les tarifs](https://formalites.entreprises.gouv.fr/tarifs.php).
+- 69 € pour la prestation d’accompagnement administratif  
+- 5 € de frais de gestion administrative  
+
+**Total facturé : 74 € TTC**
+
+##### ⚠️ Les frais de gestion administrative sont non remboursables, même si aucune régularisation n’est nécessaire.
+
+---
+
+### Frais administratifs officiels
+
+Certaines formalités peuvent entraîner des **frais administratifs demandés par les administrations** (INPI, Greffe, CMA, MSA, etc.).
+
+Ces frais :  
+
+- sont **fixés par les organismes publics**  
+- ne sont **pas inclus dans la prestation MAF**  
+- restent **entièrement à la charge du client**  
+
+Les tarifs indicatifs peuvent être consultés sur le site officiel du Guichet Unique :  
+[Consulter les tarifs officiels](https://formalites.entreprises.gouv.fr/tarifs.php)
+
+---
+
+### Paiement des frais administratifs (Guichet Unique)
+
+Lorsque la formalité nécessite le paiement de frais administratifs :  
+
+- MAF peut utiliser le système de **délégation de paiement du Guichet Unique**  
+- une **demande de paiement est envoyée directement au client**  
+
+Le client devra alors :  
+
+- se connecter à son **compte INPI**, ou en créer un si nécessaire  
+- procéder directement au **paiement des frais administratifs**
+
+MAF **ne perçoit pas ces paiements** et **n’intervient pas dans leur gestion**.
+
+Pour comprendre le fonctionnement :  
+[Consulter l'explication de la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
+
+##### ⚠️ La formalité ne peut pas être finalisée tant que ces frais ne sont pas réglés.
+
+---
 
 ### Délais de traitement
 
-Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents.
+Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète :  
 
-##### ⚠️ Ce délai correspond au traitement de votre dossier par MAF et ne comprend pas le temps de traitement des organismes officiels, qui peut varier.
+- du paiement  
+- des documents nécessaires  
+- des informations correctes
+
+##### ⚠️ Ce délai correspond uniquement au traitement par MAF et n’inclut pas les délais des administrations.
 
 ---
 
 ## Suivi et régularisation
 
-MAF gère personnellement le **suivi de votre dossier** jusqu’à sa validation ou son rejet final par l’administration.  
+MAF assure le **suivi administratif du dossier** jusqu’à sa validation ou son rejet par l’administration.
 
-- Les régularisations demandées par l’administration sont **décomptées de votre avance**, jusqu’à un maximum de **15 €**.  
-- Le solde non utilisé sera **remboursé en fin de formalité**.  
-- En cas de dépassement exceptionnel, la différence pourra être facturée au client.  
-- Si une erreur est imputable à MAF, elle sera prise en charge sans impact sur votre avance.
+Les demandes de régularisation éventuelles peuvent provenir des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.).  
 
-### Rejet définitif
-
-En cas de **rejet définitif du dossier**, celui-ci sera considéré comme **clos** :
-
-- Aucune nouvelle procédure ne sera engagée sans commande distincte.
-- **Aucun remboursement**, hormis le solde éventuel de votre avance, ne pourra être effectué.
-- **MAF ne pourra en aucun cas être tenu responsable**, que le rejet résulte :
-- - d’informations inexactes ou incomplètes fournies par le déclarant,  
-- - de décisions, délais ou actions des organismes valideurs (INSEE, Greffe, Guichet Unique, etc.).
-
-##### ⚠️ Certains organismes valideurs peuvent procéder à un remboursement de leurs propres frais en cas de rejet. Ces remboursements, lorsqu’ils existent, sont traités directement par l’organisme concerné. **MAF n’intervient pas dans cette procédure et ne peut être tenu responsable de leur traitement ou de leur obtention.**
+MAF traite ces demandes dans la limite de la prestation prévue.
 
 ---
 
-## Éléments reçus après validation ou refus de la demande sur le Guichet Unique
+## ⚠️ Rejet définitif du dossier
 
-Une fois la demande traitée par le Guichet Unique, vous recevrez :  
-- En cas de **validation** :
-- - Votre synthèse version définitive
-- - Une **attestation d’immatriculation au RNE**
-- - Un **avis de situation au répertoire SIRENE** (si disponible), avec attribution de votre **numéro SIRET**.  
+En cas de **rejet définitif par l’administration** :  
 
-- En cas de **refus** : 
-- - Un retour vous informant de l'objet du rejet.
+- la formalité est considérée comme **clôturée**  
+- aucune nouvelle procédure ne sera engagée sans **nouvelle commande**
 
-#### ⚠️ En cas de **diffusion restreinte** de vos données dans le répertoire SIRENE, l’avis de situation devra être téléchargé directement via votre espace personnel.  
-#### ⚠️ MAF peut vous accompagner pour comprendre les retours éventuels, mais **n’est pas responsable en cas de refus**.  
+Conformément aux **Conditions Générales de Vente** :  
+
+- la prestation administrative reste **entièrement due**  
+- **aucun remboursement ne pourra être effectué**
+
+MAF ne peut être tenu responsable si le rejet résulte :  
+
+- d’informations incorrectes ou incomplètes fournies par le client  
+- d’une décision administrative  
+- des règles appliquées par les organismes valideurs
+
+##### ⚠️ Certains organismes peuvent rembourser leurs propres frais en cas de rejet. Ces remboursements sont gérés directement par l’administration concernée.
+
+---
+
+## Éléments reçus après traitement du dossier
+
+### En cas de validation
+
+- votre **synthèse définitive**  
+- une **attestation d’immatriculation au RNE**  
+- un **avis de situation SIRENE** (si disponible)  
+- votre **numéro SIRET**
+
+### En cas de refus
+
+- un retour administratif indiquant le **motif du rejet**
+
+---
+
+### ⚠️ Attention
+
+En cas de **diffusion restreinte dans le répertoire SIRENE**, l’avis de situation devra être téléchargé directement depuis votre espace personnel.  
+
+MAF peut vous accompagner pour comprendre les retours administratifs mais **ne peut être tenu responsable des décisions prises par les administrations**.
+
 ##### ⚠️ Aucune nouvelle tentative ne sera engagée sans **nouvelle commande**.
 
 ---
@@ -132,18 +202,25 @@ Une fois la demande traitée par le Guichet Unique, vous recevrez :
 ## Pourquoi choisir Mon Assistant Formalités ?
 
 - Un **interlocuteur unique** pour un suivi personnalisé  
-- Une **démarche claire, expliquée** à chaque étape  
+- Un **accompagnement clair et expliqué** à chaque étape  
 - Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
-- Aucun abonnement, aucun frais caché : **tarif unique clair** dès le départ  
-- Accompagnement humain, basé en France
+- Aucun abonnement, aucun frais caché : **tarif unique clair dès le départ**  
+- Service basé en France
 
 ---
 
 ## Note importante
 
-En remplissant le formulaire et en passant votre commande:
-- Vous reconnaissez avoir pris connaissance et accepté nos [Conditions Générales](/legal/conditions-generales-de-vente), incluant:
-- - les règles concernant les régularisations, 
-- - le rejet définitif et la limitation de responsabilité.
- 
-La validation finale de votre commande se fait via la **case à cocher obligatoire** avant paiement.
+En remplissant le formulaire et en passant commande :  
+
+- vous reconnaissez avoir pris connaissance de nos [Conditions Générales de Vente](/legal/conditions-generales-de-vente)
+
+Avant l’envoi du formulaire, le déclarant doit obligatoirement cocher la case suivante :  
+
+> *« Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les Conditions Générales de Mon Assistant Formalités. Je consens à ce que ma demande soit transmise pour traitement. »*
+
+La validation de cette case constitue un **engagement ferme** :  
+
+- Le traitement de la formalité débute **après réception complète du formulaire et du paiement**  
+- Aucun remboursement ne pourra être demandé, même en cas d’annulation par le client  
+- Le client accepte expressément que MAF puisse gérer les régularisations administratives dans les limites prévues par les [CGV](/legal/conditions-generales-de-vente)

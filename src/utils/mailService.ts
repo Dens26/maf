@@ -10,10 +10,15 @@ type SendCreateNotificationParams = {
     name: string;
     email: string;
     phone: string;
+    typeFormaliteId: number;
     pdf?: {
         filename: string;
         base64: string;
     };
+};
+
+type PaymentStatusConfig = {
+    label: string;
 };
 
 /**
@@ -24,9 +29,17 @@ type SendCreateNotificationParams = {
  * @param phone 
  * @param pdf 
  */
-export async function sendCreateNotification({ firstname, name, email, phone, pdf }: SendCreateNotificationParams) {
+export async function sendNotification({ firstname, name, email, phone, typeFormaliteId, pdf }: SendCreateNotificationParams) {
 
     const now = new Date().toLocaleString('fr-FR');
+    // Labels
+    const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
+        1: { label: "création d'entreprise"},
+        2: { label: "changement d'adresse" },
+        3: { label: "modification d'activité"},
+        4: { label: 'correction'},
+        5: { label: "cessation d'entreprise"},
+    };
 
     const attachment = pdf
         ? [{
@@ -40,7 +53,7 @@ export async function sendCreateNotification({ firstname, name, email, phone, pd
     <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; padding: 20px; background-color: #f9f9f9;">
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">   
             <img style="max-width: 100%; height: auto; display: block; margin: 10px auto 50px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
-            <h2>Nouvelle demande de création</h2>
+            <h2>Nouvelle demande de ${FORMALITY_TYPE[typeFormaliteId].label}</h2>
             <p><strong>Date :</strong> ${now}</p>
             <p><strong>Nom :</strong> ${firstname} ${name}</p>
             <p><strong>Email :</strong> ${email}</p>
@@ -57,7 +70,7 @@ export async function sendCreateNotification({ firstname, name, email, phone, pd
 
             <h2 style="margin-bottom: 20px; font-size: 1.3rem;">Bonjour ${firstname} ${name},</h2>
 
-            <p style="margin-bottom: 20px;">Nous avons bien reçu votre demande de création d'entreprise. Le document récapitulatif de votre dossier est joint à cet email.</p>
+            <p style="margin-bottom: 20px;">Nous avons bien reçu votre demande de ${FORMALITY_TYPE[typeFormaliteId].label}. Le document récapitulatif de votre dossier est joint à cet email.</p>
 
             <h3 style="font-size: 1rem; margin-bottom: 10px;">Prochaines étapes</h3>
             <ul style="margin-bottom: 20px; padding-left: 20px;">
@@ -87,7 +100,7 @@ export async function sendCreateNotification({ firstname, name, email, phone, pd
         Messages: [{
             From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: 'contact@mon-assistant-formalites.fr', Name: 'Admin' }],
-            Subject: `Nouvelle demande de création de ${name}`,
+            Subject: `Nouvelle demande de ${FORMALITY_TYPE[typeFormaliteId].label} de ${name}`,
             HTMLPart: adminHtmlContent,
             Attachments: attachment,
         }]
@@ -98,7 +111,7 @@ export async function sendCreateNotification({ firstname, name, email, phone, pd
         Messages: [{
             From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
-            Subject: `Confirmation de votre demande de création d'entreprise`,
+            Subject: `Confirmation de votre demande de ${FORMALITY_TYPE[typeFormaliteId].label}`,
             HTMLPart: clientHtmlContent,
             Attachments: attachment,
         }]

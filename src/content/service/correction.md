@@ -23,25 +23,26 @@ seo:
 Des erreurs peuvent apparaître sur votre fiche d’entreprise : **adresse incorrecte, activité inexacte, nom mal orthographié…**  
 Ces inexactitudes peuvent porter préjudice à votre activité.  
 
-Avec **Mon Assistant Formalités**, obtenez une **correction rapide et encadrée** de ces données officielles.
+Avec **Mon Assistant Formalités (MAF)**, obtenez une **correction rapide et encadrée** de ces données officielles.
 
+---
 
 ## Pourquoi une déclaration est nécessaire ?
 
 Les informations figurant sur le RNE sont **publiques et utilisées par de nombreux acteurs** : clients, fournisseurs, banques, administrations…  
 
-En tant que **mandataire spécialisé**, je veille à :
+En tant que **mandataire spécialisé**, MAF veille à :  
 
-- Rétablir la conformité de vos données,
-- Vous éviter les démarches longues et techniques,
-- Suivre la demande jusqu’à sa validation.
+- Rétablir la conformité de vos données  
+- Vous éviter les démarches longues et techniques  
+- Suivre la demande jusqu’à sa validation  
 
-Elle permet de maintenir à jour votre situation au sein des registres officiels (RNE, SIRENE) et garantit la **validité de vos documents administratifs** (avis de situation, attestation d’immatriculation, etc.).
+Cette démarche garantit la **validité de vos documents administratifs** (avis de situation, attestation d’immatriculation, etc.) et la conformité de votre fiche entreprise.  
 
-Un oubli ou une déclaration incorrecte peut entraîner :
-- Des **courriers envoyés à la mauvaise adresse**
-- Un **rejet d'une demande de prestation ou d'aide**
-- Des **sanctions administratives** en cas de contrôle
+Un oubli ou une déclaration incorrecte peut entraîner :  
+- Des **courriers envoyés à la mauvaise adresse**  
+- Un **rejet d'une demande de prestation ou d'aide**  
+- Des **sanctions administratives** en cas de contrôle  
 
 ##### ⚠️ Sans mise à jour, certaines démarches (comme la clôture d’activité ou la modification d’objet) peuvent devenir plus complexes.
 
@@ -49,64 +50,69 @@ Un oubli ou une déclaration incorrecte peut entraîner :
 
 ## Ce que comprend la prestation
 
-- Analyse de la **donnée erronée** et des justificatifs nécessaires
-- Constitution du **dossier conforme** au Guichet Unique
-- Transmission et suivi du dépôt auprès de l'INPI
+- Analyse de la **donnée erronée** et des justificatifs nécessaires  
+- Constitution du **dossier conforme** au Guichet Unique  
+- Transmission et suivi du dépôt auprès de l'INPI  
 - Réponse à vos questions tout au long de la procédure
 
 ---
 
 ## Déroulement de la procédure
 
-Vous complétez vos informations directement via le formulaire en ligne.  
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier chez MAF.  
-- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.  
+Vous complétez vos informations directement via le formulaire en ligne :  
 
-Après validation des informations par nos soins:
-- une **facture vous est envoyée**, et le traitement de la formalité ne commence **qu’après règlement complet**.  
-- Une fois le paiement validé, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation.  
+- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier à MAF  
+- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier  
+
+Après validation des informations par nos soins :  
+
+- Une **facture vous est envoyée**, et le traitement de la formalité commence **après règlement complet**  
+- Une fois le paiement validé, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation  
+
+##### ⚠️ Aucun frais supplémentaire n’est requis pour cette formalité et aucune délégation de paiement n’est appliquée.
 
 ---
 
 ## Tarifs et délai de traitement
 
-Le service est proposé à partir de **39 € TTC**.  
-- Ce tarif couvre uniquement **la prestation d’accompagnement et de constitution du dossier**.  
+La prestation d’accompagnement administratif est proposée à partir de **39 € TTC**.  
 
-Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète de vos documents.  
+- Ce tarif couvre uniquement **la prestation d’accompagnement et de constitution du dossier**  
 
-##### ⚠️ Ce délai ne comprend pas le temps de traitement du dossier fait par l'INPI.
+Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète des documents.  
+
+##### ⚠️ Ce délai correspond uniquement au traitement par MAF et ne comprend pas le temps de traitement par l'INPI.
 
 ---
 
 ## Suivi et régularisation
 
-MAF gère personnellement le **suivi de votre dossier** jusqu’à sa validation ou son rejet final par l’administration.  
+MAF gère personnellement le **suivi de votre dossier** jusqu’à sa validation ou son rejet final par l’administration.
 
 ### Rejet définitif
 
-En cas de **rejet définitif du dossier**, celui-ci sera considéré comme **clos** :
+En cas de **rejet définitif du dossier** :  
 
-- Aucune nouvelle procédure ne sera engagée sans commande distincte.
-- **Aucun remboursement** ne pourra être effectué.
-- **MAF ne pourra en aucun cas être tenu responsable**, que le rejet résulte :
-- - d’informations inexactes ou incomplètes fournies par le déclarant,  
-- - de décisions, délais ou actions de l'INPI.
+- La formalité est considérée comme **clôturée**  
+- Aucune nouvelle procédure ne sera engagée sans commande distincte  
+- **Aucun remboursement** ne pourra être effectué  
+- **MAF ne pourra être tenu responsable**, que le rejet résulte d’informations inexactes ou incomplètes fournies par le déclarant ou de décisions, délais ou actions de l'INPI
 
 ---
 
-## Éléments reçus après validation ou refus de la demande sur le Guichet Unique
+## Éléments reçus après validation ou refus
 
-Une fois la demande traitée par le Guichet Unique, vous recevrez :  
-- En cas de **validation** :
-- - Votre synthèse version définitive
-- - Une **attestation d’immatriculation au RNE**
+Une fois la demande traitée :  
 
-- En cas de **refus** : 
-- - Un retour vous informant de l'objet du rejet.
+- **En cas de validation** :  
+  - Votre synthèse version définitive  
+  - Une **attestation d’immatriculation mise à jour au RNE**  
 
-#### ⚠️ MAF peut vous accompagner pour comprendre les retours éventuels, mais **n’est pas responsable en cas de refus**.  
-##### ⚠️ Aucune nouvelle tentative ne sera engagée sans **nouvelle commande**.
+- **En cas de refus** :  
+  - Un retour vous informant de l'objet du rejet  
+
+#### ⚠️ MAF peut vous accompagner pour comprendre les retours éventuels, mais **n’est pas responsable en cas de refus**  
+##### ⚠️ Aucune nouvelle tentative ne sera engagée sans **nouvelle commande**
 
 ---
 
@@ -115,16 +121,23 @@ Une fois la demande traitée par le Guichet Unique, vous recevrez :
 - Un **interlocuteur unique** pour un suivi personnalisé  
 - Une **démarche claire, expliquée** à chaque étape  
 - Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
-- Aucun abonnement, aucun frais caché : **tarif unique clair** dès le départ  
+- Aucun abonnement, aucun frais caché : **tarif unique clair dès le départ**  
 - Accompagnement humain, basé en France
 
 ---
 
 ## Note importante
 
-En remplissant le formulaire et en passant votre commande:
-- Vous reconnaissez avoir pris connaissance et accepté nos [Conditions Générales](/legal/conditions-generales-de-vente), incluant:
-- - les règles concernant les régularisations, 
-- - le rejet définitif et la limitation de responsabilité.
- 
-La validation finale de votre commande se fait via la **case à cocher obligatoire** avant paiement.
+En remplissant le formulaire et en passant commande :  
+
+- vous reconnaissez avoir pris connaissance de nos [Conditions Générales de Vente](/legal/conditions-generales-de-vente)
+
+Avant l’envoi du formulaire, le déclarant doit obligatoirement cocher la case suivante :  
+
+> *« Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les Conditions Générales de Mon Assistant Formalités. Je consens à ce que ma demande soit transmise pour traitement. »*
+
+La validation de cette case constitue un **engagement ferme** :  
+
+- Le traitement de la formalité débute **après réception complète du formulaire et du paiement**  
+- Aucun remboursement ne pourra être demandé, même en cas d’annulation par le client  
+- Le client accepte expressément que MAF puisse gérer les régularisations administratives dans les limites prévues par les [CGV](/legal/conditions-generales-de-vente)

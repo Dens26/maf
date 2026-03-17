@@ -126,7 +126,7 @@ const formBackground = 'light';
     <h3 class="text-xl-2 font-semibold mb-4">Informations Entreprise</h3>
 </div>
 
-<form id="create-form" method="GET" action="/forms/create/recapitulatif">
+<form id="create-form" method="POST" action="/forms/create/recapitulatif">
 
   <!-- ENTREPRENEUR -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
@@ -149,7 +149,7 @@ const formBackground = 'light';
       <div id="sirencountry-wrapper" class="flex-1 min-w-[48%]"><Select label="Pays de l'activité" id="sirencountry" name="sirencountry" options={countryOptions} required background={formBackground} /></div>
       <div id="siren-wrapper" class="hidden transition-all duration-300 flex-1 min-w-[48%]"><Input label="SIREN" id="siren" name="siren" required background={formBackground} /></div>
       <div id="oldactivitydate-wrapper" class="flex-1 min-w-[48%]"><Date label="Fin de l'activité" id="oldactivitydate" name="oldactivitydate" required background={formBackground} /></div>
-      <div class="flex-1 min-w-[48%]"><Input label="Description de l'activité" id="oldactivity" name="oldactivity" required background={formBackground} /></div>
+      <div class="flex-1 min-w-[48%]"><Input label="Détail de l'activité" id="oldactivity" name="oldactivity" required background={formBackground} /></div>
     </div>
   </div>
 
@@ -330,9 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const oldActivityInput = document.getElementById('oldactivity');
   const oldActivityDateInput = document.getElementById('oldactivitydate');
   const sirenCountrySelect = form.querySelector('[name="sirencountry"]');
-  const previousSelfEmployedActivity = document.querySelectorAll(
-    'input[name="previousselfemployedactivity"]'
-  );
+  const previousSelfEmployedActivity = document.querySelectorAll( 'input[name="previousselfemployedactivity"]');
 
   const updatePreviousActivityFields = () => {
     const radioValue =

@@ -1,0 +1,31 @@
+---
+import Cessation from '@components/forms/cessation/Recapitulatif.astro';
+import Stepper from '@components/forms/cessation/Stepper.astro';
+import { getBackgroundColor, getPaddingClass } from '@utils/styleUtils';
+import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
+
+export interface Props {
+    background?: ThemeColor;
+    padding?: PaddingSize;
+    paddingTop?: PaddingSize;
+    paddingBottom?: PaddingSize;
+}
+
+const { background = 'base', padding, paddingTop, paddingBottom } = Astro.props;
+
+const bgColor = getBackgroundColor(background);
+const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
+---
+
+<section class:list={[bgColor, paddingClass]}>
+    <div class="site-container px-2 sm:px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div>
+                <Stepper currentStep={4} id="stepper"/>
+            </div>
+            <div class="sm:col-span-2">
+                <Cessation />
+            </div>
+        </div>
+    </div>
+</section>

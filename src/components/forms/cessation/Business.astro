@@ -1,0 +1,148 @@
+---
+import Button from '@components/ui/Button.astro';
+import Input from '@components/ui/form/Input.astro';
+import Radio from '@components/ui/form/Radio.astro';
+
+const microOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const eirlOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const domiciliationOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const formBackground = 'light';
+---
+
+<div>
+  <h3 class="text-xl-2 font-semibold mb-4">Informations de l'entreprise</h3>
+</div>
+
+<form id="cessation-form" method="POST" action="/forms/cessation/details">
+  <!-- Contact -->
+   <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+    <div class="text-md font-semibold">Identité de l'entreprise</div>
+    <div class="grid grid-cols-2 gap-2 sm:gap-4">
+      <Input label="SIREN" id="siren" name="siren" required background={formBackground} />
+      <Radio label="Régime micro ?" id="micro" name="micro" options={microOptions} required background={formBackground} />
+    </div>
+    <Radio label="Avez-vous opté pour l'option EIRL avant le 15 février 2022 ?" id="eirl" name="eirl" options={eirlOptions} required background={formBackground} />
+  </div>
+
+  <!-- Adresse -->
+   <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+    <div class="text-md font-semibold">Adresse de l'entreprise</div>
+    <Radio label="Recours à une société de domiciliation d'entreprises ?" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} />
+    <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-2 sm:gap-4 transition-all duration-300">
+      <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
+      <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="flex justify-between my-8">
+    <Button href="/forms/cessation/entrepreneur" variant="primary" size="md" class="uppercase">étape précédente</Button>
+    <Button type="submit" variant="primary" size="md" class="uppercase">étape suivante</Button>
+  </div>
+</form>
+
+<!-- SCRIPT JS -->
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('cessation-form');
+  if (!form) return;
+
+  const STORAGE_KEY = 'cessation-business-form';
+
+  const domiciliationRadios = document.querySelectorAll('input[name="domiciliation"]');
+  const domiciliationWrapper = document.getElementById('domiciliationsiren-wrapper');
+  const domiciliationName = document.getElementById('domiciliationname');
+  const domiciliationSiren = document.getElementById('domiciliationsiren');
+
+  const sirenInput = document.getElementById('siren');
+
+  /*** ================= SUBMIT ================= ***/
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+    window.location.href = '/forms/cessation/details';
+  });
+
+  /*** ================= STORAGE ================= ***/
+  const saveForm = () => {
+    const data = {};
+    new FormData(form).forEach((value, key) => { data[key] = value; });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  };
+
+  const restoreForm = () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    Object.entries(data).forEach(([name, value]) => {
+      const field = form.querySelector(`[name="${name}"]`);
+      if (!field) return;
+
+      if (field.type === 'radio') {
+        const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
+        if (radio) radio.checked = true;
+      } else {
+        field.value = value;
+      }
+    });
+  };
+
+  form.addEventListener('input', saveForm);
+  form.addEventListener('change', saveForm);
+
+  /*** ================= DOMICILIATION ================= ***/
+  const toggleDomiciliation = () => {
+    const value =
+      Array.from(domiciliationRadios).find(r => r.checked)?.value || 'non';
+
+    if (value === 'oui') {
+      domiciliationWrapper.classList.remove('hidden');
+      domiciliationName.required = true;
+      domiciliationSiren.required = true;
+    } else {
+      domiciliationWrapper.classList.add('hidden');
+      domiciliationName.required = false;
+      domiciliationSiren.required = false;
+      domiciliationName.value = '';
+      domiciliationSiren.value = '';
+    }
+  };
+
+  domiciliationRadios.forEach(radio =>
+    radio.addEventListener('change', toggleDomiciliation)
+  );
+
+  /*** ================= VALIDATION ================= ***/
+  sirenInput?.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+  });
+
+  domiciliationSiren?.addEventListener('input', e => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+  });
+
+  /*** ================= INIT ================= ***/
+  restoreForm();
+  toggleDomiciliation();
+
+});
+</script>
