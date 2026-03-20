@@ -8,8 +8,7 @@ duration: "48h en moyenne"
 order: 2
 publish: true
 
-link: "/forms/unavailable"
-# link: "/forms/moving/address"
+link: "/forms/moving/entrepreneur"
 text: "Modifiez votre adresse"
 price: "69"
 

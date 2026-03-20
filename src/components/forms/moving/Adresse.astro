@@ -1,0 +1,350 @@
+---
+import Button from '@components/ui/Button.astro';
+import Checkbox from '@components/ui/form/Checkbox.astro';
+import Input from '@components/ui/form/Input.astro';
+import Textarea from '@components/ui/form/Textarea.astro';
+import Select from '@components/ui/form/Select.astro';
+import Radio from '@components/ui/form/Radio.astro';
+import Date from '@components/ui/form/Date.astro';
+import countries from 'public/data/countries.json';
+
+const complementnumberOptions = [
+    { label: '', value: '' },
+    { label: 'Bis', value: 'bis' },
+    { label: 'Ter', value: 'ter' },
+    { label: 'Quater', value: 'quater' },
+    { label: 'Quinquies', value: 'quinquies' },
+    { label: 'Sexies', value: 'sexies' },
+    { label: 'Septies', value: 'septies' },
+    { label: 'Octies', value: 'octies' },
+    { label: 'Nonies', value: 'nonies' },
+];
+
+const destinationOptions = [
+    { label: "Au domicile de l'entrepreneur", value: 'domicile' },
+    { label: 'Dans une autre adresse', value: 'nouvelle_adresse' },
+    { label: "Auprès d'une société de domiciliation", value: 'societe_domiciliation' },
+    { label: 'Dans un établissement existant', value: 'etablissement_existant' },
+];
+
+const adresseActiviteOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const tracktypeOptions = [
+    { label: 'Allée', value: 'Allée' },
+    { label: 'Allée privée', value: 'Allée privée' },
+    { label: 'Avenue', value: 'Avenue' },
+    { label: 'Boulevard', value: 'Boulevard' },
+    { label: 'Boulevard périphérique', value: 'Boulevard périphérique' },
+    { label: 'Cité', value: 'Cité' },
+    { label: 'Cour', value: 'Cour' },
+    { label: 'Chemin', value: 'Chemin' },
+    { label: 'Chemin rural', value: 'Chemin rural' },
+    { label: 'Impasse', value: 'Impasse' },
+    { label: 'Lotissement', value: 'Lotissement' },
+    { label: 'Parc', value: 'Parc' },
+    { label: 'Passage', value: 'Passage' },
+    { label: 'Place', value: 'Place' },
+    { label: 'Place de la…', value: 'Place de la…' },
+    { label: 'Promenade', value: 'Promenade' },
+    { label: 'Quai', value: 'Quai' },
+    { label: 'Route', value: 'Route' },
+    { label: 'Route départementale', value: 'Route départementale' },
+    { label: 'Route nationale', value: 'Route nationale' },
+    { label: 'Ruelle', value: 'Ruelle' },
+    { label: 'Résidence', value: 'Résidence' },
+    { label: 'Sentier', value: 'Sentier' },
+    { label: 'Villa', value: 'Villa' },
+    { label: 'Voie', value: 'Voie' },
+    { label: 'Zone industrielle', value: 'Zone industrielle' },
+];
+
+const countryOptions = [
+    { label: 'France', value: 'FR' },
+    ...countries
+        .filter((c) => c.name !== 'France')
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((c) => ({ label: c.name, value: c.code })),
+];
+
+const formBackground = 'light';
+---
+
+<div>
+    <h3 class="text-2xl font-semibold mb-4">Informations concernant votre changement d'adresse</h3>
+</div>
+
+<form id="moving-form">
+    <!-- ADRESSE ENTREPRENEUR -->
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold mb-4"></div>
+        <div class="text-md font-semibold">Déménagement de l'entrepreneur</div>
+        <Checkbox
+            label="Je souhaite déclarer un changement d'adresse de l'entrepreneur (déménagement)"
+            value="demenagement"
+            id="demenagement"
+            name="demenagement"
+            background={formBackground}
+        />
+
+        <!-- Nouvelle adresse de l'entrepreneur -->
+        <div id="demenagement-wrapper" class="hidden">
+            <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+                <Date class="flex-1 max-w-[150px]" label="Date d'effet" id="demenagementdate" name="demenagementdate" required background={formBackground}/>
+                <div class="grid grid-cols-12 gap-2 sm:gap-4">
+                    <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} /></div>
+                    <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=""/></div>
+                    <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground}/></div>
+                </div>
+                <Input label="Nom de la voie" id="way" name="way" required background={formBackground} />
+                <div class="grid grid-cols-2 gap-2 sm:gap-4"><Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground}/>
+                    <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground}/>
+                </div>
+                <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                    <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} />
+                    <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize"/>
+                </div>
+            </div>
+            <Radio label="Ce déménagement concerne-t-il également un établissement ?" id="adresseActivite" name="adresseActivite" options={adresseActiviteOptions} required background={formBackground}/>
+            <div id="siren-wrapper" class="hidden">
+                <div class="mt-4"><Radio label="Présence de salarié dans l'établissement ?" id="demenagementsalarie" name="demenagementsalarie" options={adresseActiviteOptions} required background={formBackground}/></div>
+                <div class="text-sm font-semibold mt-4">Siret de l'établissement à transferer :</div>
+                <div class="flex gap-2">
+                    <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
+                    <div class="w-15"><Input label="&nbsp;" id="siret" name="siret" background={formBackground} required placeholder='NIC'/></div>
+                </div>
+                <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADRESSE ETABLISSEMENT -->
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold mb-4"></div>
+        <div class="text-md font-semibold">Transfert d'établissement</div>
+        <Checkbox label="Je souhaite déclarer un changement d'adresse d'un établissement (transfert)" value="transfert" id="transfert" name="transfert" background={formBackground}/>
+
+        <!-- OPTIONS DU TRANSFERT -->
+        <div id="transfert-wrapper" class="hidden">
+            <Date class="flex-1 max-w-[150px]" label="Date d'effet" id="transfertdate" name="transfertdate" required background={formBackground}/>
+            <div class="mt-4"><Radio label="Présence de salarié dans l'établissement ?" id="transfertsalarie" name="transfertsalarie" options={adresseActiviteOptions} required background={formBackground}/></div>
+            <div class="py-4">
+                <div class="text-sm font-semibold">Siret de l'établissement à transferer :</div>
+                <div class="flex gap-2">
+                    <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
+                    <div class="w-15"><Input label="&nbsp;" id="transfertsiret" name="transfertsiret" background={formBackground} required placeholder='NIC'/></div>
+                </div>
+                <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
+            </div>
+            <div class="py-4">
+                <Select label="Destination du transfert" id="destination" name="destination" options={destinationOptions} data-optional="true" background={formBackground} required/>
+            </div>
+            <div id="domiciliation-wrapper" class="grid grid-cols-2 gap-2 sm:gap-4 hidden">
+                <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
+                <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
+            </div>
+            <div id="siretdestination-wrapper" class="py-4 hidden">
+                <div class="text-sm font-semibold">Siret de l'établissement de destination :</div>
+                <div class="flex gap-2">
+                    <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
+                    <div class="w-15"><Input label="&nbsp;" id="destinationsiret" name="destinationsiret" background={formBackground} required placeholder='NIC'/></div>
+                </div>
+                <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
+            </div>
+        </div>
+
+        <!-- ADRESSE DE L'ÉTABLISSEMENT -->
+        <div id="transfertadress-wrapper" class="hidden space-y-2 sm:space-y-4 bg-white rounded-sm mb-4">
+            <div class="text-md font-semibold">Adresse de l'établissement</div>
+            <div>
+                <Checkbox label="Je souhaite que cette adresse soit utilisée comme adresse de correspondance" value="oui" id="correspondance" name="correspondance" background={formBackground} />
+                <p class="text-sm text-primary mt-1">⚠️ Par défaut, l’adresse de correspondance est celle de l’entrepreneur. Cochez cette case uniquement si vous voulez utiliser une adresse différente.</p>
+            </div>
+            <div class="grid grid-cols-12 gap-2 sm:gap-4">
+                <div class="col-span-2"><Input label="N°" id="transfertracknumber" name="transfertracknumber" required background={formBackground}/></div>
+                <div class="col-span-3"><Select label="Indice" id="transertcomplementnumber" name="transertcomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
+                <div class="col-span-7"><Select label="Type de voie" id="transferttracktype" name="transferttracktype" options={tracktypeOptions} required background={formBackground} /></div>
+            </div>
+            <Input label="Nom de la voie" id="transfertway" name="transfertway" required background={formBackground}/>
+            <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                <Input label="Code postal" id="transfertzipcode" name="transfertzipcode" required background={formBackground}/>
+                <Input label="Ville" id="transfertcity" name="transfertcity" required background={formBackground} class="capitalize"/>
+            </div>
+            <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                <Input label="Complément" id="transfertadditionaladdress" name="transfertadditionaladdress" data-optional="true" background={formBackground}/>
+                <Select label="Pays" id="transfertcountry" name="transfertcountry" options={countryOptions} required background={formBackground}/>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION / COMMENTAIRES -->
+    <div class="space-y-2 sm:space-y-4 bg-white p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold mb-4">Informations complémentaires</div>
+        <Checkbox label="Je demande la non-diffusion des informations relatives à mon entreprise au répertoire Sirene de l’INSEE" value="oui" id="diffusioninsee" name="diffusioninsee" background={formBackground} />
+        <Checkbox label="Je consens à la mise à disposition de mes données personnelles à des fins de prospection" value="oui" id="prospection" name="prospection" background={formBackground}/>
+        <Textarea rows={5} label="Précisions utiles à votre demande" id="observation" name="observation" background={formBackground} class="text-sm"/>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="flex justify-between my-8">
+        <Button href="/forms/moving/entrepreneur" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+        <Button type="submit" variant="primary" size="md" class="uppercase">Étape suivante</Button>
+    </div>
+</form>
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('moving-form');
+    if (!form) return;
+
+    const STORAGE_KEY = 'moving-adresse-form';
+
+    /* ================= LOCALSTORAGE ================= */
+    const saveForm = () => {
+        const data = {};
+        new FormData(form).forEach((value, key) => {
+            if (data[key]) {
+                if (Array.isArray(data[key])) data[key].push(value);
+                else data[key] = [data[key], value];
+            } else {
+                data[key] = value;
+            }
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    };
+
+    const restoreForm = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([name, value]) => {
+            const fields = form.querySelectorAll(`[name="${name}"]`);
+            if (!fields.length) return;
+            fields.forEach((field) => {
+                if (field.type === 'checkbox' || field.type === 'radio') {
+                    if (Array.isArray(value)) field.checked = value.includes(field.value);
+                    else field.checked = field.value === value;
+                } else {
+                    field.value = value;
+                }
+            });
+        });
+    };
+    restoreForm();
+    form.addEventListener('input', saveForm);
+    form.addEventListener('change', saveForm);
+
+    /* ================= HELPER TOGGLE ================= */
+    const setupToggle = (checkboxId, wrapperId) => {
+        const checkbox = form.querySelector(`#${checkboxId}`);
+        const wrapper = form.querySelector(`#${wrapperId}`);
+        if (!checkbox || !wrapper) return;
+        const toggle = () => {
+            const show = checkbox.checked;
+            wrapper.classList.toggle('hidden', !show);
+            wrapper.querySelectorAll('input, select, textarea').forEach(f => {
+                f.style.display = show ? '' : 'none';
+                f.required = show && !f.hasAttribute('data-optional');
+            });
+        };
+        toggle();
+        checkbox.addEventListener('change', toggle);
+    };
+    setupToggle('demenagement', 'demenagement-wrapper');
+    setupToggle('transfert', 'transfert-wrapper');
+
+    /* ================= ADRESSE ACTIVITE (RADIO) ================= */
+    const sirenWrapper = document.getElementById('siren-wrapper');
+    const adresseActiviteRadios = form.querySelectorAll('input[name="adresseActivite"]');
+    const toggleSiren = () => {
+        const selected = form.querySelector('input[name="adresseActivite"]:checked');
+        const show = selected && selected.value === 'oui';
+        sirenWrapper.classList.toggle('hidden', !show);
+        sirenWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+            f.style.display = show ? '' : 'none';
+            f.required = show && !f.hasAttribute('data-optional');
+        });
+    };
+    toggleSiren();
+    adresseActiviteRadios.forEach(radio => radio.addEventListener('change', toggleSiren));
+
+    /* ================= DESTINATION TRANSFERT ================= */
+    const transfertCheckbox = form.querySelector('#transfert');
+    const destinationSelect = form.querySelector('#destination');
+    const transfertAdressWrapper = document.getElementById('transfertadress-wrapper');
+    const domiciliationWrapper = document.getElementById('domiciliation-wrapper');
+    const siretdestinationWrapper = document.getElementById('siretdestination-wrapper');
+
+    const toggleTransfertAdresse = () => {
+        if (!transfertCheckbox || !destinationSelect) return;
+
+        const value = destinationSelect.value;
+
+        const showTransfertAdresse = transfertCheckbox.checked && (value === 'nouvelle_adresse' || value === 'societe_domiciliation');
+        const showDomiciliation = transfertCheckbox.checked && value === 'societe_domiciliation';
+        const showDestinationSiret = transfertCheckbox.checked && value === 'etablissement_existant';
+
+        // Wrapper transfert (adresse)
+        if (transfertAdressWrapper) {
+            transfertAdressWrapper.classList.toggle('hidden', !showTransfertAdresse);
+            transfertAdressWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+                f.style.display = showTransfertAdresse ? '' : 'none';
+                f.required = showTransfertAdresse && !f.hasAttribute('data-optional');
+            });
+        }
+
+        // Wrapper domiciliation
+        if (domiciliationWrapper) {
+            domiciliationWrapper.classList.toggle('hidden', !showDomiciliation);
+            domiciliationWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+                f.style.display = showDomiciliation ? '' : 'none';
+                f.required = showDomiciliation && !f.hasAttribute('data-optional');
+            });
+        }
+
+        // Wrapper SIRET destination (pour établissement existant)
+        if (siretdestinationWrapper) {
+            siretdestinationWrapper.classList.toggle('hidden', !showDestinationSiret);
+            siretdestinationWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+                f.style.display = showDestinationSiret ? '' : 'none';
+                f.required = showDestinationSiret && !f.hasAttribute('data-optional');
+            });
+        }
+    };
+
+    toggleTransfertAdresse();
+    if (transfertCheckbox) transfertCheckbox.addEventListener('change', toggleTransfertAdresse);
+    if (destinationSelect) destinationSelect.addEventListener('change', toggleTransfertAdresse);
+
+    /* ================= PREFILL SIREN ================= */
+    const sirenInputs = form.querySelectorAll('input[name^="siren"]');
+    const businessData = localStorage.getItem('moving-entrepreneur-form');
+    if (businessData) {
+        const business = JSON.parse(businessData);
+        if (business.siren) sirenInputs.forEach(input => input.value = business.siren);
+    }
+
+    /* ================= FORM SUBMIT ================= */
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Vérifie que tous les champs visibles requis sont remplis
+        let valid = true;
+        form.querySelectorAll('input, select, textarea').forEach(f => {
+            if (f.required && f.style.display !== 'none' && !f.value) {
+                f.reportValidity();
+                valid = false;
+            }
+        });
+        if (!valid) return;
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+        window.location.href = '/forms/moving/recapitulatif';
+    });
+});
+</script>
