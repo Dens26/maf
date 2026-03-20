@@ -126,7 +126,7 @@ const formBackground = 'light';
     <h3 class="text-xl-2 font-semibold mb-4">Informations Entreprise</h3>
 </div>
 
-<form id="create-form" method="POST" action="/forms/create/recapitulatif">
+<form id="create-form">
 
   <!-- ENTREPRENEUR -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
@@ -196,18 +196,18 @@ const formBackground = 'light';
         <p class="text-sm text-primary mt-1">⚠️ Par défaut, l’adresse de correspondance est celle de l’entrepreneur. Cochez cette case uniquement si vous voulez utiliser une adresse différente.</p>
     </div>
     <div class="grid grid-cols-12 gap-2 sm:gap-4">
-      <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
+      <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground}/></div>
       <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
       <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} /></div>
     </div>
-    <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address" />
+    <Input label="Nom de la voie" id="way" name="way" required background={formBackground}/>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
-      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
-      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2" />
+      <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground}/>
+      <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize"/>
     </div>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
-      <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2" />
-      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} autocomplete="country" />
+      <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground}/>
+      <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground}/>
     </div>
   </div>
 

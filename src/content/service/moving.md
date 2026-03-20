@@ -1,6 +1,6 @@
 ---
 name: "Modification d’adresse"
-description: "Pour un déménagement, transfert d’établissement de votre entreprise individuelle sans stress."
+description: "Pour un déménagement, transfert d’établissement sans stress."
 icon: "/images/moving.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 69€"
@@ -11,6 +11,7 @@ publish: true
 link: "/forms/unavailable"
 # link: "/forms/moving/address"
 text: "Modifiez votre adresse"
+price: "69"
 
 seo:
   title: "Modification d’adresse"

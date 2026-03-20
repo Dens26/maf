@@ -72,9 +72,9 @@ const formBackground = 'light';
 <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md mb-6">
   <p class="font-semibold text-yellow-800 mb-1">⚠️ Attention</p>
   <p class="text-sm text-yellow-700 leading-relaxed">
-    La formalité de cessation entraîne l’arrêt total de l’entreprise, qu’il soit définitif ou temporaire, <strong>incluant l’ensemble des activités et des établissements.</strong>
+    La formalité de correction ne concerne que la <strong>mise à jour des informations erronées sur le Guichet Unique</strong> et <strong>ne constitue pas une modification</strong>.
     <br><br>
-    Si vous souhaitez seulement supprimer une activité ou un établissement, il s’agit d’une formalité de modification et non d’une cessation.
+    Si vous souhaitez réellement changer une activité, un établissement ou toute autre information, il faut réaliser une formalité de modification.
   </p>
 </div>
 
@@ -82,7 +82,7 @@ const formBackground = 'light';
   <h3 class="text-xl-2 font-semibold mb-4">Informations personnelles</h3>
 </div>
 
-<form id="cessation-form">
+<form id="correction-form">
     <!-- Contact -->
      <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
         <div class="text-md font-semibold">Contact</div>
@@ -90,6 +90,12 @@ const formBackground = 'light';
             <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
             <Input label="Téléphone" id="phone" name="phone" required background={formBackground}/>
         </div>
+    </div>
+
+    <!-- Entreprise -->
+    <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+        <div class="text-md font-semibold">Identité de l'entreprise</div>
+        <Input class='max-w-[150px]' label="SIREN" id="siren" name="siren" required background={formBackground} />
     </div>
 
     <!-- Entrepreneur -->
@@ -139,7 +145,7 @@ const formBackground = 'light';
 
 <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('cessation-form');
+        const form = document.getElementById('correction-form');
         if (!form) return;
 
         form.addEventListener('submit', function (e) {
@@ -148,12 +154,12 @@ const formBackground = 'light';
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            localStorage.setItem('cessation-entrepreneur-form', JSON.stringify(data));
+            localStorage.setItem('correction-entrepreneur-form', JSON.stringify(data));
 
-            window.location.href = '/forms/cessation/business';
+            window.location.href = '/forms/correction/correctif';
         });
 
-        const STORAGE_KEY = 'cessation-entrepreneur-form';
+        const STORAGE_KEY = 'correction-entrepreneur-form';
 
         /* ================= STORAGE ================= */
 
@@ -180,36 +186,9 @@ const formBackground = 'light';
         form.addEventListener('input', saveForm);
         form.addEventListener('change', saveForm);
 
-        /* ================= FIELDS ================= */
-
-        const country = document.getElementById('country');
-        const zipCode = document.getElementById('zipcode');
-
-        /* ================= EVENTS ================= */
-
-        // reset zipcode si pays change
-        country?.addEventListener('change', () => {
-            if (zipCode) zipCode.value = '';
-        });
-
-        /* ================= FILTER INPUTS ================= */
-
-        document.addEventListener('input', (e) => {
-            // Code postal FR → 5 chiffres
-            if (e.target.name === 'zipcode' && (country.value === 'FR' || country.value === ''))
-                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
-
-            // téléphone → chiffres uniquement
-            if (e.target.name === 'phone')
-                e.target.value = e.target.value.replace(/\D/g, '');
-
-            // numéro de voie → chiffres uniquement
-            if (e.target.name === 'tracknumber')
-                e.target.value = e.target.value.replace(/\D/g, '');
-
-            // ville → pas de chiffres
-            if (e.target.name === 'city')
-                e.target.value = e.target.value.replace(/\d/g, '');
+        const sirenInput = document.getElementById('siren');
+        sirenInput?.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
         });
     });
 </script>

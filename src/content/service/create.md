@@ -10,6 +10,7 @@ publish: true
 
 link: "/forms/create/entrepreneur"
 text: "Commencer ma création"
+price: "59"
 
 seo:
   title: "Création d'entreprise"

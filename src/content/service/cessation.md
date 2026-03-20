@@ -1,6 +1,6 @@
 ---
 name: "Cessation d’activité"
-description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre entreprise individuelle."
+description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre EI."
 icon: "/images/closed.jpg"
 category: "Formalités de cessation"
 priceRange: "à partir de 49€"
@@ -10,6 +10,7 @@ publish: true
 
 link: "/forms/cessation/entrepreneur"
 text: "Cessez votre entreprise"
+price: "49"
 
 seo:
   title: "Déclarer la cessation d’activité de son entreprise individuelle"

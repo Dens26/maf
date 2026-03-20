@@ -11,8 +11,8 @@ const FORMALITY_PRICES: Record<number, number> = {
     1: 5900,
     2: 6900,
     3: 6900,
-    4: 4900,
-    5: 7900,
+    4: 3900,
+    5: 4900,
 }
 
 // Labels des formalités
@@ -54,7 +54,7 @@ export async function POST({ request }: APIContext) {
         } = formality
 
         const amount = FORMALITY_PRICES[typeId]
-        const advanceAmount = 1000
+        const advanceAmount = 500
         const label = FORMALITY_LABELS[typeId]
 
         if (!email || !amount || !label) {
@@ -98,7 +98,7 @@ export async function POST({ request }: APIContext) {
             customer: finalCustomer.id,
             amount: advanceAmount,
             currency: 'eur',
-            description: `Avance pour formalité ${label} n° ${demandeId}`,
+            description: `Frais de gestion – formalité ${label} n° ${demandeId}`
         })
 
         // 5️⃣ Création facture (sans auto_advance)

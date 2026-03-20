@@ -25,8 +25,8 @@ const formBackground = 'light';
   <h3 class="text-xl-2 font-semibold mb-4">Informations de l'entreprise</h3>
 </div>
 
-<form id="cessation-form" method="POST" action="/forms/cessation/details">
-  <!-- Contact -->
+<form id="cessation-form">
+  <!-- Entreprise -->
    <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
     <div class="text-md font-semibold">Identité de l'entreprise</div>
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
@@ -55,94 +55,103 @@ const formBackground = 'light';
 
 <!-- SCRIPT JS -->
 <script type="module">
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('cessation-form');
-  if (!form) return;
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('cessation-form');
+        if (!form) return;
 
-  const STORAGE_KEY = 'cessation-business-form';
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // 🚨 ultra important
 
-  const domiciliationRadios = document.querySelectorAll('input[name="domiciliation"]');
-  const domiciliationWrapper = document.getElementById('domiciliationsiren-wrapper');
-  const domiciliationName = document.getElementById('domiciliationname');
-  const domiciliationSiren = document.getElementById('domiciliationsiren');
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-  const sirenInput = document.getElementById('siren');
+            localStorage.setItem('cessation-business-form', JSON.stringify(data));
 
-  /*** ================= SUBMIT ================= ***/
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+            window.location.href = '/forms/cessation/details';
+        });
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+        const STORAGE_KEY = 'cessation-business-form';
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        const domiciliationRadios = document.querySelectorAll('input[name="domiciliation"]');
+        const domiciliationWrapper = document.getElementById('domiciliationsiren-wrapper');
+        const domiciliationName = document.getElementById('domiciliationname');
+        const domiciliationSiren = document.getElementById('domiciliationsiren');
 
-    window.location.href = '/forms/cessation/details';
-  });
+        const sirenInput = document.getElementById('siren');
 
-  /*** ================= STORAGE ================= ***/
-  const saveForm = () => {
-    const data = {};
-    new FormData(form).forEach((value, key) => { data[key] = value; });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  };
+        /*** ================= SUBMIT ================= ***/
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-  const restoreForm = () => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-    const data = JSON.parse(saved);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 
-    Object.entries(data).forEach(([name, value]) => {
-      const field = form.querySelector(`[name="${name}"]`);
-      if (!field) return;
+            window.location.href = '/forms/cessation/details';
+        });
 
-      if (field.type === 'radio') {
-        const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
-        if (radio) radio.checked = true;
-      } else {
-        field.value = value;
-      }
+        /*** ================= STORAGE ================= ***/
+        const saveForm = () => {
+            const data = {};
+            new FormData(form).forEach((value, key) => {
+                data[key] = value;
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        };
+
+        const restoreForm = () => {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            const data = JSON.parse(saved);
+
+            Object.entries(data).forEach(([name, value]) => {
+                const field = form.querySelector(`[name="${name}"]`);
+                if (!field) return;
+
+                if (field.type === 'radio') {
+                    const radio = form.querySelector(`[name="${name}"][value="${value}"]`);
+                    if (radio) radio.checked = true;
+                } else {
+                    field.value = value;
+                }
+            });
+        };
+
+        form.addEventListener('input', saveForm);
+        form.addEventListener('change', saveForm);
+
+        /*** ================= DOMICILIATION ================= ***/
+        const toggleDomiciliation = () => {
+            const value = Array.from(domiciliationRadios).find((r) => r.checked)?.value || 'non';
+
+            if (value === 'oui') {
+                domiciliationWrapper.classList.remove('hidden');
+                domiciliationName.required = true;
+                domiciliationSiren.required = true;
+            } else {
+                domiciliationWrapper.classList.add('hidden');
+                domiciliationName.required = false;
+                domiciliationSiren.required = false;
+                domiciliationName.value = '';
+                domiciliationSiren.value = '';
+            }
+        };
+
+        domiciliationRadios.forEach((radio) => radio.addEventListener('change', toggleDomiciliation));
+
+        /*** ================= VALIDATION ================= ***/
+        sirenInput?.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+        });
+
+        domiciliationSiren?.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
+        });
+
+        /*** ================= INIT ================= ***/
+        restoreForm();
+        toggleDomiciliation();
     });
-  };
-
-  form.addEventListener('input', saveForm);
-  form.addEventListener('change', saveForm);
-
-  /*** ================= DOMICILIATION ================= ***/
-  const toggleDomiciliation = () => {
-    const value =
-      Array.from(domiciliationRadios).find(r => r.checked)?.value || 'non';
-
-    if (value === 'oui') {
-      domiciliationWrapper.classList.remove('hidden');
-      domiciliationName.required = true;
-      domiciliationSiren.required = true;
-    } else {
-      domiciliationWrapper.classList.add('hidden');
-      domiciliationName.required = false;
-      domiciliationSiren.required = false;
-      domiciliationName.value = '';
-      domiciliationSiren.value = '';
-    }
-  };
-
-  domiciliationRadios.forEach(radio =>
-    radio.addEventListener('change', toggleDomiciliation)
-  );
-
-  /*** ================= VALIDATION ================= ***/
-  sirenInput?.addEventListener('input', e => {
-    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
-  });
-
-  domiciliationSiren?.addEventListener('input', e => {
-    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
-  });
-
-  /*** ================= INIT ================= ***/
-  restoreForm();
-  toggleDomiciliation();
-
-});
 </script>

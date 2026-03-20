@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Layout.astro"
+import InnerHero from "@components/sections/InnerHero.astro"
+import Correction from "@components/sections/correction/CorrectifInfo.astro"
+
+const heroContent = {
+    title: "Cessez votre entreprise",
+    description: "Formulaire de cessation d'entreprise"
+}
+---
+
+<Layout title="Correction" description="Cessez votre entreprise">
+    <InnerHero content={heroContent} />
+    <Correction background="base" padding="responsive" />
+</Layout>

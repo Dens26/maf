@@ -58,6 +58,7 @@ const service = defineCollection({
         publish: z.boolean().default(true),
         link: z.string(),
         text: z.string(),
+        price: z.string()
     }),
 });
 

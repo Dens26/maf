@@ -1,6 +1,6 @@
 ---
 name: "Modification de l’activité"
-description: "Un accompagnement complet pour déclarer officiellement un changement ou un ajout d’activité à votre entreprise individuelle."
+description: "Un accompagnement complet pour déclarer votre changement d’activité"
 icon: "/images/activities.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 69€"
@@ -11,6 +11,7 @@ publish: true
 link: "/forms/unavailable"
 # link: "/forms/activities"
 text: "Ajouter vos activités"
+price: "69"
 
 seo:
   title: "Modifier l’activité de son entreprise individuelle"

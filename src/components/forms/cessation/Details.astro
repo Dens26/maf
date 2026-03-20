@@ -32,82 +32,88 @@ const deces_options = [
 ];
 
 const genderOptions = [
-  { label: 'M.', value: 'monsieur' },
-  { label: 'Mme', value: 'madame' },
+    { label: 'M.', value: 'monsieur' },
+    { label: 'Mme', value: 'madame' },
 ];
 
-const nationalityOptions = [
-  { label: "Française", value: "FR" },
-  ...countries
-    .filter(c => c.nationality !== "Française")
-    .sort((a, b) => a.nationality.localeCompare(b.nationality))
-    .map(c => ({ label: c.nationality, value: c.code }))
-];
-
-const countryOptions = [
-  { label: "France", value: "FR" },
-  ...countries
-    .filter(c => c.name !== "France")
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map(c => ({ label: c.name, value: c.code }))
+const siretdestinationOptions = [
+    { label: 'Fermé', value: 'ferme' },
+    { label: 'Vendu', value: 'vendu' },
+    { label: 'Autre', value: 'autre' },
 ];
 
 const situationOptions = [
-  { label: "Célibataire", value: "Célibataire" },
-  { label: "Divorcé", value: "Divorcé" },
-  { label: "En concubinage", value: "Concubinage" },
-  { label: "Marié", value: "Marié" },
-  { label: "Pacsé", value: "Pacsé" },
-  { label: "Veuf", value: "Veuf" }
+    { label: 'Célibataire', value: 'Célibataire' },
+    { label: 'Divorcé', value: 'Divorcé' },
+    { label: 'En concubinage', value: 'Concubinage' },
+    { label: 'Marié', value: 'Marié' },
+    { label: 'Pacsé', value: 'Pacsé' },
+    { label: 'Veuf', value: 'Veuf' },
 ];
 
 const complementnumberOptions = [
-  { label: '', value: '' },
-  { label: 'Bis', value: 'bis' },
-  { label: 'Ter', value: 'ter' },
-  { label: 'Quater', value: 'quater' },
-  { label: 'Quinquies', value: 'quinquies' },
-  { label: 'Sexies', value: 'sexies' },
-  { label: 'Septies', value: 'septies' },
-  { label: 'Octies', value: 'octies' },
-  { label: 'Nonies', value: 'nonies' }
+    { label: '', value: '' },
+    { label: 'Bis', value: 'bis' },
+    { label: 'Ter', value: 'ter' },
+    { label: 'Quater', value: 'quater' },
+    { label: 'Quinquies', value: 'quinquies' },
+    { label: 'Sexies', value: 'sexies' },
+    { label: 'Septies', value: 'septies' },
+    { label: 'Octies', value: 'octies' },
+    { label: 'Nonies', value: 'nonies' },
 ];
 
 const tracktypeOptions = [
-  { label: "Allée", value: "Allée" },
-  { label: "Allée privée", value: "Allée privée" },
-  { label: "Avenue", value: "Avenue" },
-  { label: "Boulevard", value: "Boulevard" },
-  { label: "Boulevard périphérique", value: "Boulevard périphérique" },
-  { label: "Cité", value: "Cité" },
-  { label: "Cour", value: "Cour" },
-  { label: "Chemin", value: "Chemin" },
-  { label: "Chemin rural", value: "Chemin rural" },
-  { label: "Impasse", value: "Impasse" },
-  { label: "Lotissement", value: "Lotissement" },
-  { label: "Parc", value: "Parc" },
-  { label: "Passage", value: "Passage" },
-  { label: "Place", value: "Place" },
-  { label: "Place de la…", value: "Place de la…" },
-  { label: "Promenade", value: "Promenade" },
-  { label: "Quai", value: "Quai" },
-  { label: "Route", value: "Route" },
-  { label: "Route départementale", value: "Route départementale" },
-  { label: "Route nationale", value: "Route nationale" },
-  { label: "Ruelle", value: "Ruelle" },
-  { label: "Résidence", value: "Résidence" },
-  { label: "Sentier", value: "Sentier" },
-  { label: "Villa", value: "Villa" },
-  { label: "Voie", value: "Voie" },
-  { label: "Zone industrielle", value: "Zone industrielle" }
+    { label: 'Allée', value: 'Allée' },
+    { label: 'Allée privée', value: 'Allée privée' },
+    { label: 'Avenue', value: 'Avenue' },
+    { label: 'Boulevard', value: 'Boulevard' },
+    { label: 'Boulevard périphérique', value: 'Boulevard périphérique' },
+    { label: 'Cité', value: 'Cité' },
+    { label: 'Cour', value: 'Cour' },
+    { label: 'Chemin', value: 'Chemin' },
+    { label: 'Chemin rural', value: 'Chemin rural' },
+    { label: 'Impasse', value: 'Impasse' },
+    { label: 'Lotissement', value: 'Lotissement' },
+    { label: 'Parc', value: 'Parc' },
+    { label: 'Passage', value: 'Passage' },
+    { label: 'Place', value: 'Place' },
+    { label: 'Place de la…', value: 'Place de la…' },
+    { label: 'Promenade', value: 'Promenade' },
+    { label: 'Quai', value: 'Quai' },
+    { label: 'Route', value: 'Route' },
+    { label: 'Route départementale', value: 'Route départementale' },
+    { label: 'Route nationale', value: 'Route nationale' },
+    { label: 'Ruelle', value: 'Ruelle' },
+    { label: 'Résidence', value: 'Résidence' },
+    { label: 'Sentier', value: 'Sentier' },
+    { label: 'Villa', value: 'Villa' },
+    { label: 'Voie', value: 'Voie' },
+    { label: 'Zone industrielle', value: 'Zone industrielle' },
+];
+
+const nationalityOptions = [
+    { label: 'Française', value: 'FR' },
+    ...countries
+        .filter((c) => c.nationality !== 'Française')
+        .sort((a, b) => a.nationality.localeCompare(b.nationality))
+        .map((c) => ({ label: c.nationality, value: c.code })),
+];
+
+const countryOptions = [
+    { label: 'France', value: 'FR' },
+    ...countries
+        .filter((c) => c.name !== 'France')
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((c) => ({ label: c.name, value: c.code })),
 ];
 
 const departmentOptions = departments
-  .sort((a, b) => a.code.localeCompare(b.code))
-  .map(dep => ({ 
-    label: `${dep.code} - ${dep.dep_name}`, 
-    value: dep.code 
-  }));
+    .sort((a, b) => a.code.localeCompare(b.code))
+    .map((dep) => ({
+        label: `${dep.code} - ${dep.dep_name}`,
+        value: dep.code,
+    }));
 
 const formBackground = 'light';
 ---
@@ -116,70 +122,89 @@ const formBackground = 'light';
     <h3 class="text-xl-2 font-semibold mb-4">Informations de l'entreprise</h3>
 </div>
 
-<form id="cessation-form" method="POST" action="/forms/cessation/recapitulatif">
+<form id="cessation-form">
     <!-- Détail de la cessation -->
     <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
         <div class="text-md font-semibold">Cessation de l'entreprise</div>
+        <div id="temporaire-wrapper" class="flex-1 min-w-[48%]" data-required="true"><Radio label="S'agit-il d'une cessation temporaire ?" id="temporaire" name="temporaire" options={temporaire_options} required background={formBackground}/></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div id="agricole-wrapper" class="flex-1 min-w-[48%]" data-required="true"><Radio label="S'agit-il d'une entreprise agricole ?" id="agricole" name="agricole" options={agricole_options} required background={formBackground}/></div>
             <div id="destination-wrapper" class="flex-1 min-w-[48%] hidden" data-required="true"><Select label="Destination" id="destination" name="destination" options={destination_options} background={formBackground} required/></div>
-            <div id="temporaire-wrapper" class="flex-1 min-w-[48%]" data-required="true"><Radio label="S'agit-il d'une cessation temporaire ?" id="temporaire" name="temporaire" options={temporaire_options} required background={formBackground}/></div>
         </div>
         <div id="deces-wrapper" class="flex-1 min-w-[48%]"><Radio label="Poursuite de l'activité suite au décès de l'entrepreneur ?" id="deces" name="deces" options={deces_options} required background={formBackground}/></div>
         <div id="cessation-date-wrapper" class="flex-1 max-w-[48%]">
-            <Date label="Date de cessation de l'entreprise" id="cessationdate" name="cessationdate" required background={formBackground} autocomplete="bday" />
+            <Date label="Date de cessation de l'entreprise" id="cessationdate" name="cessationdate" required background={formBackground}/>
         </div>
         <div id="deces-date-wrapper" class="flex-1 max-w-[48%] hidden">
-            <Date label="Date de décès de l'entrepreneur" id="decesdate" name="decesdate" required background={formBackground} autocomplete="bday" />
+            <Date label="Date de décès de l'entrepreneur" id="decesdate" name="decesdate" required background={formBackground}/>
         </div>
         <div id="temporaire-date-wrapper" class="flex-1 max-w-[48%] hidden">
-            <Date label="Date de cessation temporaire" id="temporairedate" name="temporairedate" required background={formBackground} autocomplete="bday" />
+            <Date label="Date de cessation temporaire" id="temporairedate" name="temporairedate" required background={formBackground}/>
         </div>
     </div>
 
+    <!-- Destination des établissements -->
+    <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+        <div class="text-md font-semibold">Devenir des établissements</div>
+        <div class="flex items-start gap-2 text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">Indiquez pour chaque établissement présent dans l'entreprise ce qu’il devient après la cessation d’activité</div>
+        <Input class='max-w-[75px]' type="number" min="1" max="10" value='1' label="Nombre d'établissements concernés" id="nombre-etablissement" name="nombre-etablissement" background={formBackground} />
+
+        <!-- Template pour les SIRET dynamiques -->
+        <div id="siret-container">
+            <template id="siret-template">
+                <div class="flex gap-2 siret-item">
+                    <div class="flex gap-2">
+                        <div class="w-22"><Input label="SIREN" id="siren[]" name="siren[]" background={formBackground} disabled readonly/></div>
+                        <div class="w-15"><Input label="NIC" id="siret[]" name="siret[]" background={formBackground} required/></div>
+                    </div>
+                    <div class="w-full max-w-[300px]"><Select label="Devenir" name="siretdestination[]" options={siretdestinationOptions} required background={formBackground} value=''/></div>
+                    <div class="w-full hidden siret-other-wrapper"><Input label="Précisez" id="autredestination[]" name="autredestination[]" required background={formBackground}/></div>
+                </div>
+            </template>
+        </div>
+        <div class="text-xs text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
+    </div>
+
     <!-- Suppléant -->
-    <div id="suppleant-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+    <div id="suppleant-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden">
         <div class="text-md font-semibold">Suppléant désigné</div>
 
         <!-- Genre / Nom / Prénom -->
         <div class="grid grid-cols-5 gap-2 sm:gap-4">
-            <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" autocomplete="sex" placeholder='' />
+            <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" placeholder='' />
             <div class="col-span-4 flex gap-2 sm:gap-4">
-                <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase" autocomplete="family-name" />
-                <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize" autocomplete="given-name" />
+                <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase"/>
+                <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize"/>
             </div>
         </div>
 
         <!-- Nom d'usage / Date / Pays / Département / Ville / Nationalité / Situation -->
         <div class="flex flex-wrap gap-2 sm:gap-4">
-            <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase" autocomplete="family-name" /></div>
-            <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} autocomplete="country-of-birth" /></div>
-            <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground} autocomplete="bday" /></div>
-            <div class="flex-1 min-w-[48%]"><Input label="Ville de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize" autocomplete="address-level2" /></div>
-            <div id="birthdepartment-wrapper" class="hidden transition-all duration-300 flex-1 min-w-[48%]">
-                <Select label="Dépt. de naissance" id="birthdepartment" name="birthdepartment" options={departmentOptions} required background={formBackground} />
-            </div>
-            <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground} autocomplete="nationality" /></div>
+            <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase" /></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground} /></div>
+            <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground}/></div>
+            <div class="flex-1 min-w-[48%]"><Input label="Ville de naissance" id="birthcity" name="birthcity" required background={formBackground} class="capitalize"/></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground}/></div>
             <div class="flex-1 min-w-[48%]"><Select label="Situation familiale" id="situation" name="situation" options={situationOptions} required background={formBackground} /></div>
         </div>
     </div>
 
     <!-- Adresse du Suppléant -->
-    <div id="suppleant-adresse-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+    <div id="suppleant-adresse-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden">
         <div class="text-md font-semibold">Adresse du suppléant</div>
         <div class="grid grid-cols-12 gap-2 sm:gap-4">
-            <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} autocomplete="street-address" /></div>
+            <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} /></div>
             <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=''/></div>
             <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} /></div>
         </div>
-        <Input label="Nom de la voie" id="way" name="way" required background={formBackground} autocomplete="street-address"/>
+        <Input label="Nom de la voie" id="way" name="way" required background={formBackground}/>
         <div class="grid grid-cols-2 gap-2 sm:gap-4">
-            <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground} autocomplete="address-line2"/>
-            <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground} autocomplete="country" />
+            <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground}/>
+            <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground}/>
         </div>
         <div class="grid grid-cols-2 gap-2 sm:gap-4">
-            <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground} autocomplete="postal-code" />
-            <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize" autocomplete="address-level2"/>
+            <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground}/>
+            <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize"/>
         </div>
     </div>
 
@@ -199,177 +224,312 @@ const formBackground = 'light';
 </form>
 
 <script type="module">
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('cessation-form');
-        if (!form) return;
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('cessation-form');
+    if (!form) return;
 
-        const STORAGE_KEY = 'cessation-details-form';
+    // ===================== SELECTEURS =====================
+    const $ = (sel, parent = document) => parent.querySelector(sel);
+    const $$ = (sel, parent = document) => parent.querySelectorAll(sel);
 
-        /* ================= STORAGE ================= */
+    const siretContainer = $('#siret-container');
+    const siretTemplate = $('#siret-template');
+    const nombreInput = $('#nombre-etablissement');
 
-        const saveForm = () => {
-            const data = {};
-            new FormData(form).forEach((value, key) => (data[key] = value));
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        };
+    const agricoleWrapper = $('#agricole-wrapper');
+    const temporaireWrapper = $('#temporaire-wrapper');
+    const destinationWrapper = $('#destination-wrapper');
+    const decesWrapper = $('#deces-wrapper');
+    const suppleantWrapper = $('#suppleant-wrapper');
+    const suppleantAdresseWrapper = $('#suppleant-adresse-wrapper');
+    const decesDateWrapper = $('#deces-date-wrapper');
+    const cessationDateWrapper = $('#cessation-date-wrapper');
+    const temporaireDateWrapper = $('#temporaire-date-wrapper');
 
-        const setRadioValue = (radios, value) => {
-            radios.forEach((r) => (r.checked = r.value === value));
-        };
+    const agricoleRadios = $$('input[name="agricole"]', form);
+    const temporaireRadios = $$('input[name="temporaire"]', form);
+    const decesRadios = $$('input[name="deces"]', form);
 
-        const getRadioValue = (radios) => {
-            const checked = Array.from(radios).find((r) => r.checked);
-            return checked ? checked.value : '';
-        };
+    // ===================== BUSINESS SIREN =====================
+    let businessSiren = '';
+    const businessData = localStorage.getItem('cessation-business-form');
+    if (businessData) {
+        const business = JSON.parse(businessData);
+        if (business.siren) businessSiren = business.siren;
+    }
 
-        const restoreForm = () => {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (!saved) return;
+    // ===================== SIRET =====================
+    const generateSirets = (count) => {
+        const existingBlocks = $$('.siret-item', siretContainer);
+        const existingCount = existingBlocks.length;
 
-            const data = JSON.parse(saved);
+        for (let i = existingCount; i < count; i++) {
+            const clone = siretTemplate.content.cloneNode(true);
+            siretContainer.appendChild(clone);
 
-            Object.entries(data).forEach(([name, value]) => {
-                const radios = form.querySelectorAll(`input[name="${name}"]`);
+            if (businessSiren) {
+                const newItem = $$('.siret-item', siretContainer)[i];
+                const sirenInput = $('input[name="siren[]"]', newItem);
+                const siretInput = $('input[name="siret[]"]', newItem);
 
-                if (radios.length) {
-                    setRadioValue(radios, value);
-                } else {
-                    const field = form.querySelector(`[name="${name}"]`);
-                    if (field) field.value = value;
+                if (sirenInput) {
+                    sirenInput.value = businessSiren;
+                    sirenInput.readOnly = true;
+                    sirenInput.disabled = true;
                 }
+
+                if (siretInput) siretInput.value = '';
+            }
+        }
+
+        for (let i = existingCount - 1; i >= count; i--) {
+            siretContainer.removeChild(existingBlocks[i]);
+        }
+
+        attachSiretEvents();
+    };
+
+    const attachSiretEvents = () => {
+        siretContainer.querySelectorAll('.siret-item select[name="siretdestination[]"]').forEach((select) => {
+            select.addEventListener('change', (e) => {
+                const wrapper = e.target.closest('.siret-item').querySelector('.siret-other-wrapper');
+                const input = wrapper.querySelector('input');
+                const isAutre = e.target.value === 'autre';
+                wrapper.classList.toggle('hidden', !isAutre);
+                if (input) input.required = isAutre;
             });
-        };
+        });
+    };
 
-        restoreForm();
-
-        form.addEventListener('input', saveForm);
-        form.addEventListener('change', saveForm);
-
-        /* ================= UTILS ================= */
-
-        const hideField = (wrapper) => {
-            if (!wrapper) return;
-            wrapper.classList.add('hidden');
-            wrapper.querySelectorAll('input, select, textarea').forEach((el) => (el.required = false));
-        };
-
-        const showField = (wrapper) => {
-            if (!wrapper) return;
-            wrapper.classList.remove('hidden');
-            wrapper.querySelectorAll('input, select, textarea').forEach((el) => {
-                if (wrapper.dataset.required === 'true' || el.hasAttribute('required')) {
-                    el.required = true;
-                }
-            });
-        };
-
-        /* ================= FIELDS ================= */
-
-        const agricoleRadios = form.querySelectorAll('input[name="agricole"]');
-        const temporaireRadios = form.querySelectorAll('input[name="temporaire"]');
-        const decesRadios = form.querySelectorAll('input[name="deces"]');
-
-        const agricoleWrapper = document.getElementById('agricole-wrapper');
-        const temporaireWrapper = document.getElementById('temporaire-wrapper');
-        const destinationWrapper = document.getElementById('destination-wrapper');
-        const suppleantWrapper = document.getElementById('suppleant-wrapper');
-        const suppleantAdresseWrapper = document.getElementById('suppleant-adresse-wrapper');
-
-        const decesDateWrapper = document.getElementById('deces-date-wrapper');
-        const cessationDateWrapper = document.getElementById('cessation-date-wrapper');
-        const temporaireDateWrapper = document.getElementById('temporaire-date-wrapper');
-
-        const decesWrapper = document.getElementById('deces-wrapper');
-
-        const toggleFields = () => {
-            const agricoleValue = getRadioValue(agricoleRadios);
-            const temporaireValue = getRadioValue(temporaireRadios);
-            let decesValue = getRadioValue(decesRadios);
-            const destinationSelect = destinationWrapper.querySelector('select');
-            const cessationdateDate = cessationDateWrapper.querySelector('input');
-            const decesdateDate = decesDateWrapper.querySelector('input');
-            const temporairedateDate = temporaireDateWrapper.querySelector('input');
-
-            /* AGRICOLE */
-            if (agricoleValue === 'oui') {
-                setRadioValue(temporaireRadios, 'non');
-                hideField(temporaireWrapper);
-
-                if (decesValue === 'non')
-                    showField(destinationWrapper);
-
-            } else {
-                showField(temporaireWrapper);
-                hideField(destinationWrapper);
-
-                // reset destination
-                if (destinationSelect)
-                    destinationSelect.value = '';
-            }
-
-            /* TEMPORAIRE */
-            if (temporaireValue === 'oui') {
-                setRadioValue(agricoleRadios, 'non');
-                hideField(agricoleWrapper);
-                hideField(decesWrapper);
-                hideField(cessationDateWrapper);
-                hideField(decesDateWrapper);
-                showField(temporaireDateWrapper);
-                setRadioValue(decesRadios, 'non');
-
-                if (decesdateDate)
-                    decesdateDate.value = '';
-
-                if (cessationdateDate)
-                    cessationdateDate.value = '';
-
-            } else{
-                showField(agricoleWrapper);
-                showField(decesWrapper);
-                hideField(temporaireDateWrapper);
-
-                if (temporairedateDate)
-                    temporairedateDate.value = '';
-            }
-            decesValue = getRadioValue(decesRadios);
-
-            /* DECES */
-            if (decesValue === 'oui') {
-                showField(suppleantWrapper);
-                showField(suppleantAdresseWrapper);
-                showField(decesDateWrapper);
-                hideField(cessationDateWrapper);
-                hideField(destinationWrapper)
-
-                // reset destination
-                if (destinationSelect)
-                    destinationSelect.value = '';
-
-                // reset cessation date
-                if (cessationdateDate)
-                    cessationdateDate.value = '';
-
-            } else {
-                hideField(suppleantWrapper);
-                hideField(suppleantAdresseWrapper);
-                if (temporaireValue === 'non')
-                    showField(cessationDateWrapper);
-                hideField(decesDateWrapper);
-
-                // reset death date
-                if (decesdateDate)
-                    decesdateDate.value = '';
-            }
-
-            saveForm();
-        };
-
-        /* ================= EVENTS ================= */
-
-        agricoleRadios.forEach((r) => r.addEventListener('change', toggleFields));
-        temporaireRadios.forEach((r) => r.addEventListener('change', toggleFields));
-        decesRadios.forEach((r) => r.addEventListener('change', toggleFields));
-
-        toggleFields();
+    nombreInput.addEventListener('input', () => {
+        let count = parseInt(nombreInput.value) || 1;
+        count = Math.max(1, Math.min(count, 10));
+        generateSirets(count);
     });
+
+    if (nombreInput.value) generateSirets(parseInt(nombreInput.value));
+
+    // ===================== STORAGE =====================
+    const STORAGE_KEY = 'cessation-details-form';
+
+    const saveForm = () => {
+        const data = {};
+        new FormData(form).forEach((value, key) => {
+            if (key.endsWith('[]')) {
+                if (!data[key]) data[key] = [];
+                data[key].push(value);
+            } else {
+                data[key] = value;
+            }
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    };
+
+    const setRadioValue = (radios, value) => radios.forEach((r) => (r.checked = r.value === value));
+    const getRadioValue = (radios) => {
+        const checked = [...radios].find((r) => r.checked);
+        return checked ? checked.value : '';
+    };
+
+    const restoreForm = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+
+        const data = JSON.parse(saved);
+
+        // 1️⃣ Restaurer les champs classiques (sauf établissements)
+        Object.entries(data).forEach(([name, value]) => {
+            if (['siret[]', 'siretdestination[]', 'autredestination[]'].includes(name)) return;
+            const radios = form.querySelectorAll(`input[name="${name}"]`);
+            if (radios.length) {
+                radios.forEach((r) => (r.checked = r.value === value));
+            } else {
+                const field = form.querySelector(`[name="${name}"]`);
+                if (field) field.value = value;
+            }
+        });
+
+        // 2️⃣ Restaurer le suppléant et son adresse
+        const suppleantFields = $$(
+            '#suppleant-wrapper input, #suppleant-wrapper select, #suppleant-adresse-wrapper input, #suppleant-adresse-wrapper select'
+        );
+        suppleantFields.forEach((field) => {
+            const name = field.name;
+            if (name && data[name] !== undefined) {
+                if (field.type === 'checkbox') {
+                    field.checked = data[name] === field.value;
+                } else {
+                    field.value = data[name];
+                }
+            }
+        });
+
+        // 3️⃣ Restaurer les établissements dynamiques
+        const siretValues = data['siret[]'] ? (Array.isArray(data['siret[]']) ? data['siret[]'] : [data['siret[]']]) : [];
+        const count = Math.max(1, siretValues.length);
+        nombreInput.value = count;
+        generateSirets(count);
+
+        const siretItems = siretContainer.querySelectorAll('.siret-item');
+        siretItems.forEach((item, index) => {
+            const sirenInput = item.querySelector('input[name="siren[]"]');
+            const siretInput = item.querySelector('input[name="siret[]"]');
+            const destinationSelect = item.querySelector('select[name="siretdestination[]"]');
+            const otherInput = item.querySelector('.siret-other-wrapper input');
+
+            if (sirenInput && businessSiren) {
+                sirenInput.value = businessSiren;
+                sirenInput.readOnly = true;
+                sirenInput.disabled = true;
+            }
+
+            if (siretInput && siretValues[index] !== undefined) siretInput.value = siretValues[index];
+
+            if (destinationSelect) {
+                const savedDest = Array.isArray(data['siretdestination[]'])
+                    ? data['siretdestination[]'][index]
+                    : data['siretdestination[]'];
+                if (savedDest) destinationSelect.value = savedDest;
+
+                const isAutre = destinationSelect.value === 'autre';
+                const wrapper = item.querySelector('.siret-other-wrapper');
+                wrapper.classList.toggle('hidden', !isAutre);
+
+                if (otherInput) {
+                    otherInput.required = isAutre;
+                    const savedOther = Array.isArray(data['autredestination[]'])
+                        ? data['autredestination[]'][index]
+                        : data['autredestination[]'];
+                    otherInput.value = isAutre && savedOther ? savedOther : '';
+                }
+            }
+        });
+
+        // 4️⃣ Restaurer les dates
+        const cessationDateInput = $('#cessation-date-wrapper input');
+        const decesDateInput = $('#deces-date-wrapper input');
+        const temporaireDateInput = $('#temporaire-date-wrapper input');
+
+        if (cessationDateInput && data['cessationdate']) cessationDateInput.value = data['cessationdate'];
+        if (decesDateInput && data['decesdate']) decesDateInput.value = data['decesdate'];
+        if (temporaireDateInput && data['temporairedate']) temporaireDateInput.value = data['temporairedate'];
+    };
+
+    restoreForm();
+
+    form.addEventListener('input', saveForm);
+    form.addEventListener('change', saveForm);
+
+    // ===================== UTILS =====================
+    const hideField = (wrapper) => {
+        if (!wrapper) return;
+        wrapper.classList.add('hidden');
+        $$('input, select, textarea', wrapper).forEach((el) => (el.required = false));
+    };
+    const showField = (wrapper) => {
+        if (!wrapper) return;
+        wrapper.classList.remove('hidden');
+        $$('input, select, textarea', wrapper).forEach((el) => {
+            if (wrapper.dataset.required === 'true' || el.hasAttribute('required')) el.required = true;
+        });
+    };
+    const resetValue = (el) => { if (el) el.value = ''; };
+
+    // ===================== LOGIQUE =====================
+    const toggleFields = () => {
+        const agricoleValue = getRadioValue(agricoleRadios);
+        const temporaireValue = getRadioValue(temporaireRadios);
+        let decesValue = getRadioValue(decesRadios);
+
+        const destinationSelect = $('select', destinationWrapper);
+        const cessationdate = $('input', cessationDateWrapper);
+        const decesdate = $('input', decesDateWrapper);
+        const temporairedate = $('input', temporaireDateWrapper);
+
+        if (agricoleValue === 'oui') {
+            setRadioValue(temporaireRadios, 'non');
+            hideField(temporaireWrapper);
+            if (decesValue === 'non') showField(destinationWrapper);
+        } else {
+            showField(temporaireWrapper);
+            hideField(destinationWrapper);
+            resetValue(destinationSelect);
+        }
+
+        if (temporaireValue === 'oui') {
+            setRadioValue(agricoleRadios, 'non');
+            hideField(agricoleWrapper);
+            hideField(decesWrapper);
+            hideField(cessationDateWrapper);
+            hideField(decesDateWrapper);
+            showField(temporaireDateWrapper);
+            setRadioValue(decesRadios, 'non');
+            resetValue(decesdate);
+            resetValue(cessationdate);
+        } else {
+            showField(agricoleWrapper);
+            showField(decesWrapper);
+            hideField(temporaireDateWrapper);
+            resetValue(temporairedate);
+        }
+
+        decesValue = getRadioValue(decesRadios);
+
+        if (decesValue === 'oui') {
+            showField(suppleantWrapper);
+            showField(suppleantAdresseWrapper);
+            showField(decesDateWrapper);
+            hideField(cessationDateWrapper);
+            hideField(destinationWrapper);
+            resetValue(destinationSelect);
+            resetValue(cessationdate);
+        } else {
+            hideField(suppleantWrapper);
+            hideField(suppleantAdresseWrapper);
+            if (temporaireValue === 'non') showField(cessationDateWrapper);
+            hideField(decesDateWrapper);
+            resetValue(decesdate);
+        }
+
+        saveForm();
+    };
+
+    agricoleRadios.forEach((r) => r.addEventListener('change', toggleFields));
+    temporaireRadios.forEach((r) => r.addEventListener('change', toggleFields));
+    decesRadios.forEach((r) => r.addEventListener('change', toggleFields));
+
+    // ===================== FILTRAGE INPUT =====================
+    document.addEventListener('input', (e) => {
+        if (e.target.name === 'zipcode' && (country.value === 'FR' || country.value === ''))
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+        if (e.target.name === 'phone' || e.target.name === 'tracknumber')
+            e.target.value = e.target.value.replace(/\D/g, '');
+        if (e.target.name === 'city' || e.target.name === 'birthcountry')
+            e.target.value = e.target.value.replace(/\d/g, '');
+        if (e.target.matches('input[name="siret[]"]'))
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+    });
+
+    // Vérifier les doublons de NIC (siret)
+    document.addEventListener('input', (e) => {
+        if (!e.target.matches('input[name="siret[]"]')) return;
+
+        const allSirets = [...$$('input[name="siret[]"]')].map(i => i.value).filter(v => v);
+        const duplicates = allSirets.filter((v, idx, arr) => arr.indexOf(v) !== idx);
+
+        if (duplicates.length) {
+            alert(`Le NIC "${duplicates[0]}" est déjà utilisé dans un autre établissement !`);
+            e.target.value = ''; // vider la valeur saisie en doublon
+        }
+    });
+
+    // ===================== SUBMIT =====================
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveForm();
+        window.location.href = '/forms/cessation/recapitulatif';
+    });
+
+    toggleFields();
+});
 </script>
