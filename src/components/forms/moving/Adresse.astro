@@ -61,6 +61,12 @@ const tracktypeOptions = [
     { label: 'Zone industrielle', value: 'Zone industrielle' },
 ];
 
+const siretdestinationOptions = [
+    { label: 'Fermé', value: 'ferme' },
+    { label: 'Vendu', value: 'vendu' },
+    { label: 'Autre', value: 'autre' },
+];
+
 const countryOptions = [
     { label: 'France', value: 'FR' },
     ...countries
@@ -73,7 +79,7 @@ const formBackground = 'light';
 ---
 
 <div>
-    <h3 class="text-2xl font-semibold mb-4">Informations concernant votre changement d'adresse</h3>
+    <h3 class="text-2xl font-semibold mb-4 text-primary">Informations concernant votre changement d'adresse</h3>
 </div>
 
 <form id="moving-form">
@@ -81,18 +87,13 @@ const formBackground = 'light';
     <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
         <div class="text-md font-semibold mb-4"></div>
         <div class="text-md font-semibold">Déménagement de l'entrepreneur</div>
-        <Checkbox
-            label="Je souhaite déclarer un changement d'adresse de l'entrepreneur (déménagement)"
-            value="demenagement"
-            id="demenagement"
-            name="demenagement"
-            background={formBackground}
-        />
+        <Checkbox label="Je souhaite déclarer un changement d'adresse de l'entrepreneur (déménagement)" value="demenagement" id="demenagement" name="demenagement" background={formBackground}/>
 
         <!-- Nouvelle adresse de l'entrepreneur -->
         <div id="demenagement-wrapper" class="hidden">
-            <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+            <div class="space-y-2 sm:space-y-4 bg-gray-50 p-2 sm:p-4 rounded-sm mb-4">
                 <Date class="flex-1 max-w-[150px]" label="Date d'effet" id="demenagementdate" name="demenagementdate" required background={formBackground}/>
+                <div class="text-base font-semibold pt-4">Nouvelle adresse de l'entrepreneur</div>
                 <div class="grid grid-cols-12 gap-2 sm:gap-4">
                     <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground} /></div>
                     <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=""/></div>
@@ -108,14 +109,16 @@ const formBackground = 'light';
                 </div>
             </div>
             <Radio label="Ce déménagement concerne-t-il également un établissement ?" id="adresseActivite" name="adresseActivite" options={adresseActiviteOptions} required background={formBackground}/>
-            <div id="siren-wrapper" class="hidden">
-                <div class="mt-4"><Radio label="Présence de salarié dans l'établissement ?" id="demenagementsalarie" name="demenagementsalarie" options={adresseActiviteOptions} required background={formBackground}/></div>
-                <div class="text-sm font-semibold mt-4">Siret de l'établissement à transferer :</div>
-                <div class="flex gap-2">
-                    <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
-                    <div class="w-15"><Input label="&nbsp;" id="siret" name="siret" background={formBackground} required placeholder='NIC'/></div>
+            <div id="siren-wrapper" class="hidden mt-4">
+                <div class="space-y-2 sm:space-y-4 bg-gray-50 p-2 sm:p-4 rounded-sm mb-4">
+                    <div class="mt-4"><Radio label="Présence de salarié dans l'établissement ?" id="demenagementsalarie" name="demenagementsalarie" options={adresseActiviteOptions} required background={formBackground}/></div>
+                    <div class="text-sm font-semibold mt-4">Siret de l'établissement à transferer :</div>
+                    <div class="flex gap-2">
+                        <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
+                        <div class="w-15"><Input label="&nbsp;" id="siret" name="siret" background={formBackground} required placeholder='NIC'/></div>
+                    </div>
+                    <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
                 </div>
-                <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
             </div>
         </div>
     </div>
@@ -128,30 +131,36 @@ const formBackground = 'light';
 
         <!-- OPTIONS DU TRANSFERT -->
         <div id="transfert-wrapper" class="hidden">
-            <Date class="flex-1 max-w-[150px]" label="Date d'effet" id="transfertdate" name="transfertdate" required background={formBackground}/>
-            <div class="mt-4"><Radio label="Présence de salarié dans l'établissement ?" id="transfertsalarie" name="transfertsalarie" options={adresseActiviteOptions} required background={formBackground}/></div>
-            <div class="py-4">
-                <div class="text-sm font-semibold">Siret de l'établissement à transferer :</div>
-                <div class="flex gap-2">
-                    <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
-                    <div class="w-15"><Input label="&nbsp;" id="transfertsiret" name="transfertsiret" background={formBackground} required placeholder='NIC'/></div>
+            <div class="space-y-2 sm:space-y-4 bg-gray-50 p-2 sm:p-4 rounded-sm mb-4">
+                <Date class="flex-1 max-w-[150px]" label="Date d'effet" id="transfertdate" name="transfertdate" required background={formBackground}/>
+                <div class="mt-4"><Radio label="Présence de salarié dans l'établissement ?" id="transfertsalarie" name="transfertsalarie" options={adresseActiviteOptions} required background={formBackground}/></div>
+                <div class="py-4">
+                    <div class="text-sm font-semibold">Siret de l'établissement à transferer :</div>
+                    <div class="flex gap-2">
+                        <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
+                        <div class="w-15"><Input label="&nbsp;" id="transfertsiret" name="transfertsiret" background={formBackground} required placeholder='NIC'/></div>
+                    </div>
+                    <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
                 </div>
-                <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
-            </div>
-            <div class="py-4">
-                <Select label="Destination du transfert" id="destination" name="destination" options={destinationOptions} data-optional="true" background={formBackground} required/>
-            </div>
-            <div id="domiciliation-wrapper" class="grid grid-cols-2 gap-2 sm:gap-4 hidden">
-                <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
-                <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
-            </div>
-            <div id="siretdestination-wrapper" class="py-4 hidden">
-                <div class="text-sm font-semibold">Siret de l'établissement de destination :</div>
-                <div class="flex gap-2">
-                    <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
-                    <div class="w-15"><Input label="&nbsp;" id="destinationsiret" name="destinationsiret" background={formBackground} required placeholder='NIC'/></div>
+                <div class="flex flex-wrap gap-2 sm:gap-4">
+                    <div class="flex-1 w-full md:max-w-[48%]"><Select label="Que deviendra l'établissement" id="siretdestination" name="siretdestination" options={siretdestinationOptions} required background={formBackground} value=''/></div>
+                    <div class="siret-other-wrapper hidden flex-1 w-full md:max-w-[48%]"><Input label="Précisez" id="autredestination" name="autredestination" required background={formBackground}/></div>
                 </div>
-                <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
+                <div class="pt-4">
+                    <Select label="Destination du transfert" id="destination" name="destination" options={destinationOptions} data-optional="true" background={formBackground} required/>
+                </div>
+                <div id="domiciliation-wrapper" class="grid grid-cols-2 gap-2 sm:gap-4 hidden">
+                    <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
+                    <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
+                </div>
+                <div id="siretdestination-wrapper" class="py-4 hidden">
+                    <div class="text-sm font-semibold">Siret de l'établissement de destination :</div>
+                    <div class="flex gap-2">
+                        <div class="w-22"><Input label="&nbsp;" id="siren" name="siren" background={formBackground} disabled readonly /></div>
+                        <div class="w-15"><Input label="&nbsp;" id="destinationsiret" name="destinationsiret" background={formBackground} required placeholder='NIC'/></div>
+                    </div>
+                    <div class="text-xs mt-2 text-gray-500">SIRET = SIREN + NIC (5 chiffres) — ex : 555 555 555 <strong>00013</strong></div>
+                </div>
             </div>
         </div>
 
@@ -237,36 +246,58 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('change', saveForm);
 
     /* ================= HELPER TOGGLE ================= */
-    const setupToggle = (checkboxId, wrapperId) => {
+    const setupToggle = (checkboxId, wrapperId, exceptions = []) => {
         const checkbox = form.querySelector(`#${checkboxId}`);
         const wrapper = form.querySelector(`#${wrapperId}`);
         if (!checkbox || !wrapper) return;
+
         const toggle = () => {
             const show = checkbox.checked;
             wrapper.classList.toggle('hidden', !show);
-            wrapper.querySelectorAll('input, select, textarea').forEach(f => {
+
+            wrapper.querySelectorAll('input, select, textarea').forEach((f) => {
                 f.style.display = show ? '' : 'none';
-                f.required = show && !f.hasAttribute('data-optional');
+                const isException = exceptions.includes(f.id);
+                const isCheckbox = f.type === 'checkbox';
+                f.required = isCheckbox ? false : (show && !f.hasAttribute('data-optional') && !isException);
             });
         };
+
         toggle();
         checkbox.addEventListener('change', toggle);
     };
-    setupToggle('demenagement', 'demenagement-wrapper');
-    setupToggle('transfert', 'transfert-wrapper');
+
+    setupToggle('demenagement', 'demenagement-wrapper', ['complementnumber', 'additionaladdress']);
+    setupToggle('transfert', 'transfert-wrapper', ['transertcomplementnumber', 'transfertadditionaladdress', 'correspondance']);
+
+    /* ================= TOGGLE AUTRE DESTINATION ================= */
+    const autreDestinatinSelect = form.querySelector('select[name="siretdestination"]');
+    const autredestinationInput = document.getElementById('autredestination');
+
+    const toggleAutreDestination = () => {
+        const show = autreDestinatinSelect.value === 'autre';
+        autredestinationInput.classList.toggle('hidden', !show);
+        autredestinationInput.required = show;
+    };
+
+    toggleAutreDestination();
+    autreDestinatinSelect.addEventListener('change', toggleAutreDestination);
 
     /* ================= ADRESSE ACTIVITE (RADIO) ================= */
     const sirenWrapper = document.getElementById('siren-wrapper');
     const adresseActiviteRadios = form.querySelectorAll('input[name="adresseActivite"]');
+
     const toggleSiren = () => {
         const selected = form.querySelector('input[name="adresseActivite"]:checked');
         const show = selected && selected.value === 'oui';
         sirenWrapper.classList.toggle('hidden', !show);
-        sirenWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+        sirenWrapper.querySelectorAll('input, select, textarea').forEach((f) => {
             f.style.display = show ? '' : 'none';
-            f.required = show && !f.hasAttribute('data-optional');
+            const isCheckbox = f.type === 'checkbox';
+            f.required = isCheckbox ? false : (show && !f.hasAttribute('data-optional'));
         });
     };
+
     toggleSiren();
     adresseActiviteRadios.forEach(radio => radio.addEventListener('change', toggleSiren));
 
@@ -286,32 +317,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const showDomiciliation = transfertCheckbox.checked && value === 'societe_domiciliation';
         const showDestinationSiret = transfertCheckbox.checked && value === 'etablissement_existant';
 
-        // Wrapper transfert (adresse)
-        if (transfertAdressWrapper) {
-            transfertAdressWrapper.classList.toggle('hidden', !showTransfertAdresse);
-            transfertAdressWrapper.querySelectorAll('input, select, textarea').forEach(f => {
-                f.style.display = showTransfertAdresse ? '' : 'none';
-                f.required = showTransfertAdresse && !f.hasAttribute('data-optional');
-            });
-        }
+        const applyToggle = (wrapper, show, exceptions = []) => {
+            if (!wrapper) return;
+            wrapper.classList.toggle('hidden', !show);
+            wrapper.querySelectorAll('input, select, textarea').forEach(f => {
+                // Ne pas toucher à autredestination
+                if (f.id === 'autredestination') return;
 
-        // Wrapper domiciliation
-        if (domiciliationWrapper) {
-            domiciliationWrapper.classList.toggle('hidden', !showDomiciliation);
-            domiciliationWrapper.querySelectorAll('input, select, textarea').forEach(f => {
-                f.style.display = showDomiciliation ? '' : 'none';
-                f.required = showDomiciliation && !f.hasAttribute('data-optional');
+                const isException = exceptions.includes(f.id);
+                const isCheckbox = f.type === 'checkbox';
+                f.style.display = show ? '' : 'none';
+                f.required = isCheckbox ? false : (show && !f.hasAttribute('data-optional') && !isException);
             });
-        }
+        };
 
-        // Wrapper SIRET destination (pour établissement existant)
-        if (siretdestinationWrapper) {
-            siretdestinationWrapper.classList.toggle('hidden', !showDestinationSiret);
-            siretdestinationWrapper.querySelectorAll('input, select, textarea').forEach(f => {
-                f.style.display = showDestinationSiret ? '' : 'none';
-                f.required = showDestinationSiret && !f.hasAttribute('data-optional');
-            });
-        }
+        applyToggle(transfertAdressWrapper, showTransfertAdresse, ['transertcomplementnumber', 'transfertadditionaladdress', 'correspondance']);
+        applyToggle(domiciliationWrapper, showDomiciliation);
+        applyToggle(siretdestinationWrapper, showDestinationSiret);
+
+        // Applique ensuite toggleAutreDestination pour autredestination
+        toggleAutreDestination();
     };
 
     toggleTransfertAdresse();
@@ -326,18 +351,44 @@ document.addEventListener('DOMContentLoaded', () => {
         if (business.siren) sirenInputs.forEach(input => input.value = business.siren);
     }
 
+    /* ================= SIRET AUTRE DESTINATION ================= */
+    const siretdestinationSelect = form.querySelector('#siretdestination');
+    const siretOtherWrapper = form.querySelector('.siret-other-wrapper');
+
+    const toggleSiretOther = () => {
+        if (!siretdestinationSelect || !siretOtherWrapper) return;
+        const show = siretdestinationSelect.value === 'autre';
+        siretOtherWrapper.classList.toggle('hidden', !show);
+        siretOtherWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+            const isCheckbox = f.type === 'checkbox';
+            f.style.display = show ? '' : 'none';
+            f.required = isCheckbox ? false : (show && !f.hasAttribute('data-optional'));
+            if (!show) f.value = '';
+        });
+    };
+
+    toggleSiretOther();
+    siretdestinationSelect.addEventListener('change', toggleSiretOther);
+
     /* ================= FORM SUBMIT ================= */
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', e => {
         e.preventDefault();
 
-        // Vérifie que tous les champs visibles requis sont remplis
         let valid = true;
         form.querySelectorAll('input, select, textarea').forEach(f => {
-            if (f.required && f.style.display !== 'none' && !f.value) {
+            if (!f.required || f.offsetParent === null || f.disabled) return;
+
+            if (f.type === 'checkbox') {
+                if (!f.checked) {
+                    f.reportValidity();
+                    valid = false;
+                }
+            } else if (!f.value) {
                 f.reportValidity();
                 valid = false;
             }
         });
+
         if (!valid) return;
 
         const formData = new FormData(form);

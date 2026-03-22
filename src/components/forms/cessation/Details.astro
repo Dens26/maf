@@ -108,13 +108,6 @@ const countryOptions = [
         .map((c) => ({ label: c.name, value: c.code })),
 ];
 
-const departmentOptions = departments
-    .sort((a, b) => a.code.localeCompare(b.code))
-    .map((dep) => ({
-        label: `${dep.code} - ${dep.dep_name}`,
-        value: dep.code,
-    }));
-
 const formBackground = 'light';
 ---
 
