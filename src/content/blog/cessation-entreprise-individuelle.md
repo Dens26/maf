@@ -6,12 +6,12 @@ publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/services/cessation"
+link: "/services/cessation-entreprise-individuelle"
 text: "Voir la fiche"
 
 seo:
-  title: "Cesser son entreprise ?"
-  description: "Vous souhaitez arrêter votre activité indépendante ? Découvrez comment radier correctement votre entreprise individuelle."
+  title: "Cesser ou radier son entreprise individuelle | Mon Assistant Formalités"
+  description: "Découvrez comment cesser ou radier votre entreprise individuelle en toute conformité, rapidement et sans erreur grâce à Mon Assistant Formalités."
   image: "./images/closed.jpg"
 ---
 

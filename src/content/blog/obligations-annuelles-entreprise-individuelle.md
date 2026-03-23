@@ -9,9 +9,9 @@ categories: ["Formalities"]
 link: "/services"
 text: "Voir les services"
 
-seo:
-  title: "Quelles sont les obligations administratives annuelles d’une EI ?"
-  description: "Découvrez les principales obligations administratives qu'un entrepreneur individuel doit respecter chaque année."
+sseo:
+  title: "Obligations annuelles d’une entreprise individuelle | Mon Assistant Formalités"
+  description: "Découvrez toutes les obligations administratives annuelles pour les entrepreneurs individuels, micro-entrepreneurs et EI, et restez en conformité facilement."
   image: "./images/administration.jpg"
 ---
 

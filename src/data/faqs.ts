@@ -13,28 +13,40 @@ export const faqLists: Record<string, FaqList> = {
         id: 'main',
         faqs: [
             {
-                question: "Qu’est-ce qu’un mandataire en formalités administratives ?",
-                answer: "C’est un professionnel habilité à réaliser pour vous les démarches liées à la création, la modification ou la radiation d’une entreprise. Il agit en votre nom grâce à un mandat écrit."
+                question: "Qu’est-ce qu’un mandataire INPI pour formalités d’entreprise ?",
+                answer: "Un mandataire en formalités administratives est un professionnel habilité à réaliser pour vous les démarches auprès du Guichet Unique de l’INPI : création d’entreprise individuelle, modification, correction ou cessation. Il agit en votre nom grâce à un mandat."
             },
             {
-                question: "À qui s’adressent vos services ?",
-                answer: "Mes services s’adressent principalement aux entrepreneurs individuels, micro-entrepreneurs, freelances et professions libérales qui souhaitent déléguer leurs démarches administratives."
+                question: "Pourquoi faire appel à un mandataire pour créer son entreprise ?",
+                answer: "Faire appel à un mandataire INPI permet de sécuriser votre création d’entreprise individuelle, d’éviter les erreurs administratives et de gagner du temps. Vous bénéficiez d’un accompagnement complet jusqu’à l’obtention de votre SIRET."
             },
             {
-                question: "Est-ce que tout peut se faire à distance ?",
-                answer: "Oui, toutes les formalités sont gérables en ligne. Vous n’avez pas besoin de vous déplacer : un simple échange par email ou téléphone suffit."
+                question: "À qui s’adressent vos services de formalités administratives ?",
+                answer: "Mes services s’adressent aux entrepreneurs individuels, auto-entrepreneurs (micro-entrepreneurs), freelances et professions libérales souhaitant déléguer leurs formalités administratives."
             },
             {
-                question: "Quels documents dois-je fournir ?",
-                answer: "Cela dépend de la formalité concernée. Lors de notre premier contact, je vous indique précisément les documents nécessaires pour constituer votre dossier."
+                question: "Peut-on créer ou modifier une entreprise individuelle en ligne ?",
+                answer: "Oui, toutes les formalités peuvent être réalisées en ligne via le Guichet Unique. Mon Assistant Formalités vous accompagne à distance pour simplifier chaque étape sans déplacement."
             },
             {
-                question: "Combien de temps prennent les démarches ?",
-                answer: "Votre dossier est validé par mes soins sous 48h ouvrées maximum après réception complète. Une fois la formalité déposée, les délais dépendent des organismes en charge de la validation. Je vous informe de chaque étape et reste disponible pour le suivi."
+                question: "Quels documents sont nécessaires pour une formalité INPI ?",
+                answer: "Les documents varient selon la formalité (création, modification, cessation). En général, une pièce d’identité, un justificatif d’adresse et parfois une procuration sont demandés. Une liste précise vous est fournie après votre demande."
             },
             {
-                question: "Vos prestations sont-elles éligibles aux frais professionnels ?",
-                answer: "Oui, mes prestations sont facturées avec justificatif, et peuvent être comptabilisées comme frais professionnels pour votre activité."
+                question: "Quel est le délai pour une création ou modification d’entreprise ?",
+                answer: "Votre dossier est traité sous 48h après réception complète. Ensuite, les délais dépendent des organismes (INSEE, Greffe, etc.). Un suivi complet est assuré jusqu’à validation."
+            },
+            {
+                question: "Combien coûte une formalité d’entreprise individuelle ?",
+                answer: "Les tarifs commencent à partir de 39€, 59€ ou 69€ selon la formalité (création, modification, correction). Des frais administratifs peuvent être demandés par les organismes publics et restent à la charge du client."
+            },
+            {
+                question: "Les prestations de formalités sont-elles déductibles ?",
+                answer: "Oui, les prestations sont facturées et peuvent être comptabilisées comme frais professionnels pour votre activité."
+            },
+            {
+                question: "Proposez-vous un accompagnement pour les formalités en France ?",
+                answer: "Oui, Mon Assistant Formalités accompagne les entrepreneurs dans toute la France pour leurs démarches administratives auprès de l’INPI et du Guichet Unique."
             }
         ]
     }

@@ -6,7 +6,7 @@ publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/services/create"
+link: "/services/creation-entreprise-individuelle"
 text: "Voir la fiche"
 
 seo:

@@ -1,5 +1,5 @@
 ---
-name: "Création d'entreprise"
+name: "Création d’entreprise"
 description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
 icon: "/images/create-company.jpg"
 category: "Formalités de création"
@@ -10,24 +10,27 @@ publish: true
 
 link: "/forms/create/entrepreneur"
 text: "Commencer ma création"
+ariaLabel: "Créer une entreprise individuelle en ligne"
+title: "Créer une entreprise individuelle"
 price: "59"
 
 seo:
-  title: "Création d'entreprise"
-  description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
+  title: "Créer une entreprise individuelle en ligne – Mandataire INPI"
+  description: "Accompagnement complet pour créer votre entreprise individuelle rapidement et sans erreur. Mandataire INPI spécialisé en formalités administratives pour entrepreneurs individuels."
   icon: "/icons/create-company.jpg"
 ---
 
-# Créer son entreprise individuelle
+# Création d’entreprise individuelle
 
-Créer une entreprise individuelle peut rapidement devenir complexe à cause des formalités administratives.  
-Avec **Mon Assistant Formalités (MAF)**, bénéficiez d’un **accompagnement clair et complet** pour démarrer votre activité en toute sérénité.
+Créer une entreprise individuelle implique de réaliser plusieurs formalités administratives auprès du Guichet Unique de l’INPI.
+Avec **Mon Assistant Formalités (MAF)**, mandataire INPI, bénéficiez d’un **accompagnement clair et complet** pour démarrer votre activité en toute sérénité.
 
 ---
 
-## Pourquoi une déclaration est nécessaire ?
+## Pourquoi créer une entreprise individuelle ?
 
 Pour devenir **auto-entrepreneur** (ou micro-entrepreneur), vous devez obligatoirement effectuer une **déclaration de début d’activité** auprès du Guichet Unique.
+La création d’une entreprise individuelle concerne aussi les auto-entrepreneurs (micro-entrepreneurs), soumis à une déclaration de début d’activité.
 
 - Cette formalité permet d’obtenir votre **numéro SIRET**, indispensable pour exercer légalement votre activité (artisanale, commerciale ou libérale).
 

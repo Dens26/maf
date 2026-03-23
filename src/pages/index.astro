@@ -14,36 +14,36 @@ import RecentPosts from '@components/sections/RecentPosts.astro';
 import heroImage from '../assets/images/home/default-hero-2.jpg';
 import styleGuideImage from '../assets/images/home/advisor.jpg';
 
-const seoTitle = "Mandataire administratif pour formalités d'entreprise";
+const seoTitle = "Mandataire INPI | Création entreprise individuelle, modification et cessation";
 const seoDescription =
-    "Accompagnement professionnel pour la création, la modification et la radiation d'entreprise. Simplifiez vos démarches administratives avec un mandataire expérimenté.";
+    "Mandataire INPI spécialisé en entreprise individuelle : création, modification, changement d’adresse, correction RNE et cessation. Service rapide et sans erreur.";
 
 const heroContent = {
-    title: 'Simplifiez vos formalités',
-    description: 'Création, modification, radiation… Je prends en charge vos démarches administratives pour vous permettre de vous concentrer sur votre activité.',
+    title: 'Mandataire INPI pour vos formalités d’entreprise individuelle',
+    description: 'Création d’entreprise individuelle, changement d’adresse, modification d’activité, correction RNE ou cessation : je prends en charge vos formalités administratives rapidement et en toute conformité.',
     buttons: [
-        { text: 'CRÉEZ', link: '/services/create', target: '_self' },
-        { text: 'DÉMÉNAGEZ', link: '/services/moving', target: '_self' },
-        { text: 'MODIFIEZ', link: '/services/activities', target: '_self' },
-        { text: 'CORRIGEZ', link: '/services/correction', target: '_self' },
-        { text: 'CESSEZ', link: '/services/cessation', target: '_self', },
+        {text: 'CRÉEZ', link: '/services/creation-entreprise-individuelle', target: '_self', ariaLabel: 'Créer une entreprise individuelle en ligne', title: 'Créer une entreprise individuelle'},
+        {text: 'DÉMÉNAGEZ', link: '/services/modification-adresse-entreprise-individuelle', target: '_self', ariaLabel: "Changer l'adresse d'une entreprise individuelle en ligne", title: "Changer l'adresse d'une entreprise individuelle"},
+        {text: 'MODIFIEZ', link: '/services/modification-activite-entreprise-individuelle', target: '_self', ariaLabel: "Changer l'activité d'une entreprise individuelle en ligne", title: "Changer l'activité d'une entreprise individuelle"},
+        {text: 'CORRIGEZ', link: '/services/correction-entreprise-individuelle', target: '_self', ariaLabel: "Corriger les données erronées d'une entreprise individuelle en ligne", title: "Corriger les données erronées d'une entreprise individuelle"},
+        {text: 'CESSEZ', link: '/services/cessation-entreprise-individuelle', target: '_self', ariaLabel: "Cesser une entreprise individuelle en ligne", title: "Cesser une entreprise individuelle"},
     ],
     backgroundImage: heroImage,
     overlayOpacity: 0.2,
 };
 
 const featuresSection = {
-    eyebrow: 'Mes services',
-    title: 'Un accompagnement complet et personnalisé',
-    description: 'Je vous accompagne dans toutes vos démarches administratives liées à la vie de votre entreprise. Gain de temps, conformité, tranquillité d’esprit.',
+    eyebrow: 'Formalités entreprise individuelle',
+    title: 'Création, modification et cessation d’entreprise individuelle',
+    description: 'Mandataire INPI, je vous accompagne dans toutes vos formalités : immatriculation, modification, correction RNE et cessation d’activité. Gagnez du temps et évitez les erreurs administratives.',
     features: featureLists.main.features,
     button: { text: 'Voir tous les services', link: '/services', variant: 'primary' as const },
 };
 
 const FooterCta = {
     eyebrow: "Besoin d'aide ?",
-    title: 'Confiez-moi vos formalités dès aujourd’hui',
-    description: 'Je vous aide à sécuriser vos démarches administratives en toute simplicité. Contactez-moi pour en discuter.',
+    title: 'Confiez vos formalités d’entreprise individuelle à un mandataire INPI',
+    description: 'Création, modification ou cessation : je prends en charge vos démarches administratives pour vous faire gagner du temps et sécuriser votre situation.',
     hideCta: false,
     button: { text: 'Me contacter', link: '/contact', target: '_self' },
 };
@@ -51,7 +51,7 @@ const FooterCta = {
 const styleGuideSection = {
     eyebrow: 'Pourquoi me faire confiance ?',
     headline: 'Clarté, réactivité et professionnalisme',
-    description: 'Chaque formalité est traitée avec rigueur et transparence. Vous bénéficiez d’un accompagnement humain et d’un suivi personnalisé, sans jargon ni paperasse inutile.',
+    description: 'En tant que mandataire INPI, je traite vos formalités avec rigueur et conformité. Vous bénéficiez d’un accompagnement humain, clair et rapide pour toutes vos démarches d’entreprise individuelle.',
     image: { src: styleGuideImage, alt: 'Documents administratifs en cours de traitement' },
     buttons: [
         { text: 'Découvrir mon approche', link: '/process', variant: 'primary' as const },
@@ -60,13 +60,13 @@ const styleGuideSection = {
 
 const sideBySideStats = {
     eyebrow: 'Chiffres clés',
-    title: 'Des formalités gérées avec efficacité',
-    description: 'Des dizaines d’entrepreneurs m’ont déjà fait confiance pour gérer leurs obligations administratives rapidement et sans erreur.',
+    title: 'Formalités INPI traitées rapidement et sans erreur',
+    description: 'Des entrepreneurs font appel à mes services pour la gestion de leurs formalités d’entreprise individuelle : création, modification, correction RNE et cessation.',
     variant: 'side-by-side' as const,
     stats: statsLists.withContent.stats,
     content: {
-        title: 'Un interlocuteur unique et disponible',
-        description: 'Je suis votre unique contact pour toutes vos formalités. Réponses rapides, explications claires et résultats conformes.',
+        title: 'Formalités INPI traitées rapidement et sans erreur',
+        description: 'Des entrepreneurs font appel à mes services pour la gestion de leurs formalités d’entreprise individuelle : création, modification, correction RNE et cessation.',
         // button: { text: 'Voir les témoignages', link: '/stories', variant: 'primary' as const, },
     },
 };

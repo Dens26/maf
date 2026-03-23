@@ -193,7 +193,7 @@ const formBackground = 'light';
         <div class="text-md font-semibold mb-4">Informations complémentaires</div>
         <Checkbox label="Je demande la non-diffusion des informations relatives à mon entreprise au répertoire Sirene de l’INSEE" value="oui" id="diffusioninsee" name="diffusioninsee" background={formBackground} />
         <Checkbox label="Je consens à la mise à disposition de mes données personnelles à des fins de prospection" value="oui" id="prospection" name="prospection" background={formBackground}/>
-        <Textarea rows={5} label="Précisions utiles à votre demande" id="observation" name="observation" background={formBackground} class="text-sm"/>
+        <Textarea rows={6} label="Précisions utiles à votre demande" id="observation" name="observation" background={formBackground} class="text-sm"/>
     </div>
 
     <!-- NAVIGATION -->
@@ -369,6 +369,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     toggleSiretOther();
     siretdestinationSelect.addEventListener('change', toggleSiretOther);
+    /* ================= FILTER INPUTS ================= */
+    
+    document.addEventListener('input', (e) => {
+        const target = e.target;
+        if (!target.name) return;
+
+        if ((target.name === 'zipcode' && (country?.value === 'FR' || !country?.value)) || (target.name === 'transfertzipcode' && (transfertcountry?.value === 'FR' || !transfertcountry?.value)) )
+            target.value = target.value.replace(/\D/g, '').slice(0,5);
+
+        if (target.name === 'tracknumber' || target.name === 'transfertracknumber')
+            target.value = target.value.replace(/\D/g,'');
+
+        if (target.name === 'city' || target.name === "transfertcity")
+            target.value = target.value.replace(/\d/g,'');
+
+        if (target.name === 'siret' || target.name === 'transfertsiret' || target.name === 'siretdestination')
+            target.value = target.value.replace(/\D/g,'').slice(0,5);
+    });
 
     /* ================= FORM SUBMIT ================= */
     form.addEventListener('submit', e => {

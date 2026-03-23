@@ -38,6 +38,16 @@ const versementliberatoireOptions = [
     { label: 'Non', value: 'non' }
 ];
 
+const ambulanteOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' }
+];
+
+const exerciceOptions = [
+    { label: 'Permanente', value: 'permanente' },
+    { label: 'Saisonniere', value: 'saisonniere' }
+];
+
 const otheractivityOptions = [
     { label: 'Sans activité', value: 'Sans activité' },
     { label: 'Non salarié non agricole', value: 'Non salarié non agricole' },
@@ -111,6 +121,21 @@ const tracktypeOptions = [
     { label: "Zone industrielle", value: "Zone industrielle" }
 ];
 
+const monthOptions=[
+  { label: 'Janvier', value: '01' },
+  { label: 'Février', value: '02' },
+  { label: 'Mars', value: '03' },
+  { label: 'Avril', value: '04' },
+  { label: 'Mai', value: '05' },
+  { label: 'Juin', value: '06' },
+  { label: 'Juillet', value: '07' },
+  { label: 'Août', value: '08' },
+  { label: 'Septembre', value: '09' },
+  { label: 'Octobre', value: '10' },
+  { label: 'Novembre', value: '11' },
+  { label: 'Décembre', value: '12' }
+];
+
 const countryOptions = [
     { label: "France", value: "FR" },
     ...countries
@@ -166,26 +191,77 @@ const formBackground = 'light';
   <!-- ACTIVITÉS DE L'ENTREPRISE -->
   <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
     <div class="text-md font-semibold">Activités de l'entreprise</div>
+
+    <div class="text-md mb-0 font-semibold">Activité principale de l'entreprise</div>
+    <div class="flex w-max-[150px] mt-4"><Date label="Début d'activité" id="datedebut" name="datedebut" required background={formBackground} /></div>
     <Textarea rows={3} label="Description de votre activité principale" id="activity" name="activity" required background={formBackground} class="text-sm" />
     <div class="grid grid-cols-2 gap-2 sm:gap-4">
       <Select label="Forme de l'activité" id="formofactivity" name="formofactivity" options={formofactivityOptions} required background={formBackground} />
       <Select label="Lieu de l'activité" id="domiciliation" name="domiciliation" options={domiciliationOptions} required background={formBackground} />
       <Input label="Nom commercial" id="businessname" name="businessname" background={formBackground} />
-      <div id="nbrofactivities-wrapper" class="hidden">
-        <Input type="number" min="0" max="5" label="Activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
+      <Input type="number" min="0" max="5" label="Activités secondaires" id="nbrofactivies" name="nbrofactivies" background={formBackground} />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+      <Radio label="Activité ambulante ?" id="ambulante" name="ambulante" options={ambulanteOptions} required background={formBackground} />
+      <Radio label="Exercice de l'activité ?" id="exercice" name="exercice" options={exerciceOptions} required background={formBackground} />
+    </div>
+    <div id="saison-wrapper" class="pt-2 grid grid-cols-2 gap-2 sm:gap-4 hidden transition-all duration-300">
+      <div>
+        <div class="text-small font-medium">Début d'exercice</div>
+        <div class="flex gap-2">
+          <Select label="" name="saisondatedebutjour" options={[...Array(31)].map((_,i)=>({label:`${i+1}`,value:`${i+1}`}))} required background={formBackground} placeholder='Jour'/>
+          <Select label="" name="saisondatedebutmois" options={monthOptions} required background={formBackground} placeholder='Mois'/>
+        </div>
+      </div>
+      <div>
+        <div class="text-small font-medium">Fin d'exercice</div>
+        <div class="flex gap-2">
+          <Select label="" name="saisondatefinjour" options={[...Array(31)].map((_,i)=>({label:`${i+1}`,value:`${i+1}`}))} required background={formBackground} placeholder='Jour'/>
+          <Select label="" name="saisondatefinmois" options={monthOptions} required background={formBackground} placeholder='Mois'/>
+        </div>
       </div>
     </div>
+
     <div id="domiciliationsiren-wrapper" class="grid grid-cols-2 gap-2 sm:gap-4 hidden transition-all duration-300">
-      <Input label="Dénomination" id="domiciliationname" name="domiciliationname" required background={formBackground} />
-      <Input label="Siren" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
+      <Input label="Nom domiciliation" id="domiciliationname" name="domiciliationname" required background={formBackground} />
+      <Input label="Siren domiciliation" id="domiciliationsiren" name="domiciliationsiren" required background={formBackground} />
     </div>
-    <div id="secondary-activities-container" class="space-y-2 sm:space-y-4"></div>
+    
+    <div id="secondary-activities-wrapper" class="text-md mb-0 font-semibold pt-4 hidden">Activités secondaires de l'entreprise</div>
+    <div id="secondary-activities-container" class="space-y-2 sm:space-y-4 pt-6"></div>
+
     <template id="secondary-activity-template">
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4 border border-primary/50 p-2 rounded-md shadow-sm">
-        <div class="sm:col-span-3"><Textarea label="Description de l'activité secondaire" rows={3} required /></div>
-        <Select label="Forme de l'activité secondaire" options={formofsecondaryactivityOptions} required class="col-span-1" />
+      <div class="border border-primary/50 p-2 rounded-md shadow-sm space-y-3">
+        <div class="flex w-max-[150px] mt-4"><Date label="Début d'activité" name="secondarydatedebut" required background={formBackground} /></div>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-4">
+          <div class="sm:col-span-3"><Textarea label="Description de l'activité secondaire" rows={3} required /></div>
+          <Select label="Forme de l'activité secondaire" options={formofsecondaryactivityOptions} required class="col-span-1" />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+          <Radio label="Activité ambulante ?" name="secondaryambulante" options={ambulanteOptions} required background={formBackground} />
+          <Radio label="Exercice de l'activité ?" name="secondaryexercice" options={exerciceOptions} required background={formBackground} />
+        </div>
+
+        <div class="secondary-saison-wrapper grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 hidden transition-all duration-300">
+          <div>
+            <div class="text-small font-medium">Début d'exercice</div>
+            <div class="flex gap-2">
+              <Select label="" name="secondarysaisondatedebutjour" options={[...Array(31)].map((_,i)=>({label:`${i+1}`,value:`${i+1}`}))} required background={formBackground} placeholder='Jour'/>
+              <Select label="" name="secondarysaisondatedebutmois" options={monthOptions} required background={formBackground} placeholder='Mois'/>
+            </div>
+          </div>
+          <div>
+            <div class="text-small font-medium">Fin d'exercice</div>
+            <div class="flex gap-2">
+              <Select label="" name="secondarysaisondatefinjour" options={[...Array(31)].map((_,i)=>({label:`${i+1}`,value:`${i+1}`}))} required background={formBackground} placeholder='Jour'/>
+              <Select label="" name="secondarysaisondatefinmois" options={monthOptions} required background={formBackground} placeholder='Mois'/>
+            </div>
+          </div>
+        </div>
       </div>
     </template>
+
   </div>
 
   <!-- ADRESSE DE L'ÉTABLISSEMENT -->
@@ -247,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const STORAGE_KEY = 'create-business-form';
 
-  const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
+  // const nbrofactivitiesWrapper = document.getElementById('nbrofactivities-wrapper');
   const nbrofactivitiesInput = document.getElementById('nbrofactivies');
   const container = document.getElementById('secondary-activities-container');
   const template = document.getElementById('secondary-activity-template');
@@ -436,14 +512,41 @@ document.addEventListener('DOMContentLoaded', () => {
       domiciliationnameInput.value = '';
     }
   };
-
   domiciliationsirenInput?.addEventListener('input', e => {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
   });
 
+  // Récupération des radios et du bloc saison
+  const exerciceRadios = form.querySelectorAll('[name="exercice"]');
+  const saisonWrapper = document.getElementById('saison-wrapper');
+
+  // Fonction pour afficher/masquer le bloc saison
+  const activiteSaisonniere = () => {
+    const value = form.querySelector('[name="exercice"]:checked')?.value || '';
+    const isSaisonniere = value === 'saisonniere';
+
+    saisonWrapper.classList.toggle('hidden', !isSaisonniere);
+
+    const saisonInputs = saisonWrapper.querySelectorAll('input');
+    saisonInputs.forEach(input => {
+      input.required = isSaisonniere;
+      if (!isSaisonniere) input.value = '';
+    });
+  };
+
+  exerciceRadios.forEach(radio => {
+    radio.addEventListener('change', activiteSaisonniere);
+  });
+
+
   /*** ================= ACTIVITÉS SECONDAIRES ================= ***/
   const renderSecondaryActivities = () => {
     const count = Number(nbrofactivitiesInput.value) || 0;
+    const secondaryActivitiesWrapper = document.getElementById('secondary-activities-wrapper');
+    if (count > 0)
+      secondaryActivitiesWrapper.classList.remove('hidden')
+    else
+      secondaryActivitiesWrapper.classList.add('hidden')
 
     const existingData = [];
     container.querySelectorAll('.grid.grid-cols-4').forEach(el => {
@@ -455,24 +558,74 @@ document.addEventListener('DOMContentLoaded', () => {
 
     container.innerHTML = '';
 
-    for (let i = 0; i < count; i++) {
-      const clone = template.content.cloneNode(true);
-      const textarea = clone.querySelector('textarea');
-      const select = clone.querySelector('select');
+for (let i = 0; i < count; i++) {
+  const clone = template.content.cloneNode(true);
 
-      textarea.name = `secondaryActivities[${i}][description]`;
-      select.name = `secondaryActivities[${i}][form]`;
+  const textarea = clone.querySelector('textarea');
+  const select = clone.querySelector('select');
+  const dateDebut = clone.querySelector('[name="secondarydatedebut"]');
 
-      if (existingData[i]) {
-        textarea.value = existingData[i].desc;
-        select.value = existingData[i].form;
-      }
+  const secondaryExerciceRadios = clone.querySelectorAll('[name="secondaryexercice"]');
+  const secondaryAmbulanteRadios = clone.querySelectorAll('[name="secondaryambulante"]');
+  const secondarySaisonWrapper = clone.querySelector('.secondary-saison-wrapper');
 
-      textarea.addEventListener('input', saveForm);
-      select.addEventListener('change', saveForm);
+  // ⚡ récupérer les selects jour/mois dans le bloc saison
+  const saisonSelects = secondarySaisonWrapper ? secondarySaisonWrapper.querySelectorAll('select') : [];
 
-      container.appendChild(clone);
-    }
+  /*** ================= NOMS DYNAMIQUES ================= ***/
+  textarea.name = `secondaryActivities[${i}][description]`;
+  select.name = `secondaryActivities[${i}][form]`;
+  dateDebut.name = `secondaryActivities[${i}][datedebut]`;
+
+  secondaryExerciceRadios.forEach(radio => {
+    radio.name = `secondaryActivities[${i}][exercice]`;
+  });
+
+  secondaryAmbulanteRadios.forEach(radio => {
+    radio.name = `secondaryActivities[${i}][ambulante]`;
+  });
+
+  if (saisonSelects.length === 4) {
+    // 0 = début jour, 1 = début mois, 2 = fin jour, 3 = fin mois
+    saisonSelects[0].name = `secondaryActivities[${i}][saisondatedebutjour]`;
+    saisonSelects[1].name = `secondaryActivities[${i}][saisondatedebutmois]`;
+    saisonSelects[2].name = `secondaryActivities[${i}][saisondatefinjour]`;
+    saisonSelects[3].name = `secondaryActivities[${i}][saisondatefinmois]`;
+  }
+
+  /*** ================= LOGIQUE SAISON ================= ***/
+  const handleSaison = () => {
+    const value = Array.from(secondaryExerciceRadios).find(r => r.checked)?.value || '';
+    const isSaisonniere = value === 'saisonniere';
+
+    if (!secondarySaisonWrapper) return;
+
+    secondarySaisonWrapper.classList.toggle('hidden', !isSaisonniere);
+
+    saisonSelects.forEach(sel => {
+      sel.required = isSaisonniere;
+      if (!isSaisonniere) sel.value = '';
+    });
+  };
+
+  secondaryExerciceRadios.forEach(radio => {
+    radio.addEventListener('change', handleSaison);
+  });
+
+  /*** ================= RESTORE =================*/
+  if (existingData[i]) {
+    textarea.value = existingData[i].desc;
+    select.value = existingData[i].form;
+  }
+
+  /*** ================= SAVE =================*/
+  textarea.addEventListener('input', saveForm);
+  select.addEventListener('change', saveForm);
+  dateDebut.addEventListener('change', saveForm);
+  saisonSelects.forEach(sel => sel.addEventListener('change', saveForm));
+
+  container.appendChild(clone);
+}
   };
 
   const handleAddActivity = () => {
@@ -481,15 +634,10 @@ document.addEventListener('DOMContentLoaded', () => {
       domiciliationSelect.value !== '';
 
     if (!isSecondaryAllowed) {
-      nbrofactivitiesWrapper.classList.add('hidden');
-      nbrofactivitiesInput.required = false;
       nbrofactivitiesInput.value = '';
       container.innerHTML = '';
       return;
     }
-
-    nbrofactivitiesWrapper.classList.remove('hidden');
-    nbrofactivitiesInput.required = true;
 
     if (!nbrofactivitiesInput.value) nbrofactivitiesInput.value = 0;
     renderSecondaryActivities();
@@ -508,6 +656,7 @@ document.addEventListener('DOMContentLoaded', () => {
     handleLMNP();
     handleAddress();
     handleDomiciliationCenter();
+    activiteSaisonniere();
     handleAddActivity();
   };
 

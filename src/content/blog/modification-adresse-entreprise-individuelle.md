@@ -1,17 +1,17 @@
 ---
-title: "Changer l’adresse de son EI ?"
+title: "Changer l’adresse de son EI"   # titre court pour l'affichage
 excerpt: "Découvrez les démarches à suivre pour déclarer le changement d’adresse de votre entreprise individuelle."
 featuredImage: "./images/moving.jpg"
 publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/services/moving"
+link: "/services/modification-adresse-entreprise-individuelle"
 text: "Voir la fiche"
 
 seo:
-  title: "Changer l’adresse de son entreprise individuelle"
-  description: "Découvrez les démarches à suivre pour déclarer le changement d’adresse de votre entreprise individuelle et mettre à jour votre situation administrative."
+  title: "Changer l’adresse de son entreprise individuelle | Déclaration officielle INPI"
+  description: "Apprenez comment déclarer le changement d’adresse de votre entreprise individuelle via le Guichet Unique INPI et maintenir vos informations administratives à jour en toute conformité."
   image: "./images/moving.jpg"
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: "Correction de données erronées sur le RNE"
+name: "Corriger les données erronées"
 description: "Un accompagnement rigoureux pour rectifier les données erronées du RNE"
 icon: "/images/correction.jpg"
 category: "Formalités correctives"
@@ -10,15 +10,17 @@ publish: true
 
 link: "/forms/correction/entrepreneur"
 text: "Corrigez vos données sur le RNE"
+ariaLabel: "Corriger les données erronées d'une entreprise individuelle en ligne"
+title: "Corriger les données erronées d'une entreprise"
 price: "39"
 
 seo:
-  title: "Corriger les informations erronées sur le Registre National des Entreprises"
-  description: "Un accompagnement rigoureux pour rectifier les erreurs présentes sur la fiche de votre entreprise individuelle."
+  title: "Corriger les données erronées sur le RNE – Entreprise individuelle"
+  description: "Accompagnement complet pour rectifier rapidement les informations erronées de votre entreprise individuelle sur le Registre National des Entreprises (RNE) et sécuriser vos démarches administratives."
   icon: "/icons/correction.jpg"
 ---
 
-# Corriger les informations erronées sur le Registre National des Entreprises
+# Corriger les données erronées d'une entreprise individuelle
 
 Des erreurs peuvent apparaître sur votre fiche d’entreprise : **adresse incorrecte, activité inexacte, nom mal orthographié…**  
 Ces inexactitudes peuvent porter préjudice à votre activité.  

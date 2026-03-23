@@ -1,6 +1,6 @@
 ---
-import Moving from '@components/forms/moving/Recapitulatif.astro';
-import Stepper from '@components/forms/moving/Stepper.astro';
+import Activities from '@components/forms/activities/Entrepreneur.astro';
+import Stepper from '@components/forms/activities/Stepper.astro';
 import { getBackgroundColor, getPaddingClass } from '@utils/styleUtils';
 import type { ThemeColor, PaddingSize } from '@utils/styleUtils';
 
@@ -21,10 +21,10 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
     <div class="site-container px-2 sm:px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <Stepper currentStep={3} id="stepper"/>
+                <Stepper currentStep={1} id="stepper"/>
             </div>
             <div class="sm:col-span-2">
-                <Moving />
+                <Activities />
             </div>
         </div>
     </div>

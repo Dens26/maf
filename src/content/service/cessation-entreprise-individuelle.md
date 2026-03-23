@@ -1,5 +1,5 @@
 ---
-name: "Cessation d’activité"
+name: "Cessation d'une entreprise"
 description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre EI."
 icon: "/images/closed.jpg"
 category: "Formalités de cessation"
@@ -10,15 +10,17 @@ publish: true
 
 link: "/forms/cessation/entrepreneur"
 text: "Cessez votre entreprise"
+ariaLabel: "Cessation d'une entreprise individuelle en ligne"
+title: "Cesser une entreprise individuelle"
 price: "49"
 
 seo:
-  title: "Déclarer la cessation d’activité de son entreprise individuelle"
-  description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre entreprise individuelle."
+  title: "Déclarer la cessation d’activité de son entreprise individuelle – Mandataire INPI"
+  description: "Accompagnement complet et rapide pour fermer votre entreprise individuelle, gérer la radiation au RNE et sécuriser vos démarches administratives."
   icon: "/icons/cessation.jpg"
 ---
 
-# Déclarer la cessation d’activité de son entreprise individuelle
+# Cessation d'une entreprise individuelle
 
 Mettre fin à une activité professionnelle nécessite une **déclaration officielle de cessation d’activité** auprès des organismes compétents.  
 Avec **Mon Assistant Formalités (MAF)**, soyez accompagné pour **fermer votre entreprise en toute sérénité**, sans erreurs ni démarches interminables.

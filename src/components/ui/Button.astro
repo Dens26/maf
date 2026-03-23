@@ -8,6 +8,7 @@ export interface Props {
   type?: 'button' | 'submit' | 'reset';
   target?: string;
   id?: string;
+  title?: string;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   type = 'button',
   target,
   id,
+  title,
   ...rest
 } = Astro.props;
 
@@ -61,6 +63,7 @@ const Element = href ? 'a' : 'button';
   class={classes}
   disabled={disabled}
   aria-disabled={disabled}
+  title={title}
   {...(target && { target, rel: target === '_blank' ? 'noopener noreferrer' : undefined })}
 >
   <span class="absolute left-0 -mt-12 h-32 w-1/2 translate-x-[250%] rotate-12 bg-white opacity-20 transition-all duration-250 ease-out group-hover:translate-x-[2%]"></span>

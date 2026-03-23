@@ -1,33 +1,35 @@
 ---
-name: "Modification d’adresse"
-description: "Pour un déménagement, transfert d’établissement sans stress."
-icon: "/images/moving.jpg"
+name: "Modifier l'activité d'une entreprise"
+description: "Un accompagnement complet pour déclarer votre changement d’activité"
+icon: "/images/activities.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 69€"
 duration: "48h en moyenne"
-order: 2
+order: 3
 publish: true
 
-link: "/forms/moving/entrepreneur"
-text: "Modifiez votre adresse"
+link: "/forms/activities/entrepreneur"
+text: "Ajouter vos activités"
+ariaLabel: "Modifier l'activité d'une entreprise individuelle en ligne"
+title: "Modifier l'activité d'une entreprise individuelle"
 price: "69"
 
 seo:
-  title: "Modification d’adresse"
-  description: "Pour un déménagement, transfert d’établissement de votre entreprise individuelle sans stress."
-  icon: "/icons/moving.jpg"
+  title: "Modifier l’activité d’une entreprise individuelle – Mandataire INPI"
+  description: "Accompagnement complet pour déclarer un changement ou l’ajout d’activité à votre entreprise individuelle rapidement et sans erreur avec un mandataire INPI spécialisé."
+  icon: "/icons/activities.jpg"
 ---
 
-# Modifier l’adresse de son entreprise individuelle
+# Modifier l’activité de son entreprise individuelle
 
-Déclarer un changement de domicile ou d'établissement peut rapidement devenir complexe à cause des formalités administratives.  
-Avec **Mon Assistant Formalités (MAF)**, bénéficiez d’un **accompagnement clair et complet** pour vous libérer de cette charge.
+Changer d’activité principale ou en ajouter une nouvelle implique une **mise à jour obligatoire de votre déclaration d’entreprise**.  
+Avec **Mon Assistant Formalités (MAF)**, bénéficiez d’un **accompagnement clair et complet** pour assurer la conformité de votre démarche auprès du Guichet Unique.
 
 ---
 
 ## Pourquoi une déclaration est nécessaire ?
 
-La déclaration d’un changement d’adresse est **obligatoire** pour toute entreprise individuelle.  
+La déclaration du changement d’activité est **obligatoire** pour toute entreprise individuelle.  
 
 Elle permet de maintenir à jour votre situation au sein des registres officiels (RNE, SIRENE) et garantit la **validité de vos documents administratifs** (avis de situation, attestation d’immatriculation, etc.).  
 
@@ -42,7 +44,7 @@ Un oubli ou une déclaration incorrecte peut entraîner :
 
 ## Ce que comprend la prestation
 
-- Identification de la **nature du changement** (adresse personnelle et/ou lieu d’exercice)  
+- Identification de la **nature de la modification** (Adjonction, suppression, mise à jour)  
 - Constitution du **dossier complet** pour le Guichet Unique  
 - Préparation et transmission de la formalité auprès des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.)  
 - Suivi du dossier administratif  
@@ -52,10 +54,10 @@ Un oubli ou une déclaration incorrecte peut entraîner :
 
 ## Déroulement de la procédure
 
-Vous complétez vos informations directement via le formulaire en ligne.  
+Vous complétez vos informations directement via le formulaire en ligne.
 
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier à MAF  
-- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier
+- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier à MAF.  
+- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.
 
 Après validation des informations par nos soins :  
 
@@ -65,7 +67,7 @@ Après validation des informations par nos soins :
 Une fois le paiement validé et les documents reçus :  
 
 - MAF prépare le dossier administratif  
-- La formalité est déposée sur le **Guichet Unique**
+- La formalité est déposée sur le **Guichet Unique**  
 
 Si certaines informations ou documents sont manquants, vous recevrez un **mail de demande de pièces complémentaires**.
 
@@ -75,9 +77,9 @@ Si certaines informations ou documents sont manquants, vous recevrez un **mail d
 
 ## Tarifs et délai de traitement
 
-La prestation d’accompagnement administratif est proposée à partir de **69 € TTC**.  
+La prestation d’accompagnement administratif est proposée à partir de **69 € TTC**.
 
-À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.  
+À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.
 
 Ces frais de gestion permettent de couvrir d’éventuelles **régularisations administratives demandées par les organismes valideurs** (Greffe, CMA, MSA, etc.).  
 
@@ -96,7 +98,7 @@ MAF prend en charge ces régularisations **dans la limite de 10 € par formalit
 
 ### Frais administratifs officiels
 
-Certaines formalités peuvent entraîner des **frais administratifs demandés par les administrations** (INSEE, Greffe, CMA, MSA, etc.).  
+Certaines formalités peuvent entraîner des **frais administratifs demandés par les administrations** (INPI, Greffe, CMA, MSA, etc.).
 
 Ces frais :  
 
@@ -121,7 +123,7 @@ Le client devra alors :
 - se connecter à son **compte INPI**, ou en créer un si nécessaire  
 - procéder directement au **paiement des frais administratifs**
 
-MAF **ne perçoit pas ces paiements** et **n’intervient pas dans leur gestion**.  
+MAF **ne perçoit pas ces paiements** et **n’intervient pas dans leur gestion**.
 
 Pour comprendre le fonctionnement :  
 [Consulter l'explication de la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
@@ -144,7 +146,7 @@ Le délai moyen de traitement est d’environ **48 heures** à partir de la réc
 
 ## Suivi et régularisation
 
-MAF assure le **suivi administratif du dossier** jusqu’à sa validation ou son rejet par l’administration.  
+MAF assure le **suivi administratif du dossier** jusqu’à sa validation ou son rejet par l’administration.
 
 Les demandes de régularisation éventuelles peuvent provenir des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.).  
 
@@ -179,8 +181,9 @@ MAF ne peut être tenu responsable si le rejet résulte :
 ### En cas de validation
 
 - votre **synthèse définitive**  
-- une **attestation d’immatriculation mise à jour**  
-- un **avis de situation SIRENE** (si disponible), indiquant la nouvelle adresse
+- une **attestation d’immatriculation au RNE**  
+- un **avis de situation SIRENE** (si disponible)  
+- votre **numéro SIRET**
 
 ### En cas de refus
 
@@ -201,7 +204,7 @@ MAF peut vous accompagner pour comprendre les retours administratifs mais **ne p
 ## Pourquoi choisir Mon Assistant Formalités ?
 
 - Un **interlocuteur unique** pour un suivi personnalisé  
-- Une **démarche claire et expliquée** à chaque étape  
+- Un **accompagnement clair et expliqué** à chaque étape  
 - Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
 - Aucun abonnement, aucun frais caché : **tarif unique clair dès le départ**  
 - Service basé en France

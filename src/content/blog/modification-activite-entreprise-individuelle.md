@@ -6,12 +6,12 @@ publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
-link: "/services/activities"
+link: "/services/modification-activite-entreprise-individuelle"
 text: "Voir la fiche"
 
 seo:
-  title: "Modifier l’activité ou le nom commercial de son EI"
-  description: "Découvrez les démarches pour modifier l’activité déclarée ou le nom commercial de votre entreprise individuelle."
+  title: "Modifier l’activité ou le nom commercial d’une entreprise individuelle | Guide 2026"
+  description: "Apprenez à déclarer la modification d’activité ou du nom commercial de votre entreprise individuelle via le Guichet unique. Accompagnement complet avec Mon Assistant Formalités."
   image: "./images/activities.jpg"
 ---
 
