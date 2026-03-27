@@ -190,5 +190,14 @@ const formBackground = 'light';
         sirenInput?.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/\D/g, '').slice(0, 9);
         });
+        document.addEventListener('input', (e) => {
+            if (e.target.name === 'zipcode' && (country.value === 'FR' || country.value === ''))
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+
+            if (['tracknumber', 'phone'].includes(e.target.name))
+                e.target.value = e.target.value.replace(/\D/g, '');
+
+            if (e.target.name === 'city') e.target.value = e.target.value.replace(/\d/g, '');
+        });
     });
 </script>

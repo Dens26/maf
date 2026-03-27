@@ -3,7 +3,7 @@ name: "Création d’entreprise"
 description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
 icon: "/images/create-company.jpg"
 category: "Formalités de création"
-priceRange: "à partir de 59€"
+priceRange: "à partir de 49€"
 duration: "48h en moyenne"
 order: 1
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/create/entrepreneur"
 text: "Commencer ma création"
 ariaLabel: "Créer une entreprise individuelle en ligne"
 title: "Créer une entreprise individuelle"
-price: "59"
+price: "49"
 
 seo:
   title: "Créer une entreprise individuelle en ligne – Mandataire INPI"
@@ -71,7 +71,7 @@ Si certaines informations ou documents sont manquants, vous recevrez un **mail d
 
 ## Tarifs et délai de traitement
 
-La prestation d’accompagnement administratif est proposée à partir de **59 € TTC**.
+La prestation d’accompagnement administratif est proposée à partir de **49 € TTC**.
 
 À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.
 
@@ -81,10 +81,10 @@ Mon Assistant Formalités prend en charge ces régularisations **dans la limite 
 
 **Exemple :**
 
-- 59 € pour la prestation d’accompagnement administratif  
+- 49 € pour la prestation d’accompagnement administratif  
 - 5 € de frais de gestion administrative  
 
-**Total facturé : 64 € TTC**
+**Total facturé : 54 € TTC**
 
 ##### ⚠️ Les frais de gestion administrative sont non remboursables, même si aucune régularisation n’est nécessaire.
 

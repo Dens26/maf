@@ -8,11 +8,11 @@ const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY as string, {
 
 // Prix des formalités (en centimes)
 const FORMALITY_PRICES: Record<number, number> = {
-    1: 5900,
-    2: 6900,
-    3: 6900,
+    1: 4900,
+    2: 5900,
+    3: 5900,
     4: 3900,
-    5: 4900,
+    5: 3900,
 }
 
 // Labels des formalités
@@ -94,12 +94,14 @@ export async function POST({ request }: APIContext) {
             description: `Formalité ${label} n° ${demandeId}`,
         })
 
-        await stripe.invoiceItems.create({
-            customer: finalCustomer.id,
-            amount: advanceAmount,
-            currency: 'eur',
-            description: `Frais de gestion – formalité ${label} n° ${demandeId}`
-        })
+        if (FORMALITY_LABELS[typeId] != 'Correction'){
+            await stripe.invoiceItems.create({
+                customer: finalCustomer.id,
+                amount: advanceAmount,
+                currency: 'eur',
+                description: `Frais de gestion – formalité ${label} n° ${demandeId}`
+            })
+        }
 
         // 5️⃣ Création facture (sans auto_advance)
         const invoice = await stripe.invoices.create({

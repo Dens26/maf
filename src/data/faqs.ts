@@ -38,7 +38,7 @@ export const faqLists: Record<string, FaqList> = {
             },
             {
                 question: "Combien coûte une formalité d’entreprise individuelle ?",
-                answer: "Les tarifs commencent à partir de 39€, 59€ ou 69€ selon la formalité (création, modification, correction). Des frais administratifs peuvent être demandés par les organismes publics et restent à la charge du client."
+                answer: "Les tarifs commencent à partir de 39€ les correction et cessation, 49€ la création ou 59€ les modifications. Des frais administratifs de 5 € peuvent être demandés selon la formalité. Certaines formalités peuvent entraîner des frais administratifs demandés par les administrations (INPI, Greffe, CMA, MSA, etc.)."
             },
             {
                 question: "Les prestations de formalités sont-elles déductibles ?",

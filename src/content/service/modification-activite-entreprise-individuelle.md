@@ -3,7 +3,7 @@ name: "Modifier l'activité d'une entreprise"
 description: "Un accompagnement complet pour déclarer votre changement d’activité"
 icon: "/images/activities.jpg"
 category: "Formalités de modification"
-priceRange: "à partir de 69€"
+priceRange: "à partir de 59€"
 duration: "48h en moyenne"
 order: 3
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/activities/entrepreneur"
 text: "Ajouter vos activités"
 ariaLabel: "Modifier l'activité d'une entreprise individuelle en ligne"
 title: "Modifier l'activité d'une entreprise individuelle"
-price: "69"
+price: "59"
 
 seo:
   title: "Modifier l’activité d’une entreprise individuelle – Mandataire INPI"
@@ -77,7 +77,7 @@ Si certaines informations ou documents sont manquants, vous recevrez un **mail d
 
 ## Tarifs et délai de traitement
 
-La prestation d’accompagnement administratif est proposée à partir de **69 € TTC**.
+La prestation d’accompagnement administratif est proposée à partir de **59 € TTC**.
 
 À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.
 
@@ -87,10 +87,10 @@ MAF prend en charge ces régularisations **dans la limite de 10 € par formalit
 
 **Exemple :**
 
-- 69 € pour la prestation d’accompagnement administratif  
+- 59 € pour la prestation d’accompagnement administratif  
 - 5 € de frais de gestion administrative  
 
-**Total facturé : 74 € TTC**
+**Total facturé : 64 € TTC**
 
 ##### ⚠️ Les frais de gestion administrative sont non remboursables, même si aucune régularisation n’est nécessaire.
 

@@ -61,18 +61,17 @@ const tracktypeOptions = [
     { label: 'Zone industrielle', value: 'Zone industrielle' },
 ];
 
-const siretdestinationOptions = [
-    { label: 'Fermé', value: 'ferme' },
-    { label: 'Vendu', value: 'vendu' },
-    { label: 'Autre', value: 'autre' },
+const etablishmentOptions = [
+    { label: 'Nouvel établissement', value: 'nouveau' },
+    { label: 'Etablissement existant', value: 'existant' }
 ];
 
 const countryOptions = [
-    { label: 'France', value: 'FR' },
+    { label: "France", value: "FR" },
     ...countries
-        .filter((c) => c.name !== 'France')
+        .filter(c => c.name !== "France")
         .sort((a, b) => a.name.localeCompare(b.name))
-        .map((c) => ({ label: c.name, value: c.code })),
+        .map(c => ({ label: c.name, value: c.code }))
 ];
 
 const formBackground = 'light';
@@ -86,7 +85,45 @@ const formBackground = 'light';
     <!-- ADRESSE ENTREPRENEUR -->
     <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
         <div class="text-md font-semibold mb-4"></div>
-        <div class="text-md font-semibold">Changement d'activités de l'entrepreneur</div>
+        <div class="text-md font-semibold">Ajout d'activité(s)</div>
+        <Checkbox label="Je souhaite ajouter une ou plusieurs activités" value="addActivity" id="addActivity" name="demenagement" background={formBackground}/>
+
+        <!-- Mettre hidden -->
+        <div id="addActivity-wrapper" class="hidden"> 
+            <Select label="Choix de l'établissement" id="country" name="country" options={etablishmentOptions} required background={formBackground}/>
+
+            <!-- Mettre hidden -->
+            <div id="existingEtablishment-wrapper">
+
+            </div>
+
+            <!-- Mettre hidden -->
+            <!-- ADRESSE DE L'ÉTABLISSEMENT -->
+            <div id="newEtablishment-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 transition-all duration-300">
+                <div class="text-md font-semibold">Adresse de l'établissement</div>
+                <div>
+                    <Checkbox label="Je souhaite que cette adresse soit utilisée comme adresse de correspondance" value="oui" id="correspondance" name="correspondance" background={formBackground} />
+                    <p class="text-sm text-primary mt-1">⚠️ Par défaut, l’adresse de correspondance est celle de l’entrepreneur. Cochez cette case uniquement si vous voulez utiliser une adresse différente.</p>
+                </div>
+                <div class="grid grid-cols-12 gap-2 sm:gap-4">
+                <div class="col-span-2"><Input label="N°" id="newEtablishmenttracknumber" name="newEtablishmenttracknumber" required background={formBackground}/></div>
+                <div class="col-span-3"><Select label="Indice" id="newEtablishmentcomplementnumber" name="newEtablishmentcomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
+                <div class="col-span-7"><Select label="Type de voie" id="newEtablishmenttracktype" name="newEtablishmenttracktype" options={tracktypeOptions} required background={formBackground} /></div>
+                </div>
+                <Input label="Nom de la voie" id="newEtablishmentway" name="newEtablishmentway" required background={formBackground}/>
+                <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                <Input label="Code postal" id="newEtablishmentzipcode" name="newEtablishmentzipcode" required background={formBackground}/>
+                <Input label="Ville" id="newEtablishmentcity" name="newEtablishmentcity" required background={formBackground} class="capitalize"/>
+                </div>
+                <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                <Input label="Complément" id="newEtablishmentadditionaladdress" name="newEtablishmentadditionaladdress" data-optional="true" background={formBackground}/>
+                <Select label="Pays" id="newEtablishmentcountry" name="newEtablishmentcountry" options={countryOptions} required background={formBackground}/>
+                </div>
+            </div>
+            <div class="space-y-2 sm:space-y-4 bg-gray-50 p-2 sm:p-4 rounded-sm mb-4">
+
+            </div>
+        </div>
     </div>
 
 
@@ -104,3 +141,71 @@ const formBackground = 'light';
         <Button type="submit" variant="primary" size="md" class="uppercase">Étape suivante</Button>
     </div>
 </form>
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('activities-form');
+    if (!form) return;
+
+    const STORAGE_KEY = 'activities-modifications-form';
+
+    /* ================= LOCALSTORAGE ================= */
+    const saveForm = () => {
+        const data = {};
+        new FormData(form).forEach((value, key) => {
+            if (data[key]) {
+                if (Array.isArray(data[key])) data[key].push(value);
+                else data[key] = [data[key], value];
+            } else {
+                data[key] = value;
+            }
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    };
+
+    const restoreForm = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([name, value]) => {
+            const fields = form.querySelectorAll(`[name="${name}"]`);
+            if (!fields.length) return;
+            fields.forEach((field) => {
+                if (field.type === 'checkbox' || field.type === 'radio') {
+                    if (Array.isArray(value)) field.checked = value.includes(field.value);
+                    else field.checked = field.value === value;
+                } else {
+                    field.value = value;
+                }
+            });
+        });
+    };
+    restoreForm();
+    form.addEventListener('input', saveForm);
+    form.addEventListener('change', saveForm);
+
+    /* ================= HELPER TOGGLE ================= */
+    const setupToggle = (checkboxId, wrapperId, exceptions = []) => {
+        const checkbox = form.querySelector(`#${checkboxId}`);
+        const wrapper = form.querySelector(`#${wrapperId}`);
+        if (!checkbox || !wrapper) return;
+
+        const toggle = () => {
+            const show = checkbox.checked;
+            wrapper.classList.toggle('hidden', !show);
+
+            wrapper.querySelectorAll('input, select, textarea').forEach((f) => {
+                f.style.display = show ? '' : 'none';
+                const isException = exceptions.includes(f.id);
+                const isCheckbox = f.type === 'checkbox';
+                f.required = isCheckbox ? false : (show && !f.hasAttribute('data-optional') && !isException);
+            });
+        };
+
+        toggle();
+        checkbox.addEventListener('change', toggle);
+    };
+
+    setupToggle('addActivity', 'addActivity-wrapper', ['newEtablishmentcomplementnumber', 'newEtablishmentadditionaladdress']);
+});
+</script>

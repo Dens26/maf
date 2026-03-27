@@ -3,7 +3,7 @@ name: "Cessation d'une entreprise"
 description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre EI."
 icon: "/images/closed.jpg"
 category: "Formalités de cessation"
-priceRange: "à partir de 49€"
+priceRange: "à partir de 39€"
 duration: "48h en moyenne"
 order: 5
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/cessation/entrepreneur"
 text: "Cessez votre entreprise"
 ariaLabel: "Cessation d'une entreprise individuelle en ligne"
 title: "Cesser une entreprise individuelle"
-price: "49"
+price: "39"
 
 seo:
   title: "Déclarer la cessation d’activité de son entreprise individuelle – Mandataire INPI"
@@ -77,7 +77,7 @@ Si certaines informations ou documents sont manquants, vous recevrez un **mail d
 
 ## Tarifs et délai de traitement
 
-La prestation d’accompagnement administratif est proposée à partir de **49 € TTC**.
+La prestation d’accompagnement administratif est proposée à partir de **39 € TTC**.
 
 À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.  
 
@@ -87,10 +87,10 @@ MAF prend en charge ces régularisations **dans la limite de 10 € par formalit
 
 **Exemple :**
 
-- 49 € pour la prestation d’accompagnement administratif  
+- 39 € pour la prestation d’accompagnement administratif  
 - 5 € de frais de gestion administrative  
 
-**Total facturé : 54 € TTC**
+**Total facturé : 44 € TTC**
 
 ##### ⚠️ Les frais de gestion administrative sont non remboursables, même si aucune régularisation n’est nécessaire.
 

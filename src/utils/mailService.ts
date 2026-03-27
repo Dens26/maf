@@ -20,6 +20,14 @@ type SendCreateNotificationParams = {
 type PaymentStatusConfig = {
     label: string;
 };
+// Labels
+const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
+    1: { label: "création d'entreprise"},
+    2: { label: "changement d'adresse" },
+    3: { label: "modification d'activité"},
+    4: { label: 'correction'},
+    5: { label: "cessation d'entreprise"},
+};
 
 /**
  * Envoi de la confirmation de la demande de création d'entreprise
@@ -32,14 +40,6 @@ type PaymentStatusConfig = {
 export async function sendNotification({ firstname, name, email, phone, typeFormaliteId, pdf }: SendCreateNotificationParams) {
 
     const now = new Date().toLocaleString('fr-FR');
-    // Labels
-    const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
-        1: { label: "création d'entreprise"},
-        2: { label: "changement d'adresse" },
-        3: { label: "modification d'activité"},
-        4: { label: 'correction'},
-        5: { label: "cessation d'entreprise"},
-    };
 
     const attachment = pdf
         ? [{
@@ -98,8 +98,8 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
     // Admin
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
-            To: [{ Email: 'contact@mon-assistant-formalites.fr', Name: 'Admin' }],
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            To: [{ Email: 'formalites@mon-assistant-formalites.fr', Name: 'Admin' }],
             Subject: `Nouvelle demande de ${FORMALITY_TYPE[typeFormaliteId].label} de ${name}`,
             HTMLPart: adminHtmlContent,
             Attachments: attachment,
@@ -109,7 +109,7 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
     // Client
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Confirmation de votre demande de ${FORMALITY_TYPE[typeFormaliteId].label}`,
             HTMLPart: clientHtmlContent,
@@ -125,7 +125,7 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
  * @param name 
  * @param email 
  */
-export async function sendRequestDocuments(demandeid : string, firstname: string, name : string, email : string) {
+export async function sendRequestDocuments(demandeid : string, typeFormaliteId: number, firstname: string, name : string, email : string) {
     
     const htmlContent = `
     <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; background-color: #f9f9f9;">
@@ -135,7 +135,7 @@ export async function sendRequestDocuments(demandeid : string, firstname: string
             
             <h2 style="margin-bottom: 20px;">Bonjour ${firstname} ${name},</h2>
 
-            <p style="margin-bottom: 20px;">C’est avec plaisir que nous vous informons de la prise en charge de votre dossier de création d’entreprise numéro : <strong>${demandeid}</strong>.</p>
+            <p style="margin-bottom: 20px;">C’est avec plaisir que nous vous informons de la prise en charge de votre dossier de ${FORMALITY_TYPE[typeFormaliteId].label} numéro : <strong>${demandeid}</strong>.</p>
 
             <p>Pour finaliser la création de votre entreprise individuelle, merci de nous fournir les pièces justificatives suivantes :</p>
             <ul>
@@ -168,7 +168,7 @@ export async function sendRequestDocuments(demandeid : string, firstname: string
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Dossier MAF n°${demandeid} pris en charge – pièces justificatives requises`,
             HTMLPart: htmlContent
@@ -216,7 +216,7 @@ export async function sendCanceledInvoice(demandeid : string, firstname: string,
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Annulation de votre facture n°${invoiceNumber}`,
             HTMLPart: htmlContent
@@ -239,22 +239,32 @@ export async function sendRefundNotification(demandeid : string, firstname: stri
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
             <img style="max-width: 100%; height: auto; display: block; margin: 10px auto 50px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
             <h2 style="margin-bottom: 30px; font-size: 1.3rem;">Bonjour ${firstname} ${name}</h2>
-            <p style="margin-bottom: 30px;">Nous vous informons que le solde non utilisé de l’avance demandée pour la formalité n° <strong>${demandeid}</strong> vous a été remboursé.</p>
-            <p>Lors du traitement de votre dossier, une avance de <strong>10 €</strong> est demandée afin de couvrir d’éventuels frais de régularisation auprès de l’administration.</p>
-            <p style="margin-bottom: 30px;">Les frais réellement engagés ont été déduits de cette avance et le montant restant, soit <strong>${amount} €</strong>, vient d’être remboursé sur votre moyen de paiement.</p>
-            <p style="margin-bottom: 30px;">Ce remboursement peut apparaître sur votre compte dans un délai de quelques jours selon les délais de votre établissement bancaire.</p>
-            <p>Si vous avez la moindre question concernant votre formalité, n’hésitez pas à nous contacter.</p><p>Merci pour votre confiance,</p>
-            <p style="margin-top: 30px; font-weight: bold;">Mon Assistant Formalités</p><hr style="margin-top: 20px; border-color: #e5e7eb;"/>
-            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse mail à vos contacts ou comme courrier légitime.</p>
+            
+            <p style="margin-bottom: 30px;">Nous vous informons qu’un remboursement a été effectué concernant votre dossier n° <strong>${demandeid}</strong>.</p>
+            
+            <p style="margin-bottom: 30px;">Le montant de <strong>${amount} €</strong> a été recrédité sur votre moyen de paiement.</p>
+            
+            <p style="margin-bottom: 30px;">Ce remboursement peut apparaître sur votre compte dans un délai de quelques jours, selon les délais de traitement de votre établissement bancaire.</p>
+            
+            <p>Si vous avez la moindre question concernant votre dossier, n’hésitez pas à nous contacter.</p>
+            <p>Merci pour votre confiance,</p>
+            
+            <p style="margin-top: 30px; font-weight: bold;">Mon Assistant Formalités</p>
+            
+            <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
+            
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">
+                Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse mail à vos contacts ou comme courrier légitime.
+            </p>
         </div>
     </div>
     `;
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
-            Subject: `Information concernant le remboursement de votre solde`,
+            Subject: `Information concernant votre remboursement`,
             HTMLPart: htmlContent
         }]
     });
@@ -286,13 +296,6 @@ export async function sendCompletedFormalityNotification(demandeid : string, fir
 
             <p style="margin-bottom: 20px;">J’ai le plaisir de vous informer que votre formalité a été <strong>validée avec succès</strong> auprès de l’administration.</p>
             <p style="margin-bottom: 20px;">Votre dossier est désormais finalisé. Vous recevrez dans un prochain message la <strong>synthèse définitive de votre formalité</strong> ainsi que les éléments récapitulatifs relatifs à votre démarche.</p>
-            <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
-                <p>Pour rappel :</p>
-                <p style="margin-top: 10px; font-weight: bold; color: #1d4ed8;">
-                    Pour tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
-                    Selon les délais de traitement de votre établissement bancaire, ce remboursement peut apparaître sur votre compte dans les prochains jours.
-                </p>
-            </div>
             <p style="margin-bottom: 20px;">Nous vous conseillons de conserver ce message ainsi que les références ci-dessus, qui pourront vous être utiles pour toute correspondance ou suivi ultérieur concernant votre formalité.</p>
             <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier ou si vous avez besoin d'une information complémentaire, n’hésitez pas à nous <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
                     
@@ -307,7 +310,7 @@ export async function sendCompletedFormalityNotification(demandeid : string, fir
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Votre formalité MAF n°${demandeid} a été validée`,
             HTMLPart: htmlContent
@@ -338,13 +341,6 @@ export async function sendRejectedFormalityNotification(demandeid : string, firs
             <h2 style="margin-bottom: 25px; font-size: 1.3rem;">Bonjour ${firstname} ${name},</h2>
             <p style="margin-bottom: 20px;">Après analyse de votre dossier, nous vous informons que votre formalité n’a malheureusement pas pu être <strong>validée auprès de l’administration</strong>.</p>
             <p style="margin-bottom: 20px;">Cette décision peut intervenir pour différentes raisons (informations incomplètes, incohérences dans les données transmises ou éléments nécessitant une correction préalable).</p>
-            <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
-                <p>Pour rappel :</p>
-                <p style="margin-top: 10px; font-weight: bold; color: #1d4ed8;">
-                    Pour tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
-                    Selon les délais de traitement de votre établissement bancaire, ce remboursement peut apparaître sur votre compte dans les prochains jours.
-                </p>
-            </div>
             <p style="margin-bottom: 30px;">Si vous souhaitez obtenir plus d’informations concernant ce refus ou être accompagné pour effectuer une nouvelle démarche, n’hésitez pas à nous <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
                     
             <p>Nous restons à votre disposition pour toute question.</p>
@@ -358,7 +354,7 @@ export async function sendRejectedFormalityNotification(demandeid : string, firs
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Votre formalité MAF n°${demandeid} a été rejetée`,
             HTMLPart: htmlContent
@@ -392,14 +388,6 @@ export async function sendCanceledFormalityNotification(demandeid : string, firs
 
             <p style="margin-bottom: 20px;">Nous vous informons que votre demande de formalité n° <strong>${demandeid}</strong> a été <strong>annulée</strong>.</p>
             <p style="margin-bottom: 20px;">Après analyse de votre dossier, il n’a malheureusement pas été possible de poursuivre le traitement de cette formalité dans les conditions actuelles.</p>
-            <!-- Section mise en valeur -->
-            <div style="margin-top: 30px; padding: 20px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
-                <p>Pour rappel :</p>
-                <p style="margin-top: 10px; font-weight: bold; color: #1d4ed8;">
-                    Pour tout solde restant sur votre avance, un remboursement sera effectué sur votre moyen de paiement dans les prochains jours s’il n’a pas déjà été traité.
-                    Selon les délais de traitement de votre établissement bancaire, ce remboursement peut apparaître sur votre compte dans les prochains jours.
-                </p>
-            </div>
             <p style="margin-bottom: 30px;">Si vous souhaitez effectuer une nouvelle demande ou obtenir des précisions concernant cette annulation, vous pouvez nous <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
             
             <p>Nous restons à votre disposition pour toute question.</p>
@@ -413,7 +401,7 @@ export async function sendCanceledFormalityNotification(demandeid : string, firs
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
-            From: { Email: 'contact@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Votre formalité MAF n°${demandeid} a été annulée`,
             HTMLPart: htmlContent

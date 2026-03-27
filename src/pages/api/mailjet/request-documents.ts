@@ -22,7 +22,7 @@ export async function POST({ request }: APIContext) {
         }
 
         // Envoi du mail notification (désactivé temporairement)
-        await sendRequestDocuments(formality.demandeid, formality.firstname, formality.name, formality.email);
+        await sendRequestDocuments(formality.demandeid, formality.typeFormaliteId, formality.firstname, formality.name, formality.email);
 
         return jsonResponse({ success: true }, 200);
 
