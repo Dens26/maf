@@ -28,19 +28,9 @@ const validCategories = postCategories.filter((categoryName: string) =>
     data-aos="fade-up"
     data-aos-delay={index * 100}
 >
-    <div
-        class="relative aspect-[16/9] overflow-hidden border-black border-b group-hover:border-primary transition-colors duration-300"
-    >
+    <div class="relative aspect-[16/9] overflow-hidden border-black border-b group-hover:border-primary transition-colors duration-300">
         {
-            featuredImage && (
-                <Image
-                    src={featuredImage}
-                    alt=""
-                    width={600}
-                    height={338}
-                    class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                />
-            )
+            featuredImage && (<Image src={featuredImage} alt="" width={600} height={338} class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"/>)
         }
         <div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
     </div>
@@ -55,20 +45,12 @@ const validCategories = postCategories.filter((categoryName: string) =>
             {title}
         </h2>
 
-        <p
-            class="mt-2 mb-8 text-body-base line-clamp-4 flex-grow text-small group-hover:text-gray-700 transition-colors duration-300"
-        >
-            {excerpt}
-        </p>
+        <p class="mt-2 mb-8 text-body-base line-clamp-4 flex-grow text-small group-hover:text-gray-700 transition-colors duration-300">{excerpt}</p>
 
         {/* Categories as hashtags at the bottom */}
         <div class="absolute bottom-4 left-4 flex flex-wrap">
             {
-                validCategories.map((categoryName) => (
-                    <div class="category-tag">
-                        <HashtagCategory category={categoryName} />
-                    </div>
-                ))
+                validCategories.map((categoryName) => ( <div class="category-tag"><HashtagCategory category={categoryName} /></div>))
             }
         </div>
     </div>

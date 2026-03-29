@@ -25,33 +25,6 @@ type CreateFormalityParams = {
   }
 }
 
-// Labels
-const FORMALITY_TYPE_LABELS: Record<number, string> = {
-  1: 'CR', // Création
-  2: 'MO', // Déménagement
-  3: 'AC', // Activité
-  4: 'CO', // Correction
-  5: 'CE', // Cessation
-};
-
-// Fonction de génération du numéro de formalité
-function generateDemandeId(typeFormaliteId: number) {
-  const brand = 'MAF';
-  const prefix = FORMALITY_TYPE_LABELS[typeFormaliteId] ?? 'XX';
-
-  // Date format YYMMDD
-  const now = new Date();
-  const year = String(now.getFullYear()).slice(-2);
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const datePart = `${year}${month}${day}`;
-
-  // 7 caractères alphanumériques aléatoires
-  const randomPart = parseInt(randomBytes(4).toString('hex'), 16).toString(36).toUpperCase().substring(0, 7);
-
-  return `${brand}${prefix}-${datePart}-${randomPart}`;
-}
-
 /**
  * Création d'une formalité
  * @param param0 

@@ -23,7 +23,7 @@ export async function POST({ request }: APIContext) {
         }
 
         // Envoi du mail notification (désactivé temporairement)
-        await sendRefundNotification(formality.demandeid, formality.firstname, formality.name, amount, formality.email);
+        await sendRefundNotification(formality.demandeid, formality.typeformaliteid, formality.firstname, formality.name, amount, formality.email);
 
         return jsonResponse({ success: true }, 200);
 

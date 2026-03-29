@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Layout.astro"
+import InnerHero from "@components/sections/InnerHero.astro"
+import Signature from "@components/sections/signature/RecapitulatifInfo.astro"
+
+const heroContent = {
+    title: "Modifiez votre adresse",
+    description: "Formulaire de transfert d'adresse"
+}
+---
+
+<Layout title="Déménagement" description="Modifiez votre adresse">
+    <InnerHero content={heroContent} />
+    <Signature background="base" padding="responsive" />
+</Layout>

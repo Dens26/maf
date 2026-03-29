@@ -8,7 +8,8 @@ duration: "48h en moyenne"
 order: 3
 publish: true
 
-link: "/forms/activities/entrepreneur"
+# link: "/forms/activities/entrepreneur"
+link: "/forms/unavailable"
 text: "Ajouter vos activités"
 ariaLabel: "Modifier l'activité d'une entreprise individuelle en ligne"
 title: "Modifier l'activité d'une entreprise individuelle"

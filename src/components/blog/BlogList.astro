@@ -22,7 +22,7 @@ const activeCategories = categories.filter((category) =>
 );
 ---
 
-<section class="site-container mx-auto px-4 py-base">
+<section class="site-container--small mx-auto px-4 py-base">
     <!-- <div
         class="mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6"
         data-aos="fade-in"
@@ -31,28 +31,20 @@ const activeCategories = categories.filter((category) =>
         <div class="w-full">
             <h2 class="text-lg font-semibold mb-4">Filtrer par catégories:</h2>
             <div class="flex flex-wrap gap-2">
-                <a
-                    href="/blog"
-                    class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
+                <a href="/blog" class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
                         !currentCategory
                             ? 'bg-primary text-body-dark shadow-md'
                             : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
                     }`}
-                >
-                    Tour afficher
+                    >Tour afficher
                 </a>
                 {
                     activeCategories.map((category) => (
-                        <a
-                            href={`/category/${category.slug}`}
-                            class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${
-                                currentCategory === category.name
+                        <a href={`/category/${category.slug}`} class={`px-4 sm:px-6 py-2 sm:py-3 leading-none rounded-md text-small flex items-center justify-center transition-colors border border-primary duration-200 ${ currentCategory === category.name
                                     ? 'bg-primary text-body-dark shadow-md'
                                     : 'bg-background text-body-base hover:bg-background-light hover:text-body-light'
                             }`}
-                            title={category.description}
-                        >
-                            {category.name}
+                            title={category.description}>{category.name}
                         </a>
                     ))
                 }

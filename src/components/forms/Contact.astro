@@ -18,6 +18,8 @@ const serviceOptions = [
   { label: "Modification d'activité", value: "modification-activite" },
   { label: "Correction", value: "correction-rne" },
   { label: "Cessation", value: "cessation" },
+  { label: "Signature", value: "signature" },
+  { label: "Autre", value: "autre" },
 ];
 
 const formBackground = 'light';
@@ -43,7 +45,7 @@ const formBackground = 'light';
             background={formBackground}
         />
         <Select
-            label="Quelle prestation vous intéresse ?"
+            label="Sujet de la demande ?"
             id="service"
             name="service"
             options={serviceOptions}
