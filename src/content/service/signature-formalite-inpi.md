@@ -1,6 +1,6 @@
 ---
-name: "Finaliser une formalité INPI bloquée"
-description: "Vous êtes bloqué à la signature de votre formalité INPI ? Je finalise votre dossier rapidement et sans stress."
+name: "Finaliser une formalité"
+description: "Bloqué à la signature de votre formalité ? Je finalise votre dossier rapidement."
 icon: "/images/signature.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 39€"

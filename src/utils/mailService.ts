@@ -5,16 +5,19 @@ const mailjet = Mailjet.apiConnect(
     import.meta.env.MJ_APIKEY_PRIVATE
 );
 
+type FileBase64 = {
+    filename: string;
+    base64: string;
+};
+
 type SendCreateNotificationParams = {
     firstname: string;
     name: string;
     email: string;
     phone: string;
     typeFormaliteId: number;
-    pdf?: {
-        filename: string;
-        base64: string;
-    };
+    pdf?: FileBase64;
+    synthese?: FileBase64;
 };
 
 type PieceJointe = {
@@ -99,17 +102,15 @@ function generatePJList(pjs?: PieceJointe[]): string {
  * @param phone 
  * @param pdf 
  */
-export async function sendNotification({ firstname, name, email, phone, typeFormaliteId, pdf }: SendCreateNotificationParams) {
+export async function sendNotification({ firstname, name, email, phone, typeFormaliteId, pdf, synthese }: SendCreateNotificationParams) {
 
     const now = new Date().toLocaleString('fr-FR');
 
-    const attachment = pdf
-        ? [{
-            ContentType: "application/pdf",
-            Filename: pdf.filename,
-            Base64Content: pdf.base64,
-        }]
-        : [];
+    // Construire les pièces jointes (pdf + synthèse si présente)
+    const attachments = [
+        ...(pdf ? [{ ContentType: "application/pdf", Filename: pdf.filename, Base64Content: pdf.base64 }] : []),
+        ...(synthese ? [{ ContentType: "application/pdf", Filename: synthese.filename, Base64Content: synthese.base64 }] : [])
+    ];
         
     const adminHtmlContent = `
     <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; padding: 20px; background-color: #f9f9f9;">
@@ -162,25 +163,25 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
     </div>
     `;
 
-    // Admin
+    // Envoi Admin
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: 'formalites@mon-assistant-formalites.fr', Name: 'Admin' }],
             Subject: `Nouvelle demande de ${FORMALITY_TYPE[typeFormaliteId].label} de ${name}`,
             HTMLPart: adminHtmlContent,
-            Attachments: attachment,
+            Attachments: attachments,
         }]
     });
 
-    // Client
+    // Envoi Client
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
             To: [{ Email: email, Name: `${firstname} ${name}` }],
             Subject: `Confirmation de votre demande de ${FORMALITY_TYPE[typeFormaliteId].label}`,
             HTMLPart: clientHtmlContent,
-            Attachments: attachment,
+            Attachments: attachments,
         }]
     });
 }

@@ -496,7 +496,11 @@ const formBackground = 'light';
 
                 // ✅ Succès total
                 submitBtn.textContent = 'Envoyé ✔';
-                // localStorage.clear();
+
+                // Suppression du localStorage
+                localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
+                localStorage.removeItem(STORAGE_KEY_BUSINESS);
+                localStorage.removeItem(STORAGE_KEY_DETAILS);
 
                 window.location.href = `/confirmation?token=${data.token}`;
             } catch (e) {

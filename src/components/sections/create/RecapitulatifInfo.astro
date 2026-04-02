@@ -766,7 +766,10 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 // ✅ Succès total
                 submitBtn.textContent = 'Envoyé ✔';
-                // localStorage.clear();
+
+                // Suppression du localStorage
+                localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
+                localStorage.removeItem(STORAGE_KEY_BUSINESS);
 
                 window.location.href = `/confirmation?token=${data.token}`;
             } catch (e) {

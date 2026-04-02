@@ -312,40 +312,71 @@ const formBackground = 'light';
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Récupération du bouton submit
             const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Génération du PDF...';
 
             try {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Génération du PDF...';
-
                 const demandeId = generateDemandeId();
 
+                // Génération du PDF récap
                 const pdfBlob = await generateRecapPdf(demandeId, recapContainer, { download: false });
 
-
-                if (!(pdfBlob instanceof Blob) || pdfBlob.size === 0)
+                if (!(pdfBlob instanceof Blob) || pdfBlob.size === 0) {
                     throw new Error('Le PDF généré est vide ou invalide.');
+                }
 
-                // Convertir en base64 pour stockage temporaire
-                const reader = new FileReader();
-
-                reader.onloadend = () => {
-                    sessionStorage.setItem('generatedPdf', reader.result);
-                };
-
-                reader.readAsDataURL(pdfBlob);
-
-                const pdfBase64 = await new Promise((resolve) => {
+                // Conversion PDF en Base64
+                const pdfBase64 = await new Promise((resolve, reject) => {
                     const reader = new FileReader();
-                    reader.onloadend = () => {
-                        resolve(reader.result.split(',')[1]);
-                    };
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = reject;
                     reader.readAsDataURL(pdfBlob);
                 });
 
+                // Récupération de la synthèse
+                const syntheseFileInput = document.getElementById('synthese');
+                let syntheseBase64;
 
+                if (syntheseFileInput && syntheseFileInput.files && syntheseFileInput.files[0]) {
+                    const syntheseFile = syntheseFileInput.files[0];
+
+                    if (syntheseFile.type !== 'application/pdf') {
+                        alert('Seuls les fichiers PDF sont acceptés');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer';
+                        return;
+                    }
+
+                    if (!syntheseFile.name.toLowerCase().endsWith('.pdf')) {
+                        alert('Le fichier doit être au format PDF');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer';
+                        return;
+                    }
+
+                    if (syntheseFile.size > 5 * 1024 * 1024) {
+                        alert('Le fichier ne doit pas dépasser 5 Mo');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer';
+                        return;
+                    }
+
+                    syntheseBase64 = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(syntheseFile);
+                    });
+                } else {
+                    alert('Veuillez ajouter la synthèse PDF');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Envoyer';
+                    return;
+                }
+
+                // Préparer le payload
                 const payload = {
                     demandeId: demandeId,
                     typeFormaliteId: 6,
@@ -353,30 +384,28 @@ const formBackground = 'light';
                     phone: entrepreneur.phone,
                     name: entrepreneur.birthname,
                     firstname: entrepreneur.firstname,
-                    address: address, 
+                    address: address,
                     city: entrepreneur.city,
                     zipcode: entrepreneur.zipcode,
                     siren: entrepreneur.siren,
                     pdf: pdfBase64,
+                    synthese: syntheseBase64
                 };
 
                 submitBtn.textContent = 'Envoi en cours...';
 
+                // Envoi au serveur
                 const response = await fetch('/api/create', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload),
                 });
-
-                console.log(response)
 
                 const data = await response.json();
 
                 if (!response.ok) {
                     if (response.status === 500) {
-                        // window.location.href = '/serveur_indisponible';
+                        window.location.href = '/serveur_indisponible';
                         return;
                     }
                     if (response.status === 400) {
@@ -386,13 +415,17 @@ const formBackground = 'light';
                     throw new Error(data.error || 'Erreur lors de l’envoi');
                 }
 
-                // ✅ Succès total
+                // Succès
                 submitBtn.textContent = 'Envoyé ✔';
-                // localStorage.clear();
+
+                // Suppression du localStorage
+                localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
 
                 window.location.href = `/confirmation?token=${data.token}`;
-            } catch (e) {
-                // window.location.href = '/serveur_indisponible';
+
+            } catch (err) {
+                console.error(err);
+                window.location.href = '/serveur_indisponible';
             }
         });
     });

@@ -1,111 +1,170 @@
 ---
-title: "Créer son entreprise individuelle"
-excerpt: "Découvrez les étapes essentielles pour créer votre entreprise individuelle."
+title: "Créer son entreprise"
+excerpt: "Découvrez comment créer votre entreprise individuelle et choisir entre micro-entreprise ou régime réel."
 featuredImage: "./images/create-company.jpg"
 publishDate: "2026-03-14"
 publish: true
 categories: ["Formalities"]
 
 link: "/services/creation-entreprise-individuelle"
-text: "Voir la fiche"
+text: "Voir la fiche de création"
 
 seo:
-  title: "Créer son entreprise individuelle"
-  description: "Découvrez les étapes essentielles pour créer votre entreprise individuelle et démarrer votre activité."
+  title: "Créer une entreprise individuelle : micro-entreprise ou régime réel ? Guide complet"
+  description: "Découvrez comment créer une entreprise individuelle et choisir entre micro-entreprise ou régime réel : démarches, différences et conseils."
   image: "./images/create-company.jpg"
+---
+
+## Créer une entreprise individuelle : guide complet
+
+Créer une entreprise individuelle (EI) permet de démarrer une activité professionnelle en nom propre, sans constituer de société.
+
+Ce statut est apprécié pour sa **simplicité de fonctionnement** et la rapidité des démarches de création.
+
+Avant de vous lancer, il est important de comprendre les **différences entre les régimes disponibles**, notamment la micro-entreprise et le régime réel.
+
+---
+
+## Micro-entreprise ou régime réel : que choisir ?
+
+Lorsqu’une activité est exercée en entreprise individuelle, deux régimes fiscaux peuvent s’appliquer :
+
+- le **régime micro-entreprise**, souvent appelé régime micro  
+- le **régime réel d’imposition**
+
+Ces deux régimes ne correspondent pas à des statuts juridiques différents : il s’agit toujours d’une **entreprise individuelle**, avec des règles fiscales et comptables différentes.
+
+### Les points communs
+
+Dans les deux cas :
+
+- l’entreprise est exercée **en nom propre**  
+- il n’y a **pas de création de société**  
+- la déclaration se fait via le **Guichet unique de l’INPI**  
+- un **numéro SIREN et SIRET** est attribué
+
+---
+
+### Le régime micro-entreprise
+
+Le régime micro-entreprise propose un fonctionnement simplifié :
+
+- comptabilité allégée  
+- cotisations sociales calculées sur le **chiffre d’affaires**  
+- application d’un **abattement forfaitaire**  
+- franchise possible de TVA sous certains seuils  
+
+Ce régime est soumis à des **plafonds de chiffre d’affaires**.
+
+##### ⚠️ Ces seuils peuvent évoluer.
+
+Il est recommandé de vérifier les montants en vigueur sur le site officiel de l’administration :
+
+[Seuils de chiffre d’affaires en micro-entreprise (site officiel)](https://entreprendre.service-public.fr/vosdroits/F23267)
+
+---
+
+### Le régime réel
+
+Le régime réel implique une gestion plus complète :
+
+- tenue d’une **comptabilité complète**  
+- calcul du **résultat réel**  
+- possibilité de **déduire les charges**  
+- déclaration et gestion de la TVA (selon les cas)
+
+---
+
+### Les principales différences
+
+Les différences concernent principalement :
+
+- le calcul de l’impôt et des cotisations  
+- les obligations comptables  
+- les plafonds de chiffre d’affaires  
+
+Le choix dépend de votre activité, de vos charges et de votre situation.
+
 ---
 
 ## Comment créer une entreprise individuelle ?
 
-Créer une entreprise individuelle (EI) permet de démarrer une activité professionnelle en nom propre, sans constituer de société.
+### 1. Définir l’activité
 
-Ce statut est souvent choisi pour sa **simplicité de fonctionnement** et pour la rapidité des démarches de création.
-
-Avant de lancer votre activité, plusieurs étapes administratives doivent être réalisées afin d’enregistrer officiellement votre entreprise.
-
----
-
-### 1. Définir l’activité de l’entreprise
-
-La première étape consiste à déterminer précisément l’activité que vous souhaitez exercer.
+La première étape consiste à déterminer précisément l’activité exercée.
 
 Certaines activités sont **réglementées** et peuvent nécessiter :
 
-- un diplôme ou une qualification professionnelle  
-- une autorisation administrative  
-- une inscription auprès d’un organisme spécifique
-
-##### ⚠️ Il est important de vérifier ces éléments avant d’effectuer la déclaration de création.
+- un diplôme  
+- une autorisation  
+- une inscription spécifique  
 
 ---
 
-### 2. Choisir le régime fiscal et social
+### 2. Choisir le régime
 
-L’entreprise individuelle peut relever de différents régimes fiscaux.
+Lors de la création, vous devrez choisir entre :
 
-Les deux situations les plus fréquentes sont :
+- le **régime micro-entreprise**  
+- le **régime réel**
 
-- **le régime micro-entreprise**, qui prévoit des obligations administratives simplifiées  
-- **le régime réel d’imposition**, avec une comptabilité plus complète
-
-Le choix dépend notamment du **chiffre d’affaires prévisionnel**, du niveau de charges et de la nature de l’activité.
+Ce choix dépend notamment du chiffre d’affaires prévisionnel et des charges.
 
 ---
 
 ### 3. Choisir un nom commercial (facultatif)
 
-Par défaut, une entreprise individuelle exerce sous le **nom de la personne physique** qui la crée.
+Par défaut, l’entreprise utilise le nom de la personne.
 
-Il est toutefois possible d’utiliser un **nom commercial** pour communiquer auprès des clients.
-
-Ce nom peut être déclaré lors de la création de l’entreprise ou ajouté ultérieurement.
+Il est possible d’ajouter un **nom commercial** pour communiquer auprès des clients.
 
 ---
 
-### 4. Déclarer la création via le Guichet Unique (INPI)
+### 4. Déclarer la création via le Guichet Unique
 
-Depuis 2023, toutes les formalités de création d’entreprise sont réalisées via le **Guichet unique de l’INPI**.
+Depuis 2023, toutes les démarches passent par le **Guichet unique de l’INPI** :
 
-La déclaration se fait en ligne sur :  
 https://procedures.inpi.fr
 
-La démarche consiste notamment à :
+La procédure consiste à :
 
-- créer un compte sur la plateforme  
-- compléter le formulaire de création d’entreprise  
-- indiquer les informations relatives à l’activité  
-- joindre les éventuels justificatifs nécessaires
-
-Une fois la déclaration validée, les informations sont transmises aux organismes concernés.
+- créer un compte  
+- remplir le formulaire  
+- transmettre les informations  
+- joindre les justificatifs nécessaires  
 
 ---
 
-### 5. Obtenir les identifiants de l’entreprise
+### 5. Obtenir les identifiants
 
-Après l’enregistrement du dossier, l’INSEE attribue à l’entreprise :
+Après validation :
 
-- un **numéro SIREN**, qui identifie l’entreprise  
-- un **numéro SIRET**, qui identifie l’établissement  
-- un **code APE**, correspondant à l’activité principale
+- attribution d’un **SIREN**  
+- attribution d’un **SIRET**  
+- attribution d’un **code APE**
 
-Ces informations permettent d’exercer officiellement l’activité.
+Ces éléments permettent de démarrer officiellement l’activité.
 
 ---
 
 ### 6. Vérifier les obligations complémentaires
 
-Selon l’activité exercée, certaines démarches peuvent être nécessaires après la création :
+Selon votre activité :
 
-- souscription d’une **assurance professionnelle**  
-- ouverture d’un **compte bancaire dédié à l’activité**  
-- mise en place d’outils de gestion ou de facturation
-
-Ces éléments permettent d’organiser le fonctionnement administratif de l’entreprise.
+- assurance professionnelle  
+- compte bancaire dédié  
+- outils de gestion  
 
 ---
 
-### Créer son entreprise dans de bonnes conditions
+## Créer son entreprise dans de bonnes conditions
 
-La création d’une entreprise individuelle implique plusieurs démarches administratives qui doivent être réalisées avec précision afin d’éviter tout retard ou demande de correction.
+Créer une entreprise individuelle implique plusieurs démarches administratives qui doivent être réalisées avec précision.
 
-Un accompagnement peut permettre de sécuriser la formalité et de s’assurer que l’ensemble des informations transmises est conforme à la situation de l’entrepreneur.
+Un accompagnement permet de :
+
+- éviter les erreurs  
+- sécuriser la déclaration  
+- gagner du temps  
+
+👉 Vous souhaitez créer votre entreprise individuelle ? Consultez notre service dédié.

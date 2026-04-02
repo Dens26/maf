@@ -453,7 +453,10 @@ for (const section of sections) {
 
                 // ✅ Succès total
                 submitBtn.textContent = 'Envoyé ✔';
-                // localStorage.clear();
+
+                // Suppression du localStorage
+                localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
+                localStorage.removeItem(STORAGE_KEY_CORRECTIF);
 
                 window.location.href = `/confirmation?token=${data.token}`;
             } catch (e) {

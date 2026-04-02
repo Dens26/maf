@@ -8,11 +8,12 @@ const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY as string, {
 
 // Prix des formalités (en centimes)
 const FORMALITY_PRICES: Record<number, number> = {
-    1: 4900,
+    1: 50,
     2: 5900,
     3: 5900,
     4: 3900,
     5: 3900,
+    6: 3900,
 }
 
 // Labels des formalités
@@ -22,6 +23,7 @@ const FORMALITY_LABELS: Record<number, string> = {
     3: 'Modification d’activité',
     4: 'Correction',
     5: 'Cessation',
+    6: 'Signature',
 }
 
 export async function POST({ request }: APIContext) {
@@ -54,7 +56,7 @@ export async function POST({ request }: APIContext) {
         } = formality
 
         const amount = FORMALITY_PRICES[typeId]
-        const advanceAmount = 500
+        const advanceAmount = 50
         const label = FORMALITY_LABELS[typeId]
 
         if (!email || !amount || !label) {
