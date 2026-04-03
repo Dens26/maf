@@ -66,7 +66,7 @@ let filteredPosts = allPosts
                     )}
                     {content?.button && (
                         <div class="mt-8" data-aos="fade-up" data-aos-delay="200">
-                            <Button href={content.button.link} variant={content.button.variant || 'primary'}>
+                            <Button href={content.button.link} variant={content.button.variant || 'primary'} analyticsLabel={`Hero Button: ${content.button.text}`} >
                                 {content.button.text}
                             </Button>
                         </div>

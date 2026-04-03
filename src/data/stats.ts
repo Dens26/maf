@@ -32,10 +32,10 @@ export const statsLists: Record<string, StatsList> = {
     withContent: {
         id: 'withContent',
         stats: [
-            { value: 2026, label: "lancement du service" },
-            { value: 100, label: "démarches traitées en ligne", suffix: " %" },
-            { value: 49, label: "la création de votre EI*", suffix: " €" },
-            { value: 48, label: "délai de réponse maximum", prefix: "< ", suffix: " h" }
-        ]
+            { value: 0, label: 'Stress administratif' },
+            { value: 100, label: 'Clarté et suivi', suffix: '%' },
+            { value: 0, label: 'Erreurs dans les dossiers' },
+            { value: 100, label: 'Accompagnement personnalisé', suffix: '%' }
+        ],
     }
 };

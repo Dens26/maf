@@ -63,7 +63,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                         <p class:list={['mt-4', textColor, 'opacity-90']}>{contentContent.description}</p>
                         {contentContent.button && (
                             <div class="mt-8">
-                                <Button href={contentContent.button.link} variant={contentContent.button.variant || 'primary'} >
+                                <Button href={contentContent.button.link} variant={contentContent.button.variant || 'primary'} analyticsLabel={`Stats Button: ${contentContent.button.text}`}  >
                                     {contentContent.button.text}
                                 </Button>
                             </div>
@@ -72,7 +72,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 )
             }
 
-            <div class:list = {[variant === 'default' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8' : 'grid grid-cols-2 gap-8',]}>
+            <div class:list = {[variant === 'default' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-4' : 'grid grid-cols-2 gap-8 mb-4',]}>
                 {
                     stats.map((stat, index) => (
                     <div class="text-center" data-aos={variant === 'side-by-side' ? 'fade-left' : 'fade-up'} data-aos-delay={index * 100} >
@@ -84,7 +84,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     ))
                 }
             </div>
-            <p class:list={['mt-4', textColor,'text-sm', 'opacity-50']}>*Hors frais administratifs obligatoires (le cas échéant).</p>
+            <!-- <p class:list={['mt-4', textColor,'text-sm', 'opacity-50']}>*Hors frais administratifs obligatoires (le cas échéant).</p> -->
         </div>
     </div>
 </section>

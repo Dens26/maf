@@ -47,8 +47,8 @@ if (seoImage && !seoImage.startsWith('http')) {
         }
 
       {entry.data.link && entry.data.text &&
-          <Button href={entry.data.link} variant="primary" size="md" class="uppercase mb-2"aria-label={entry.data.ariaLabel || entry.data.text}title={entry.data.title || entry.data.text}>
-              {entry.data.text}
+          <Button href={entry.data.link} variant="primary" size="md" class="uppercase mb-2"aria-label={entry.data.ariaLabel || entry.data.text}title={entry.data.title || entry.data.text} data-analytics={`Features Button: ${entry.data.text}`}>
+            {entry.data.text}
           </Button>
       }
 
@@ -65,7 +65,7 @@ if (seoImage && !seoImage.startsWith('http')) {
           <Content></Content>
           {entry.data.link && entry.data.text ? 
             <div class="text-center mt-12">
-              <Button href={entry.data.link} variant="primary" size="md" class="uppercase mb-2"aria-label={entry.data.ariaLabel || entry.data.text}title={entry.data.title || entry.data.text}>
+              <Button href={entry.data.link} variant="primary" size="md" class="uppercase mb-2"aria-label={entry.data.ariaLabel || entry.data.text}title={entry.data.title || entry.data.text} analyticsLabel={`Features Button: ${entry.data.text}`}>
                   {entry.data.text}
               </Button>
             </div>

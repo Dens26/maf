@@ -55,7 +55,7 @@ if (seoImage && !seoImage.startsWith('http')) {
 
                 {post.data.link && post.data.text && (
                     <div class="flex justify-center">
-                        <Button href={post.data.link} variant="primary" size="md" class="uppercase">{post.data.text}</Button>
+                        <Button href={post.data.link} variant="primary" size="md" class="uppercase" analyticsLabel={`Features Button: ${post.data.text}`}>{post.data.text}</Button>
                     </div>
                 )}
 
@@ -64,7 +64,7 @@ if (seoImage && !seoImage.startsWith('http')) {
                         <Content />
                         {post.data.link && post.data.text && (
                         <div class="flex justify-center">
-                            <Button href={post.data.link} variant="primary" size="md" class="uppercase">{post.data.text}</Button>
+                            <Button href={post.data.link} variant="primary" size="md" class="uppercase" analyticsLabel={`Features Button: ${post.data.text}`}>{post.data.text}</Button>
                         </div>
                         )}
                     </div>

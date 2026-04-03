@@ -9,6 +9,7 @@ export interface Props {
   target?: string;
   id?: string;
   title?: string;
+  analyticsLabel?: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   target,
   id,
   title,
+  analyticsLabel,
   ...rest
 } = Astro.props;
 
@@ -65,6 +67,7 @@ const Element = href ? 'a' : 'button';
   aria-disabled={disabled}
   title={title}
   {...(target && { target, rel: target === '_blank' ? 'noopener noreferrer' : undefined })}
+  {...(analyticsLabel && { 'data-analytics': analyticsLabel })}
 >
   <span class="absolute left-0 -mt-12 h-32 w-1/2 translate-x-[250%] rotate-12 bg-white opacity-20 transition-all duration-250 ease-out group-hover:translate-x-[2%]"></span>
   <slot />

@@ -92,6 +92,7 @@ const containerBgColor = containerBgColors[background as keyof typeof containerB
                         variant={button.variant || 'primary'}
                         target={button.target || '_self'}
                         size="md"
+                        analyticsLabel={`CTA Button: ${button.text}`} 
                     >
                         {button.text}
                     </Button>

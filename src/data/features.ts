@@ -18,36 +18,36 @@ export interface FeatureList {
 export const featureLists: Record<string, FeatureList> = {
     main: {
         id: 'main',
-        features: [
+    features: [
             {
                 icon: Zap,
-                title: 'Formalités simplifiées',
-                description: 'Je prends en charge la rédaction, le dépôt et le suivi de vos formalités.'
+                title: 'Dossier traité rapidement',
+                description: 'Votre formalité est préparée et déposée sous 48h.'
             },
             {
                 icon: Shield,
-                title: 'Conformité garantie',
-                description: 'Vos démarches sont réalisées selon les dernières exigences réglementaires.'
-            },
-            {
-                icon: TabletSmartphone,
-                title: '100% à distance',
-                description: 'Toutes les démarches peuvent être traitées en ligne, où que vous soyez.'
+                title: 'Zéro erreur administrative',
+                description: 'Chaque dossier est vérifié pour éviter les refus.'
             },
             {
                 icon: Smile,
-                title: 'Gain de temps assuré',
-                description: 'Focalisez-vous sur votre activité pendant que je m’occupe du reste.'
+                title: 'Accompagnement humain',
+                description: 'Un interlocuteur unique pour vous guider.'
+            },
+            {
+                icon: TabletSmartphone,
+                title: '100% en ligne',
+                description: 'Aucune paperasse, tout se fait à distance.'
             },
             {
                 icon: Type,
-                title: 'Transparence totale',
-                description: 'Vous êtes informé à chaque étape, sans jargon inutile.'
+                title: 'Tarifs clairs',
+                description: 'Pas de surprise, vous savez ce que vous payez.'
             },
             {
                 icon: CodeXml,
-                title: 'Adapté aux indépendants',
-                description: 'Spécialiste des entreprises individuelles et micro-entrepreneurs.'
+                title: 'Spécialiste indépendants',
+                description: 'EI, micro-entrepreneurs, freelances.'
             }
         ]
     },

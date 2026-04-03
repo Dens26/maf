@@ -47,7 +47,7 @@
     --color-header-logo: var(--color-primary);
     --color-footer-logo: var(--color-primary);
 
-    --text-h1: clamp(2rem, 5vw + 1rem, 4rem);
+    --text-h1: clamp(1.8rem, 3vw + 1rem, 3.2rem);
     --text-h2: clamp(1.5rem, 4vw + 0.5rem, 2.5rem);
     --text-h3: clamp(1.25rem, 3vw + 0.25rem, 2rem);
     --text-h4: clamp(1rem, 2vw + 0.125rem, 1.5rem);

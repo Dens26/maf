@@ -50,13 +50,14 @@ const isCurrentPage = (link: string) => {
                     }
                 </ul>
 
-                <Button href={ctaButton.link} variant="primary">{ctaButton.name}</Button>
+                <Button href={ctaButton.link} variant="primary" analyticsLabel={`CTA: ${ctaButton.name}`}>{ctaButton.name}</Button>
 
                 {/* Mobile Menu Button */}
                 <button
                     class="mobile-menu-button relative z-30 p-2 border-none cursor-pointer bg-transparent lg:hidden"
                     aria-label="Toggle Menu"
                     aria-expanded="false"
+                    data-analytics={`CTA: ${ctaButton.name}`}
                 >
                     <span class="menu-icon block">
                         <Menu size={24} class="text-body-base" />
@@ -96,7 +97,7 @@ const isCurrentPage = (link: string) => {
                     </ul>
 
                     <div class="mt-8 pb-8">
-                        <Button href={ctaButton.link} variant="ghostLight">{ctaButton.name} </Button>
+                        <Button href={ctaButton.link} variant="ghostLight" analyticsLabel={`CTA: ${ctaButton.name}`}>{ctaButton.name} </Button>
                     </div>
                 </div>
             </nav>
