@@ -2,7 +2,7 @@
 title: "Signer une formalité INPI"
 excerpt: "Vous êtes bloqué à la signature de votre formalité INPI ? Découvrez les solutions pour finaliser votre dossier sur le Guichet Unique."
 featuredImage: "./images/signature.jpg"
-publishDate: "2026-03-28"
+publishDate: "2026-04-01"
 publish: true
 categories: ["Formalities"]
 

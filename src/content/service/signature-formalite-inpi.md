@@ -22,23 +22,25 @@ seo:
 
 # Finaliser une formalité INPI bloquée
 
-Vous avez commencé une formalité sur le Guichet Unique mais vous êtes bloqué au moment de la signature ou du dépôt ?
+Vous avez commencé une formalité sur le Guichet Unique mais êtes bloqué au moment de la **signature ou du dépôt** ?  
 
-Avec **Mon Assistant Formalités (MAF)**, confiez la finalisation de votre dossier à un mandataire INPI et évitez les erreurs ou blocages techniques.
+Avec **Mon Assistant Formalités (MAF)**, confiez la finalisation de votre dossier à un mandataire INPI et évitez les **erreurs et blocages techniques**.
+
+👉 [Finalisez votre formalité →](/forms/signature/entrepreneur)
 
 ---
 
-## Pourquoi vous êtes bloqué à la signature INPI ?
+## Pourquoi vous êtes bloqué à la signature ?
 
-De nombreux entrepreneurs rencontrent des difficultés pour signer leur formalité en ligne.
+De nombreux entrepreneurs rencontrent des difficultés pour signer leur formalité en ligne.  
 
-Les causes les plus fréquentes :
+Les causes fréquentes :  
 
-- Impossible de créer une **identité numérique**
-- Problème de **signature électronique**
-- Blocage technique sur le Guichet Unique
-- Dossier incomplet ou mal structuré
-- Difficulté à finaliser la procédure
+- Impossible de créer une **identité numérique**  
+- Problème de **signature électronique**  
+- Blocage technique sur le Guichet Unique  
+- Dossier incomplet ou mal structuré  
+- Difficulté à finaliser la procédure  
 
 ##### ⚠️ Sans signature, votre formalité ne peut pas être validée ni transmise aux administrations.
 
@@ -46,61 +48,60 @@ Les causes les plus fréquentes :
 
 ## Ce que comprend la prestation
 
-- Reprise de votre **synthèse PDF déjà générée**
-- Vérification rapide de cohérence des informations
-- Re-saisie complète de la formalité sur le Guichet Unique
-- Finalisation et dépôt du dossier
-- Suivi administratif jusqu’à validation ou rejet
-- Gestion des éventuelles demandes de régularisation
+- Reprise de votre **synthèse PDF déjà générée**  
+- Vérification rapide de cohérence des informations  
+- Re-saisie complète de la formalité sur le Guichet Unique  
+- Finalisation et dépôt du dossier  
+- Suivi administratif jusqu’à validation ou rejet  
+- Gestion des éventuelles demandes de régularisation  
 
 ---
 
 ## Déroulement de la procédure
 
-Vous transmettez votre **synthèse PDF** déjà générée depuis le Guichet Unique.
+Vous transmettez votre **synthèse PDF** générée depuis le Guichet Unique.  
 
 - MAF analyse votre dossier et vérifie les informations essentielles  
-- Une **facture vous est envoyée**  
-- Vous recevez un **mail de demande de pièces complémentaires** si nécessaire  
+- Envoi de la **facture**  
+- Demande de pièces complémentaires par mail si nécessaire  
 
-Après réception du paiement et des éléments :
+Après réception du paiement et des éléments :  
 
 - La formalité est reconstituée et finalisée  
-- Le dossier est déposé sur le **Guichet Unique**  
+- Dépôt du dossier sur le **Guichet Unique**  
 
-##### ⚠️ Le traitement débute uniquement après réception complète du dossier et du paiement
-
----
-
-## Tarifs et délai de traitement
-
-La prestation est proposée à partir de **39 € TTC**.
-
-À ce tarif s’ajoutent **5 € de frais de gestion administrative**.
-
-Ces frais permettent de couvrir les éventuelles régularisations demandées par les organismes valideurs.
-
-MAF prend en charge ces régularisations dans la limite de **10 € par formalité**.
+##### ⚠️ Le traitement débute uniquement après réception complète du dossier et du paiement.
 
 ---
 
-### Délais
+## Tarifs
 
-Le délai moyen est d’environ **48 heures** après réception complète :
+✔ Prestation MAF : **39 € TTC**  
+✔ Frais de gestion administrative* : **5 €**  
 
-- du paiement  
-- de la synthèse PDF  
-- des informations nécessaires  
+Total : **44 € TTC**
+
+👉 [Finalisez votre formalité →](/forms/signature/entrepreneur)
+
+##### *Ces frais couvrent les éventuelles régularisations demandées par les organismes valideurs
+
+---
+
+## Délais
+
+⏱️ Traitement MAF : environ **48h**
+
+⚠️ Les délais des administrations ne sont pas inclus.
 
 ---
 
 ## Responsabilité et informations fournies
 
-La formalité est réalisée sur la base des informations transmises par le client.
+La formalité est réalisée sur la base des informations transmises par le client.  
 
-##### ⚠️ Le client reste responsable de l’exactitude des informations fournies.
+##### ⚠️ Le client reste responsable de l’exactitude des informations fournies.  
 
-MAF intervient uniquement pour :
+MAF intervient uniquement pour :  
 
 - la mise en forme  
 - la saisie  
@@ -110,38 +111,37 @@ MAF intervient uniquement pour :
 
 ## Suivi et régularisation
 
-MAF assure le suivi administratif du dossier.
+MAF assure le suivi administratif du dossier.  
 
-En cas de demande de régularisation :
-
-- traitement dans la limite de la prestation  
-- accompagnement pour fournir les éléments nécessaires  
+- Traitement des demandes de régularisation dans la limite de la prestation  
+- Accompagnement pour fournir les éléments nécessaires  
 
 ---
 
 ## ⚠️ Rejet du dossier
 
-En cas de rejet :
+En cas de rejet :  
 
-- la formalité est considérée comme traitée  
-- aucune nouvelle procédure ne sera engagée sans nouvelle commande  
-
-Aucun remboursement ne pourra être effectué conformément aux CGV.
+- La formalité est considérée comme **traitée**  
+- Aucune nouvelle procédure ne sera engagée sans **nouvelle commande**  
+- Aucun remboursement ne pourra être effectué conformément aux CGV  
 
 ---
 
 ## Pourquoi choisir Mon Assistant Formalités ?
 
-- Solution rapide en cas de blocage  
-- Gain de temps immédiat  
-- Évite les erreurs techniques fréquentes  
-- Accompagnement simple et clair  
-- Service 100 % en ligne  
+✔ Solution rapide en cas de blocage  
+✔ Gain de temps immédiat  
+✔ Évite les erreurs techniques fréquentes  
+✔ Accompagnement simple et clair  
+✔ Service 100 % en ligne  
+
+👉 [Finalisez votre formalité →](/forms/signature/entrepreneur)
 
 ---
 
-## Vous êtes bloqué à la signature INPI ?
+## 🚀 Finalisez votre formalité sans blocage
 
-Ne perdez plus de temps avec les problèmes techniques.
-
-Confiez la finalisation de votre formalité et assurez-vous qu’elle soit correctement déposée.
+✔ Dossier complet et conforme  
+✔ Accompagnement personnalisé  
+✔ Réponse sous 48h  

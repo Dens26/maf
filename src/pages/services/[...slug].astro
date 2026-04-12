@@ -22,6 +22,7 @@ if (seoImage && !seoImage.startsWith('http')) {
   const siteUrl = import.meta.env.SITE || 'https://exemple.com';
   seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
 }
+
 ---
 
 {entry ? (

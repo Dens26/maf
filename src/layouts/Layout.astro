@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 import { SEO, siteConfig } from '../data/config';
-import 'aos/dist/aos.css';
 import { themeSetting } from '../data/config';
 const { theme } = themeSetting;
 
@@ -31,7 +30,7 @@ const { title, description, image, footerCta, canonicalUrl } = Astro.props;
 
 const pageTitle = title ? `${title} ${Separator} ${SiteName}` : SiteName;
 const pageDescription = description || defaultDescription || '';
-const pageImage = image || '';
+const pageImage = image || '/images/mail-entete.jpg';
 const canonicalPath = canonicalUrl || Astro.url.pathname;
 const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
 ---
@@ -72,116 +71,114 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
         <meta property="twitter:description" content={pageDescription} />
         {pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
 
-<!-- Tarteaucitron.js + Google Analytics -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/css/tarteaucitron.css" />
+        <!-- Tarteaucitron.js + Google Analytics -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/css/tarteaucitron.css" />
+        <script is:inline>
+            (function () {
+                const tarteScript = document.createElement('script');
+                tarteScript.src = 'https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/tarteaucitron.min.js';
+                tarteScript.async = true;
+                tarteScript.onload = function () {
+                    const langScript = document.createElement('script');
+                    langScript.src = 'https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/lang/tarteaucitron.fr.js';
+                    langScript.async = true;
+                    langScript.onload = function () {
+                        window.tarteaucitronForceLanguage = 'fr';
+                        tarteaucitron.init({
+                            privacyUrl: '/legal/politique-de-confidentialite',
+                            bodyPosition: 'bottom',
+                            hashtag: '#tarteaucitron',
+                            cookieName: 'tarteaucitron',
+                            orientation: 'bottom',
+                            groupServices: false,
+                            showAlertSmall: false,
+                            cookieslist: true,
+                            closePopup: false,
+                            showIcon: false,
+                            adblocker: false,
+                            DenyAllCta: true,
+                            AcceptAllCta: true,
+                            highPrivacy: true,
+                            handleBrowserDNTRequest: false,
+                            removeCredit: false,
+                            moreInfoLink: true,
+                            useExternalCss: true,
+                            useExternalJs: true,
+                            cookieDuration: 30,
+                        });
 
-<script is:inline>
-(function() {
-    // Charger le script principal Tarteaucitron
-    const tarteScript = document.createElement('script');
-    tarteScript.src = 'https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/tarteaucitron.min.js';
-    tarteScript.async = true;
-
-    tarteScript.onload = function() {
-        // Charger la langue FR
-        const langScript = document.createElement('script');
-        langScript.src = 'https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/lang/tarteaucitron.fr.js';
-        langScript.async = true;
-
-        langScript.onload = function() {
-            window.tarteaucitronForceLanguage = 'fr';
-
-            // Initialisation
-            tarteaucitron.init({
-                privacyUrl: '/legal/politique-de-confidentialite',
-                bodyPosition: 'bottom',
-                hashtag: '#tarteaucitron',
-                cookieName: 'tarteaucitron',
-                orientation: 'bottom',
-                groupServices: false,
-                showAlertSmall: false,
-                cookieslist: true,
-                closePopup: false,
-                showIcon: false,
-                adblocker: false,
-                DenyAllCta: true,
-                AcceptAllCta: true,
-                highPrivacy: true,
-                handleBrowserDNTRequest: false,
-                removeCredit: false,
-                moreInfoLink: true,
-                useExternalCss: true,
-                useExternalJs: true,
-                cookieDuration: 30,
-            });
-
-            // Google Analytics via Tarteaucitron
-            tarteaucitron.services.gtag = {
-                key: 'gtag',
-                type: 'analytic',
-                name: 'Google Analytics',
-                uri: 'https://policies.google.com/privacy',
-                needConsent: true,
-                cookies: ['_ga', '_gat', '_gid'],
-                js: function() {
-                    // Charger GA
-                    const gaScript = document.createElement('script');
-                    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-DKCG2RRGB2';
-                    gaScript.async = true;
-                    document.head.appendChild(gaScript);
-
-                    // Définir window.gtag
-                    window.dataLayer = window.dataLayer || [];
-                    window.gtag = function() { dataLayer.push(arguments); };
-                    gtag('js', new Date());
-                    gtag('config', 'G-DKCG2RRGB2', { anonymize_ip: true });
-
-                    // Wrapper pour événements boutons
-                    window.tarteGtagEvent = function(eventName, params) {
-                        if (window.gtag) {
-                            gtag('event', eventName, params);
-                        } else {
-                            console.warn('GA non chargé, événement ignoré', eventName);
-                        }
+                        tarteaucitron.services.gtag = {
+                            key: 'gtag',
+                            type: 'analytic',
+                            name: 'Google Analytics',
+                            uri: 'https://policies.google.com/privacy',
+                            needConsent: true,
+                            cookies: ['_ga', '_gat', '_gid'],
+                            js: function () {
+                                const gaScript = document.createElement('script');
+                                gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-DKCG2RRGB2';
+                                gaScript.async = true;
+                                document.head.appendChild(gaScript);
+                                window.dataLayer = window.dataLayer || [];
+                                window.gtag = function () {
+                                    dataLayer.push(arguments);
+                                };
+                                gtag('js', new Date());
+                                gtag('config', 'G-DKCG2RRGB2', { anonymize_ip: true });
+                            },
+                        };
+                        (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
                     };
-                },
-            };
+                    document.head.appendChild(langScript);
+                };
+                document.head.appendChild(tarteScript);
+            })();
+        </script>
 
-            (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
+        <!-- Pixel Meta -->
+        <script is:inline>
+            !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1744861786879723');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1" src="https://www.facebook.com/tr?id=1744861786879723&ev=PageView&noscript=1" />
+        </noscript>
 
-            // Ajouter gestion des boutons après DOM
-            document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('[data-analytics]').forEach((btn) => {
-                    btn.addEventListener('click', () => {
-                        const label = btn.getAttribute('data-analytics');
-                        if (window.tarteGtagEvent) {
-                            window.tarteGtagEvent('click', {
-                                event_category: 'Bouton',
-                                event_label: label,
-                                value: 1,
-                            });
-                        }
-                    });
-                });
-            });
-
-        };
-        document.head.appendChild(langScript);
-    };
-
-    document.head.appendChild(tarteScript);
-})();
-</script>
+        <!-- AOS CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+        <!-- AOS JS -->
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
     </head>
+
     <body data-theme={theme}>
         <Header />
         <slot />
         <Footer {footerCta} />
         <ThemeSwitcher />
 
-        <script>
-            import AOS from 'aos';
-            AOS.init({ duration: 800, once: true });
+        <!-- Init AOS après DOMContentLoaded -->
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof AOS !== 'undefined' && AOS.init) {
+                    AOS.init({ duration: 800, once: true });
+                }
+            });
         </script>
     </body>
 </html>

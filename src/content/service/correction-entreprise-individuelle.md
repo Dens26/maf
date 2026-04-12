@@ -22,124 +22,101 @@ seo:
 
 # Corriger les données erronées d'une entreprise individuelle
 
-Des erreurs peuvent apparaître sur votre fiche d’entreprise : **adresse incorrecte, activité inexacte, nom mal orthographié…**  
-Ces inexactitudes peuvent porter préjudice à votre activité.  
+Des erreurs sur votre fiche entreprise peuvent compliquer vos démarches : **adresse incorrecte, activité mal définie, nom mal orthographié…**  
+Avec **Mon Assistant Formalités (MAF)**, bénéficiez d’une **correction rapide et encadrée**, pour que vos informations officielles soient exactes et sécurisées.
 
-Avec **Mon Assistant Formalités (MAF)**, obtenez une **correction rapide et encadrée** de ces données officielles.
+👉 [Corrigez vos données sur le RNE →](/forms/correction/entrepreneur)
 
 ---
 
-## Pourquoi une déclaration est nécessaire ?
+## Pourquoi corriger votre fiche RNE ?
 
-Les informations figurant sur le RNE sont **publiques et utilisées par de nombreux acteurs** : clients, fournisseurs, banques, administrations…  
+Les données figurant sur le RNE sont **publiques et consultées par clients, fournisseurs, banques et administrations**.  
+MAF vous aide à :
 
-En tant que **mandataire spécialisé**, MAF veille à :  
+- Rétablir la **conformité des informations**  
+- Éviter des démarches **longues et complexes**  
+- Suivre le dossier jusqu’à sa validation  
 
-- Rétablir la conformité de vos données  
-- Vous éviter les démarches longues et techniques  
-- Suivre la demande jusqu’à sa validation  
-
-Cette démarche garantit la **validité de vos documents administratifs** (avis de situation, attestation d’immatriculation, etc.) et la conformité de votre fiche entreprise.  
-
-Un oubli ou une déclaration incorrecte peut entraîner :  
-- Des **courriers envoyés à la mauvaise adresse**  
-- Un **rejet d'une demande de prestation ou d'aide**  
-- Des **sanctions administratives** en cas de contrôle  
-
-##### ⚠️ Sans mise à jour, certaines démarches (comme la clôture d’activité ou la modification d’objet) peuvent devenir plus complexes.
+Sans mise à jour, certaines démarches (comme la clôture d’activité ou la modification d’objet) peuvent devenir plus compliquées.
 
 ---
 
 ## Ce que comprend la prestation
 
-- Analyse de la **donnée erronée** et des justificatifs nécessaires  
-- Constitution du **dossier conforme** au Guichet Unique  
-- Transmission et suivi du dépôt auprès de l'INPI  
-- Réponse à vos questions tout au long de la procédure
+- Analyse des données erronées et des justificatifs  
+- Constitution d’un **dossier conforme**  
+- Transmission et suivi auprès de l’INPI  
+- Support et réponses à vos questions pendant toute la procédure  
 
 ---
 
 ## Déroulement de la procédure
 
-Vous complétez vos informations directement via le formulaire en ligne :  
+1. Vous remplissez le formulaire en ligne.  
+2. Un **PDF récapitulatif** est généré pour vérification.  
+3. MAF contrôle les informations et prépare le dossier.  
+4. Après validation :  
+   - Envoi de la **facture**  
+   - Début du traitement **après réception complète du paiement**  
+5. MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à validation.  
 
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier à MAF  
-- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier  
-
-Après validation des informations par nos soins :  
-
-- Une **facture vous est envoyée**, et le traitement de la formalité commence **après règlement complet**  
-- Une fois le paiement validé, MAF dépose le dossier auprès du Guichet Unique et assure le **suivi complet** jusqu’à sa validation  
-
-##### ⚠️ Aucun frais supplémentaire n’est requis pour cette formalité et aucune délégation de paiement n’est appliquée.
+##### ⚠️ Aucun frais supplémentaire n’est requis pour cette formalité.  
 
 ---
 
-## Tarifs et délai de traitement
+## Tarifs
 
-La prestation d’accompagnement administratif est proposée à partir de **39 € TTC**.  
+✔ Prestation d’accompagnement : **39 € TTC**  
 
-- Ce tarif couvre uniquement **la prestation d’accompagnement et de constitution du dossier**  
+👉 [Corrigez vos données sur le RNE →](/forms/correction/entrepreneur)
 
-Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète des documents.  
+---
 
-##### ⚠️ Ce délai correspond uniquement au traitement par MAF et ne comprend pas le temps de traitement par l'INPI.
+## Délais
+
+⏱️ Traitement MAF : environ **48h**
+
+⚠️ Les délais des administrations ne sont pas inclus.
 
 ---
 
 ## Suivi et régularisation
 
-MAF gère personnellement le **suivi de votre dossier** jusqu’à sa validation ou son rejet final par l’administration.
+MAF assure le **suivi complet du dossier** jusqu’à validation ou rejet.  
 
-### Rejet définitif
+### En cas de rejet définitif
 
-En cas de **rejet définitif du dossier** :  
-
-- La formalité est considérée comme **clôturée**  
-- Aucune nouvelle procédure ne sera engagée sans commande distincte  
-- **Aucun remboursement** ne pourra être effectué  
-- **MAF ne pourra être tenu responsable**, que le rejet résulte d’informations inexactes ou incomplètes fournies par le déclarant ou de décisions, délais ou actions de l'INPI
+- Dossier clôturé  
+- Nouvelle procédure uniquement sur commande distincte  
+- **Pas de remboursement**  
+- MAF n’est **pas responsable** des décisions ou délais de l’INPI  
 
 ---
 
-## Éléments reçus après validation ou refus
+## Éléments reçus après traitement
 
-Une fois la demande traitée :  
+- **Validation** : synthèse définitive + attestation d’immatriculation mise à jour  
+- **Refus** : retour administratif détaillant le motif  
 
-- **En cas de validation** :  
-  - Votre synthèse version définitive  
-  - Une **attestation d’immatriculation mise à jour au RNE**  
-
-- **En cas de refus** :  
-  - Un retour vous informant de l'objet du rejet  
-
-#### ⚠️ MAF peut vous accompagner pour comprendre les retours éventuels, mais **n’est pas responsable en cas de refus**  
-##### ⚠️ Aucune nouvelle tentative ne sera engagée sans **nouvelle commande**
+⚠️ MAF peut accompagner pour comprendre le retour mais **ne garantit pas le résultat**.
 
 ---
 
 ## Pourquoi choisir Mon Assistant Formalités ?
 
-- Un **interlocuteur unique** pour un suivi personnalisé  
-- Une **démarche claire, expliquée** à chaque étape  
-- Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
-- Aucun abonnement, aucun frais caché : **tarif unique clair dès le départ**  
-- Accompagnement humain, basé en France
+✔ Interlocuteur unique et suivi personnalisé  
+✔ Démarche claire et expliquée à chaque étape  
+✔ Vérification pour éviter les erreurs fréquentes  
+✔ Aucun abonnement ni frais cachés  
+✔ Service humain et basé en France  
+
+👉 [Corrigez vos données sur le RNE →](/forms/correction/entrepreneur)
 
 ---
 
-## Note importante
+## 🚀 Corrigez vos informations rapidement
 
-En remplissant le formulaire et en passant commande :  
-
-- vous reconnaissez avoir pris connaissance de nos [Conditions Générales de Vente](/legal/conditions-generales-de-vente)
-
-Avant l’envoi du formulaire, le déclarant doit obligatoirement cocher la case suivante :  
-
-> *« Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les Conditions Générales de Mon Assistant Formalités. Je consens à ce que ma demande soit transmise pour traitement. »*
-
-La validation de cette case constitue un **engagement ferme** :  
-
-- Le traitement de la formalité débute **après réception complète du formulaire et du paiement**  
-- Aucun remboursement ne pourra être demandé, même en cas d’annulation par le client  
-- Le client accepte expressément que MAF puisse gérer les régularisations administratives dans les limites prévues par les [CGV](/legal/conditions-generales-de-vente)
+✔ Données conformes et sécurisées  
+✔ Suivi personnalisé  
+✔ Réponse sous 48h

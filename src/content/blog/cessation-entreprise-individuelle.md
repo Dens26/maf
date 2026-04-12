@@ -2,7 +2,7 @@
 title: "Cesser son entreprise"
 excerpt: "Vous souhaitez arrêter votre activité indépendante ? Découvrez comment radier correctement votre entreprise individuelle."
 featuredImage: "./images/closed.jpg"
-publishDate: "2026-03-14"
+publishDate: "2026-03-28"
 publish: true
 categories: ["Formalities"]
 

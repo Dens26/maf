@@ -22,206 +22,135 @@ seo:
 
 # Cessation d'une entreprise individuelle
 
-Mettre fin à une activité professionnelle nécessite une **déclaration officielle de cessation d’activité** auprès des organismes compétents.  
-Avec **Mon Assistant Formalités (MAF)**, soyez accompagné pour **fermer votre entreprise en toute sérénité**, sans erreurs ni démarches interminables.
+Fermer une entreprise peut vite devenir complexe :  
+- obligations administratives à respecter  
+- documents à fournir aux différents organismes  
+- risque de rejets ou erreurs dans le dossier
+
+Avec **Mon Assistant Formalités (MAF)**, vous déléguez vos formalités pour **cesser votre activité sans stress et sans erreur**.
+
+👉 [Cessez votre entreprise rapidement →](/forms/cessation/entrepreneur)
 
 ---
 
-## Pourquoi une déclaration est nécessaire ?
+## Pourquoi déclarer la cessation ?
 
-La déclaration de **cessation d’activité est obligatoire** pour toute entreprise individuelle.  
+La déclaration de cessation est **obligatoire** pour informer les registres officiels (RNE, SIRENE) et mettre fin à vos obligations administratives et fiscales.  
 
-Elle permet d’informer les registres officiels (RNE, SIRENE) de l’arrêt de votre activité et de **mettre fin à vos obligations administratives liées à l’entreprise**.  
+Sans déclaration :  
+- votre entreprise peut rester **active dans les registres officiels**  
+- vous pourriez recevoir **des courriers administratifs ou fiscaux**  
+- certaines obligations sociales ou fiscales peuvent se **maintenir indûment**
 
-Une absence de déclaration peut entraîner :  
-- Le maintien de votre entreprise comme **active dans les registres officiels**  
-- La **réception de courriers administratifs ou fiscaux**  
-- Des **obligations fiscales ou sociales maintenues** (cotisations, déclarations, etc.)
-
-##### ⚠️ Sans déclaration officielle, votre entreprise peut continuer d’être considérée comme active par l’administration.
+##### ⚠️ La déclaration officielle protège votre responsabilité et clôture administrativement votre activité.
 
 ---
 
 ## Ce que comprend la prestation
 
-- Vérification de la **situation de votre entreprise** avant la cessation  
-- Constitution du **dossier complet** pour le Guichet Unique  
-- Préparation et transmission de la formalité auprès des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.)  
-- Suivi du dossier administratif  
-- Réponse à vos questions tout au long de la procédure
+- Vérification de votre **situation avant cessation**  
+- Constitution du **dossier complet**  
+- Transmission aux organismes (INSEE, Greffe, CMA, MSA…)  
+- Suivi administratif complet  
+- Réponses à vos questions tout au long de la procédure
 
 ---
 
 ## Déroulement de la procédure
 
-Vous complétez vos informations directement via le formulaire en ligne.  
+1. Remplissez vos informations via le formulaire en ligne  
+2. Génération d’un **PDF récapitulatif** pour validation  
+3. Réception d’un **mail de confirmation** et vérification par MAF  
+4. Après validation :  
+   - Envoi de la **facture**  
+   - Demande des **pièces justificatives** nécessaires  
+5. Une fois le paiement et documents reçus :  
+   - Préparation du dossier  
+   - Dépôt sur le **Guichet Unique**  
 
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier à MAF  
-- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier
+En cas de documents manquants, une **demande complémentaire** vous sera envoyée.
 
-Après validation des informations par nos soins :  
-
-- Une **facture vous est envoyée**  
-- Vous recevez également un **mail de demande de pièces justificatives** (procuration, pièce d’identité, justificatif d’adresse, etc.)
-
-Une fois le paiement validé et les documents reçus :  
-
-- MAF prépare le dossier administratif  
-- La formalité est déposée sur le **Guichet Unique**
-
-Si certaines informations ou documents sont manquants, vous recevrez un **mail de demande de pièces complémentaires**.
-
-##### ⚠️ Le traitement de la formalité ne commence **qu’après règlement complet**
+##### ⚠️ Le traitement commence uniquement après **réception complète du paiement et des documents**.
 
 ---
 
-## Tarifs et délai de traitement
+## Tarifs
 
-La prestation d’accompagnement administratif est proposée à partir de **39 € TTC**.
+✔ Prestation MAF : **39 € TTC**  
+✔ Frais de gestion administrative* : **5 €**  
 
-À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.  
+**Total : 44 € TTC**
 
-Ces frais de gestion permettent de couvrir d’éventuelles **régularisations administratives demandées par les organismes valideurs** (Greffe, CMA, MSA, etc.).  
+👉 [Cessez votre entreprise rapidement →](/forms/cessation/entrepreneur)
 
-MAF prend en charge ces régularisations **dans la limite de 10 € par formalité**.
-
-**Exemple :**
-
-- 39 € pour la prestation d’accompagnement administratif  
-- 5 € de frais de gestion administrative  
-
-**Total facturé : 44 € TTC**
-
-##### ⚠️ Les frais de gestion administrative sont non remboursables, même si aucune régularisation n’est nécessaire.
+##### *Ces frais couvrent les régularisations éventuelles demandées par les organismes valideurs.
 
 ---
 
-### Frais administratifs officiels
+## Frais administratifs officiels
 
-Certaines formalités peuvent entraîner des **frais administratifs demandés par les administrations** (INPI, Greffe, CMA, MSA, etc.).  
+Certains organismes (INPI, Greffe, CMA…) peuvent appliquer des frais :  
 
-Ces frais :  
+- fixés par l’administration  
+- non inclus dans la prestation MAF  
+- à la charge du client  
 
-- sont **fixés par les organismes publics**  
-- ne sont **pas inclus dans la prestation MAF**  
-- restent **entièrement à la charge du client**  
-
-Les tarifs indicatifs peuvent être consultés sur le site officiel du Guichet Unique :  
 [Consulter les tarifs officiels](https://formalites.entreprises.gouv.fr/tarifs.php)
 
 ---
 
-### Paiement des frais administratifs (Guichet Unique)
+## Paiement des frais administratifs
 
-Lorsque la formalité nécessite le paiement de frais administratifs :  
+- MAF peut utiliser la **délégation de paiement** du Guichet Unique  
+- Une **demande de paiement** est envoyée directement au client  
+- Paiement à effectuer via le **compte INPI**  
 
-- MAF peut utiliser le système de **délégation de paiement du Guichet Unique**  
-- une **demande de paiement est envoyée directement au client**  
+MAF ne perçoit pas ces paiements et n’intervient pas dans leur gestion.
 
-Le client devra alors :  
-
-- se connecter à son **compte INPI**, ou en créer un si nécessaire  
-- procéder directement au **paiement des frais administratifs**
-
-MAF **ne perçoit pas ces paiements** et **n’intervient pas dans leur gestion**.  
-
-Pour comprendre le fonctionnement :  
-[Consulter l'explication de la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
-
-##### ⚠️ La formalité ne peut pas être finalisée tant que ces frais ne sont pas réglés.
+[Explications sur la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
 
 ---
 
-### Délais de traitement
+## Délais
 
-Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète :  
+⏱️ Traitement MAF : environ **48h**
 
-- du paiement  
-- des documents nécessaires  
-- des informations correctes
-
-##### ⚠️ Ce délai correspond uniquement au traitement par MAF et n’inclut pas les délais des administrations.
+⚠️ Les délais des administrations ne sont pas inclus.
 
 ---
 
-## Suivi et régularisation
+## Suivi du dossier
 
-MAF assure le **suivi administratif du dossier** jusqu’à sa validation ou son rejet par l’administration.  
+MAF assure le **suivi complet du dossier** jusqu’à validation ou rejet par l’administration.  
 
-Les demandes de régularisation éventuelles peuvent provenir des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.).  
-
-MAF traite ces demandes dans la limite de la prestation prévue.
+Les régularisations éventuelles sont prises en charge dans la limite de la prestation.
 
 ---
 
-## ⚠️ Rejet définitif du dossier
+## ⚠️ Informations importantes
 
-En cas de **rejet définitif par l’administration** :  
+- Le traitement débute après réception du paiement et des documents  
+- Les informations fournies restent sous votre responsabilité  
+- En cas de rejet administratif, une nouvelle démarche peut être nécessaire  
 
-- la formalité est considérée comme **clôturée**  
-- aucune nouvelle procédure ne sera engagée sans **nouvelle commande**
-
-Conformément aux **Conditions Générales de Vente** :  
-
-- la prestation administrative reste **entièrement due**  
-- **aucun remboursement ne pourra être effectué**
-
-MAF ne peut être tenu responsable si le rejet résulte :  
-
-- d’informations incorrectes ou incomplètes fournies par le client  
-- d’une décision administrative  
-- des règles appliquées par les organismes valideurs
-
-##### ⚠️ Certains organismes peuvent rembourser leurs propres frais en cas de rejet. Ces remboursements sont gérés directement par l’administration concernée.
-
----
-
-## Éléments reçus après traitement du dossier
-
-### En cas de validation
-
-- votre **synthèse définitive**  
-- une **attestation de radiation du RNE**  
-- un **avis de situation SIRENE** indiquant la cessation d’activité (si disponible)
-
-### En cas de refus
-
-- un retour administratif indiquant le **motif du rejet**
-
----
-
-### ⚠️ Attention
-
-En cas de **diffusion restreinte dans le répertoire SIRENE**, l’avis de situation devra être téléchargé directement depuis votre espace personnel.  
-
-MAF peut vous accompagner pour comprendre les retours administratifs mais **ne peut être tenu responsable des décisions prises par les administrations**.
-
-##### ⚠️ Aucune nouvelle tentative ne sera engagée sans **nouvelle commande**.
+👉 Voir les détails dans nos [Conditions Générales de Vente](/legal/conditions-generales-de-vente)
 
 ---
 
 ## Pourquoi choisir Mon Assistant Formalités ?
 
-- Un **interlocuteur unique** pour un suivi personnalisé  
-- Une **démarche claire et expliquée** à chaque étape  
-- Vérification des informations pour éviter les erreurs fréquentes (activité, justificatifs, fiscalité, etc.)  
-- Aucun abonnement, aucun frais caché : **tarif unique clair dès le départ**  
-- Service basé en France
+✔ Un interlocuteur unique  
+✔ Accompagnement personnalisé  
+✔ Dossier conforme et sécurisé  
+✔ Tarif clair, sans abonnement  
+✔ Service basé en France
+
+👉 [Cessez votre entreprise rapidement →](/forms/cessation/entrepreneur)
 
 ---
 
-## Note importante
+## 🚀 Cessez votre entreprise sans stress
 
-En remplissant le formulaire et en passant commande :  
-
-- vous reconnaissez avoir pris connaissance de nos [Conditions Générales de Vente](/legal/conditions-generales-de-vente)
-
-Avant l’envoi du formulaire, le déclarant doit obligatoirement cocher la case suivante :  
-
-> *« Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les Conditions Générales de Mon Assistant Formalités. Je consens à ce que ma demande soit transmise pour traitement. »*
-
-La validation de cette case constitue un **engagement ferme** :  
-
-- Le traitement de la formalité débute **après réception complète du formulaire et du paiement**  
-- Aucun remboursement ne pourra être demandé, même en cas d’annulation par le client  
-- Le client accepte expressément que MAF puisse gérer les régularisations administratives dans les limites prévues par les [CGV](/legal/conditions-generales-de-vente)
+✔ Dossier conforme  
+✔ Accompagnement personnalisé  
+✔ Réponse sous 48h  

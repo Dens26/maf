@@ -2,7 +2,7 @@
 title: "Obligations administratives"
 excerpt: "Découvrez les principales obligations administratives qu'un entrepreneur individuel doit respecter chaque année."
 featuredImage: "./images/administration.jpg"
-publishDate: "2026-03-14"
+publishDate: "2026-03-10"
 publish: true
 categories: ["Formalities"]
 

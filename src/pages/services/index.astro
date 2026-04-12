@@ -5,6 +5,7 @@ import ServiceGrid from '@components/sections/serviceGrid.astro';
 
 const seoTitle = "Services";
 const seoDescription = "Listes des services proposés";
+const image = '/images/services.jpg';
 
 const heroContent = {
     title: "Services",
@@ -13,7 +14,7 @@ const heroContent = {
 
 ---
 
-<Layout title={seoTitle} description={seoDescription}>
+<Layout title={seoTitle} description={seoDescription} image={image}>
     <InnerHero content={heroContent}  />
     <ServiceGrid padding='responsive'/>
 </Layout>

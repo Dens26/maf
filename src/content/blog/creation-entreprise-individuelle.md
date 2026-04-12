@@ -2,7 +2,7 @@
 title: "Créer son entreprise"
 excerpt: "Découvrez comment créer votre entreprise individuelle et choisir entre micro-entreprise ou régime réel."
 featuredImage: "./images/create-company.jpg"
-publishDate: "2026-03-14"
+publishDate: "2026-03-12"
 publish: true
 categories: ["Formalities"]
 

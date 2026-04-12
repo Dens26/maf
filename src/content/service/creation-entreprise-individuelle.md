@@ -1,7 +1,7 @@
 ---
 name: "Création d’entreprise"
 description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
-icon: "/images/create-company.jpg"
+icon: "https://www.mon-assistant-formalites.fr/images/create-company.jpg"
 category: "Formalités de création"
 priceRange: "à partir de 49€"
 duration: "48h en moyenne"
@@ -9,7 +9,7 @@ order: 1
 publish: true
 
 link: "/forms/create/entrepreneur"
-text: "Commencer ma création"
+text: "Créer mon entreprise"
 ariaLabel: "Créer une entreprise individuelle en ligne"
 title: "Créer une entreprise individuelle"
 price: "49"
@@ -22,204 +22,134 @@ seo:
 
 # Création d’entreprise individuelle
 
-Créer une entreprise individuelle implique de réaliser plusieurs formalités administratives auprès du Guichet Unique de l’INPI.
-Avec **Mon Assistant Formalités (MAF)**, mandataire INPI, bénéficiez d’un **accompagnement clair et complet** pour démarrer votre activité en toute sérénité.
+Créer son entreprise peut vite devenir complexe :
+- choix du régime (micro ou réel)
+- erreurs dans la déclaration
+- dossier refusé ou bloqué
+
+Avec **Mon Assistant Formalités (MAF)**, vous déléguez vos formalités pour créer votre entreprise **sans erreur et sans stress**.
+
+👉 [Créer mon entreprise sans erreur →](/forms/create/entrepreneur)
 
 ---
 
 ## Pourquoi créer une entreprise individuelle ?
 
-Pour devenir **auto-entrepreneur** (ou micro-entrepreneur), vous devez obligatoirement effectuer une **déclaration de début d’activité** auprès du Guichet Unique.
-La création d’une entreprise individuelle concerne aussi les auto-entrepreneurs (micro-entrepreneurs), soumis à une déclaration de début d’activité.
+Pour devenir auto-entrepreneur (micro-entrepreneur), vous devez effectuer une déclaration de début d’activité via le Guichet Unique.
 
-- Cette formalité permet d’obtenir votre **numéro SIRET**, indispensable pour exercer légalement votre activité (artisanale, commerciale ou libérale).
+Cette formalité permet d’obtenir votre **SIRET**, indispensable pour exercer légalement votre activité.
 
 ---
 
 ## Ce que comprend la prestation
 
-- Vérification des informations envoyées via le formulaire de création interne
-- Constitution du **dossier complet** pour le Guichet Unique  
-- Préparation et transmission de la formalité auprès des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.)
-- Suivi du dossier administratif
-- Réponse à vos questions tout au long de la procédure
+- Vérification des informations transmises  
+- Constitution du **dossier complet**  
+- Préparation et transmission auprès des organismes (INSEE, Greffe, CMA, MSA…)  
+- Suivi du dossier administratif  
+- Réponse à vos questions tout au long de la procédure  
 
 ---
 
 ## Déroulement de la procédure
 
-Vous complétez vos informations directement via le formulaire en ligne.
+Vous complétez vos informations via le formulaire en ligne.
 
-- Un PDF récapitulatif est généré pour **vérification et confirmation** avant l’envoi du dossier chez MAF.
-- Vous recevez un **mail de confirmation**, et MAF reçoit également ce PDF pour **contrôle et préparation** du dossier.
+- Génération d’un PDF récapitulatif pour validation  
+- Réception d’un mail de confirmation  
+- Vérification du dossier par MAF  
 
-Après validation des informations par nos soins :
+Après validation :
 
-- Une **facture vous est envoyée**
-- Vous recevez également un **mail de demande de pièces justificatives** (pièce d’identité, justificatif d’adresse, procuration si nécessaire, etc.)
+- Envoi de la facture  
+- Demande des pièces justificatives  
 
-Une fois le paiement validé et les documents reçus :
+Une fois le paiement et les documents reçus :
 
-- MAF prépare le dossier administratif
-- La formalité est déposée sur le **Guichet Unique**
+- Préparation du dossier  
+- Dépôt sur le Guichet Unique  
 
-Si certaines informations ou documents sont manquants, vous recevrez un **mail de demande de pièces complémentaires**.
+En cas d’éléments manquants, une demande complémentaire vous sera envoyée.
 
-##### ⚠️ Le traitement de la formalité ne commence **qu’après règlement complet**
+##### ⚠️ Le traitement débute uniquement après **réception complète du paiement et des documents**.
+---
+
+## Tarifs
+
+✔ Accompagnement complet : **49 € TTC**  
+✔ Frais de gestion administrative* : **5 €**  
+
+Total : **54 € TTC**
+
+👉 [Créer mon entreprise sans erreur →](/forms/create/entrepreneur)
+##### *Ces frais couvrent les régularisations éventuelles demandées par les organismes valideurs.
 
 ---
 
-## Tarifs et délai de traitement
+## Frais administratifs officiels
 
-La prestation d’accompagnement administratif est proposée à partir de **49 € TTC**.
+Certains organismes (INPI, Greffe, CMA…) peuvent appliquer des frais :  
 
-À ce tarif s’ajoutent **5 € de frais de gestion administrative**, appliqués à chaque formalité.
-
-Ces frais de gestion permettent de couvrir d’éventuelles **régularisations administratives demandées par les organismes valideurs** (Greffe, CMA, MSA, etc.).
-
-Mon Assistant Formalités prend en charge ces régularisations **dans la limite de 10 € par formalité**.
-
-**Exemple :**
-
-- 49 € pour la prestation d’accompagnement administratif  
-- 5 € de frais de gestion administrative  
-
-**Total facturé : 54 € TTC**
-
-##### ⚠️ Les frais de gestion administrative sont non remboursables, même si aucune régularisation n’est nécessaire.
-
----
-
-### Frais administratifs officiels
-
-Certaines formalités peuvent entraîner des **frais administratifs demandés par les administrations** (INPI, Greffe, CMA, MSA, etc.).
-
-Ces frais :
-
-- sont **fixés par les organismes publics**
-- ne sont **pas inclus dans la prestation MAF**
-- restent **entièrement à la charge du client**
-
-Les tarifs indicatifs peuvent être consultés sur le site officiel du Guichet Unique :
+- fixés par l’administration  
+- non inclus dans la prestation MAF  
+- à la charge du client  
 
 [Consulter les tarifs officiels](https://formalites.entreprises.gouv.fr/tarifs.php)
 
 ---
 
-### Paiement des frais administratifs (Guichet Unique)
+## Paiement des frais administratifs
 
-Lorsque la formalité nécessite le paiement de frais administratifs :
+- MAF peut utiliser la **délégation de paiement** du Guichet Unique  
+- Une **demande de paiement** est envoyée directement au client  
+- Paiement à effectuer via le **compte INPI**  
 
-- MAF peut utiliser le système de **délégation de paiement du Guichet Unique**
-- une **demande de paiement est envoyée directement au client**
+MAF ne perçoit pas ces paiements et n’intervient pas dans leur gestion.
 
-Le client devra alors :
-
-- se connecter à son **compte INPI**
-- ou créer un compte si nécessaire
-- procéder directement au **paiement des frais administratifs**
-
-MAF **ne perçoit pas ces paiements** et **n’intervient pas dans leur gestion**.
-
-Pour comprendre le fonctionnement :
-
-[Consulter l'explication de la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
-
-##### ⚠️ La formalité ne peut pas être finalisée tant que ces frais ne sont pas réglés.
+[Explications sur la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
 
 ---
 
-### Délais de traitement
+## Délais
 
-Le délai moyen de traitement est d’environ **48 heures** à partir de la réception complète :
+⏱️ Traitement MAF : environ **48h**
 
-- du paiement
-- des documents nécessaires
-- des informations correctes
-
-##### ⚠️ Ce délai correspond uniquement au traitement par MAF et n’inclut pas les délais des administrations.
+⚠️ Les délais des administrations ne sont pas inclus.
 
 ---
 
-## Suivi et régularisation
+## Suivi du dossier
 
-MAF assure le **suivi administratif du dossier** jusqu’à sa validation ou son rejet par l’administration.
+MAF assure le suivi administratif jusqu’à validation ou retour de l’administration.
 
-Les demandes de régularisation éventuelles peuvent provenir des organismes valideurs (INSEE, Greffe, CMA, MSA, etc.).
-
-MAF traite ces demandes dans la limite de la prestation prévue.
+Les demandes de régularisation sont prises en charge dans le cadre de la prestation.
 
 ---
 
-## ⚠️ Rejet définitif du dossier
+## ⚠️ Informations importantes
 
-En cas de **rejet définitif par l’administration** :
+- Le traitement débute après réception du paiement et des documents  
+- Les informations fournies restent sous votre responsabilité  
+- En cas de rejet administratif, une nouvelle démarche peut être nécessaire  
 
-- la formalité est considérée comme **clôturée**
-- aucune nouvelle procédure ne sera engagée sans **nouvelle commande**
-
-Conformément aux **Conditions Générales de Vente** :
-
-- la prestation administrative reste **entièrement due**
-- **aucun remboursement ne pourra être effectué**
-
-MAF ne peut être tenu responsable si le rejet résulte :
-
-- d’informations incorrectes ou incomplètes fournies par le client
-- d’une décision administrative
-- des règles appliquées par les organismes valideurs
-
-##### ⚠️ Certains organismes peuvent rembourser leurs propres frais en cas de rejet. Ces remboursements sont gérés directement par l’administration concernée.
-
----
-
-## Éléments reçus après traitement du dossier
-
-Une fois la demande traitée par le Guichet Unique, vous recevrez :
-
-### En cas de validation
-
-- votre **synthèse définitive**
-- une **attestation d’immatriculation au RNE**
-- un **avis de situation SIRENE** (si disponible)
-- votre **numéro SIRET**
-
-### En cas de refus
-
-- un retour administratif indiquant le **motif du rejet**
-
----
-
-### ⚠️ Attention
-
-En cas de **diffusion restreinte dans le répertoire SIRENE**, l’avis de situation devra être téléchargé directement depuis votre espace personnel.
-
-MAF peut vous accompagner pour comprendre les retours administratifs mais **ne peut être tenu responsable des décisions prises par les administrations**.
+👉 Voir les détails dans nos [Conditions Générales de Vente](/legal/conditions-generales-de-vente)
 
 ---
 
 ## Pourquoi choisir Mon Assistant Formalités ?
 
-- Un **interlocuteur unique**
-- Un **accompagnement personnalisé**
-- Une procédure claire et expliquée
-- **Tarif transparent sans abonnement**
-- Service basé en France
+✔ Un interlocuteur unique  
+✔ Accompagnement personnalisé  
+✔ Dossier conforme et sécurisé  
+✔ Tarif clair, sans abonnement  
+✔ Service basé en France  
+
+👉 [Créer mon entreprise sans erreur →](/forms/create/entrepreneur)
 
 ---
 
-## Note importante
+## 🚀 Créez votre entreprise sans stress
 
-En remplissant le formulaire et en passant commande :
-
-- vous reconnaissez avoir pris connaissance de nos  
-[Conditions Générales de Vente](/legal/conditions-generales-de-vente)
-
-Avant l’envoi du formulaire, le déclarant doit obligatoirement cocher la case suivante :
-
-> *« Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les Conditions Générales de Mon Assistant Formalités. Je consens à ce que ma demande soit transmise pour traitement. »*
-
-La validation de cette case constitue un **engagement ferme** :  
-- Le traitement de la formalité débute **après réception complète du formulaire et du paiement**.  
-- Aucun remboursement ne pourra être demandé, même en cas d’annulation par le client.  
-- Le client accepte expressément que MAF puisse gérer les régularisations administratives dans les limites prévues par les [CGV](/legal/conditions-generales-de-vente)
+✔ Dossier conforme  
+✔ Accompagnement personnalisé  
+✔ Réponse sous 48h  
