@@ -9,7 +9,7 @@ order: 4
 publish: true
 
 link: "/forms/correction/entrepreneur"
-text: "Formulaire de correction des données RNE"
+text: "Formulaire de correction"
 ariaLabel: "Corriger les données erronées d'une entreprise individuelle en ligne"
 title: "Corriger les données erronées d'une entreprise"
 price: "39"
