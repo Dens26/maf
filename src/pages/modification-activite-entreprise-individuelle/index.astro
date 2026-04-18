@@ -1,0 +1,90 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/sections/Hero.astro';
+import SplitPanel from '@components/sections/SplitPanel.astro';
+import Features from '@components/sections/Features.astro';
+import Stats from '@components/sections/Stats.astro';
+import { featureLists } from '@data/features';
+import { statsLists } from '@data/stats';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import Faqs from '@components/sections/Faqs.astro';
+import { faqLists } from '@data/faqs';
+import heroImage from '@assets/images/home/activity1.jpg';
+import styleGuideImage from '@assets/images/home/advisor.jpg';
+
+const seoTitle = "Modification d’activité entreprise individuelle (EI) | Mandataire INPI";
+const seoDescription = "Modifiez l’activité de votre entreprise individuelle simplement et sans erreur avec un mandataire INPI. Dossier complet, conforme et accompagné.";
+
+const heroContent = {
+    title: 'Modifiez votre activité simplement et sans erreur',
+    description: 'Je vous accompagne dans la déclaration de modification de votre activité : préparation du dossier, vérification des informations et dépôt auprès de l’INPI.',
+    buttons: [
+        {text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "Hero_modify_cta_click", target: '_self'},
+    ],
+    backgroundImage: heroImage,
+    overlayOpacity: 0.25,
+};
+
+const featuresSection = {
+    eyebrow: 'Modification d’activité',
+    title: 'Une modification simple, rapide et conforme',
+    description: 'Je vous accompagne dans toutes les étapes de modification de votre activité : mise à jour du dossier, vérification des informations et déclaration auprès de l’INPI.',
+    features: featureLists.activity.features,
+    button: { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "Features_modify_cta_click", variant: 'primary' as const },
+};
+
+const styleGuideSection = {
+    eyebrow: 'Modification d’activité',
+    headline: 'Une modification encadrée, sans erreur et sans stress',
+    description: 'Changer ou ajouter une activité nécessite une déclaration conforme. Je vous accompagne à chaque étape pour éviter les erreurs et assurer la bonne prise en compte de votre modification par l’INPI.',
+    image: { src: styleGuideImage, alt: 'Modification d’activité entreprise individuelle - mise à jour du dossier' },
+    buttons: [
+        { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "styleguide_modify_cta_click", variant: 'primary' as const },
+    ],
+};
+
+const mainCta = {
+    eyebrow: 'Modification d’activité',
+    title: 'Mettez à jour votre activité simplement',
+    description: 'Je prends en charge votre déclaration de modification d’activité : préparation, vérification et dépôt auprès de l’INPI. Vous évitez les erreurs et gagnez du temps.',
+    button: { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "main_cta_modify_click", variant: 'primary' as const, target: '_self' as const },
+};
+
+const sideBySideStats = {
+    eyebrow: 'Modification d’activité',
+    title: 'Une mise à jour rapide et sécurisée',
+    description: 'Je vous accompagne dans la modification de votre activité pour garantir une déclaration conforme auprès de l’INPI.',
+    variant: 'side-by-side' as const,
+    stats: statsLists.activity.stats,
+    content: {
+        title: 'Une modification conforme dès le premier dépôt',
+        description: 'Je vérifie votre dossier avant envoi pour limiter les erreurs et assurer une prise en compte rapide de votre nouvelle activité.',
+    },
+};
+
+const faqsSection = {
+    eyebrow: "Modification d’activité",
+    title: 'Tout savoir avant de modifier votre activité',
+    description: 'Je réponds aux questions les plus fréquentes sur la modification d’activité et les démarches associées.',
+    faqs: faqLists.activity.faqs,
+};
+
+const FooterCta = {
+    eyebrow: "Modification d’activité",
+    title: 'Modifiez votre activité en toute simplicité',
+    description: 'Je vous accompagne dans la déclaration de modification de votre entreprise individuelle de A à Z : préparation du dossier, vérification et dépôt auprès de l’INPI.',
+    hideCta: false,
+    button: { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "footer_modify_cta_click", target: '_self' },
+};
+
+---
+
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='hades'>
+    <Hero content={heroContent} />
+    <Features content={featuresSection} padding="responsive" background="base" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />
+    <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <Stats content={sideBySideStats} background="dark" padding="responsive" />
+    <Faqs content={faqsSection} background="base" padding="responsive" />
+    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
+</Layout>

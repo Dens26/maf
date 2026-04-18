@@ -113,4 +113,58 @@ export const faqLists: Record<string, FaqList> = {
             }
         ]
     },
+    correction: {
+        id: 'correction',
+        faqs: [
+            {
+                question: "Qu’est-ce qu’une correction du RNE ?",
+                answer: "Il s’agit de rectifier une erreur ou une information inexacte enregistrée sur le Registre National des Entreprises afin de rendre votre dossier conforme."
+            },
+            {
+                question: "Pourquoi corriger une information sur le RNE ?",
+                answer: "Une erreur sur le RNE peut entraîner des incohérences administratives ou des blocages dans certaines démarches. La correction permet de sécuriser votre situation."
+            },
+            {
+                question: "Combien de temps prend une correction du RNE ?",
+                answer: "Une fois le dossier complet, la correction est transmise à l’INPI via le guichet unique. Le délai dépend ensuite de leur traitement et validation."
+            },
+            {
+                question: "Dois-je me déplacer pour corriger une erreur sur le RNE ?",
+                answer: "Non, tout se fait en ligne. Vous me transmettez les informations nécessaires et je m’occupe de la correction auprès de l’INPI."
+            },
+            {
+                question: "Que se passe-t-il si mon dossier est refusé ?",
+                answer: "Je vérifie votre dossier en amont pour limiter au maximum les risques de rejet et je vous accompagne en cas de demande de complément ou de correction."
+            }
+        ]
+    },
+    activity: {
+        id: 'activity',
+        faqs: [
+            {
+                question: "Comment modifier l’activité de mon entreprise individuelle ?",
+                answer: "La modification d’activité se fait via une déclaration sur le guichet unique de l’INPI. Je vous accompagne dans la préparation et le dépôt de votre dossier pour garantir sa conformité."
+            },
+            {
+                question: "Puis-je ajouter une nouvelle activité à mon entreprise ?",
+                answer: "Oui, vous pouvez ajouter une activité secondaire ou modifier votre activité principale. La démarche doit être déclarée pour être prise en compte officiellement."
+            },
+            {
+                question: "La modification d’activité est-elle obligatoire ?",
+                answer: "Oui, toute modification de votre activité doit être déclarée afin de maintenir votre situation administrative à jour et éviter toute incohérence."
+            },
+            {
+                question: "Combien de temps prend une modification d’activité ?",
+                answer: "Une fois votre dossier complet, la déclaration est transmise à l’INPI. Le délai dépend ensuite de leur traitement et de la validation de votre demande."
+            },
+            {
+                question: "Dois-je me déplacer pour modifier mon activité ?",
+                answer: "Non, tout se fait en ligne. Vous me transmettez les informations nécessaires et je m’occupe de la déclaration auprès de l’INPI."
+            },
+            {
+                question: "Que se passe-t-il en cas d’erreur dans la déclaration ?",
+                answer: "Je vérifie votre dossier avant dépôt pour limiter les risques de rejet et je vous accompagne en cas de demande de correction ou de complément."
+            }
+        ]
+    },
 };

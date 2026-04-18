@@ -32,7 +32,7 @@ export const statsLists: Record<string, StatsList> = {
     create: {
         id: 'create',
         stats: [
-            { value: 100, label: 'Dossiers accompagnés', prefix: '+' },
+            { value: 0, label: 'Stress administratif' },
             { value: 24, label: 'Heures en moyenne pour traitement', suffix: 'h' },
             { value: 0, label: 'Erreur évitée grâce à la vérification', suffix: '%' },
             { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
@@ -41,7 +41,7 @@ export const statsLists: Record<string, StatsList> = {
     close: {
         id: 'close',
         stats: [
-            { value: 100, label: 'Dossiers de cessation accompagnés', prefix: '+' },
+            { value: 0, label: 'Stress administratif' },
             { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
             { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
             { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
@@ -50,7 +50,25 @@ export const statsLists: Record<string, StatsList> = {
     move: {
         id: 'move',
         stats: [
-            { value: 100, label: 'Changements d’adresse accompagnés', prefix: '+' },
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    correction: {
+        id: 'correction',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    activity: {
+        id: 'activity',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
             { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
             { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
             { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }

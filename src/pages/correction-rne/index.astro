@@ -1,0 +1,90 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/sections/Hero.astro';
+import SplitPanel from '@components/sections/SplitPanel.astro';
+import Features from '@components/sections/Features.astro';
+import Stats from '@components/sections/Stats.astro';
+import { featureLists } from '@data/features';
+import { statsLists } from '@data/stats';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import Faqs from '@components/sections/Faqs.astro';
+import { faqLists } from '@data/faqs';
+import heroImage from '@assets/images/home/correction.jpg';
+import styleGuideImage from '@assets/images/home/advisor.jpg';
+
+const seoTitle = "Correction RNE (Registre National des Entreprises) | Rectification avec mandataire INPI";
+const seoDescription = "Corrigez une erreur sur votre RNE simplement et sans stress avec un mandataire INPI. Dossier de rectification conforme et accompagné.";
+
+const heroContent = {
+    title: 'Corrigez une erreur sur votre entreprise simplement et sans stress',
+    description: 'Je vous accompagne pour rectifier les informations de votre entreprise sur le RNE : analyse de l’erreur, préparation du dossier et dépôt auprès de l’INPI.',
+    buttons: [
+        { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "Hero_rne_cta_click", target: '_self' },
+    ],
+    backgroundImage: heroImage,
+    overlayOpacity: 0.25,
+};
+
+const featuresSection = {
+    eyebrow: 'Correction RNE',
+    title: 'Une rectification simple, rapide et sécurisée',
+    description: 'Je vous accompagne dans la correction des informations de votre entreprise enregistrées au RNE afin d’éviter les erreurs administratives et garantir la conformité de votre dossier.',
+    features: featureLists.correction.features,
+    button: { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "Features_rne_cta_click", variant: 'primary' as const },
+};
+
+const styleGuideSection = {
+    eyebrow: 'Correction RNE',
+    headline: 'Corriger une erreur administrative sans complication',
+    description: 'Une erreur sur le registre peut bloquer ou compliquer votre activité. Je vous aide à la corriger rapidement avec un dossier conforme et vérifié avant dépôt.',
+    image: { src: styleGuideImage, alt: 'Correction d’une erreur sur le registre RNE' },
+    buttons: [
+        { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "styleguide_rne_cta_click", variant: 'primary' as const },
+    ],
+};
+
+const mainCta = {
+    eyebrow: 'Correction RNE',
+    title: 'Corrigez vos informations d’entreprise simplement et sans erreur',
+    description: 'Je prends en charge la correction de votre dossier RNE : analyse de l’erreur, vérification et dépôt auprès de l’INPI pour garantir une mise à jour conforme.',
+    button: { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "Main_CTA_rne_cta_click", variant: 'primary' as const, target: '_self' as const },
+};
+
+const sideBySideStats = {
+    eyebrow: 'Correction RNE',
+    title: 'Une correction fiable et conforme',
+    description: 'Je vous accompagne pour corriger vos informations administratives et éviter les blocages liés à des erreurs dans le registre.',
+    variant: 'side-by-side' as const,
+    stats: statsLists.correction.stats,
+    content: {
+        title: 'Une correction validée dès le premier dépôt',
+        description: 'Je vérifie votre dossier avant transmission pour limiter les refus et garantir une correction conforme auprès de l’INPI.',
+    },
+};
+
+const faqsSection = {
+    eyebrow: "Correction RNE",
+    title: 'Tout ce que vous devez savoir sur la correction du RNE',
+    description: 'Je réponds aux questions les plus fréquentes sur la correction des informations enregistrées au RNE et mon accompagnement.',
+    faqs: faqLists.correction.faqs,
+};
+
+const FooterCta = {
+    eyebrow: "Correction RNE",
+    title: 'Corrigez vos informations d’entreprise simplement',
+    description: 'Je vous accompagne dans la rectification de votre dossier RNE : analyse de l’erreur, préparation et dépôt auprès de l’INPI.',
+    hideCta: false,
+    button: { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "footer_rne_cta_click", target: '_self' },
+};
+
+---
+
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='apollo'>
+    <Hero content={heroContent} />
+    <Features content={featuresSection} padding="responsive" background="base" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />
+    <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <Stats content={sideBySideStats} background="dark" padding="responsive" />
+    <Faqs content={faqsSection} background="base" padding="responsive" />
+    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
+</Layout>

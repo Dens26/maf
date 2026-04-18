@@ -126,4 +126,54 @@ export const featureLists: Record<string, FeatureList> = {
             }
         ]
     },
+    correction: {
+        id: 'correction',
+        features: [
+            {
+                icon: FileText,
+                title: 'Analyse de l’erreur sur le RNE',
+                description: 'J’identifie précisément l’erreur ou l’incohérence présente dans les informations de votre entreprise afin de préparer une correction conforme.'
+            },
+            {
+                icon: ShieldCheck,
+                title: 'Vérification et mise en conformité',
+                description: 'Votre dossier est contrôlé pour garantir qu’il respecte les exigences du registre et éviter tout refus ou blocage administratif.'
+            },
+            {
+                icon: Send,
+                title: 'Dépôt de la demande de correction auprès de l’INPI',
+                description: 'Je réalise la démarche sur le guichet unique et assure le suivi jusqu’à la prise en compte de la modification.'
+            },
+            {
+                icon: CircleCheck,
+                title: 'Données administratives corrigées et sécurisées',
+                description: 'Vos informations sont mises à jour correctement pour garantir la cohérence de votre dossier et éviter toute erreur future.'
+            }
+        ]
+    },
+    activity: {
+        id: 'activity',
+        features: [
+            {
+                icon: FileText,
+                title: 'Analyse de votre activité actuelle',
+                description: 'J’analyse votre situation pour identifier la modification à effectuer : ajout d’activité, changement d’activité principale ou mise à jour.'
+            },
+            {
+                icon: ShieldCheck,
+                title: 'Vérification et conformité du dossier',
+                description: 'Votre demande est vérifiée pour garantir qu’elle respecte les exigences du guichet unique et éviter tout refus ou blocage.'
+            },
+            {
+                icon: Send,
+                title: 'Déclaration auprès de l’INPI',
+                description: 'Je réalise la modification de votre activité sur le guichet unique et assure le suivi de votre dossier jusqu’à validation.'
+            },
+            {
+                icon: CircleCheck,
+                title: 'Activité mise à jour et sécurisée',
+                description: 'Votre nouvelle activité est correctement enregistrée, vous permettant de poursuivre votre activité en toute conformité.'
+            }
+        ]
+    },
 };

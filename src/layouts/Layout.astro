@@ -5,7 +5,8 @@ import Footer from '../components/Footer.astro';
 import ThemeSwitcher from '../components/ThemeSwitcher.astro';
 import { SEO, siteConfig } from '../data/config';
 import { themeSetting } from '../data/config';
-const { theme } = themeSetting;
+const { theme: globalTheme } = themeSetting;
+const theme = Astro.props.theme || globalTheme;
 
 const { SiteName, Separator, defaultDescription } = SEO;
 
@@ -24,6 +25,7 @@ interface Props {
         };
     };
     canonicalUrl?: string;
+    theme?: 'zeus' | 'poseidon' | 'hades' | 'apollo' | 'artemis' | 'ares' | 'athena' | 'hermes' | 'dionysus' | 'demeter';
 }
 
 const { title, description, image, footerCta, canonicalUrl } = Astro.props;
@@ -170,7 +172,6 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
         <Header />
         <slot />
         <Footer {footerCta} />
-        <ThemeSwitcher />
 
         <!-- Init AOS après DOMContentLoaded -->
         <script is:inline>
