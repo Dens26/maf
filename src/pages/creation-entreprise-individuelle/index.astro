@@ -1,0 +1,90 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/sections/Hero.astro';
+import SplitPanel from '@components/sections/SplitPanel.astro';
+import Features from '@components/sections/Features.astro';
+import Stats from '@components/sections/Stats.astro';
+import { featureLists } from '@data/features';
+import { statsLists } from '@data/stats';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import Faqs from '@components/sections/Faqs.astro';
+import { faqLists } from '@data/faqs';
+import heroImage from '@assets/images/home/create.jpg';
+import styleGuideImage from '@assets/images/home/advisor.jpg';
+
+const seoTitle = "Création entreprise individuelle (EI) | Mandataire INPI";
+const seoDescription = "Créez votre entreprise individuelle rapidement et sans erreur avec un mandataire INPI. Dossier complet, conforme et accompagné.";
+
+const heroContent = {
+    title: 'Créez votre entreprise individuelle simplement et sans erreur',
+    description: 'Je prends en charge votre dossier INPI de A à Z : préparation, vérification et dépôt, avec un accompagnement personnalisé.',
+    buttons: [
+        {text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Hero_create_cta_click", target: '_self'},
+    ],
+    backgroundImage: heroImage,
+    overlayOpacity: 0.25,
+};
+
+const featuresSection = {
+    eyebrow: 'Création d’entreprise individuelle',
+    title: 'Un accompagnement complet pour créer votre activité',
+    description: 'Je vous accompagne dans toutes les étapes de création de votre entreprise individuelle : préparation du dossier, vérification des informations et dépôt auprès de l’INPI.',
+    features: featureLists.create.features,
+    button: { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Features_create_cta_click", variant: 'primary' as const },
+};
+
+const styleGuideSection = {
+    eyebrow: 'Création d’entreprise individuelle',
+    headline: 'Un accompagnement humain pour lancer votre activité sereinement',
+    description: 'Créer son entreprise individuelle peut vite devenir complexe. Je vous accompagne à chaque étape pour constituer un dossier conforme, éviter les erreurs et déposer votre demande en toute sérénité.',
+    image: { src: styleGuideImage, alt: 'Création d’entreprise individuelle - préparation du dossier' },
+    buttons: [
+        { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "StyleGuide_create_cta_click", variant: 'primary' as const },
+    ],
+};
+
+const mainCta = {
+    eyebrow: 'Créer votre entreprise individuelle',
+    title: 'Lancez votre activité en toute simplicité',
+    description: 'Je m’occupe de votre dossier de création de A à Z : préparation, vérification et dépôt auprès de l’INPI. Vous gagnez du temps et évitez les erreurs.',
+    button: { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Main_CTA_create_cta_click", variant: 'primary' as const, target: '_self' as const },
+};
+
+const sideBySideStats = {
+    eyebrow: 'Création d’entreprise individuelle',
+    title: 'Un accompagnement simple, rapide et sécurisé',
+    description: 'Je vous accompagne dans la création de votre entreprise individuelle pour éviter les erreurs et accélérer vos démarches auprès de l’INPI.',
+    variant: 'side-by-side' as const,
+    stats: statsLists.create.stats,
+    content: {
+        title: 'Un dossier conforme dès le premier dépôt',
+        description: 'Je vérifie l’ensemble de votre dossier avant dépôt pour limiter les risques de refus et vous permettre de démarrer votre activité sereinement.',
+    },
+};
+
+const faqsSection = {
+    eyebrow: "Création d’entreprise individuelle",
+    title: 'Tout ce que vous devez savoir avant de créer votre entreprise',
+    description: 'Je réponds aux questions les plus fréquentes sur la création d’une entreprise individuelle et mon accompagnement.',
+    faqs: faqLists.create.faqs,
+};
+
+const FooterCta = {
+    eyebrow: "Créer votre entreprise individuelle",
+    title: 'Prêt à lancer votre activité ?',
+    description: 'Je vous accompagne dans la création de votre entreprise individuelle de A à Z : préparation du dossier, vérification et dépôt auprès de l’INPI.',
+    hideCta: false,
+    button: { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Footer_create_cta_click", target: '_self' },
+};
+
+---
+
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
+    <Hero content={heroContent} />
+    <Features content={featuresSection} padding="responsive" background="base" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />
+    <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <Stats content={sideBySideStats} background="dark" padding="responsive" />
+    <Faqs content={faqsSection} background="base" padding="responsive" />
+    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
+</Layout>

@@ -29,6 +29,33 @@ export const statsLists: Record<string, StatsList> = {
             { value: 500000, label: 'Lines of Code', prefix: '+' }
         ]
     },
+    create: {
+        id: 'create',
+        stats: [
+            { value: 100, label: 'Dossiers accompagnés', prefix: '+' },
+            { value: 24, label: 'Heures en moyenne pour traitement', suffix: 'h' },
+            { value: 0, label: 'Erreur évitée grâce à la vérification', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    close: {
+        id: 'close',
+        stats: [
+            { value: 100, label: 'Dossiers de cessation accompagnés', prefix: '+' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    move: {
+        id: 'move',
+        stats: [
+            { value: 100, label: 'Changements d’adresse accompagnés', prefix: '+' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
     withContent: {
         id: 'withContent',
         stats: [

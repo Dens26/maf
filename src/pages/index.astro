@@ -15,14 +15,13 @@ import heroImage from '../assets/images/home/default-hero-2.jpg';
 import styleGuideImage from '../assets/images/home/advisor.jpg';
 
 const seoTitle = "Mandataire INPI | Création entreprise individuelle, modification et cessation";
-const seoDescription =
-    "Confiez vos formalités d'entreprise individuelle à un mandataire INPI : création, modification, changement d'adresse, correction RNE et cessation. Rapide, simple et sécurisé.";
+const seoDescription ="Confiez vos formalités d'entreprise individuelle à un mandataire INPI : création, modification, changement d'adresse, correction RNE et cessation. Rapide, simple et sécurisé.";
 
 const heroContent = {
     title: 'Créez, modifiez ou cédez votre entreprise individuelle sans stress',
     description: 'Je m’occupe de toutes vos formalités INPI : dossier complet, conformité garantie et accompagnement personnalisé, 100% en ligne.',
     buttons: [
-        {text: 'Commencer ma formalité', link: '/services', target: '_self', ariaLabel: 'Démarrer une formalité en ligne', title: 'Commencer ma formalité'},
+        {text: 'Commencer ma formalité', link: '/services', target: '_self', ariaLabel: 'Démarrer une formalité en ligne', title: 'Commencer ma formalité', "data-analytics": "Hero_index_cta_click" },
     ],
     backgroundImage: heroImage,
     overlayOpacity: 0.25,
@@ -33,7 +32,7 @@ const featuresSection = {
     title: 'Des formalités simplifiées pour les indépendants',
     description: 'Gagnez du temps, évitez les erreurs et restez concentré sur votre activité pendant que je m’occupe de vos formalités administratives.',
     features: featureLists.main.features,
-    button: { text: 'Voir tous les services', link: '/services', variant: 'primary' as const },
+    button: { text: 'Voir tous les services', link: '/services', "data-analytics": "FeaturesSection_index_cta_click", variant: 'primary' as const },
 };
 
 const FooterCta = {
@@ -41,7 +40,7 @@ const FooterCta = {
     title: 'Confiez vos formalités d’entreprise individuelle à un mandataire INPI',
     description: 'Création, modification ou cessation : je prends en charge vos démarches administratives pour vous faire gagner du temps et sécuriser votre situation.',
     hideCta: false,
-    button: { text: 'Me contacter', link: '/contact', target: '_self' },
+    button: { text: 'Me contacter', link: '/contact', "data-analytics": "Footer_index_cta_click", target: '_self' },
 };
 
 const styleGuideSection = {
@@ -50,7 +49,7 @@ const styleGuideSection = {
     description: 'Je traite vos formalités avec rigueur et conformité. Vous bénéficiez d’un suivi personnalisé et de conseils humains à chaque étape.',
     image: { src: styleGuideImage, alt: 'Documents administratifs en cours de traitement' },
     buttons: [
-        { text: 'Découvrir mon approche', link: '/process', variant: 'primary' as const },
+        { text: 'Découvrir mon approche', link: '/process', "data-analytics": "StyleGuideSection_index_cta_click", variant: 'primary' as const },
     ],
 };
 
@@ -70,7 +69,7 @@ const mainCta = {
     eyebrow: 'Prêt à démarrer ?',
     title: 'Confiez vos formalités à un mandataire INPI',
     description: 'Gagnez du temps et sécurisez vos démarches. Je vous accompagne personnellement de la création à la cessation d’activité.',
-    button: { text: 'Commencer maintenant', link: '/services', variant: 'primary' as const, target: '_self' as const },
+    button: { text: 'Commencer maintenant', link: '/services', "data-analytics": "Main_CTA_index_cta_click", variant: 'primary' as const, target: '_self' as const },
 };
 
 const logosSection = {
@@ -89,7 +88,7 @@ const recentPostsSection = {
     eyebrow: "Conseils pratiques",
     title: "Mieux comprendre vos obligations",
     description: "Je partage des conseils utiles pour gérer vos formalités et rester en conformité.",
-    button: { text: "Lire les articles", link: "/blog", variant: "primary" as const },
+    button: { text: "Lire les articles", link: "/blog", "data-analytics": "RecentPost_index_cta_click", variant: "primary" as const },
 };
 ---
 

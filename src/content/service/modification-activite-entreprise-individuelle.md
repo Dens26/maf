@@ -9,7 +9,7 @@ order: 3
 publish: true
 
 link: "/forms/unavailable"
-text: "Modifier mon activité"
+text: "Formulaire de modification d'activité"
 ariaLabel: "Modifier l'activité d'une entreprise individuelle en ligne"
 title: "Modifier l'activité d'une entreprise individuelle"
 price: "59"

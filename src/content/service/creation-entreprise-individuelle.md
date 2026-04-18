@@ -9,7 +9,7 @@ order: 1
 publish: true
 
 link: "/forms/create/entrepreneur"
-text: "Créer mon entreprise"
+text: "Formulaire de création d'entreprise"
 ariaLabel: "Créer une entreprise individuelle en ligne"
 title: "Créer une entreprise individuelle"
 price: "49"

@@ -10,8 +10,8 @@ link: "/documents/modele_de_mandat.pdf"
 text: "Télécharger le modèle de mandat"
 
 seo:
-  title: "Procuration INPI : modèle de mandat et explication simple"
-  description: "Tout comprendre sur la procuration pour les formalités INPI : à quoi sert le mandat, comment le remplir et déléguer vos démarches administratives."
+  title: "Procuration INPI : modèle de mandat (PDF gratuit)"
+  description: "Téléchargez un modèle de mandat pour une procuration INPI et découvrez comment déléguer vos formalités simplement."
   image: "./images/procuration.jpg"
 ---
 

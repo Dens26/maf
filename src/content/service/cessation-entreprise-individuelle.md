@@ -9,7 +9,7 @@ order: 5
 publish: true
 
 link: "/forms/cessation/entrepreneur"
-text: "Cessez votre entreprise"
+text: "Formulaire de cessation d'entreprise"
 ariaLabel: "Cessation d'une entreprise individuelle en ligne"
 title: "Cesser une entreprise individuelle"
 price: "39"

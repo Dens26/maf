@@ -9,7 +9,7 @@ order: 2
 publish: true
 
 link: "/forms/moving/entrepreneur"
-text: "Modifiez votre adresse"
+text: "Formulaire de modification d'adresse"
 ariaLabel: "Modifier l'adresse d'une entreprise individuelle en ligne"
 title: "Modifier l'adresse d'une entreprise individuelle"
 price: "59"
