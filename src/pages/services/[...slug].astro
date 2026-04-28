@@ -3,6 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import Button from '@components/ui/Button.astro';
 
 const { slug } = Astro.params;
+console.log('slug :' , slug)
 
 // On récupère l'entry depuis la collection
 import { getCollection, render } from 'astro:content';
@@ -21,6 +22,7 @@ if (seoImage && !seoImage.startsWith('http')) {
   const siteUrl = import.meta.env.SITE || 'https://exemple.com';
   seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
 }
+
 ---
 
 {entry ? (
@@ -28,24 +30,34 @@ if (seoImage && !seoImage.startsWith('http')) {
     
     <!-- Image de fond avec overlay -->
     {seoImage ?
-    <div class="relative w-full overflow-hidden border-b border-black h-96">
-        <img src={seoImage} alt=""
-            class="w-full h-full object-cover object-top grayscale opacity-20"/>
-        
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-primary/10 backdrop-blur-md z-0"></div>
+<div class="relative w-full overflow-hidden border-b border-black h-106">
+    <img src={seoImage} alt="" class="w-full h-full object-cover object-top grayscale opacity-20"/>
+    
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-primary/10 backdrop-blur-md z-0"></div>
 
-        <!-- Contenu au-dessus -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center z-10 mt-16">
-            <h1 class="text-center text-4xl font-bold mb-4">{entry.data.name}</h1>
-            <p class="text-gray-600 max-w-xl mx-auto text-center mb-4">{entry.data.description}</p>
-            {entry.data.link && entry.data.text &&
-                <Button href={entry.data.link} variant="primary" size="md" class="uppercase">
-                {entry.data.text}
-                </Button>
-            }
-        </div>
+    <!-- Contenu au-dessus -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10 mt-16 px-4">
+        <h1 class="text-center text-4xl font-bold mb-2">{entry.data.name}</h1>
+        <p class="text-gray-600 max-w-xl mx-auto text-center mb-2">{entry.data.description}</p>
+
+        {entry.data.price &&
+            <p class="mb-2 text-2xl font-extrabold text-primary text-center">
+                À partir de {entry.data.price}€ ! *
+            </p>
+        }
+
+      {entry.data.link && entry.data.text &&
+          <Button href={entry.data.link} variant="primary" size="md" class="uppercase mb-2"aria-label={entry.data.ariaLabel || entry.data.text}title={entry.data.title || entry.data.text} data-analytics={`Features Button: ${entry.data.text}`}>
+            {entry.data.text}
+          </Button>
+      }
+
+        <p class="text-sm text-gray-600 text-center">
+            * Des frais administratifs de 5 € peuvent être demandés selon la formalité
+        </p>
     </div>
+</div>
     : null}
 
       <!-- Contenu Markdown -->
@@ -54,8 +66,8 @@ if (seoImage && !seoImage.startsWith('http')) {
           <Content></Content>
           {entry.data.link && entry.data.text ? 
             <div class="text-center mt-12">
-              <Button href={entry.data.link} variant="primary" size="md" class="uppercase">
-                {entry.data.text}
+              <Button href={entry.data.link} variant="primary" size="md" class="uppercase mb-2"aria-label={entry.data.ariaLabel || entry.data.text}title={entry.data.title || entry.data.text} analyticsLabel={`Features Button: ${entry.data.text}`}>
+                  {entry.data.text}
               </Button>
             </div>
           : null}

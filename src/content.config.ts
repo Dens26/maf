@@ -15,6 +15,8 @@ const blog = defineCollection({
             publishDate: z.string().transform((str) => new Date(str)),
             publish: z.boolean().optional(),
             categories: z.array(z.enum(categoryNames as [string, ...string[]])),
+            link: z.string(),
+            text: z.string(),
             seo: z
                 .object({
                     title: z.string().optional(),
@@ -56,6 +58,9 @@ const service = defineCollection({
         publish: z.boolean().default(true),
         link: z.string(),
         text: z.string(),
+        ariaLabel: z.string(),
+        title: z.string(),
+        price: z.string()
     }),
 });
 

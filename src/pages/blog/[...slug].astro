@@ -1,94 +1,83 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import CategoryPill from '@components/ui/CategoryPill.astro';
 import Date from '@components/ui/Date.astro';
 import { Image } from 'astro:assets';
+import Button from '@components/ui/Button.astro';
 
-export async function getStaticPaths() {
-    const posts = await getCollection('blog');
-    return posts.map((post) => ({
-        params: { slug: post.id },
-        props: { post },
-    }));
-}
+const { slug } = Astro.params;
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+// Récupération des posts
+const posts = await getCollection('blog');
+const post = posts.find((p) => p.id === slug) ?? null;
 
-// Use SEO data from frontmatter if available, fallback to regular post data
-const seoTitle = post.data.seo?.title || post.data.title;
-const seoDescription = post.data.seo?.description || post.data.excerpt;
+// Rendu markdown
+const { Content } = post ? await render(post) : { Content: null };
 
-// For SEO image, use the seo.image if provided, otherwise use the featured image
-// The Layout component expects a string for the image, so we need to handle that
-let seoImage: string | undefined = post.data.seo?.image;
+// SEO
+const seoTitle = post?.data.seo?.title || post?.data.title || 'Article introuvable';
+const seoDescription = post?.data.seo?.description || post?.data.excerpt || '';
 
-// If seoImage is provided but not an absolute URL, make it absolute
+let seoImage: string | undefined = post?.data.seo?.image;
+
 if (seoImage && !seoImage.startsWith('http')) {
     const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
     seoImage = new URL(seoImage.startsWith('/') ? seoImage : `/${seoImage}`, siteUrl).toString();
-}
-// If no SEO image is specified, but we have a featured image, use its URL
-else if (!seoImage && post.data.featuredImage) {
-    // For Astro image objects, we need to create an absolute URL
+} else if (!seoImage && post?.data.featuredImage) {
     const siteUrl = import.meta.env.SITE || 'https://titan-core.vercel.app';
     seoImage = new URL(post.data.featuredImage.src, siteUrl).toString();
 }
 ---
 
-<Layout title={seoTitle} description={seoDescription} image={seoImage}>
-    <div class="w-full h-120 absolute top-0 left-0 z-0 overflow-hidden border-b border-black">
-        {
-            post.data.featuredImage && (
-                <>
-                    <Image
-                        src={post.data.featuredImage}
-                        alt=""
-                        width={1920}
-                        height={1080}
-                        class="w-full h-full object-cover grayscale opacity-20"
-                        quality={60}
-                    />
+{
+    post ? (
+        <Layout title={seoTitle} description={seoDescription} image={seoImage}>
+            <div class="w-full h-96 absolute top-0 left-0 z-0 overflow-hidden border-b border-black">
+                {post.data.featuredImage && (
+                    <Image src={post.data.featuredImage} alt="" width={1920} height={1080} class="w-full h-full object-cover grayscale opacity-20" quality={60}/>
                     <div class="absolute inset-0 bg-primary/10 backdrop-blur-md" />
-                </>
-            )
-        }
-    </div>
-
-    <article class="site-container--small mx-auto px-4 prose relative z-10 pb-base">
-        <div class="mt-42 mb-12 text-center">
-            <h1>{post.data.title}</h1>
-            <div class="flex items-center justify-center gap-4 text-gray-600">
-                <Date date={post.data.publishDate} />
-                {
-                    post.data.categories && (
-                        <div class="flex flex-wrap gap-2">
-                            {post.data.categories.map((category) => (
-                                <CategoryPill category={category} />
-                            ))}
-                        </div>
-                    )
-                }
+                )}
             </div>
-        </div>
 
-        {
-            post.data.featuredImage && (
-                <Image
-                    src={post.data.featuredImage}
-                    alt=""
-                    width={1200}
-                    height={675}
-                    class="w-full h-auto rounded-lg border mb-12 border-black"
-                    quality={80}
-                    format="webp"
-                />
-            )
-        }
+            <article class="site-container--small mx-auto px-4 prose relative z-10 pb-base">
+                <div class="mt-25 text-center">
+                    <h1 class="mb-0">{post.data.title}</h1>
 
-        <div class="mt-8">
-            <Content />
-        </div>
-    </article>
-</Layout>
+                    <div class="flex items-center justify-center gap-4 text-gray-600 mb-2">
+                        <span>Dernière mise à jour : </span>
+                        <Date date={post.data.publishDate} />
+                    </div>
+                </div>
+
+                {post.data.featuredImage && (
+                    <Image src={post.data.featuredImage} alt="" width={800} height={533} class="w-full h-auto rounded-lg border mb-8 border-black" quality={80} format="webp"/>
+                )}
+
+                {post.data.link && post.data.text && (
+                    <div class="flex justify-center">
+                        <Button href={post.data.link} variant="primary" size="md" class="uppercase" analyticsLabel={`Features Button: ${post.data.text}`}>{post.data.text}</Button>
+                    </div>
+                )}
+
+                {Content ? (
+                    <div class="site-container--small prose-neutral dark:prose-invert service-text max-w-none mx-auto px-4 pt-4 pb-4">
+                        <Content />
+                        {post.data.link && post.data.text && (
+                        <div class="flex justify-center">
+                            <Button href={post.data.link} variant="primary" size="md" class="uppercase" analyticsLabel={`Features Button: ${post.data.text}`}>{post.data.text}</Button>
+                        </div>
+                        )}
+                    </div>
+                ) : null}
+            </article>
+            
+        </Layout>
+    ) : (
+        <Layout title="Article introuvable" description="Slug manquant">
+            <div class="site-container mx-auto py-24 px-6 text-center">
+                <h1 class="text-4xl font-bold mb-4">Article introuvable</h1>
+                <p class="text-gray-600">L’article que vous recherchez n'existe pas.</p>
+            </div>
+        </Layout>
+    )
+}

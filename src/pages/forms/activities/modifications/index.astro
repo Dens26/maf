@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Layout.astro"
+import InnerHero from "@components/sections/InnerHero.astro"
+import Activities from "@components/sections/activities/ModificationsInfo.astro"
+
+const heroContent = {
+    title: "Modifiez vos activités",
+    description: "Formulaire de modificaton d'activités"
+}
+---
+
+<Layout title="Changement d'activités" description="Modifiez vos activités">
+    <InnerHero content={heroContent} />
+    <Activities background="base" padding="responsive" />
+</Layout>

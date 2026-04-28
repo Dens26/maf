@@ -203,66 +203,107 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 });
             } else {
                 // Cas spécial : Activités secondaires avec blocs
-                const activityBlocks = sectionDiv.querySelectorAll('.border');
+                const activityBlocks = sectionDiv.querySelectorAll('.activity-secondary-block');
 
                 if (activityBlocks.length > 0) {
 
+                    const lineHeight = 4.5;
+                    const padding = 4;
+                    const startX = 20;
+                    const contentWidth = pageWidth - 40;
+
                     activityBlocks.forEach((block, index) => {
 
-                        const title = block.querySelector('.font-semibold')?.innerText.trim() || 'Activité';
-                        const desc = block.querySelector('.text-gray-700')?.innerText.trim() || '';
-                        const form = block.querySelector('.bg-gray-100 span')?.innerText.trim() || '';
+                        // 🔹 Récupération des données
+                        const texts = block.querySelectorAll('.text-gray-700');
+                        const debut = texts[0]?.innerText.trim() || '-';
+                        const ambulante = texts[1]?.innerText.trim() || '-';
+                        const exercice = texts[2]?.innerText.trim() || '-';
+                        const debutExercice = texts[3]?.innerText.trim() || '-';
+                        const finExercice = texts[4]?.innerText.trim() || '-';
+                        const desc = texts[5]?.innerText.trim() || '-';
+                        const form = block.querySelector('.bg-gray-100 span')?.innerText.trim() || '-';
 
-                        const lineHeight = 4.5;
+                        // 🔹 Découpage texte
+                        const splitDebut = doc.splitTextToSize(debut, contentWidth - 10);
+                        const splitAmbulante = doc.splitTextToSize(ambulante, contentWidth - 10);
+                        const splitExercice = doc.splitTextToSize(exercice, contentWidth - 10);
+                        const splitDebutExercice = doc.splitTextToSize(debutExercice, contentWidth - 10);
+                        const splitFinExercice = doc.splitTextToSize(finExercice, contentWidth - 10);
+                        const splitDesc = doc.splitTextToSize(desc, contentWidth - 10);
+                        const splitForm = doc.splitTextToSize(`Forme de l'activité : ${form}`, contentWidth - 10);
 
-                        const splitDesc = doc.splitTextToSize(desc, pageWidth - 40);
-                        const splitForm = doc.splitTextToSize(`Forme de l'activité : ${form}`, pageWidth - 40);
+                        // 🔹 Calcul hauteur bloc
+                        const blockHeight = 8 + (splitDebut.length + splitAmbulante.length + splitExercice.length + splitDebutExercice.length + splitFinExercice.length + splitDesc.length + splitForm.length) * lineHeight + 45;
 
-                        const blockHeight =
-                            lineHeight + // titre
-                            splitDesc.length * lineHeight +
-                            splitForm.length * lineHeight +
-                            10;
-
-                        if (y + blockHeight > pageHeight - 25) {
+                        if (y + blockHeight > pageHeight - 20) {
                             doc.addPage();
                             y = 20;
                         }
 
-                        // numéro activité
+                        const boxY = y;
+
+                        // 🧱 FOND GRIS
+                        doc.setFillColor(245, 245, 245);
+                        doc.rect(startX, boxY, contentWidth, blockHeight, 'F');
+
+                        // 🧱 BORDURE
+                        doc.setDrawColor(200);
+                        doc.rect(startX, boxY, contentWidth, blockHeight);
+
+                        y += padding + 2;
+
+                        // 🔷 TITRE
                         doc.setFont('helvetica', 'bold');
                         doc.setFontSize(12);
                         doc.setTextColor(53, 87, 193);
-                        doc.text(`Activité secondaire ${index + 1}`, 20, y);
+                        doc.text(`Activité secondaire ${index + 1}`, startX + padding, y);
+
                         y += 6;
 
-                        // description title
+                        // Reset texte
                         doc.setFontSize(10);
                         doc.setTextColor(33, 33, 33);
+
+                        // 🔹 Fonction utilitaire
+                        const writeLine = (label, splitValue) => {
+                            doc.setFont('helvetica', 'bold');
+                            doc.text(label, startX + padding, y);
+
+                            y += 4;
+
+                            doc.setFont('helvetica', 'normal');
+                            doc.text(splitValue, startX + padding, y);
+
+                            y += splitValue.length * lineHeight + 2;
+                        };
+
+                        // 📌 Champs
+                        writeLine("Début d'activité :", splitDebut);
+                        writeLine("Activité ambulante :", splitAmbulante);
+                        writeLine("Exercice de l'activité :", splitExercice);
+                        writeLine("Début de l'exercice (si activité saisonniere) :", splitDebutExercice);
+                        writeLine("Fin de l'exercice (si activité saisonniere) :", splitFinExercice);
+
+                        // 📌 Description (mise en valeur)
                         doc.setFont('helvetica', 'bold');
-                        doc.text(title, 20, y);
+                        doc.text("Description de l'activité :", startX + padding, y);
                         y += 5;
 
-                        // description
                         doc.setFont('helvetica', 'normal');
-                        doc.text(splitDesc, 20, y);
-                        y += splitDesc.length * lineHeight + 3;
+                        doc.text(splitDesc, startX + padding, y);
+                        y += splitDesc.length * lineHeight + 4;
 
-                        // forme
+                        // 📌 Forme (italique)
                         doc.setFont('helvetica', 'italic', 'bold');
-                        doc.text(splitForm, 20, y);
-                        y += splitForm.length * lineHeight + 6;
-
-                        // séparation visuelle
-                        doc.setDrawColor(200);
-                        doc.line(20, y, pageWidth - 20, y);
-                        y += 6;
+                        doc.text(splitForm, startX + padding, y);
+                        y += splitForm.length * lineHeight + padding + 4;
 
                     });
 
                 } else {
 
-                    // fallback si jamais ce n'est pas une section structurée
+                    // fallback
                     const text = sectionDiv.innerText.replace(sectionTitle.innerText, '').trim();
                     if (text) {
                         const splitText = doc.splitTextToSize(text, pageWidth - 40);
@@ -315,12 +356,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             doc.text(`Page ${i} / ${totalPages}`, pageWidth - 20, pageHeight - 10, { align: 'right' });
         }
 
-        if (download) {
-            doc.save(`recap-${dossierNumber}.pdf`);
-            return null;
-        } else {
-            return doc.output('blob');
-        }
+        return doc.output('blob');
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
@@ -340,6 +376,26 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         const business = JSON.parse(localStorage.getItem(STORAGE_KEY_BUSINESS) || '{}');
 
         /* HELPERS */
+        const monthOptions=[
+            { label: 'Janvier', value: '01' },
+            { label: 'Février', value: '02' },
+            { label: 'Mars', value: '03' },
+            { label: 'Avril', value: '04' },
+            { label: 'Mai', value: '05' },
+            { label: 'Juin', value: '06' },
+            { label: 'Juillet', value: '07' },
+            { label: 'Août', value: '08' },
+            { label: 'Septembre', value: '09' },
+            { label: 'Octobre', value: '10' },
+            { label: 'Novembre', value: '11' },
+            { label: 'Décembre', value: '12' }
+        ];
+
+        const getMonthLabel = (monthValue) => {
+            if (!monthValue) return '';
+            const month = monthOptions.find(m => m.value === monthValue);
+            return month ? month.label : '';
+        };
 
         const formatCountry = (code) => {
             if (!code) return '-';
@@ -366,12 +422,23 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
             return `${d}/${m}/${y}`;
         };
 
-        const createLine = (label, values, way = 'right') => `
-        <div class="flex justify-between border-b border-gray-200 py-1">
-            <span class="font-medium">${label}</span>
-            <span class="text-gray-600 text-${way}">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
-        </div>
-        `;
+        const createLine = (label, values, way = 'right') => {
+            if (way === 'left') {
+                return `
+                <div class="border-b border-gray-200 py-1 flex flex-col">
+                    ${label ? `<span class="font-medium mb-1">${label}</span>` : ''}
+                    <span class="text-gray-600">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
+                </div>
+                `;
+            } else {
+                return `
+                <div class="flex justify-between border-b border-gray-200 py-1">
+                    <span class="font-medium mr-1">${label}</span>
+                    <span class="text-gray-600">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
+                </div>
+                `;
+            }
+        };
 
         const createSection = (title, rows) => {
             const section = document.createElement('div');
@@ -386,15 +453,20 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
         };
         const address = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`;
 
-        const addressParts = [
-            `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`.trim(),
-            `${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`.trim(),
-        ];
+        const addressParts = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''} ${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`;
 
         /* DISPLAY RECAP */
         const displayRecap = () => {
             recapContainer.innerHTML = '';
 
+            // DEMARCHAGE
+            if (Object.keys(entrepreneur).length) {
+                const rows = [
+                    createLine('Comment avez vous connu Mon Assistant Formalités', entrepreneur.hearabout)
+                ];
+                recapContainer.appendChild(createSection('', rows));
+            }
+            
             // ---------------- ENTREPRENEUR ----------------
             if (Object.keys(entrepreneur).length) {
 
@@ -439,10 +511,7 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 // INFO CONJOINT
                 if (entrepreneur.partnerbirthname) {
-                    const partnerAddress = [
-                        `${entrepreneur.partnertracknumber || ''} ${entrepreneur.partnercomplementnumber || ''} ${entrepreneur.partnertracktype || ''} ${entrepreneur.partnerway || ''} ${entrepreneur.partneradditionaladdress || ''}`.trim(),
-                        `${entrepreneur.partnerzipcode || ''} ${entrepreneur.partnercity || ''} ${formatCountry(entrepreneur.partnercountry) || ''}`.trim(),
-                    ];
+                    const partnerAddress = `${entrepreneur.partnertracknumber || ''} ${entrepreneur.partnercomplementnumber || ''} ${entrepreneur.partnertracktype || ''} ${entrepreneur.partnerway || ''} ${entrepreneur.partneradditionaladdress || ''} ${entrepreneur.partnerzipcode || ''} ${entrepreneur.partnercity || ''} ${formatCountry(entrepreneur.partnercountry) || ''}`;
                     const rows = [
                         createLine('Genre', capitalizeWords(entrepreneur.partnergender)),
                         createLine('Nom de naissance', (entrepreneur.partnerbirthname || '').toUpperCase()),
@@ -469,9 +538,10 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 }
             }
 
+            console.log(business)
             // ---------------- BUSINESS ----------------
             if (Object.keys(business).length) {
-                const businessAddress = `${business.tracknumber || ''} ${business.complementnumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.zipcode || ''} ${business.city || ''}`;
+                const businessAddress = `${business.tracknumber || ''} ${business.complementnumber || ''} ${business.tracktype || ''} ${business.way || ''}, ${business.additionaladdress} ${business.zipcode || ''} ${business.city || ''} ${formatCountry(business.country) || ''} `;
 
                 let rows = [];
                 // INFORMATION SUR L'ANCIENNE ACTIVITE DEJA EXERCEE
@@ -487,31 +557,48 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                     recapContainer.appendChild(createSection('Activité déjà exercée', rows));
 
                 // INFORMATION DE L'ENTREPRISE
-                rows = [createLine('Micro-entreprise', business.micro)];
-
-                rows.push(
+                rows = [
+                    createLine('Versement libératoire', business.versementliberatoire),
+                    createLine('Micro-entreprise', business.micro),
                     createLine('Déclaration URSSAF', business.insuranceorganization),
                     createLine("Contrat d'appui", business.supportcontract),
                     createLine("Demande d'ACCRE", business.accre),
-                );
+                ];
+
                 if (business.domiciliationname)
                     rows.push(createLine('Organisme de domiciliation', business.domiciliationname));
                 if (business.domiciliationsiren)
                     rows.push(createLine('Siren de domiciliation', business.domiciliationsiren));
+                if (business.correspondance === 'oui')
+                    rows.push(createLine('Adresse de correspondance', businessAddress));
+                else
+                    rows.push(createLine('Adresse de correspondance', addressParts));
                 recapContainer.appendChild(createSection("Informations de l'entreprise à créer", rows));
 
                 // ACTIVITES DE L'ENTREPRISE
                 rows = [
-                    createLine("Description de l'activité", ''),
-                    createLine("", business.activity, 'left'),
-                    createLine("Forme de l'activité", business.formofactivity),
+                    createLine("Date de début d'activité", formatDateFR(business.datedebut)),
                 ];
 
-                if (business.businessname) rows.push(createLine('Nom commercial', business.businessname));
+                if (business.way)
+                    rows.push(createLine("Adresse de l'établissement", businessAddress));
+                else 
+                    rows.push(createLine("Adresse de l'établissement", addressParts));
 
-                if (business.way) rows.push(createLine("Adresse de l'établissement", businessAddress));
-                else rows.push(createLine("Adresse de l'établissement", addressParts));
+                rows.push(createLine("Description de l'activité", ''));
+                rows.push(createLine("", business.activity, 'left'));
+                rows.push(createLine("Forme de l'activité", capitalizeWords(business.formofactivity)));
 
+                if (business.businessname) rows.push(createLine('Nom commercial', capitalizeWords(business.businessname)));
+
+                rows.push(createLine("Activité Ambulante", business.ambulante));
+                rows.push(createLine("Exercice de l'activité", capitalizeWords(business.exercice)));
+
+                if (business.exercice === 'saisonniere'){
+                    rows.push(createLine("Début d'exercice", String(business.saisondatedebutjour).padStart(2, '0') + ' ' + getMonthLabel(business.saisondatedebutmois)))
+                    rows.push(createLine("Fin d'exercice", String(business.saisondatefinjour).padStart(2, '0') + ' ' + getMonthLabel(business.saisondatefinmois)))
+                }
+    
                 recapContainer.appendChild(createSection("Informations de l'activité de l'entreprise à créer", rows));
 
                 // ACTIVITÉS SECONDAIRES
@@ -519,10 +606,15 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 const n = parseInt(business.nbrofactivies || 0);
 
                 for (let i = 0; i < n; i++) {
+                    const debut = formatDateFR(business[`secondaryActivities[${i}][datedebut]`]) || '';
+                    const ambulante = business[`secondaryActivities[${i}][ambulante]`] || '';
+                    const exercice = capitalizeWords(business[`secondaryActivities[${i}][exercice]`] || '');
+                    const saisonDebut = business[`secondaryActivities[${i}][saisondatedebutjour]`] && business[`secondaryActivities[${i}][saisondatedebutmois]`]  ? `${String(business[`secondaryActivities[${i}][saisondatedebutjour]`]).padStart(2,'0')} ${getMonthLabel(business[`secondaryActivities[${i}][saisondatedebutmois]`])}` : '';
+                    const saisonFin = business[`secondaryActivities[${i}][saisondatefinjour]`] && business[`secondaryActivities[${i}][saisondatefinmois]`]  ? `${String(business[`secondaryActivities[${i}][saisondatefinjour]`]).padStart(2,'0')} ${getMonthLabel(business[`secondaryActivities[${i}][saisondatefinmois]`])}` : '';
                     const desc = business[`secondaryActivities[${i}][description]`];
                     const form = business[`secondaryActivities[${i}][form]`];
 
-                    if (desc) secondary.push({ desc, form });
+                    if (debut && ambulante && exercice && desc) secondary.push({debut, ambulante, exercice, saisonDebut, saisonFin, desc, form });
                 }
 
                 if (secondary.length) {
@@ -535,8 +627,32 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                         ${secondary
                             .map(
                                 (a) => `
-                        <div class="border border-gray-400 bg-gray-50 rounded-sm overflow-hidden">
-                            
+                        <div class="activity-secondary-block border border-gray-400 bg-gray-50 rounded-sm overflow-hidden">
+
+                            <!-- Début d'activité -->
+                            <div class="p-3 text-sm bg-white">
+                                <span class="font-semibold mb-1">Début d'activité :</span>
+                                <span class="text-gray-700 whitespace-pre-line leading-relaxed">${a.debut}</span>
+                            </div>
+
+                            <!-- Activité ambulante -->
+                            <div class="p-3 text-sm bg-white">
+                                <span class="font-semibold mb-1">Activité ambulante :</span>
+                                <span class="text-gray-700 whitespace-pre-line leading-relaxed">${a.ambulante}</span>
+                            </div>
+
+                            <!-- Exercice de l'activité -->
+                            <div class="p-3 text-sm bg-white">
+                                <span class="font-semibold mb-1">Exercice de l'activité :</span>
+                                <span class="text-gray-700 whitespace-pre-line leading-relaxed">${a.exercice}</span>
+                            </div>
+
+                            <!-- Date d'exercice -->
+                            <div class="p-3 text-sm bg-white">
+                                <p class="text-gray-700 whitespace-pre-line leading-relaxed">${a.saisonDebut ? `Début d'exercice : ${a.saisonDebut}` : ''}</p>
+                                <p class="text-gray-700 whitespace-pre-line leading-relaxed">${a.saisonFin ? `Fin d'exercice : ${a.saisonFin}` : ''}</p>
+                            </div>
+
                             <!-- Description -->
                             <div class="p-3 text-sm bg-white">
                                 <p class="font-semibold mb-1">Description de l'activité</p>
@@ -561,11 +677,22 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
                 }
             }
             // OBSERVATION
+            let rows = [];
+            if (business.diffusioninsee == 'oui')
+                rows.push(createLine('','Vous avez exercé votre droit d’opposition à la diffusion publique des informations relatives à votre entreprise au répertoire sirene de l’INSEE'));
+            else
+                rows.push(createLine('',"Vous n'avez pas exercé votre droit d’opposition à la diffusion publique des informations relatives à votre entreprise au répertoire sirene de l’INSEE"));
+
+            if (business.prospection == 'oui')
+                rows.push(createLine('','Vous avez consenti à la mise à disposition de vos données personnelles à des fins de prospection'));
+            else
+                rows.push(createLine('',"Vous n'avez pas consenti à la mise à disposition de vos données personnelles à des fins de prospection"));
+
             if (business.observation != '') {
-                const rows = [createLine('Précision utile à votre demande', '')];
+                rows.push(createLine('Précision utile à votre demande', ''));
                 rows.push(createLine('', business.observation, 'left'));
 
-                recapContainer.appendChild(createSection('Informations complémentaire', rows));
+                recapContainer.appendChild(createSection('Informations complémentaires', rows));
             }
         };
 
@@ -647,7 +774,10 @@ const paddingClass = getPaddingClass({ padding, paddingTop, paddingBottom });
 
                 // ✅ Succès total
                 submitBtn.textContent = 'Envoyé ✔';
-                // localStorage.clear();
+
+                // Suppression du localStorage
+                localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
+                localStorage.removeItem(STORAGE_KEY_BUSINESS);
 
                 window.location.href = `/confirmation?token=${data.token}`;
             } catch (e) {

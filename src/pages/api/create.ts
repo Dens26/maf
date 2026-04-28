@@ -3,11 +3,11 @@ export const prerender = false;
 import { v4 as uuidv4 } from 'uuid';
 import type { APIContext } from 'astro';
 import { saveToken } from '@utils/tokenStore';
-import { sendCreateNotification } from "@utils/mailService";
 import { checkDuplicateFormality } from '@utils/supabase';
 import { createFormality } from '@utils/supabase.server';
+import { sendNotification } from '@utils/mailService';
 
-const MAX_PDF_SIZE = 1_000_000; // 5MB
+const MAX_PDF_SIZE = 1_000_000; // 1MB
 
 export async function POST({ request }: APIContext) {
   try {
@@ -24,16 +24,22 @@ export async function POST({ request }: APIContext) {
       zipcode,
       city,
       siren,
-      pdf
+      pdf,
+      synthese
     } = body;
 
-    // ✅ Validation minimale
-    if (!demandeId || !typeFormaliteId || !name || !email || !pdf) {
+    const typeId = Number(typeFormaliteId);
+
+    /* ================= VALIDATION ================= */
+
+    if (!demandeId || !typeId || !name || !email || !pdf) {
       return jsonResponse({ error: "Champs obligatoires manquants" }, 400);
     }
 
-    // ✅ Vérification PDF base64
+    /* ================= PDF RECAP ================= */
+
     let pdfBuffer: Buffer;
+
     try {
       pdfBuffer = Buffer.from(pdf, 'base64');
     } catch {
@@ -42,18 +48,49 @@ export async function POST({ request }: APIContext) {
 
     if (pdfBuffer.length === 0 || pdfBuffer.length > MAX_PDF_SIZE) {
       return jsonResponse(
-        { error: "Fichier PDF invalide ou trop volumineux (max 5MB)" },
+        { error: "PDF invalide ou trop volumineux (max 1MB)" },
         400
       );
     }
 
-    const token = uuidv4();
+    /* ================= SYNTHESE (OPTIONNELLE) ================= */
 
-    // Sauvegarde temporaire pour téléchargement ultérieur
+    let syntheseData: { filename: string; base64: string } | undefined;
+
+    if (typeId === 6) {
+      if (!synthese) {
+        return jsonResponse({ error: "Synthèse manquante" }, 400);
+      }
+
+      let syntheseBuffer: Buffer;
+
+      try {
+        syntheseBuffer = Buffer.from(synthese, 'base64');
+      } catch {
+        return jsonResponse({ error: "Synthèse invalide (base64 incorrect)" }, 400);
+      }
+
+      if (syntheseBuffer.length === 0 || syntheseBuffer.length > MAX_PDF_SIZE) {
+        return jsonResponse(
+          { error: "Synthèse invalide ou trop volumineuse (max 1MB)" },
+          400
+        );
+      }
+
+      syntheseData = {
+        filename: "synthese.pdf",
+        base64: synthese,
+      };
+    }
+
+    /* ================= TOKEN ================= */
+
+    const token = uuidv4();
     saveToken(token, pdf);
 
-    // Vérification doublon
-    const result = await checkDuplicateFormality(email, name, typeFormaliteId);
+    /* ================= DOUBLON ================= */
+
+    const result = await checkDuplicateFormality(email, name, firstname, typeId);
 
     if (result.status === 'error_db')
       return jsonResponse({ error: "error_db" }, 500);
@@ -61,11 +98,12 @@ export async function POST({ request }: APIContext) {
     if (result.status === 'duplicate')
       return jsonResponse({ error: "duplicate", statut: result.statut }, 400);
 
-    // Enregistrement Supabase
+    /* ================= INSERT ================= */
+
     try {
       await createFormality({
         demandeId,
-        typeFormaliteId,
+        typeFormaliteId: typeId,
         email,
         phone,
         name,
@@ -77,24 +115,32 @@ export async function POST({ request }: APIContext) {
         pdf: {
           filename: "recap.pdf",
           base64: pdf,
-        }
+        },
+        synthese: syntheseData 
       });
     } catch (error) {
-      console.error('Erreur create.ts:', error)
-      return jsonResponse({ error: "Erreur insertion Supabase", detail: error }, 500);
+      console.error('Erreur create.ts:', error);
+      return jsonResponse({ error: "Erreur insertion Supabase" }, 500);
     }
 
     // Envoi du mail notification (désactivé temporairement)
-    await sendCreateNotification({
-      firstname,
-      name,
-      email,
-      phone,
-      pdf: {
-        filename: "recap.pdf",
-        base64: pdf,
-      }
-    });
+    try {
+      await sendNotification({
+        firstname,
+        name,
+        email,
+        phone,
+        typeFormaliteId: typeId,
+        pdf: {
+          filename: "recap.pdf",
+          base64: pdf,
+        },
+        synthese: syntheseData
+      });
+    } catch (err) {
+      console.error("Erreur envoi mail :", err);
+      // ne bloque PAS la création de la demande
+    }
 
     return jsonResponse({ success: true, token }, 200);
 
@@ -107,7 +153,8 @@ export async function POST({ request }: APIContext) {
   }
 }
 
-// Helper pour réponses JSON homogènes
+/* ================= HELPER ================= */
+
 function jsonResponse(data: unknown, status: number) {
   return new Response(JSON.stringify(data), {
     status,

@@ -1,86 +1,186 @@
 ---
-import "../styles/global.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import ThemeSwitcher from "../components/ThemeSwitcher.astro";
-import { SEO, siteConfig } from "../data/config";
-import 'aos/dist/aos.css';
-import { themeSetting } from "../data/config";
-const { theme } = themeSetting;
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import { SEO, siteConfig } from '../data/config';
+import { themeSetting } from '../data/config';
+const { theme: globalTheme } = themeSetting;
+const theme = Astro.props.theme || globalTheme;
 
 const { SiteName, Separator, defaultDescription } = SEO;
 
 interface Props {
-	title?: string;
-	description?: string;
-	image?: string;
-	footerCta?: {
-		title: string;
-		description: string;
-		hideCta: boolean;
-		button: {
-			text: string;
-			link: string;
-			target?: string;
-		};
-	};
-	canonicalUrl?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+    footerCta?: {
+        title: string;
+        description: string;
+        hideCta: boolean;
+        button: {
+            text: string;
+            link: string;
+            target?: string;
+        };
+    };
+    canonicalUrl?: string;
+    theme?: 'zeus' | 'poseidon' | 'hades' | 'apollo' | 'artemis' | 'ares' | 'athena' | 'hermes' | 'dionysus' | 'demeter';
 }
 
 const { title, description, image, footerCta, canonicalUrl } = Astro.props;
 
 const pageTitle = title ? `${title} ${Separator} ${SiteName}` : SiteName;
 const pageDescription = description || defaultDescription || '';
-const pageImage = image || '';
+const pageImage = image || '/images/mail-entete.jpg';
 const canonicalPath = canonicalUrl || Astro.url.pathname;
 const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
-
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link rel="canonical" href={fullCanonicalUrl} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<meta name="robots" content="index, follow" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={fullCanonicalUrl} />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		{pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="sitemap" href="/sitemap-index.xml" />
+        <link rel="canonical" href={fullCanonicalUrl} />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="robots" content="index, follow" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Noto+Sans+KR:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
 
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={fullCanonicalUrl} />
-		<meta property="twitter:title" content={pageTitle} />
-		<meta property="twitter:description" content={pageDescription} />
-		{pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
-	</head>
-	<body data-theme={theme}>
-		<Header />
-		<slot />
-		<Footer footerCta={footerCta} />
-		<ThemeSwitcher />
-		
-		<script>
-			import AOS from 'aos';
-			AOS.init({
-				duration: 800,
-				once: true,
-			});
-		</script>
-	</body>
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={fullCanonicalUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="fb:app_id" content="777139179010669">
+        <meta property="og:description" content={pageDescription} />
+        {pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={fullCanonicalUrl} />
+        <meta property="twitter:title" content={pageTitle} />
+        <meta property="twitter:description" content={pageDescription} />
+        {pageImage && <meta property="twitter:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
+
+        <!-- Tarteaucitron.js + Google Analytics -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/css/tarteaucitron.css" />
+        <script is:inline>
+            (function () {
+                const tarteScript = document.createElement('script');
+                tarteScript.src = 'https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/tarteaucitron.min.js';
+                tarteScript.async = true;
+                tarteScript.onload = function () {
+                    const langScript = document.createElement('script');
+                    langScript.src = 'https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.9.5/lang/tarteaucitron.fr.js';
+                    langScript.async = true;
+                    langScript.onload = function () {
+                        window.tarteaucitronForceLanguage = 'fr';
+                        tarteaucitron.init({
+                            privacyUrl: '/legal/politique-de-confidentialite',
+                            bodyPosition: 'bottom',
+                            hashtag: '#tarteaucitron',
+                            cookieName: 'tarteaucitron',
+                            orientation: 'bottom',
+                            groupServices: false,
+                            showAlertSmall: false,
+                            cookieslist: true,
+                            closePopup: false,
+                            showIcon: false,
+                            adblocker: false,
+                            DenyAllCta: true,
+                            AcceptAllCta: true,
+                            highPrivacy: true,
+                            handleBrowserDNTRequest: false,
+                            removeCredit: false,
+                            moreInfoLink: true,
+                            useExternalCss: true,
+                            useExternalJs: true,
+                            cookieDuration: 30,
+                        });
+
+                        tarteaucitron.services.gtag = {
+                            key: 'gtag',
+                            type: 'analytic',
+                            name: 'Google Analytics',
+                            uri: 'https://policies.google.com/privacy',
+                            needConsent: true,
+                            cookies: ['_ga', '_gat', '_gid'],
+                            js: function () {
+                                const gaScript = document.createElement('script');
+                                gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-DKCG2RRGB2';
+                                gaScript.async = true;
+                                document.head.appendChild(gaScript);
+                                window.dataLayer = window.dataLayer || [];
+                                window.gtag = function () {
+                                    dataLayer.push(arguments);
+                                };
+                                gtag('js', new Date());
+                                gtag('config', 'G-DKCG2RRGB2', { anonymize_ip: true });
+                            },
+                        };
+                        (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
+                    };
+                    document.head.appendChild(langScript);
+                };
+                document.head.appendChild(tarteScript);
+            })();
+        </script>
+
+        <!-- Pixel Meta -->
+        <script is:inline>
+            !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1744861786879723');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1" src="https://www.facebook.com/tr?id=1744861786879723&ev=PageView&noscript=1" />
+        </noscript>
+
+        <!-- AOS CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+        <!-- AOS JS -->
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    </head>
+
+    <body data-theme={theme}>
+        <Header />
+        <slot />
+        <Footer {footerCta} />
+
+        <!-- Init AOS après DOMContentLoaded -->
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof AOS !== 'undefined' && AOS.init) {
+                    AOS.init({ duration: 800, once: true });
+                }
+            });
+        </script>
+    </body>
 </html>

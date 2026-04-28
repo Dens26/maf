@@ -50,7 +50,7 @@ export async function getFormalityByDemandeId(demandeId: string) {
 export async function getFormalitiesByStatus(statutFormaliteId: number) {
     const { data, error } = await supabase
         .from('demandes')
-        .select(`id, demandeid, stripe_customer_id, email, phone, name, firstname, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, city, zipcode, datecreation, ref_inpi, amount_paid, amount_refunded`)
+        .select(`id, demandeid, stripe_customer_id, email, phone, name, firstname, siren, typeformaliteid, statutformaliteid, statutpaiementid, pdf, synthese, city, zipcode, datecreation, ref_inpi, amount_paid, amount_refunded`)
         .eq('statutformaliteid', statutFormaliteId)
         .order('datecreation', { ascending: false })
 
@@ -71,17 +71,14 @@ export async function getFormalitiesByStatus(statutFormaliteId: number) {
  * @param typeFormaliteId 
  * @returns 
  */
-export async function checkDuplicateFormality(
-    email: string,
-    name: string,
-    typeFormaliteId: number
-) {
+export async function checkDuplicateFormality(email: string, name: string, firstname: string, typeFormaliteId: number) {
     try {
         const { data, error } = await supabase
             .from('demandes')
             .select('demandeid, statutformaliteid')
             .eq('email', email)
-            .eq('name', name)
+            .eq('name', name.toUpperCase())
+            .eq('firstname', firstname)
             .eq('typeformaliteid', typeFormaliteId)
             .in('statutformaliteid', [1, 2])
             .maybeSingle()

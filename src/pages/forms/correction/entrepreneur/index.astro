@@ -1,0 +1,15 @@
+---
+import Layout from "@layouts/Layout.astro"
+import InnerHero from "@components/sections/InnerHero.astro"
+import Correction from "@components/sections/correction/EntrepreneurInfo.astro"
+
+const heroContent = {
+    title: "Corrigez votre entreprise",
+    description: "Formulaire de correction des données erronées de votre entreprise"
+}
+---
+
+<Layout title="Correction" description="Corrigez votre entreprise">
+    <InnerHero content={heroContent} />
+    <Correction background="base" padding="responsive" />
+</Layout>

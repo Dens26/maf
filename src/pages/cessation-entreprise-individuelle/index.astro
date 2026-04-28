@@ -1,0 +1,99 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/sections/Hero.astro';
+import SplitPanel from '@components/sections/SplitPanel.astro';
+import Features from '@components/sections/Features.astro';
+import Stats from '@components/sections/Stats.astro';
+import { featureLists } from '@data/features';
+import { statsLists } from '@data/stats';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import Faqs from '@components/sections/Faqs.astro';
+import { faqLists } from '@data/faqs';
+import heroImage from '@assets/images/home/closed.jpg';
+import styleGuideImage from '@assets/images/home/advisor.jpg';
+
+const image = 'https://www.mon-assistant-formalites.fr/images/home/closed.jpg';
+
+const seoTitle = "Cessation d’entreprise individuelle (EI) | Fermeture avec mandataire INPI";
+const seoDescription = "Fermez votre entreprise individuelle simplement et sans erreur avec un mandataire INPI. Dossier de cessation complet, conforme et accompagné.";
+
+const heroContent = {
+    title: 'Cessez votre entreprise individuelle simplement et sans erreur',
+    description: 'Je vous accompagne dans la fermeture de votre activité : préparation du dossier de cessation, vérification des informations et dépôt auprès de l’INPI.',
+    buttons: [
+        {text: 'Fermer mon entreprise', link: '/services/cessation-entreprise-individuelle', "data-analytics": "Hero_close_cta_click", target: '_self'},
+    ],
+    backgroundImage: heroImage,
+    overlayOpacity: 0.25,
+};
+
+const featuresSection = {
+    eyebrow: 'Cessation d’entreprise individuelle',
+    title: 'Une fermeture simple, rapide et sécurisée',
+    description: 'Je vous accompagne dans toutes les étapes de cessation de votre entreprise individuelle : préparation du dossier, vérification des informations et dépôt auprès de l’INPI.',
+    features: featureLists.close.features,
+    button: { text: 'Fermer mon entreprise', link: '/services/cessation-entreprise-individuelle', "data-analytics": "Features_close_cta_click", variant: 'primary' as const },
+};
+
+const mainCta = {
+    eyebrow: 'Cessation d’entreprise individuelle',
+    title: 'Fermez votre activité simplement et sans erreur',
+    description: 'Je vous accompagne dans la fermeture de votre entreprise individuelle : préparation du dossier, vérification et dépôt auprès de l’INPI. Vous gagnez du temps et évitez les erreurs.',
+    button: { text: 'Fermer mon entreprise', link: '/services/cessation-entreprise-individuelle', "data-analytics": "Main_cta_cessation_click", variant: 'primary' as const, target: '_self' as const },
+};
+
+const styleGuideSection = {
+    eyebrow: 'Cessation d’entreprise individuelle',
+    headline: 'Une fermeture simple, encadrée et sans erreur',
+    description: 'Mettre fin à son activité peut sembler complexe. Je vous accompagne à chaque étape pour constituer un dossier de cessation conforme, éviter les erreurs et déposer votre demande auprès de l’INPI en toute sérénité.',
+    image: { src: styleGuideImage, alt: 'Cessation d’entreprise individuelle - préparation du dossier de fermeture' },
+    buttons: [
+        { text: 'Fermer mon entreprise', link: '/services/cessation-entreprise-individuelle', "data-analytics": "styleguide_cessation_cta_click", variant: 'primary' as const },
+    ],
+};
+
+const linkCta = {
+    eyebrow: 'Nouveau projet',
+    title: 'Vous souhaitez relancer une activité ?',
+    description: 'Après la fermeture de votre entreprise individuelle, vous pouvez créer une nouvelle activité simplement et en toute conformité.',
+    button: { text: 'Créer une entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Link_cta_cessation_click", variant: 'primary' as const, target: '_self' as const },
+};
+
+const sideBySideStats = {
+    eyebrow: 'Cessation d’entreprise individuelle',
+    title: 'Une fermeture simple, rapide et sécurisée',
+    description: 'Je vous accompagne dans la fermeture de votre entreprise individuelle pour éviter les erreurs et sécuriser vos démarches auprès de l’INPI.',
+    variant: 'side-by-side' as const,
+    stats: statsLists.close.stats,
+    content: {
+        title: 'Une cessation conforme dès le premier dépôt',
+        description: 'Je vérifie l’ensemble de votre dossier avant dépôt pour limiter les risques d’erreur et vous permettre de clôturer votre activité sereinement.',
+    },
+};
+
+const faqsSection = {
+    eyebrow: "Cessation d’entreprise individuelle",
+    title: 'Tout ce que vous devez savoir avant de fermer votre entreprise',
+    description: 'Je réponds aux questions les plus fréquentes sur la cessation d’activité et mon accompagnement pour fermer votre entreprise individuelle.',
+    faqs: faqLists.close.faqs,
+};
+
+const FooterCta = {
+    eyebrow: "Cessation d’entreprise individuelle",
+    title: 'Fermez votre activité en toute simplicité',
+    description: 'Je vous accompagne dans la fermeture de votre entreprise individuelle de A à Z : préparation du dossier, vérification et dépôt auprès de l’INPI.',
+    hideCta: false,
+    button: { text: 'Fermer mon entreprise', link: '/services/cessation-entreprise-individuelle', "data-analytics": "footer_cessation_cta_click",target: '_self' },
+};
+
+---
+
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='demeter' image={image}>
+    <Hero content={heroContent} />
+    <Features content={featuresSection} padding="responsive" background="base" />
+    <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="base" padding="responsive" />
+    <CtaBanner content={linkCta} variant="contained" background="light" paddingBottom="responsive" />
+    <Stats content={sideBySideStats} background="dark" padding="responsive" />
+    <Faqs content={faqsSection} background="base" padding="responsive" />
+</Layout>

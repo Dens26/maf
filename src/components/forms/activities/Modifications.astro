@@ -1,0 +1,211 @@
+---
+import Button from '@components/ui/Button.astro';
+import Checkbox from '@components/ui/form/Checkbox.astro';
+import Input from '@components/ui/form/Input.astro';
+import Textarea from '@components/ui/form/Textarea.astro';
+import Select from '@components/ui/form/Select.astro';
+import Radio from '@components/ui/form/Radio.astro';
+import Date from '@components/ui/form/Date.astro';
+import countries from 'public/data/countries.json';
+
+const complementnumberOptions = [
+    { label: '', value: '' },
+    { label: 'Bis', value: 'bis' },
+    { label: 'Ter', value: 'ter' },
+    { label: 'Quater', value: 'quater' },
+    { label: 'Quinquies', value: 'quinquies' },
+    { label: 'Sexies', value: 'sexies' },
+    { label: 'Septies', value: 'septies' },
+    { label: 'Octies', value: 'octies' },
+    { label: 'Nonies', value: 'nonies' },
+];
+
+const destinationOptions = [
+    { label: "Au domicile de l'entrepreneur", value: 'domicile' },
+    { label: 'Dans une autre adresse', value: 'nouvelle_adresse' },
+    { label: "Auprès d'une société de domiciliation", value: 'societe_domiciliation' },
+    { label: 'Dans un établissement existant', value: 'etablissement_existant' },
+];
+
+const adresseActiviteOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const tracktypeOptions = [
+    { label: 'Allée', value: 'Allée' },
+    { label: 'Allée privée', value: 'Allée privée' },
+    { label: 'Avenue', value: 'Avenue' },
+    { label: 'Boulevard', value: 'Boulevard' },
+    { label: 'Boulevard périphérique', value: 'Boulevard périphérique' },
+    { label: 'Cité', value: 'Cité' },
+    { label: 'Cour', value: 'Cour' },
+    { label: 'Chemin', value: 'Chemin' },
+    { label: 'Chemin rural', value: 'Chemin rural' },
+    { label: 'Impasse', value: 'Impasse' },
+    { label: 'Lotissement', value: 'Lotissement' },
+    { label: 'Parc', value: 'Parc' },
+    { label: 'Passage', value: 'Passage' },
+    { label: 'Place', value: 'Place' },
+    { label: 'Place de la…', value: 'Place de la…' },
+    { label: 'Promenade', value: 'Promenade' },
+    { label: 'Quai', value: 'Quai' },
+    { label: 'Route', value: 'Route' },
+    { label: 'Route départementale', value: 'Route départementale' },
+    { label: 'Route nationale', value: 'Route nationale' },
+    { label: 'Ruelle', value: 'Ruelle' },
+    { label: 'Résidence', value: 'Résidence' },
+    { label: 'Sentier', value: 'Sentier' },
+    { label: 'Villa', value: 'Villa' },
+    { label: 'Voie', value: 'Voie' },
+    { label: 'Zone industrielle', value: 'Zone industrielle' },
+];
+
+const etablishmentOptions = [
+    { label: 'Nouvel établissement', value: 'nouveau' },
+    { label: 'Etablissement existant', value: 'existant' }
+];
+
+const countryOptions = [
+    { label: "France", value: "FR" },
+    ...countries
+        .filter(c => c.name !== "France")
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(c => ({ label: c.name, value: c.code }))
+];
+
+const formBackground = 'light';
+---
+
+<div>
+    <h3 class="text-2xl font-semibold mb-4 text-primary">Informations concernant votre changement d'adresse</h3>
+</div>
+
+<form id="activities-form">
+    <!-- ADRESSE ENTREPRENEUR -->
+    <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold mb-4"></div>
+        <div class="text-md font-semibold">Ajout d'activité(s)</div>
+        <Checkbox label="Je souhaite ajouter une ou plusieurs activités" value="addActivity" id="addActivity" name="demenagement" background={formBackground}/>
+
+        <!-- Mettre hidden -->
+        <div id="addActivity-wrapper" class="hidden"> 
+            <Select label="Choix de l'établissement" id="country" name="country" options={etablishmentOptions} required background={formBackground}/>
+
+            <!-- Mettre hidden -->
+            <div id="existingEtablishment-wrapper">
+
+            </div>
+
+            <!-- Mettre hidden -->
+            <!-- ADRESSE DE L'ÉTABLISSEMENT -->
+            <div id="newEtablishment-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 transition-all duration-300">
+                <div class="text-md font-semibold">Adresse de l'établissement</div>
+                <div>
+                    <Checkbox label="Je souhaite que cette adresse soit utilisée comme adresse de correspondance" value="oui" id="correspondance" name="correspondance" background={formBackground} />
+                    <p class="text-sm text-primary mt-1">⚠️ Par défaut, l’adresse de correspondance est celle de l’entrepreneur. Cochez cette case uniquement si vous voulez utiliser une adresse différente.</p>
+                </div>
+                <div class="grid grid-cols-12 gap-2 sm:gap-4">
+                <div class="col-span-2"><Input label="N°" id="newEtablishmenttracknumber" name="newEtablishmenttracknumber" required background={formBackground}/></div>
+                <div class="col-span-3"><Select label="Indice" id="newEtablishmentcomplementnumber" name="newEtablishmentcomplementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder="" /></div>
+                <div class="col-span-7"><Select label="Type de voie" id="newEtablishmenttracktype" name="newEtablishmenttracktype" options={tracktypeOptions} required background={formBackground} /></div>
+                </div>
+                <Input label="Nom de la voie" id="newEtablishmentway" name="newEtablishmentway" required background={formBackground}/>
+                <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                <Input label="Code postal" id="newEtablishmentzipcode" name="newEtablishmentzipcode" required background={formBackground}/>
+                <Input label="Ville" id="newEtablishmentcity" name="newEtablishmentcity" required background={formBackground} class="capitalize"/>
+                </div>
+                <div class="grid grid-cols-2 gap-2 sm:gap-4">
+                <Input label="Complément" id="newEtablishmentadditionaladdress" name="newEtablishmentadditionaladdress" data-optional="true" background={formBackground}/>
+                <Select label="Pays" id="newEtablishmentcountry" name="newEtablishmentcountry" options={countryOptions} required background={formBackground}/>
+                </div>
+            </div>
+            <div class="space-y-2 sm:space-y-4 bg-gray-50 p-2 sm:p-4 rounded-sm mb-4">
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- OBSERVATION / COMMENTAIRES -->
+    <div class="space-y-2 sm:space-y-4 bg-white p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold mb-4">Informations complémentaires</div>
+        <Checkbox label="Je demande la non-diffusion des informations relatives à mon entreprise au répertoire Sirene de l’INSEE" value="oui" id="diffusioninsee" name="diffusioninsee" background={formBackground} />
+        <Checkbox label="Je consens à la mise à disposition de mes données personnelles à des fins de prospection" value="oui" id="prospection" name="prospection" background={formBackground}/>
+        <Textarea rows={6} label="Précisions utiles à votre demande" id="observation" name="observation" background={formBackground} class="text-sm"/>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="flex justify-between my-8">
+        <Button href="/forms/activities/entrepreneur" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+        <Button type="submit" variant="primary" size="md" class="uppercase">Étape suivante</Button>
+    </div>
+</form>
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('activities-form');
+    if (!form) return;
+
+    const STORAGE_KEY = 'activities-modifications-form';
+
+    /* ================= LOCALSTORAGE ================= */
+    const saveForm = () => {
+        const data = {};
+        new FormData(form).forEach((value, key) => {
+            if (data[key]) {
+                if (Array.isArray(data[key])) data[key].push(value);
+                else data[key] = [data[key], value];
+            } else {
+                data[key] = value;
+            }
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    };
+
+    const restoreForm = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        Object.entries(data).forEach(([name, value]) => {
+            const fields = form.querySelectorAll(`[name="${name}"]`);
+            if (!fields.length) return;
+            fields.forEach((field) => {
+                if (field.type === 'checkbox' || field.type === 'radio') {
+                    if (Array.isArray(value)) field.checked = value.includes(field.value);
+                    else field.checked = field.value === value;
+                } else {
+                    field.value = value;
+                }
+            });
+        });
+    };
+    restoreForm();
+    form.addEventListener('input', saveForm);
+    form.addEventListener('change', saveForm);
+
+    /* ================= HELPER TOGGLE ================= */
+    const setupToggle = (checkboxId, wrapperId, exceptions = []) => {
+        const checkbox = form.querySelector(`#${checkboxId}`);
+        const wrapper = form.querySelector(`#${wrapperId}`);
+        if (!checkbox || !wrapper) return;
+
+        const toggle = () => {
+            const show = checkbox.checked;
+            wrapper.classList.toggle('hidden', !show);
+
+            wrapper.querySelectorAll('input, select, textarea').forEach((f) => {
+                f.style.display = show ? '' : 'none';
+                const isException = exceptions.includes(f.id);
+                const isCheckbox = f.type === 'checkbox';
+                f.required = isCheckbox ? false : (show && !f.hasAttribute('data-optional') && !isException);
+            });
+        };
+
+        toggle();
+        checkbox.addEventListener('change', toggle);
+    };
+
+    setupToggle('addActivity', 'addActivity-wrapper', ['newEtablishmentcomplementnumber', 'newEtablishmentadditionaladdress']);
+});
+</script>

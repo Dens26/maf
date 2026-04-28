@@ -6,10 +6,11 @@ import Checkbox from '@components/ui/form/Checkbox.astro';
 import Select from '@components/ui/form/Select.astro';
 
 const hearAboutOptions = [
-    { label: 'Moteur de recherche', value: 'search' },
-    { label: 'Réseaux sociaux', value: 'social' },
-    { label: 'Amis/Collègues', value: 'referral' },
-    { label: 'Autre', value: 'other' },
+    { label: 'Moteur de recherche', value: 'Moteur de recherche' },
+    { label: 'Réseaux sociaux (Facebook, LinkedIn)', value: 'Réseaux sociaux' },
+    { label: 'Email / Newsletter', value: 'Email' },
+    { label: 'Amis / Collègues', value: 'Recommandation' },
+    { label: 'Autre', value: 'Autre' },
 ];
 
 const serviceOptions = [
@@ -18,6 +19,8 @@ const serviceOptions = [
   { label: "Modification d'activité", value: "modification-activite" },
   { label: "Correction", value: "correction-rne" },
   { label: "Cessation", value: "cessation" },
+  { label: "Signature", value: "signature" },
+  { label: "Autre", value: "autre" },
 ];
 
 const formBackground = 'light';
@@ -34,33 +37,13 @@ const formBackground = 'light';
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Select
-            label="Comment avez-vous connu MAF ?"
-            id="hear_about"
-            name="hear_about"
-            options={hearAboutOptions}
-            required
-            background={formBackground}
-        />
-        <Select
-            label="Quelle prestation vous intéresse ?"
-            id="service"
-            name="service"
-            options={serviceOptions}
-            required
-            background={formBackground}
-        />
+        <Select label="Comment avez-vous connu MAF ?" id="hear_about" name="hear_about" options={hearAboutOptions} required background={formBackground}/>
+        <Select label="Sujet de la demande ?" id="service" name="service" options={serviceOptions} required background={formBackground}/>
     </div>
 
-    <Textarea label="Message" id="message" name="message" required background={formBackground} />
+    <Textarea label="Message" id="message" name="message" required background={formBackground} rows={8} />
 
-    <Checkbox
-        label="J'accepte les termes et conditions"
-        id="terms"
-        name="terms"
-        required
-        background={formBackground}
-    />
+    <Checkbox label="J'accepte les termes et conditions" id="terms" name="terms" required background={formBackground}/>
 
     <div class="mt-6">
         <Button type='submit'>Envoyer</Button>

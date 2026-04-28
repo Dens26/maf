@@ -1,0 +1,141 @@
+---
+import Button from '@components/ui/Button.astro';
+import Checkbox from '@components/ui/form/Checkbox.astro';
+import Textarea from '@components/ui/form/Textarea.astro';
+
+const formBackground = 'light';
+---
+
+<div>
+  <h3 class="text-2xl font-semibold mb-4">Informations à corriger</h3>
+</div>
+
+<form id="correction-form">
+  <!-- CORRECTION OPTIONS -->
+  <div class="space-y-2 md:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold mb-4">Sélectionner les informations à corriger</div>
+    
+    <Checkbox label="Je souhaite corriger les données personnelles de l'entrepreneur (nom, prénom, date de naissance, etc.)" value="entrepreneur" id="entrepreneur" name="entrepreneur" background={formBackground} />
+    <div id="entrepreneur-wrapper" class="hidden"><Textarea rows={5}label="Précisez votre correction" id="correctifEntrepreneur" name="correctifEntrepreneur" background={formBackground} required class="text-sm" /></div>
+
+    <Checkbox label="Je souhaite corriger l'adresse personnelle de l'entrepreneur" value="adresse" id="adresse" name="adresse" background={formBackground} />
+    <div id="adresse-wrapper" class="hidden"><Textarea rows={5}label="Précisez votre correction" id="correctifAdresse" name="correctifAdresse" background={formBackground} required class="text-sm" /></div>
+
+    <Checkbox label="Je souhaite corriger les informations concernant mon établissement (adresse, nom commercial, principal/secondaire, etc.)" value="etablissement" id="etablissement" name="etablissement" background={formBackground} />
+    <div id="entretablissementpreneur-wrapper" class="hidden"><Textarea rows={5}label="Précisez votre correction" id="correctifEtablissement" name="correctifEtablissement" background={formBackground} required class="text-sm" /></div>
+
+    <Checkbox label="Je souhaite corriger les informations concernant mon activité (codes APE, date de début d'activité, etc.)" value="activite" id="activite" name="activite" background={formBackground} />
+    <div id="activite-wrapper" class="hidden"><Textarea rows={5}label="Précisez votre correction" id="correctifActivite" name="correctifActivite" background={formBackground} required class="text-sm" /></div>
+
+    <Checkbox label="Autre correction" value="autre" id="autre" name="autre" background={formBackground} />
+    <div id="autre-wrapper" class="hidden"><Textarea rows={5}label="Précisez votre correction" id="correctifAutre" name="correctifAutre" background={formBackground} required class="text-sm" /></div>
+
+  </div>
+
+  <!-- OBSERVATION / COMMENTAIRES -->
+  <div class="space-y-2 sm:space-y-4 bg-white p-4 rounded-sm mb-4">
+    <div class="text-md font-semibold mb-4">Informations complémentaires</div>
+    
+    <Checkbox label="Je consens à la mise à disposition de mes données personnelles à des fins de prospection" value="oui" id="prospection" name="prospection" background={formBackground} />
+    <Textarea rows={5}label="Précisions utiles à votre demande" id="observation" name="observation" background={formBackground} class="text-sm" />
+
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="flex justify-between my-8">
+    <Button href="/forms/correction/entrepreneur" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+    <Button type="submit" variant="primary" size="md" class="uppercase">Étape suivante</Button>
+  </div>
+</form>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('correction-form');
+        if (!form) return;
+
+        const STORAGE_KEY = 'correction-correctif-form';
+
+        /* ================= LOCALSTORAGE ================= */
+        const saveForm = () => {
+            const data = {};
+            new FormData(form).forEach((value, key) => {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) data[key].push(value);
+                    else data[key] = [data[key], value];
+                } else {
+                    data[key] = value;
+                }
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        };
+
+        const restoreForm = () => {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            const data = JSON.parse(saved);
+
+            Object.entries(data).forEach(([name, value]) => {
+                const field = form.querySelector(`[name="${name}"]`);
+                if (!field) return;
+
+                if (field.type === 'checkbox') {
+                    if (Array.isArray(value)) {
+                        if (value.includes(field.value)) field.checked = true;
+                    } else {
+                        field.checked = field.value === value;
+                    }
+                } else {
+                    field.value = value;
+                }
+            });
+        };
+
+        restoreForm();
+        form.addEventListener('input', saveForm);
+        form.addEventListener('change', saveForm);
+
+        /* ================= TOGGLE TEXTAREAS AVEC REQUIRED ================= */
+        const toggleTextarea = (checkboxId, wrapperId, textareaId) => {
+            const checkbox = document.getElementById(checkboxId);
+            const wrapper = document.getElementById(wrapperId);
+            const textarea = document.getElementById(textareaId);
+            if (!checkbox || !wrapper || !textarea) return;
+
+            const update = () => {
+                if (checkbox.checked) {
+                    wrapper.classList.remove('hidden');
+                    textarea.required = true;
+                } else {
+                    wrapper.classList.add('hidden');
+                    textarea.required = false;
+                }
+            };
+
+            checkbox.addEventListener('change', () => {
+                update();
+                saveForm();
+            });
+
+            update(); // état initial
+        };
+
+        toggleTextarea('entrepreneur', 'entrepreneur-wrapper', 'correctifEntrepreneur');
+        toggleTextarea('adresse', 'adresse-wrapper', 'correctifAdresse');
+        toggleTextarea('etablissement', 'entretablissementpreneur-wrapper', 'correctifEtablissement');
+        toggleTextarea('activite', 'activite-wrapper', 'correctifActivite');
+        toggleTextarea('autre', 'autre-wrapper', 'correctifAutre');
+
+        /* ================= FORM SUBMIT ================= */
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            localStorage.setItem('correction-correctif-form', JSON.stringify(data));
+
+            window.location.href = '/forms/correction/recapitulatif';
+        });
+    });
+</script>

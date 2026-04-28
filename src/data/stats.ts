@@ -29,13 +29,58 @@ export const statsLists: Record<string, StatsList> = {
             { value: 500000, label: 'Lines of Code', prefix: '+' }
         ]
     },
+    create: {
+        id: 'create',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Heures en moyenne pour traitement', suffix: 'h' },
+            { value: 0, label: 'Erreur évitée grâce à la vérification', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    close: {
+        id: 'close',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    move: {
+        id: 'move',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    correction: {
+        id: 'correction',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
+    activity: {
+        id: 'activity',
+        stats: [
+            { value: 0, label: 'Stress administratif' },
+            { value: 24, label: 'Traitement moyen des dossiers', suffix: 'h' },
+            { value: 0, label: 'Erreur dans les dossiers préparés', suffix: '%' },
+            { value: 100, label: 'Formalités réalisées en ligne', suffix: '%' }
+        ]
+    },
     withContent: {
         id: 'withContent',
         stats: [
-            { value: 2026, label: "lancement du service" },
-            { value: 100, label: "démarches traitées en ligne", suffix: " %" },
-            { value: 59, label: "la création de votre EI*", suffix: " €" },
-            { value: 48, label: "délai de réponse maximum", prefix: "< ", suffix: " h" }
-        ]
+            { value: 0, label: 'Stress administratif' },
+            { value: 100, label: 'Clarté et suivi', suffix: '%' },
+            { value: 0, label: 'Erreurs dans les dossiers' },
+            { value: 100, label: 'Accompagnement personnalisé', suffix: '%' }
+        ],
     }
 };

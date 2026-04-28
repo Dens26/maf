@@ -9,8 +9,8 @@ interface Option {
 
 interface Props {
     label: string;
-    id: string;
-    name: string;
+    id?: string;
+    name?: string;
     options: Option[];
     required?: boolean;
     background?: ThemeColor;
@@ -37,7 +37,7 @@ const bgClass = getBackgroundColor(background === 'dark' ? 'light' : 'base');
         {label}
         {required && <span class="text-red-500">*</span>}
     </label>
-    <div class="space-y-2">
+    <div class="flex items-center gap-2">
         {options.map((option, index) => (
             <div class="flex items-center space-x-2">
                 <input

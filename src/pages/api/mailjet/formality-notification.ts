@@ -25,13 +25,13 @@ export async function POST({ request }: APIContext) {
         // Envoi du mail notification
         switch (action){
             case 'terminer_formalite' :
-                await sendCompletedFormalityNotification(formality.demandeid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
+                await sendCompletedFormalityNotification(formality.demandeid, formality.typeformaliteid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
                 break;
             case 'rejeter_formalite' :
-                await sendRejectedFormalityNotification(formality.demandeid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
+                await sendRejectedFormalityNotification(formality.demandeid, formality.typeformaliteid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
                 break;
             case 'annuler_formalite' :
-                await sendCanceledFormalityNotification(formality.demandeid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
+                await sendCanceledFormalityNotification(formality.demandeid, formality.typeformaliteid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
                 break;
             default :
                 return new Response(JSON.stringify({ error: 'Action inconnue' }), { status: 400 });

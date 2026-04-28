@@ -1,0 +1,226 @@
+---
+import Button from '@components/ui/Button.astro';
+import Input from '@components/ui/form/Input.astro';
+import Select from '@components/ui/form/Select.astro';
+import countries from 'public/data/countries.json';
+
+const genderOptions = [
+  { label: 'M.', value: 'monsieur' },
+  { label: 'Mme', value: 'madame' },
+];
+
+const complementnumberOptions = [
+  { label: '', value: '' },
+  { label: 'Bis', value: 'bis' },
+  { label: 'Ter', value: 'ter' },
+  { label: 'Quater', value: 'quater' },
+  { label: 'Quinquies', value: 'quinquies' },
+  { label: 'Sexies', value: 'sexies' },
+  { label: 'Septies', value: 'septies' },
+  { label: 'Octies', value: 'octies' },
+  { label: 'Nonies', value: 'nonies' }
+];
+
+const tracktypeOptions = [
+  { label: "Allée", value: "Allée" },
+  { label: "Allée privée", value: "Allée privée" },
+  { label: "Avenue", value: "Avenue" },
+  { label: "Boulevard", value: "Boulevard" },
+  { label: "Boulevard périphérique", value: "Boulevard périphérique" },
+  { label: "Cité", value: "Cité" },
+  { label: "Cour", value: "Cour" },
+  { label: "Chemin", value: "Chemin" },
+  { label: "Chemin rural", value: "Chemin rural" },
+  { label: "Impasse", value: "Impasse" },
+  { label: "Lotissement", value: "Lotissement" },
+  { label: "Parc", value: "Parc" },
+  { label: "Passage", value: "Passage" },
+  { label: "Place", value: "Place" },
+  { label: "Place de la…", value: "Place de la…" },
+  { label: "Promenade", value: "Promenade" },
+  { label: "Quai", value: "Quai" },
+  { label: "Route", value: "Route" },
+  { label: "Route départementale", value: "Route départementale" },
+  { label: "Route nationale", value: "Route nationale" },
+  { label: "Ruelle", value: "Ruelle" },
+  { label: "Résidence", value: "Résidence" },
+  { label: "Sentier", value: "Sentier" },
+  { label: "Villa", value: "Villa" },
+  { label: "Voie", value: "Voie" },
+  { label: "Zone industrielle", value: "Zone industrielle" }
+];
+
+const countryOptions = [
+  { label: "France", value: "FR" },
+  ...countries
+    .filter(c => c.name !== "France")
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(c => ({ label: c.name, value: c.code }))
+];
+
+const nationalityOptions = [
+  { label: "Française", value: "FR" },
+  ...countries
+    .filter(c => c.nationality !== "Française")
+    .sort((a, b) => a.nationality.localeCompare(b.nationality))
+    .map(c => ({ label: c.nationality, value: c.code }))
+];
+
+const hearAboutOptions = [
+    { label: 'Moteur de recherche', value: 'Moteur de recherche' },
+    { label: 'Réseaux sociaux (Facebook, LinkedIn)', value: 'Réseaux sociaux' },
+    { label: 'Email / Newsletter', value: 'Email' },
+    { label: 'Amis / Collègues', value: 'Recommandation' },
+    { label: 'Autre', value: 'Autre' },
+];
+
+const formBackground = 'light';
+---
+
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md mb-6">
+  <p class="font-semibold text-yellow-800 mb-1">⚠️ Attention</p>
+  <p class="text-sm text-yellow-700 leading-relaxed">
+    La formalité de cessation entraîne l’arrêt total de l’entreprise, qu’il soit définitif ou temporaire, <strong>incluant l’ensemble des activités et des établissements.</strong>
+    <br><br>
+    Si vous souhaitez seulement supprimer une activité ou un établissement, il s’agit d’une formalité de modification et non d’une cessation.
+  </p>
+</div>
+
+
+<form id="cessation-form">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <Select label="Comment avez-vous connu Mon Assistant Formalités ?" id="hearabout" name="hearabout" options={hearAboutOptions} required background={formBackground}/>
+    </div>
+    <div>
+    <h3 class="text-xl-2 font-semibold mb-4">Informations personnelles</h3>
+    </div>
+    <!-- Contact -->
+     <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+        <div class="text-md font-semibold">Contact</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
+            <Input label="Téléphone" id="phone" name="phone" required background={formBackground}/>
+        </div>
+    </div>
+
+    <!-- Entrepreneur -->
+    <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold">Entrepreneur</div>
+
+        <!-- Genre / Nom / Prénom -->
+        <div class="grid grid-cols-5 gap-2 sm:gap-4">
+            <Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" placeholder='' />
+            <div class="col-span-4 flex gap-2 sm:gap-4">
+                <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase"/>
+                <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize"/>
+            </div>
+        </div>
+
+        <!-- Nom d'usage / Date / Pays / Département / Ville / Nationalité / Situation -->
+        <div class="flex flex-wrap gap-2 sm:gap-4">
+            <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase"/></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground}/></div>
+        </div>
+    </div>
+
+    <!-- Adresse de l'entrepreneur -->
+    <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold">Adresse de correspondance</div>
+        <div class="grid grid-cols-12 gap-2 sm:gap-4">
+            <div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground}/></div>
+            <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=''/></div>
+            <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground} /></div>
+        </div>
+        <Input label="Nom de la voie" id="way" name="way" required background={formBackground}/>
+        <div class="grid grid-cols-2 gap-2 sm:gap-4">
+            <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground}/>
+            <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground}/>
+        </div>
+        <div class="grid grid-cols-2 gap-2 sm:gap-4">
+            <Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground}/>
+            <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize"/>
+        </div>
+    </div>
+
+
+    <div class="text-end my-8">
+        <Button type="submit" variant="primary" size="md" class='uppercase'>étape suivante</Button>
+    </div>
+</form>
+
+<script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('cessation-form');
+        if (!form) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // 🚨 ultra important
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            localStorage.setItem('cessation-entrepreneur-form', JSON.stringify(data));
+
+            window.location.href = '/forms/cessation/business';
+        });
+
+        const STORAGE_KEY = 'cessation-entrepreneur-form';
+
+        /* ================= STORAGE ================= */
+
+        const saveForm = () => {
+            const data = {};
+            new FormData(form).forEach((value, key) => (data[key] = value));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        };
+
+        const restoreForm = () => {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            const data = JSON.parse(saved);
+
+            Object.entries(data).forEach(([name, value]) => {
+                const field = form.querySelector(`[name="${name}"]`);
+                if (field) field.value = value;
+            });
+        };
+
+        restoreForm();
+
+        form.addEventListener('input', saveForm);
+        form.addEventListener('change', saveForm);
+
+        /* ================= FIELDS ================= */
+
+        const country = document.getElementById('country');
+        const zipCode = document.getElementById('zipcode');
+
+        /* ================= EVENTS ================= */
+
+        // reset zipcode si pays change
+        country?.addEventListener('change', () => {
+            if (zipCode) zipCode.value = '';
+        });
+
+        /* ================= FILTER INPUTS ================= */
+
+        document.addEventListener('input', (e) => {
+            // Code postal FR → 5 chiffres
+            if (e.target.name === 'zipcode' && (country.value === 'FR' || country.value === ''))
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+
+            // téléphone → chiffres uniquement
+            if (e.target.name === 'phone')
+                e.target.value = e.target.value.replace(/\D/g, '');
+
+            // numéro de voie → chiffres uniquement
+            if (e.target.name === 'tracknumber')
+                e.target.value = e.target.value.replace(/\D/g, '');
+
+            // ville → pas de chiffres
+            if (e.target.name === 'city')
+                e.target.value = e.target.value.replace(/\d/g, '');
+        });
+    });
+</script>

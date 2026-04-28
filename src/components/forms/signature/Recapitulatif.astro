@@ -1,0 +1,440 @@
+---
+import Button from '@components/ui/Button.astro';
+
+const formBackground = 'light';
+---
+
+
+<h3 class="text-xl-2 font-semibold mb-4">Récapitulatif de vos informations</h3>
+
+<form id="recap-form">
+    <!-- RECAP CONTAINER -->
+    <div id="recap-container" class="space-y-4 text-sm mb-4"></div>
+
+    <!-- UPLOAD SYNTHÈSE PDF -->
+    <div class="mb-4">
+        <label class="block mb-2 font-medium text-gray-700">Déposez la synthèse PDF générée :</label>
+        <input type="file" id="synthese" name="synthese" accept="application/pdf" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-black file:text-white hover:file:bg-gray-800 cursor-pointer"/>
+    </div>
+
+    <!-- CERTIFICATION -->
+    <div class="mb-4">
+        <label class="flex items-center space-x-2">
+            <input type="checkbox" id="certify" required class="w-4 h-4 text-primary border-gray-300 rounded" />
+            <span class="text-sm text-gray-700">
+                Je certifie que les informations fournies sont exactes et que j’ai pris connaissance et accepté les 
+                <a href="/legal/conditions-generales-de-vente" target="_blank" class="text-blue-600 underline">Conditions Générales</a> de Mon Assistant Formalités.  
+                Je consens à ce que ma demande soit transmise pour traitement.
+            </span> 
+        </label>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="flex justify-between my-8">
+        <Button href="/forms/signature/entrepreneur" variant="primary" size="md" class="uppercase">Étape précédente</Button>
+        <Button type="submit" variant="primary" size="md" class="uppercase" id="submit-formality">Envoyer</Button>
+    </div>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script type="module">
+    const { jsPDF } = window.jspdf;
+    
+    function generateDemandeId() {
+        const brand = 'MAF';
+        const prefix = 'SI';
+
+        // Date format YYMMDD
+        const now = new Date();
+        const year = String(now.getFullYear()).slice(-2);
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const datePart = `${year}${month}${day}`;
+
+        // 7 caractères alphanumériques aléatoires
+        const array = new Uint8Array(4);
+        window.crypto.getRandomValues(array);
+        const randomPart = Array.from(array)
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('')
+            .slice(0, 7)
+            .toUpperCase();
+
+        return `${brand}${prefix}-${datePart}-${randomPart}`;
+    }
+
+    async function generateRecapPdf(demandeId, recapContainer, options = { download: true }) {
+        const { download } = options;
+        const doc = new jsPDF();
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+        let y = 20;
+
+        /* HEADER */
+        const img = new Image();
+        img.src = "/images/logo.png";
+        await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; });
+
+        const logoWidth = 130;
+        const ratio = img.height / img.width;
+        const logoHeight = logoWidth * ratio;
+        doc.addImage(img, "PNG", pageWidth / 2 - logoWidth / 2, y, logoWidth, logoHeight);
+        y += logoHeight + 10;
+
+        doc.setFontSize(12);
+        doc.setTextColor(33, 33, 33);
+        doc.text('Récapitulatif de demande de finalisation de formalité', pageWidth / 2, y, { align: 'center' });
+        y += 10;
+
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        const today = new Date().toLocaleDateString('fr-FR');
+        doc.text(`N° Dossier : ${demandeId}`, 20, y);
+        doc.text(`Date : ${today}`, pageWidth - 20, y, { align: 'right' });
+        y += 15;
+
+        /* CONTENT */
+        const sections = recapContainer.querySelectorAll('.bg-white');
+
+        for (const section of sections) {
+            const titleEl = section.querySelector('h3');
+            const contentDiv = section.querySelector('div.space-y-1') || section.querySelector('div');
+
+            if (!titleEl || !contentDiv) continue;
+
+            const title = titleEl.textContent.trim();
+
+            // Nouvelle page si besoin
+            if (y > pageHeight - 30) { doc.addPage(); y = 20; }
+
+            // TITRE SECTION
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.setTextColor(26, 60, 140);
+            doc.text(title, 20, y);
+
+            y += 4;
+            doc.setDrawColor(26, 60, 140);
+            doc.setLineWidth(0.5);
+            doc.line(20, y, pageWidth - 20, y);
+            y += 8;
+
+            const lines = contentDiv.querySelectorAll('div');
+
+            for (const line of lines) {
+                const labelEl = line.querySelector('.font-medium');
+                const valueEl = line.querySelector('.text-gray-600');
+
+                const label = labelEl ? labelEl.textContent.trim() : '';
+                const value = valueEl ? valueEl.textContent.trim() : '';
+
+                if (!label && !value) continue;
+
+                const fullWidth = pageWidth - 40;
+                const lineHeight = 5;
+
+                if (!label && value) {
+                    // bloc texte (textarea ou multi-lignes)
+                    const splitValue = doc.splitTextToSize(value, fullWidth);
+                    const blockHeight = splitValue.length * lineHeight + 6;
+
+                    if (y + blockHeight > pageHeight - 20) { doc.addPage(); y = 20; }
+
+                    doc.setFillColor(245, 247, 250);
+                    doc.roundedRect(18, y - 3, fullWidth + 4, blockHeight, 2, 2, 'F');
+
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(11);
+                    doc.setTextColor(40, 40, 40);
+                    doc.text(splitValue, 20, y + 2);
+                    y += blockHeight + 4;
+                    continue;
+                }
+
+                if (label && !value) {
+                    // ligne titre
+                    if (y > pageHeight - 20) { doc.addPage(); y = 20; }
+
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(12);
+                    doc.setTextColor(0, 0, 0);
+                    doc.text(label, 20, y);
+                    y += 6;
+                    continue;
+                }
+
+                // ligne classique
+                const labelWidth = 65;
+                const valueWidth = pageWidth - 40 - labelWidth;
+                const splitLabel = doc.splitTextToSize(label, labelWidth - 5);
+                const splitValue = doc.splitTextToSize(value, valueWidth);
+                const rowHeight = Math.max(splitLabel.length, splitValue.length) * lineHeight;
+
+                if (y + rowHeight > pageHeight - 20) { doc.addPage(); y = 20; }
+
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.setTextColor(60, 60, 60);
+                doc.text(splitLabel, 20, y);
+
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(33, 33, 33);
+                doc.text(splitValue, 20 + labelWidth, y);
+
+                y += rowHeight + 3;
+            }
+
+            y += 6;
+        }
+
+        /* FOOTER + tampon */
+        const totalPages = doc.getNumberOfPages();
+        for (let i = 1; i <= totalPages; i++) {
+            doc.setPage(i);
+
+            const stampText = `CERTIFIÉ`;
+            const stampX = pageWidth / 2;
+            const stampY = pageHeight / 2;
+            const fontSize = 30;
+            const angle = -25;
+
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(fontSize);
+            doc.setTextColor(200, 0, 0);
+            doc.setDrawColor(200, 0, 0);
+            doc.setLineWidth(1);
+
+            doc.setGState(new doc.GState({ opacity: 0.2 }));
+            doc.text(stampText, stampX, stampY, { align: "center", angle });
+            doc.setGState(new doc.GState({ opacity: 1 }));
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.setTextColor(120);
+
+            doc.text('Document généré automatiquement par Mon Assistant Formalités', pageWidth / 2, pageHeight - 15, { align: 'center' });
+            doc.text(`Certifié conforme par le déclarant le ${today} après acceptation des CGV`, pageWidth / 2, pageHeight - 10, { align: "center" });
+            doc.text(`Page ${i} / ${totalPages}`, pageWidth - 20, pageHeight - 10, { align: 'right' });
+        }
+
+        if (download) doc.save(`Recap_Correction_${demandeId}.pdf`);
+        return doc.output('blob');
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        /* CONFIG */
+
+        const STORAGE_KEY_ENTREPRENEUR = 'signature-entrepreneur-form';
+
+        const recapContainer = document.getElementById('recap-container');
+        const form = document.getElementById('recap-form');
+
+        if (!recapContainer || !form) return;
+
+        const countries = await fetch('/data/countries.json').then((r) => r.json());
+
+        const entrepreneur = JSON.parse(localStorage.getItem(STORAGE_KEY_ENTREPRENEUR) || '{}');
+
+        /* HELPERS */
+
+        const formatCountry = (code) => {
+            if (!code) return '-';
+            const c = countries.find((x) => x.code === code);
+            return c ? c.name : code;
+        };
+
+        const capitalizeWords = (v = '') =>
+            v
+                .toLowerCase()
+                .split(' ')
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+
+        const createLine = (label, values, way = 'right') => {
+            if (way === 'left') {
+                return `
+                <div class="border-b border-gray-200 py-1 flex flex-col">
+                    ${label ? `<span class="font-medium mb-1">${label}</span>` : ''}
+                    <span class="text-gray-600">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
+                </div>
+                `;
+            } else {
+                return `
+                <div class="flex justify-between border-b border-gray-200 py-1">
+                    <span class="font-medium mr-1">${label}</span>
+                    <span class="text-gray-600">${Array.isArray(values) ? values.filter(Boolean).join('<br>') : values || ''}</span>
+                </div>
+                `;
+            }
+        };
+
+        const createSection = (title, rows) => {
+            const section = document.createElement('div');
+            section.className = 'bg-white rounded-sm p-4 shadow-xs';
+
+            section.innerHTML = `
+            <h3 class="text-lg font-semibold mb-4">${title}</h3>
+            <div class="space-y-1">${rows.join('')}</div>
+            `;
+
+            return section;
+        };
+        const address = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''}`;
+
+        const addressParts = `${entrepreneur.tracknumber || ''} ${entrepreneur.complementnumber || ''} ${entrepreneur.tracktype || ''} ${entrepreneur.way || ''} ${entrepreneur.additionaladdress || ''} ${entrepreneur.zipcode || ''} ${entrepreneur.city || ''} ${formatCountry(entrepreneur.country) || ''}`;
+
+        /* DISPLAY RECAP */
+        const displayRecap = () => {
+            recapContainer.innerHTML = '';
+
+            // DEMARCHAGE
+            if (Object.keys(entrepreneur).length) {
+                const rows = [
+                    createLine('Comment avez vous connu Mon Assistant Formalités', entrepreneur.hearabout)
+                ];
+                recapContainer.appendChild(createSection('', rows));
+            }
+
+            // ---------------- ENTREPRENEUR ----------------
+            if (Object.keys(entrepreneur).length) {
+                const rows = [
+                    createLine('SIREN', entrepreneur.siren),
+                    createLine('Genre', capitalizeWords(entrepreneur.gender)),
+                    createLine('Nom de naissance', (entrepreneur.birthname || '').toUpperCase()),
+                ];
+
+                rows.push(
+                    createLine('Prénom', capitalizeWords(entrepreneur.firstname)),
+                    createLine('Email', entrepreneur.email),
+                    createLine('Téléphone', entrepreneur.phone),
+                    createLine('Adresse', addressParts),
+                );
+                recapContainer.appendChild(createSection('Informations personnelles', rows));
+            }
+        };
+
+        displayRecap();
+
+        /* SUBMIT → GENERATE PDF */
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Récupération du bouton submit
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Génération du PDF...';
+
+            try {
+                const demandeId = generateDemandeId();
+
+                // Génération du PDF récap
+                const pdfBlob = await generateRecapPdf(demandeId, recapContainer, { download: false });
+
+                if (!(pdfBlob instanceof Blob) || pdfBlob.size === 0) {
+                    throw new Error('Le PDF généré est vide ou invalide.');
+                }
+
+                // Conversion PDF en Base64
+                const pdfBase64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(pdfBlob);
+                });
+
+                // Récupération de la synthèse
+                const syntheseFileInput = document.getElementById('synthese');
+                let syntheseBase64;
+
+                if (syntheseFileInput && syntheseFileInput.files && syntheseFileInput.files[0]) {
+                    const syntheseFile = syntheseFileInput.files[0];
+
+                    if (syntheseFile.type !== 'application/pdf') {
+                        alert('Seuls les fichiers PDF sont acceptés');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer';
+                        return;
+                    }
+
+                    if (!syntheseFile.name.toLowerCase().endsWith('.pdf')) {
+                        alert('Le fichier doit être au format PDF');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer';
+                        return;
+                    }
+
+                    if (syntheseFile.size > 5 * 1024 * 1024) {
+                        alert('Le fichier ne doit pas dépasser 5 Mo');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Envoyer';
+                        return;
+                    }
+
+                    syntheseBase64 = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(syntheseFile);
+                    });
+                } else {
+                    alert('Veuillez ajouter la synthèse PDF');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Envoyer';
+                    return;
+                }
+
+                // Préparer le payload
+                const payload = {
+                    demandeId: demandeId,
+                    typeFormaliteId: 6,
+                    email: entrepreneur.email,
+                    phone: entrepreneur.phone,
+                    name: entrepreneur.birthname,
+                    firstname: entrepreneur.firstname,
+                    address: address,
+                    city: entrepreneur.city,
+                    zipcode: entrepreneur.zipcode,
+                    siren: entrepreneur.siren,
+                    pdf: pdfBase64,
+                    synthese: syntheseBase64
+                };
+
+                submitBtn.textContent = 'Envoi en cours...';
+
+                // Envoi au serveur
+                const response = await fetch('/api/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (response.status === 500) {
+                        window.location.href = '/serveur_indisponible';
+                        return;
+                    }
+                    if (response.status === 400) {
+                        window.location.href = `/doublon?statut=${data.statut}`;
+                        return;
+                    }
+                    throw new Error(data.error || 'Erreur lors de l’envoi');
+                }
+
+                // Succès
+                submitBtn.textContent = 'Envoyé ✔';
+
+                // Suppression du localStorage
+                localStorage.removeItem(STORAGE_KEY_ENTREPRENEUR);
+
+                window.location.href = `/confirmation?token=${data.token}`;
+
+            } catch (err) {
+                console.error(err);
+                window.location.href = '/serveur_indisponible';
+            }
+        });
+    });
+</script>

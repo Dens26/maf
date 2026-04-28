@@ -37,6 +37,7 @@ export async function POST({ request }: APIContext) {
         if (voidedInvoice) {
             await sendCanceledInvoice(
                 formality.demandeid,
+                formality.typeformaliteid,
                 formality.firstname,
                 formality.name,
                 formality.stripe_invoice_number,

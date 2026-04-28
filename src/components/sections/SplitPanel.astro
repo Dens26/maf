@@ -103,6 +103,7 @@ const textColor = getTextColor(background);
                                     href={button.link}
                                     target={button.target || '_self'}
                                     variant={button.variant || 'primary'}
+                                    analyticsLabel={`SplitPanel Button: ${button.text}`} 
                                 >
                                     {button.text}
                                 </Button>

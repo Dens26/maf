@@ -1,0 +1,357 @@
+---
+import Button from '@components/ui/Button.astro';
+import Input from '@components/ui/form/Input.astro';
+import Select from '@components/ui/form/Select.astro';
+import Radio from '@components/ui/form/Radio.astro';
+import Date from '@components/ui/form/Date.astro';
+import countries from 'public/data/countries.json';
+
+const genderOptions = [
+  { label: 'M.', value: 'monsieur' },
+  { label: 'Mme', value: 'madame' },
+];
+
+const complementnumberOptions = [
+  { label: '', value: '' },
+  { label: 'Bis', value: 'bis' },
+  { label: 'Ter', value: 'ter' },
+  { label: 'Quater', value: 'quater' },
+  { label: 'Quinquies', value: 'quinquies' },
+  { label: 'Sexies', value: 'sexies' },
+  { label: 'Septies', value: 'septies' },
+  { label: 'Octies', value: 'octies' },
+  { label: 'Nonies', value: 'nonies' }
+];
+
+const tracktypeOptions = [
+  { label: "Allée", value: "Allée" },
+  { label: "Allée privée", value: "Allée privée" },
+  { label: "Avenue", value: "Avenue" },
+  { label: "Boulevard", value: "Boulevard" },
+  { label: "Boulevard périphérique", value: "Boulevard périphérique" },
+  { label: "Cité", value: "Cité" },
+  { label: "Cour", value: "Cour" },
+  { label: "Chemin", value: "Chemin" },
+  { label: "Chemin rural", value: "Chemin rural" },
+  { label: "Impasse", value: "Impasse" },
+  { label: "Lotissement", value: "Lotissement" },
+  { label: "Parc", value: "Parc" },
+  { label: "Passage", value: "Passage" },
+  { label: "Place", value: "Place" },
+  { label: "Place de la…", value: "Place de la…" },
+  { label: "Promenade", value: "Promenade" },
+  { label: "Quai", value: "Quai" },
+  { label: "Route", value: "Route" },
+  { label: "Route départementale", value: "Route départementale" },
+  { label: "Route nationale", value: "Route nationale" },
+  { label: "Ruelle", value: "Ruelle" },
+  { label: "Résidence", value: "Résidence" },
+  { label: "Sentier", value: "Sentier" },
+  { label: "Villa", value: "Villa" },
+  { label: "Voie", value: "Voie" },
+  { label: "Zone industrielle", value: "Zone industrielle" }
+];
+
+const microOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const partnerFonctionOptions = [
+  { label: "Aucun", value: "Aucun" },
+  { label: "Collaborateur", value: "Collaborateur" },
+  { label: "Salarié", value: "Salarié" }
+];
+
+const partnerAddressOptions = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
+const countryOptions = [
+  { label: "France", value: "FR" },
+  ...countries
+    .filter(c => c.name !== "France")
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(c => ({ label: c.name, value: c.code }))
+];
+
+const situationOptions = [
+  { label: "Célibataire", value: "Célibataire" },
+  { label: "Divorcé", value: "Divorcé" },
+  { label: "En concubinage", value: "Concubinage" },
+  { label: "Marié", value: "Marié" },
+  { label: "Pacsé", value: "Pacsé" },
+  { label: "Veuf", value: "Veuf" }
+];
+
+const nationalityOptions = [
+  { label: "Française", value: "FR" },
+  ...countries
+    .filter(c => c.nationality !== "Française")
+    .sort((a, b) => a.nationality.localeCompare(b.nationality))
+    .map(c => ({ label: c.nationality, value: c.code }))
+];
+
+const hearAboutOptions = [
+    { label: 'Moteur de recherche', value: 'Moteur de recherche' },
+    { label: 'Réseaux sociaux (Facebook, LinkedIn)', value: 'Réseaux sociaux' },
+    { label: 'Email / Newsletter', value: 'Email' },
+    { label: 'Amis / Collègues', value: 'Recommandation' },
+    { label: 'Autre', value: 'Autre' },
+];
+
+const formBackground = 'light';
+---
+
+<div>
+    <h3 class="text-xl-2 font-semibold mb-4">Informations de l'entrepreneur</h3>
+</div>
+
+<form id="moving-form">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <Select label="Comment avez-vous connu Mon Assistant Formalités ?" id="hearabout" name="hearabout" options={hearAboutOptions} required background={formBackground}/>
+    </div>
+    <!-- CONTACT -->
+    <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+        <div class="text-md font-semibold">Contact</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <Input label="Adresse e-mail" id="email" name="email" required background={formBackground} class="lowercase"/>
+            <Input label="Téléphone" id="phone" name="phone" required background={formBackground}/>
+        </div>
+    </div>
+
+    <!-- IDENTITE DE L'ENTREPRISE -->
+    <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
+        <div class="text-md font-semibold">Identité de l'entreprise</div>
+        <div class="flex items-start gap-2 text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">Veuillez indiquer votre régime fiscal actuel ou celui pour lequel vous souhaitez opter.</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Radio label="Régime micro-entreprise ?" id="micro" name="micro" options={microOptions} required background={formBackground}/>
+            <Input class='flex max-w-[150px]' label="SIREN" id="siren" name="siren" required background={formBackground}/>
+        </div>
+    </div>
+
+    <!-- IDENTITE DE L'ENTREPRENEUR -->
+    <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold">Entrepreneur</div>
+        <div class="flex items-start gap-2 text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">⚠️ Si certaines informations ci-dessous sont différentes de celles actuellement enregistrées, merci de cocher la case correspondante pour nous le signaler.</div>
+
+        <Radio label="Je souhaite la mise à jour de mes informations personnelles." id="modificationpersonnelles" name="modificationpersonnelles" options={microOptions} required background={formBackground}/>
+        <div id="modificationpersonnelles-wrapper" class="text-sm text-orange-500 hidden">Vous avez indiqué une modification de vos informations personnelles</div>
+        <div class="grid grid-cols-5 gap-2 sm:gap-4"><Select label="Genre" id="gender" name="gender" options={genderOptions} required background={formBackground} class="col-span-1" placeholder=''/>
+            <div class="col-span-4 flex gap-2 sm:gap-4">
+                <Input label="Nom naissance" id="birthname" name="birthname" required background={formBackground} class="uppercase"/>
+                <Input label="Prénom" id="firstname" name="firstname" required background={formBackground} class="capitalize"/>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 sm:gap-4"><div class="flex-1 min-w-[48%]">
+            <Input label="Nom d'usage" id="name" name="name" background={formBackground} class="uppercase"/></div>
+            <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="birthdate" name="birthdate" required background={formBackground}/></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="birthcountry" name="birthcountry" options={countryOptions} required background={formBackground}/></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="nationality" name="nationality" options={nationalityOptions} required background={formBackground}/></div>
+            <div class="flex-1 max-w-[48%]"><Select label="Situation familiale" id="situation" name="situation" options={situationOptions} required background={formBackground}/></div>
+        </div>
+        <div id="partnermodification-wrapper" class="hidden"><Radio label="Je souhaite déclarer une modification des informations de mon conjoint" id="modificationconjoint" name="modificationconjoint" options={microOptions} required background={formBackground}/></div>
+    </div>
+
+    <!-- Conjoint -->
+    <div id="partner-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden transition-all duration-300">
+        <div class="text-md font-semibold">Conjoint</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+            <Select label="Rôle actuel du conjoint" id="oldpartnerfonction" name="oldpartnerfonction" options={partnerFonctionOptions} required background={formBackground} />
+            <Select label="Nouveau Rôle du conjoint" id="partnerfonction" name="partnerfonction" options={partnerFonctionOptions} required background={formBackground} />
+        </div>
+        <div id="partnerinfo-wrapper">
+        <div class="grid grid-cols-5 gap-2 sm:gap-4">
+            <Select label="Genre" id="partnergender" name="partnergender" options={genderOptions} required background={formBackground} class="col-span-1" placeholder=''/>
+            <div class="col-span-4 flex gap-2 sm:gap-4">
+                <Input label="Nom naissance" id="partnerbirthname" name="partnerbirthname" required background={formBackground} class="uppercase"/>
+                <Input label="Prénom" id="partnerfirstname" name="partnerfirstname" required background={formBackground} class="capitalize"/>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 sm:gap-4">
+            <div class="flex-1 min-w-[48%]"><Input label="Nom d'usage" id="partnername" name="partnername" background={formBackground} class="uppercase"/></div>
+            <div class="flex-1 min-w-[48%]"><Date label="Date de naissance" id="partnerbirthdate" name="partnerbirthdate" required background={formBackground}/></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Pays de naissance" id="partnerbirthcountry" name="partnerbirthcountry" options={countryOptions} required background={formBackground}/></div>
+            <div class="flex-1 min-w-[48%]"><Select label="Nationalité" id="partnernationality" name="partnernationality" options={nationalityOptions} required background={formBackground}/></div>
+        </div>
+        </div>
+    </div>
+
+    <!-- ADRESSE DE L'ENTREPRENEUR -->
+    <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
+        <div class="text-md font-semibold">Adresse de l'entrepreneur</div>
+        <div class="flex items-start gap-2 text-sm text-gray-600 bg-blue-50 border border-blue-100 rounded-lg px-3 py-2">⚠️ Indiquez l'adresse actuelle de l'entrepreneur telle qu'elle est enregistrée avant toute modification.</div>
+        <div class="grid grid-cols-12 gap-2 sm:gap-4"><div class="col-span-2"><Input label="N°" id="tracknumber" name="tracknumber" required background={formBackground}/></div>
+            <div class="col-span-3"><Select label="Indice" id="complementnumber" name="complementnumber" options={complementnumberOptions} data-optional="true" background={formBackground} placeholder=''/></div>
+            <div class="col-span-7"><Select label="Type de voie" id="tracktype" name="tracktype" options={tracktypeOptions} required background={formBackground}/></div>
+        </div>
+        <Input label="Nom de la voie" id="way" name="way" required background={formBackground}/>
+        <div class="grid grid-cols-2 gap-2 sm:gap-4">
+            <Input label="Complément" id="additionaladdress" name="additionaladdress" data-optional="true" background={formBackground}/>
+            <Select label="Pays" id="country" name="country" options={countryOptions} required background={formBackground}/>
+        </div>
+        <div class="grid grid-cols-2 gap-2 sm:gap-4"><Input label="Code postal" id="zipcode" name="zipcode" required background={formBackground}/>
+            <Input label="Ville" id="city" name="city" required background={formBackground} class="capitalize"/>
+        </div>
+    </div>
+
+    <div class="text-end my-8">
+        <Button type="submit" variant="primary" size="md" class='uppercase'>étape suivante</Button>
+    </div>
+</form>
+
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('moving-form');
+    if (!form) return;
+
+    const STORAGE_KEY = 'moving-entrepreneur-form';
+
+    /* ================= STORAGE ================= */
+    const saveForm = () => {
+        const data = {};
+        new FormData(form).forEach((value, key) => (data[key] = value));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    };
+
+    const restoreForm = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+
+        Object.entries(data).forEach(([name, value]) => {
+            const fields = form.querySelectorAll(`[name="${name}"]`);
+            fields.forEach(field => {
+                if (field.type === 'radio') {
+                    field.checked = field.value === value;
+                } else {
+                    field.value = value;
+                }
+            });
+        });
+    };
+    restoreForm();
+    form.addEventListener('input', saveForm);
+    form.addEventListener('change', saveForm);
+
+    /* ================= SUBMIT ================= */
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+        window.location.href = '/forms/moving/adresse';
+    });
+
+    /* ================= PARTNER MODIFICATION ================= */
+    const situationSelect = document.getElementById('situation');
+    const partnerModWrapper = document.getElementById('partnermodification-wrapper');
+
+    const togglePartnerModificationWrapper = () => {
+        const show = ['Concubinage', 'Marié', 'Pacsé'].includes(situationSelect.value);
+        partnerModWrapper.classList.toggle('hidden', !show);
+        partnerModWrapper.querySelectorAll('input, select, textarea').forEach(f => {
+            f.style.display = show ? '' : 'none';
+            f.required = show && !f.hasAttribute('data-optional');
+        });
+    };
+    situationSelect?.addEventListener('change', togglePartnerModificationWrapper);
+    togglePartnerModificationWrapper(); // initial
+
+    /* ================= CONJOINT ================= */
+    const partnerWrapper = document.getElementById('partner-wrapper');
+    const modificationconjointRadios = form.querySelectorAll('input[name="modificationconjoint"]');
+
+    const togglePartner = () => {
+        const selected = form.querySelector('input[name="modificationconjoint"]:checked');
+        const show = selected?.value === 'oui';
+
+        if (!partnerWrapper) return;
+
+        partnerWrapper.classList.toggle('hidden', !show);
+        partnerWrapper.querySelectorAll('input, select, textarea').forEach(field => {
+            if (show) {
+                field.style.display = '';
+                if (!field.hasAttribute('data-optional')) field.required = true;
+            } else {
+                field.style.display = 'none';
+                field.required = false;
+            }
+        });
+    };
+    modificationconjointRadios.forEach(radio => radio.addEventListener('change', togglePartner));
+    togglePartner();
+
+    const modificationpersonnellesWrapper = document.getElementById('modificationpersonnelles-wrapper')
+    const modificationpersonnellesRadios = form.querySelectorAll('input[name="modificationpersonnelles"]');
+    const toggleModificationPersonelle = () => {
+        const selected = form.querySelector('input[name="modificationpersonnelles"]:checked');
+
+        if(selected && selected.value === 'oui')
+            modificationpersonnellesWrapper.classList.remove('hidden')
+        else
+            modificationpersonnellesWrapper.classList.add('hidden')
+    }
+    modificationpersonnellesRadios.forEach(radio => radio.addEventListener('change', toggleModificationPersonelle));
+    toggleModificationPersonelle();
+
+    /* ================= INFOS CONJOINT ================= */
+    const partnerFonctionSelect = form.querySelector('select[name="partnerfonction"]');
+    const partnerInfoWrapper = document.getElementById('partnerinfo-wrapper');
+
+    const togglePartnerInfo = () => {
+        if (!partnerFonctionSelect || !partnerInfoWrapper) return;
+
+        const isAucun = partnerFonctionSelect.value === 'Aucun' || !partnerFonctionSelect.value;
+
+        partnerInfoWrapper.classList.toggle('hidden', isAucun);
+
+        partnerInfoWrapper.querySelectorAll('input, select, textarea').forEach(field => {
+            if (isAucun) {
+                field.required = false;
+                field.value = '';
+            } else {
+                if (!field.hasAttribute('data-optional')) field.required = true;
+            }
+        });
+    };
+    partnerFonctionSelect?.addEventListener('change', togglePartnerInfo);
+    togglePartnerInfo();
+
+    /* ================= CHAMPS ================= */
+    const country = document.getElementById('country');
+    const zipCode = document.getElementById('zipcode');
+
+    country?.addEventListener('change', () => {
+        if (zipCode) zipCode.value = '';
+    });
+
+    /* ================= FILTER INPUTS ================= */
+    document.addEventListener('input', (e) => {
+        const target = e.target;
+        if (!target.name) return;
+
+        if (target.name === 'zipcode' && (country?.value === 'FR' || !country?.value))
+            target.value = target.value.replace(/\D/g, '').slice(0,5);
+
+        if (target.name === 'phone')
+            target.value = target.value.replace(/\D/g,'');
+
+        if (target.name === 'tracknumber')
+            target.value = target.value.replace(/\D/g,'');
+
+        if (target.name === 'city')
+            target.value = target.value.replace(/\d/g,'');
+
+        if (target.name === 'siren')
+            target.value = target.value.replace(/\D/g,'').slice(0,9);
+    });
+});
+</script>
