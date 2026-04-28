@@ -39,21 +39,21 @@ const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
-            { text: "Le mandat signé donnant pouvoir à Denis BEKAERT (Mon Assistant Formalités) pour déposer votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
     },
     2: { label: "changement d'adresse",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
-            { text: "Le mandat signé donnant pouvoir à Denis BEKAERT (Mon Assistant Formalités) pour déposer votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
      },
     3: { label: "modification d'activité",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
-            { text: "Le mandat signé donnant pouvoir à Denis BEKAERT (Mon Assistant Formalités) pour déposer votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
     },
     4: { label: "correction",
@@ -61,21 +61,21 @@ const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Votre avis de situation au répertoire Sirene de moins de 3 mois", link: { url: "https://avis-situation-sirene.insee.fr/", label: "Obtenir un avis de situation au répertoire Sirene"} },
             { text: "Votre extrait kbis de moins de 3 mois le cas échéant", link: { url: "https://www.infogreffe.fr/kbis-documents/extrait-kbis", label: "Obtenir un extrait Kbis" } },
-            { text: "Le mandat signé donnant pouvoir à Denis BEKAERT (Mon Assistant Formalités) pour déposer votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
      },
     5: { label: "cessation d'entreprise",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
-            { text: "Le mandat signé donnant pouvoir à Denis BEKAERT (Mon Assistant Formalités) pour déposer votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
      },
     6: { label: "finalisation de formalité",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
-            { text: "Le mandat signé donnant pouvoir à Denis BEKAERT (Mon Assistant Formalités) pour déposer votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
      },
 };

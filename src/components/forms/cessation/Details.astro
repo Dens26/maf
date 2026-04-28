@@ -19,6 +19,11 @@ const salarie_options = [
     { label: 'Non', value: 'non' },
 ];
 
+const rne_options = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
 const destination_options = [
     { label: 'Aucune conservation de cheptel, stock ou exploitation', value: 'aucune' },
     { label: 'Conservation de cheptel ou de stock', value: 'conservation' },
@@ -140,7 +145,8 @@ const formBackground = 'light';
             <Date label="Date de cessation temporaire" id="temporairedate" name="temporairedate" required background={formBackground}/>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <div class="flex-1 min-w-[48%]" data-required="true"><Radio label="Présence de salariés dans l'entreprise ?" id="salarie" name="salarie" options={salarie_options} required background={formBackground}/></div>
+            <div class="flex-1" data-required="true"><Radio label="Présence de salariés dans l'entreprise ?" id="salarie" name="salarie" options={salarie_options} required background={formBackground}/></div>
+            <div class="flex-1" data-required="true"><Radio label="Maintien de l'immatriculation au registre (RNE) ?" id="rne" name="rne" options={rne_options} required background={formBackground}/></div>
         </div>
     </div>
 

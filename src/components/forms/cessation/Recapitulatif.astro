@@ -367,6 +367,7 @@ const formBackground = 'light';
                         rows.push(createLine("Date de décès de l'entrepreneur", formatDateFR(details.decesdate)));
 
                 rows.push(createLine("Présence de salariés dans l'entreprise", details.salarie));
+                rows.push(createLine("Demande le Maintien de l'immatriculation au Registre National des Entreprises", details.rne));
 
                 recapContainer.appendChild(createSection("Détails de la cessation", rows))
             }
