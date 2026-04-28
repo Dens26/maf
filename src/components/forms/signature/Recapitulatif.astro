@@ -288,6 +288,14 @@ const formBackground = 'light';
         const displayRecap = () => {
             recapContainer.innerHTML = '';
 
+            // DEMARCHAGE
+            if (Object.keys(entrepreneur).length) {
+                const rows = [
+                    createLine('Comment avez vous connu Mon Assistant Formalités', entrepreneur.hearabout)
+                ];
+                recapContainer.appendChild(createSection('', rows));
+            }
+
             // ---------------- ENTREPRENEUR ----------------
             if (Object.keys(entrepreneur).length) {
                 const rows = [

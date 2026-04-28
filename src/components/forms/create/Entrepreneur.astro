@@ -104,6 +104,14 @@ const departmentOptions = departments
     value: dep.code 
   }));
 
+const hearAboutOptions = [
+    { label: 'Moteur de recherche', value: 'Moteur de recherche' },
+    { label: 'Réseaux sociaux (Facebook, LinkedIn)', value: 'Réseaux sociaux' },
+    { label: 'Email / Newsletter', value: 'Email' },
+    { label: 'Amis / Collègues', value: 'Recommandation' },
+    { label: 'Autre', value: 'Autre' },
+];
+
 const formBackground = 'light';
 ---
 
@@ -112,6 +120,9 @@ const formBackground = 'light';
 </div>
 
 <form id="create-form">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <Select label="Comment avez-vous connu Mon Assistant Formalités ?" id="hearabout" name="hearabout" options={hearAboutOptions} required background={formBackground}/>
+  </div>
   <!-- Contact -->
    <div class="space-y-2 md:space-y-4 bg-white p-2 rounded-sm mb-4">
     <div class="text-md font-semibold">Contact</div>

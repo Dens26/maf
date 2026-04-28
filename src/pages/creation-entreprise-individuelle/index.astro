@@ -12,6 +12,8 @@ import { faqLists } from '@data/faqs';
 import heroImage from '@assets/images/home/create.jpg';
 import styleGuideImage from '@assets/images/home/advisor.jpg';
 
+const image = 'https://www.mon-assistant-formalites.fr/images/home/create.jpg';
+
 const seoTitle = "Création entreprise individuelle (EI) | Mandataire INPI";
 const seoDescription = "Créez votre entreprise individuelle rapidement et sans erreur avec un mandataire INPI. Dossier complet, conforme et accompagné.";
 
@@ -33,6 +35,13 @@ const featuresSection = {
     button: { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Features_create_cta_click", variant: 'primary' as const },
 };
 
+const mainCta = {
+    eyebrow: 'Créer votre entreprise individuelle',
+    title: 'Lancez votre activité en toute simplicité',
+    description: 'Je m’occupe de votre dossier de création de A à Z : préparation, vérification et dépôt auprès de l’INPI. Vous gagnez du temps et évitez les erreurs.',
+    button: { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Main_CTA_create_cta_click", variant: 'primary' as const, target: '_self' as const },
+};
+
 const styleGuideSection = {
     eyebrow: 'Création d’entreprise individuelle',
     headline: 'Un accompagnement humain pour lancer votre activité sereinement',
@@ -43,11 +52,11 @@ const styleGuideSection = {
     ],
 };
 
-const mainCta = {
-    eyebrow: 'Créer votre entreprise individuelle',
-    title: 'Lancez votre activité en toute simplicité',
-    description: 'Je m’occupe de votre dossier de création de A à Z : préparation, vérification et dépôt auprès de l’INPI. Vous gagnez du temps et évitez les erreurs.',
-    button: { text: 'Créer mon entreprise', link: '/services/creation-entreprise-individuelle', "data-analytics": "Main_CTA_create_cta_click", variant: 'primary' as const, target: '_self' as const },
+const linkCta = {
+    eyebrow: 'Autres démarches',
+    title: 'Votre entreprise évolue ?',
+    description: 'Après la création, vous pouvez être amené à modifier votre activité, changer votre adresse ou cesser votre activité.',
+    button: { text: 'Modifier mon activité', link: '/modification-activite-entreprise-individuelle', "data-analytics": "Link_CTA_create_cta_click", variant: 'primary' as const, target: '_self' as const },
 };
 
 const sideBySideStats = {
@@ -79,12 +88,12 @@ const FooterCta = {
 
 ---
 
-<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='zeus'>
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='zeus' image={image}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="responsive" background="base" />
-    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="base" padding="responsive" />
+    <CtaBanner content={linkCta} variant="contained" background="light" paddingBottom="responsive" />
     <Stats content={sideBySideStats} background="dark" padding="responsive" />
     <Faqs content={faqsSection} background="base" padding="responsive" />
-    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
 </Layout>

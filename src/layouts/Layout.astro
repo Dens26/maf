@@ -63,6 +63,7 @@ const fullCanonicalUrl = new URL(canonicalPath, siteConfig.siteUrl).toString();
         <meta property="og:type" content="website" />
         <meta property="og:url" content={fullCanonicalUrl} />
         <meta property="og:title" content={pageTitle} />
+        <meta property="fb:app_id" content="777139179010669">
         <meta property="og:description" content={pageDescription} />
         {pageImage && <meta property="og:image" content={new URL(pageImage, siteConfig.siteUrl).toString()} />}
 

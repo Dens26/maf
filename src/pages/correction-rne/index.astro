@@ -12,6 +12,8 @@ import { faqLists } from '@data/faqs';
 import heroImage from '@assets/images/home/correction.jpg';
 import styleGuideImage from '@assets/images/home/advisor.jpg';
 
+const image = 'https://www.mon-assistant-formalites.fr/images/home/correction.jpg';
+
 const seoTitle = "Correction RNE (Registre National des Entreprises) | Rectification avec mandataire INPI";
 const seoDescription = "Corrigez une erreur sur votre RNE simplement et sans stress avec un mandataire INPI. Dossier de rectification conforme et accompagné.";
 
@@ -33,6 +35,13 @@ const featuresSection = {
     button: { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "Features_rne_cta_click", variant: 'primary' as const },
 };
 
+const mainCta = {
+    eyebrow: 'Correction RNE',
+    title: 'Corrigez vos informations d’entreprise simplement et sans erreur',
+    description: 'Je prends en charge la correction de votre dossier RNE : analyse de l’erreur, vérification et dépôt auprès de l’INPI pour garantir une mise à jour conforme.',
+    button: { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "Main_CTA_rne_cta_click", variant: 'primary' as const, target: '_self' as const },
+};
+
 const styleGuideSection = {
     eyebrow: 'Correction RNE',
     headline: 'Corriger une erreur administrative sans complication',
@@ -43,11 +52,11 @@ const styleGuideSection = {
     ],
 };
 
-const mainCta = {
-    eyebrow: 'Correction RNE',
-    title: 'Corrigez vos informations d’entreprise simplement et sans erreur',
-    description: 'Je prends en charge la correction de votre dossier RNE : analyse de l’erreur, vérification et dépôt auprès de l’INPI pour garantir une mise à jour conforme.',
-    button: { text: 'Corriger mon RNE', link: '/services/correction-rne', "data-analytics": "Main_CTA_rne_cta_click", variant: 'primary' as const, target: '_self' as const },
+const linkCta = {
+    eyebrow: 'Autres démarches',
+    title: 'Besoin d’une autre formalité ?',
+    description: 'Création, modification d’activité, changement d’adresse ou cessation : retrouvez toutes mes démarches pour votre entreprise individuelle.',
+    button: { text: 'Voir tous les services', link: '/services', "data-analytics": "Link_CTA_rne_cta_click", variant: 'primary' as const, target: '_self' as const },
 };
 
 const sideBySideStats = {
@@ -79,12 +88,12 @@ const FooterCta = {
 
 ---
 
-<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='apollo'>
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='apollo' image={image}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="responsive" background="base" />
-    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="base" padding="responsive" />
+    <CtaBanner content={linkCta} variant="contained" background="light" paddingBottom="responsive" />
     <Stats content={sideBySideStats} background="dark" padding="responsive" />
     <Faqs content={faqsSection} background="base" padding="responsive" />
-    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
 </Layout>

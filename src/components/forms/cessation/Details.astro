@@ -14,6 +14,11 @@ const agricole_options = [
     { label: 'Non', value: 'non' },
 ];
 
+const salarie_options = [
+    { label: 'Oui', value: 'oui' },
+    { label: 'Non', value: 'non' },
+];
+
 const destination_options = [
     { label: 'Aucune conservation de cheptel, stock ou exploitation', value: 'aucune' },
     { label: 'Conservation de cheptel ou de stock', value: 'conservation' },
@@ -112,7 +117,7 @@ const formBackground = 'light';
 ---
 
 <div>
-    <h3 class="text-xl-2 font-semibold mb-4">Informations de l'entreprise</h3>
+    <h3 class="text-xl-2 font-semibold mb-4">Détails de la cessation</h3>
 </div>
 
 <form id="cessation-form">
@@ -133,6 +138,9 @@ const formBackground = 'light';
         </div>
         <div id="temporaire-date-wrapper" class="flex-1 max-w-[48%] hidden">
             <Date label="Date de cessation temporaire" id="temporairedate" name="temporairedate" required background={formBackground}/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div class="flex-1 min-w-[48%]" data-required="true"><Radio label="Présence de salariés dans l'entreprise ?" id="salarie" name="salarie" options={salarie_options} required background={formBackground}/></div>
         </div>
     </div>
 

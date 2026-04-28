@@ -299,6 +299,15 @@ for (const section of sections) {
         const displayRecap = () => {
             recapContainer.innerHTML = '';
 
+            // ---------------- Démarchage ----------------
+            if (Object.keys(entrepreneur).length) {
+
+                const rows = [
+                    createLine('Comment avez vous connu Mon Assistant Formalités', entrepreneur.hearabout)
+                ];
+                recapContainer.appendChild(createSection('', rows));
+            }
+            
             // ---------------- ENTREPRENEUR ----------------
             if (Object.keys(entrepreneur).length) {
                 const rows = [

@@ -12,6 +12,8 @@ import { faqLists } from '@data/faqs';
 import heroImage from '@assets/images/home/activity1.jpg';
 import styleGuideImage from '@assets/images/home/advisor.jpg';
 
+const image = 'https://www.mon-assistant-formalites.fr/images/home/activity1.jpg';
+
 const seoTitle = "Modification d’activité entreprise individuelle (EI) | Mandataire INPI";
 const seoDescription = "Modifiez l’activité de votre entreprise individuelle simplement et sans erreur avec un mandataire INPI. Dossier complet, conforme et accompagné.";
 
@@ -33,6 +35,13 @@ const featuresSection = {
     button: { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "Features_modify_cta_click", variant: 'primary' as const },
 };
 
+const mainCta = {
+    eyebrow: 'Modification d’activité',
+    title: 'Mettez à jour votre activité simplement',
+    description: 'Je prends en charge votre déclaration de modification d’activité : préparation, vérification et dépôt auprès de l’INPI. Vous évitez les erreurs et gagnez du temps.',
+    button: { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "Main_cta_modify_click", variant: 'primary' as const, target: '_self' as const },
+};
+
 const styleGuideSection = {
     eyebrow: 'Modification d’activité',
     headline: 'Une modification encadrée, sans erreur et sans stress',
@@ -43,11 +52,11 @@ const styleGuideSection = {
     ],
 };
 
-const mainCta = {
-    eyebrow: 'Modification d’activité',
-    title: 'Mettez à jour votre activité simplement',
-    description: 'Je prends en charge votre déclaration de modification d’activité : préparation, vérification et dépôt auprès de l’INPI. Vous évitez les erreurs et gagnez du temps.',
-    button: { text: 'Modifier mon activité', link: '/services/modification-activite-entreprise-individuelle', "data-analytics": "main_cta_modify_click", variant: 'primary' as const, target: '_self' as const },
+const linkCta = {
+    eyebrow: 'Autres démarches',
+    title: 'Une erreur sur votre entreprise ?',
+    description: 'Si vos informations sont incorrectes sur le RNE, vous pouvez demander une correction pour remettre votre dossier en conformité.',
+    button: { text: 'Corriger le RNE', link: '/correction-rne', "data-analytics": "Link_cta_modify_click", variant: 'primary' as const, target: '_self' as const },
 };
 
 const sideBySideStats = {
@@ -79,12 +88,12 @@ const FooterCta = {
 
 ---
 
-<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='hades'>
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} theme='hades' image={image}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="responsive" background="base" />
-    <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />
     <CtaBanner content={mainCta} variant="contained" background="light" paddingBottom="responsive" />
+    <SplitPanel content={styleGuideSection} imagePosition="right" background="base" padding="responsive" />
+    <CtaBanner content={linkCta} variant="contained" background="light" paddingBottom="responsive" />
     <Stats content={sideBySideStats} background="dark" padding="responsive" />
     <Faqs content={faqsSection} background="base" padding="responsive" />
-    <!-- <Logos content={logosSection} background="base" padding="small" /> -->
 </Layout>
