@@ -324,6 +324,9 @@ const formBackground = 'light';
                     createLine('Adresse de correspondance', addressParts),
                     createLine('Nationalité', formatNationality(entrepreneur.nationality)),
                 );
+                if (entrepreneur.nationality == 'FR')
+                    rows.push(createLine('Numéro de sécurité sociale', entrepreneur.healthinsurance));
+                
                 recapContainer.appendChild(createSection('Informations personnelles', rows));
             }
 

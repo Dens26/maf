@@ -5,7 +5,7 @@ icon: "/images/activities.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 59€"
 duration: "48h en moyenne"
-order: 3
+order: 5
 publish: true
 
 link: "/forms/unavailable"

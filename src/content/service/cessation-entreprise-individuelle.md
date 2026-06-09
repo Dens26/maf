@@ -5,7 +5,7 @@ icon: "/images/closed.jpg"
 category: "Formalités de cessation"
 priceRange: "à partir de 39€"
 duration: "48h en moyenne"
-order: 5
+order: 1
 publish: true
 
 link: "/forms/cessation/entrepreneur"

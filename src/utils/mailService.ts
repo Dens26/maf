@@ -42,42 +42,47 @@ const FORMALITY_TYPE: Record<number, PaymentStatusConfig> = {
             { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
     },
-    2: { label: "changement d'adresse",
-        PJ: [
-            { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
-            { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
-            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
-        ]
-     },
-    3: { label: "modification d'activité",
+    2: {
+        label: "changement d'adresse",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
             { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
     },
-    4: { label: "correction",
+    3: {
+        label: "modification d'activité",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
-            { text: "Votre avis de situation au répertoire Sirene de moins de 3 mois", link: { url: "https://avis-situation-sirene.insee.fr/", label: "Obtenir un avis de situation au répertoire Sirene"} },
+            { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
+            { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
+        ]
+    },
+    4: {
+        label: "correction",
+        PJ: [
+            { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
+            { text: "Votre avis de situation au répertoire Sirene de moins de 3 mois", link: { url: "https://avis-situation-sirene.insee.fr/", label: "Obtenir un avis de situation au répertoire Sirene" } },
             { text: "Votre extrait kbis de moins de 3 mois le cas échéant", link: { url: "https://www.infogreffe.fr/kbis-documents/extrait-kbis", label: "Obtenir un extrait Kbis" } },
             { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
-     },
-    5: { label: "cessation d'entreprise",
+    },
+    5: {
+        label: "cessation d'entreprise",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
             { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
-     },
-    6: { label: "finalisation de formalité",
+    },
+    6: {
+        label: "finalisation de formalité",
         PJ: [
             { text: "Une copie de votre pièce d'identité (carte d'identité ou passeport en cours de validité)" },
             { text: "Un justificatif de domicile récent (facture, avis d’imposition, contrat de bail, etc.)" },
             { text: "Le mandat signé donnant pouvoir à Monsieur Denis BEKAERT, demeurant à 07130 Cornas (France), afin de procéder au dépôt de votre dossier auprès du Guichet Unique.", link: { url: "https://www.mon-assistant-formalites.fr/documents/modele_de_mandat.pdf", label: "Modèle de mandat PDF" } }
         ]
-     },
+    },
 };
 
 function generatePJList(pjs?: PieceJointe[]): string {
@@ -111,7 +116,7 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
         ...(pdf ? [{ ContentType: "application/pdf", Filename: pdf.filename, Base64Content: pdf.base64 }] : []),
         ...(synthese ? [{ ContentType: "application/pdf", Filename: synthese.filename, Base64Content: synthese.base64 }] : [])
     ];
-        
+
     const adminHtmlContent = `
     <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; padding: 20px; background-color: #f9f9f9;">
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">   
@@ -147,11 +152,11 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
 
             <!-- Section contact séparée -->
             <div style="margin-bottom: 20px; margin-top: 20px; padding: 15px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
-                <p>Le traitement de votre dossier commencera dès réception de l’ensemble des documents requis et confirmation de votre paiement.</p>
+                <p>Le traitement de votre dossier commencera dès réception de l'ensemble des documents requis et confirmation de votre paiement.</p>
             </div>
 
-            <p style="margin-bottom: 20px;">Je vous remercie pour votre confiance et reste à votre disposition pour tout complément d’information.</p>
-            <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
+            <p style="margin-bottom: 20px;">Je vous remercie pour votre confiance et reste à votre disposition pour tout complément d'information.</p>
+            <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n'hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
 
             <p>Merci pour votre confiance.</p>   
             <p style="margin-bottom:0; padding-bottom:0">Denis BEKAERT</p>   
@@ -159,7 +164,7 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
 
             <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
 
-            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse mail à vos contacts ou comme courrier légitime.</p>
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de notre part, nous vous recommandons d'ajouter notre adresse mail à vos contacts ou comme courrier légitime.</p>
         </div>
     </div>
     `;
@@ -194,8 +199,8 @@ export async function sendNotification({ firstname, name, email, phone, typeForm
  * @param name 
  * @param email 
  */
-export async function sendRequestDocuments(demandeid : string, typeFormaliteId: number, firstname: string, name : string, email : string) {
-    
+export async function sendRequestDocuments(demandeid: string, typeFormaliteId: number, firstname: string, name: string, email: string) {
+
     const htmlContent = `
     <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; background-color: #f9f9f9;">
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
@@ -219,13 +224,13 @@ export async function sendRequestDocuments(demandeid : string, typeFormaliteId: 
                 <p>Si vous ne le recevez pas dans les prochaines minutes, veuillez vérifier votre dossier <strong>SPAM</strong> ou me contacter par retour de mail afin que je puisse vous renvoyer le message.</p>
 
                 <p style="margin-top: 20px; font-weight: bold; color: #d63636; background-color: #fff3f3; padding: 12px; border-radius: 6px; border: 1px solid #f5c2c2; line-height: 1.5;">
-                    Le traitement de votre formalité ne pourra commencer qu’après réception complète des pièces et validation de votre paiement.
+                    Le traitement de votre formalité ne pourra commencer qu'après réception complète des pièces et validation de votre paiement.
                 </p>
             </div>
 
             <p style="margin-top: 30px;"><em>⚠️ Cet e-mail a été généré automatiquement suite à la prise en charge de votre dossier. Selon le contenu de votre dossier, nous pourrons revenir vers vous pour demander des pièces justificatives complémentaires si nécessaire.</em></p>
 
-            <p style="margin-bottom: 30px; margin-top: 30px;;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
+            <p style="margin-bottom: 30px; margin-top: 30px;;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n'hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
 
             <p>Merci pour votre confiance.</p>   
             <p style="margin-bottom:0; padding-bottom:0">Denis BEKAERT</p>   
@@ -249,6 +254,71 @@ export async function sendRequestDocuments(demandeid : string, typeFormaliteId: 
 }
 
 /**
+ * Confirmation de réception des pièces justificatives et du paiement
+ * @param demandeid 
+ * @param firstname 
+ * @param name 
+ * @param invoiceNumber 
+ * @param email 
+ */
+export async function sendProcessingConfirmation(demandeid: string, typeFormaliteId: number, firstname: string, name: string, email: string) {
+
+    const htmlContent = `
+    <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;">
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+
+            <img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
+            <img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src="https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt="Mon Assistant Formalités">
+
+            <p style="font-size: 0.9rem; color:#6b7280; margin-bottom: 5px;">Référence de votre dossier :</p>
+
+            <ul style="margin-top: 0; margin-bottom: 25px;">
+                <li>n° MAF : <strong>${demandeid}</strong></li>
+            </ul>
+
+            <h2 style="margin-bottom: 20px; font-size: 1.3rem;">
+                Bonjour ${firstname} ${name},
+            </h2>
+
+            <p style="margin-bottom: 20px;">Je vous confirme avoir bien reçu :</p>
+
+            <ul style="margin-bottom: 20px;">
+                <li>vos pièces justificatives,</li>
+                <li>ainsi que votre règlement.</li>
+            </ul>
+
+            <div style="margin: 25px 0; padding: 18px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px;">
+                <p style="margin:0; font-weight:bold;">Votre dossier est désormais complet et en cours de traitement.</p>
+            </div>
+
+            <p style="margin-bottom: 20px;">Votre demande de <strong>${FORMALITY_TYPE[typeFormaliteId].label}</strong> va maintenant être transmise et suivie auprès de l’administration compétente.</p>
+            <p style="margin-bottom: 20px;">Vous serez informé par email à chaque étape importante de l’avancement de votre formalité.</p>
+            <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier, vous pouvez me contacter à tout moment :
+                <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;"> contacter Mon Assistant Formalités</a>
+            </p>
+
+            <p>Merci pour votre confiance.</p>
+            <p style="margin-bottom:0;"><strong>Denis BEKAERT</strong></p>
+            <p style="margin-top:0;">Mon Assistant Formalités</p>
+
+            <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de ma part, je vous recommande d’ajouter cette adresse email à vos contacts.</p>
+
+        </div>
+    </div>
+    `;
+
+    await mailjet.post('send', { version: 'v3.1' }).request({
+        Messages: [{
+            From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
+            To: [{ Email: email, Name: `${firstname} ${name}` }],
+            Subject: `Votre dossier MAF n°${demandeid} est en cours de traitement`,
+            HTMLPart: htmlContent
+        }]
+    });
+}
+
+/**
  * Envoi d'un mail d'annulation de facture
  * @param demandeid 
  * @param firstname 
@@ -259,32 +329,32 @@ export async function sendRequestDocuments(demandeid : string, typeFormaliteId: 
 export async function sendCanceledInvoice(demandeid : string, typeFormaliteId: number, firstname: string, name : string, invoiceNumber: string, email : string) {
     
     const htmlContent = `
-    <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; background-color: #f9f9f9;">
-        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+    <div style = "font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; background-color: #f9f9f9;" >
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);" >
+        
+            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src = "https://www.mon-assistant-formalites.fr/images/logo.png" alt = "Mon Assistant Formalités" >
+            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src = "https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt = "Mon Assistant Formalités" >
 
-            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
-            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src="https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt="Mon Assistant Formalités">
+            <h2 style="margin-bottom: 20px; font-size: 1.3rem;" > Bonjour ${ firstname } ${ name }, </h2>
 
-            <h2 style="margin-bottom: 20px; font-size: 1.3rem;">Bonjour ${firstname} ${name},</h2>
+            <p style = "margin-bottom: 20px;" > Je vous informe que la facture numéro <strong > ${ invoiceNumber } </strong> relative à votre demande de ${FORMALITY_TYPE[typeFormaliteId].label} numéro <strong>${demandeid}</strong > a été <strong > annulée </strong>.</p >
 
-            <p style="margin-bottom: 20px;">Je vous informe que la facture numéro <strong>${invoiceNumber}</strong> relative à votre demande de ${FORMALITY_TYPE[typeFormaliteId].label} numéro <strong>${demandeid}</strong> a été <strong>annulée</strong>.</p>
+            <p style="margin-bottom: 20px;" > Merci de ne plus tenir compte de cette facture.Si nécessaire, une nouvelle facture vous sera envoyée ultérieurement pour poursuivre le traitement de votre dossier.</p>
 
-            <p style="margin-bottom: 20px;">Merci de ne plus tenir compte de cette facture. Si nécessaire, une nouvelle facture vous sera envoyée ultérieurement pour poursuivre le traitement de votre dossier.</p>
-
-            <div style="margin-top: 30px; padding: 15px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;">
-                <p>Pour rappel :</p>
-                <p style="margin-top: 10px;">L’annulation de cette facture n’impacte pas l’état de votre formalité, qui reste en cours de traitement. Vous serez informé par email de toute action ou facture à venir.</p>
+            <div style = "margin-top: 30px; padding: 15px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px; line-height: 1.5;" >
+                <p>Pour rappel: </p>
+                <p style = "margin-top: 10px;" > L'annulation de cette facture n'impacte pas l'état de votre formalité, qui reste en cours de traitement.Vous serez informé par email de toute action ou facture à venir.</p>
             </div>
 
-            <p style="margin-bottom: 30px; margin-top: 30px;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
+            <p style = "margin-bottom: 30px; margin-top: 30px;" > Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n'hésitez pas à me <a href = "https://www.mon-assistant-formalites.fr/contact" style = "color:#1d4ed8; text-decoration:underline;" > contacter </a>.</p >
 
-            <p>Merci pour votre confiance.</p>   
-            <p style="margin-bottom:0; padding-bottom:0">Denis BEKAERT</p>   
-            <h3 style="font-size: 1rem; margin-top: 0; padding-top: 0;">Mon Assistant Formalités</h3>
+            <p>Merci pour votre confiance.</p>
+            <p style = "margin-bottom:0; padding-bottom:0" > Denis BEKAERT </p>
+            <h3 style = "font-size: 1rem; margin-top: 0; padding-top: 0;" > Mon Assistant Formalités </h3>
 
-            <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
+            <hr style = "margin-top: 20px; border-color: #e5e7eb;" />
 
-            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse mail à vos contacts ou comme courrier légitime.</p>
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;" > Pour ne manquer aucune information de notre part, nous vous recommandons d'ajouter notre adresse mail à vos contacts ou comme courrier légitime.</p>
         </div>
     </div>
     `;
@@ -292,8 +362,8 @@ export async function sendCanceledInvoice(demandeid : string, typeFormaliteId: n
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
-            To: [{ Email: email, Name: `${firstname} ${name}` }],
-            Subject: `Annulation de votre facture n°${invoiceNumber}`,
+            To: [{ Email: email, Name: `${ firstname } ${ name } ` }],
+            Subject: `Annulation de votre facture n°${ invoiceNumber } `,
             HTMLPart: htmlContent
         }]
     });
@@ -310,29 +380,29 @@ export async function sendCanceledInvoice(demandeid : string, typeFormaliteId: n
 export async function sendRefundNotification(demandeid : string, typeFormaliteId: number, firstname: string, name : string, amount: string, email : string) {
     
     const htmlContent = `
-    <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; background-color: #f9f9f9;">
-        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
-            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
-            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src="https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt="Mon Assistant Formalités">
+    <div style = "font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.5; background-color: #f9f9f9;" >
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);" >
+            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src = "https://www.mon-assistant-formalites.fr/images/logo.png" alt = "Mon Assistant Formalités" >
+            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src = "https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt = "Mon Assistant Formalités" >
 
-            <h2 style="margin-bottom: 30px; font-size: 1.3rem;">Bonjour ${firstname} ${name}</h2>
-            
-            <p style="margin-bottom: 30px;">Je vous informe qu’un remboursement a été effectué concernant votre demande de ${FORMALITY_TYPE[typeFormaliteId].label} numéro <strong>${demandeid}</strong>.</p>
-            
-            <p style="margin-bottom: 30px;">Le montant de <strong>${amount} €</strong> a été recrédité sur votre moyen de paiement.</p>
-            
-            <p style="margin-bottom: 30px;">Ce remboursement peut apparaître sur votre compte dans un délai de quelques jours, selon les délais de traitement de votre établissement bancaire.</p>
-            
-            <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
-            
-            <p>Merci pour votre confiance.</p>   
-            <p style="margin-bottom:0; padding-bottom:0">Denis BEKAERT</p>   
-            <h3 style="font-size: 1rem; margin-top: 0; padding-top: 0;">Mon Assistant Formalités</h3>
-            
-            <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
-            
-            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">
-                Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse mail à vos contacts ou comme courrier légitime.
+            <h2 style="margin-bottom: 30px; font-size: 1.3rem;" > Bonjour ${ firstname } ${ name } </h2>
+
+            <p style = "margin-bottom: 30px;" >Je vous informe qu'un remboursement a été effectué concernant votre demande de ${ FORMALITY_TYPE[typeFormaliteId].label } numéro <strong > ${ demandeid } </strong>.</p >
+
+            <p style="margin-bottom: 30px;" > Le montant de <strong > ${ amount } €</strong> a été recrédité sur votre moyen de paiement.</p >
+
+            <p style="margin-bottom: 30px;" > Ce remboursement peut apparaître sur votre compte dans un délai de quelques jours, selon les délais de traitement de votre établissement bancaire.</p>
+
+            <p style = "margin-bottom: 30px;" > Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n'hésitez pas à me <a href = "https://www.mon-assistant-formalites.fr/contact" style = "color:#1d4ed8; text-decoration:underline;" > contacter </a>.</p >
+
+            <p>Merci pour votre confiance.</p>
+            <p style = "margin-bottom:0; padding-bottom:0" > Denis BEKAERT </p>
+            <h3 style = "font-size: 1rem; margin-top: 0; padding-top: 0;" > Mon Assistant Formalités </h3>
+
+            <hr style = "margin-top: 20px; border-color: #e5e7eb;" />
+
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;" >
+                Pour ne manquer aucune information de notre part, nous vous recommandons d'ajouter notre adresse mail à vos contacts ou comme courrier légitime.
             </p>
         </div>
     </div>
@@ -341,7 +411,7 @@ export async function sendRefundNotification(demandeid : string, typeFormaliteId
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
-            To: [{ Email: email, Name: `${firstname} ${name}` }],
+            To: [{ Email: email, Name: `${ firstname } ${ name } ` }],
             Subject: `Information concernant votre remboursement`,
             HTMLPart: htmlContent
         }]
@@ -359,46 +429,44 @@ export async function sendRefundNotification(demandeid : string, typeFormaliteId
 export async function sendCompletedFormalityNotification(demandeid : string, typeFormaliteId: number, firstname: string, name : string, ref_inpi: string, email : string) {
     
     const htmlContent = `
-<div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;">
-    <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+    <div style = "font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;">
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);" >
 
-        <img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
-        <img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src="https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt="Mon Assistant Formalités">
+            <img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src = "https://www.mon-assistant-formalites.fr/images/logo.png" alt = "Mon Assistant Formalités" >
+            <img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src = "https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt = "Mon Assistant Formalités" >
 
-        <p style="font-size: 0.9rem; color:#6b7280; margin-bottom: 5px;">Références utiles pour votre dossier :</p>
-        <ul style="margin-top: 0; margin-bottom: 25px;">
-            <li>n° MAF : <strong>${demandeid}</strong></li>
-            <li>réf. INPI : <strong>${ref_inpi}</strong></li>
-        </ul>
+            <p style="font-size: 0.9rem; color:#6b7280; margin-bottom: 5px;" > Références utiles pour votre dossier: </p>
+            <ul style = "margin-top: 0; margin-bottom: 25px;" >
+                <li>n° MAF: <strong>${ demandeid } </strong></li >
+                <li>réf.INPI : <strong>${ ref_inpi } </strong></li >
+            </ul>
 
-        <h2 style="margin-bottom: 20px; font-size: 1.3rem;">Bonjour ${firstname} ${name},</h2>
+            <h2 style = "margin-bottom: 20px; font-size: 1.3rem;" > Bonjour ${ firstname } ${ name }, </h2>
 
-        <p style="margin-bottom: 20px;">Je vous confirme que votre demande de <strong>${FORMALITY_TYPE[typeFormaliteId].label}</strong> a été <strong>validée avec succès</strong> auprès de l’administration ✅</p>
-        <p style="margin-bottom: 20px;">Votre dossier est désormais finalisé. Vous recevrez dans un prochain message la <strong>synthèse définitive de votre formalité</strong> ainsi que les éléments récapitulatifs.</p>
-        <p style="margin-bottom: 20px;">Je vous conseille de conserver ce message ainsi que les références ci-dessus, qui pourront vous être utiles pour tout suivi ultérieur.</p>
-        <p style="margin-bottom: 20px;">💡 Si vous avez la moindre question ou besoin d’un accompagnement complémentaire, vous pouvez me contacter à tout moment.</p>
-        <p style="margin-bottom: 30px;">
-            🙏 Si vous êtes satisfait de mon accompagnement, vous pouvez laisser un avis en quelques secondes :<br>
-            👉 <a href="https://g.page/r/CfLC4EN68pBsEBM/review" style="color:#1d4ed8; text-decoration:underline;">Donner mon avis</a>
-        </p>
-
-        <p>Merci pour votre confiance.</p>   
-
-        <p style="margin-bottom:0;"><strong>Denis BEKAERT</strong></p>   
-        <p style="margin-top: 0;">Mon Assistant Formalités<br>
-        Formaliste spécialisé en entreprise individuelle</p>
-
-        <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
-        <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de ma part, je vous recommande d’ajouter cette adresse email à vos contacts.</p>
+            <p style = "margin-bottom: 20px;" > Je vous confirme que votre demande de <strong> ${ FORMALITY_TYPE[typeFormaliteId].label } </strong> a été <strong>validée avec succès</strong > auprès de l'administration ✅</p>
+            <p style = "margin-bottom: 20px;" > Votre dossier est désormais finalisé.</br>Vous recevrez dans un prochain message la <strong> synthèse définitive de votre formalité </strong> ainsi que les éléments récapitulatifs.</p >
+            <p style="margin-bottom: 20px;" > Je vous conseille de conserver ce message ainsi que les références ci - dessus, qui pourront vous être utiles pour tout suivi ultérieur.</p>
+            <div style="margin: 25px 0; padding: 18px; background-color: #f9fafb; border-left: 4px solid #6366f1; border-radius: 6px;">
+                <p>🙏 Aidez à faire connaître Mon Assistant Formalités et à rassurer les futurs clients en laissant votre avis sur ma fiche Google. </p>
+                <p> 👉 <a href="https://g.page/r/CRyf2Y4flqZ9EAE/review" style = "color:#1d4ed8; text-decoration:underline;" > Donner mon avis </a></p>
+            </div>
+            <p> Merci pour votre confiance.</p>
+            
+            <p style = "margin-bottom:0;" > <strong>Denis BEKAERT </strong></p >
+            <p style="margin-top: 0;" > Mon Assistant Formalités<br>
+            Formaliste spécialisé en entreprise individuelle </p>
+            
+            <hr style = "margin-top: 20px; border-color: #e5e7eb;" />
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;" > Pour ne manquer aucune information de ma part, je vous recommande d'ajouter cette adresse email à vos contacts.</p>
+        </div>
     </div>
-</div>
     `;
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
-            To: [{ Email: email, Name: `${firstname} ${name}` }],
-            Subject: `Votre formalité MAF n°${demandeid} a été validée`,
+            To: [{ Email: email, Name: `${ firstname } ${ name } ` }],
+            Subject: `Votre formalité MAF n°${ demandeid } a été validée`,
             HTMLPart: htmlContent
         }]
     });
@@ -415,28 +483,28 @@ export async function sendCompletedFormalityNotification(demandeid : string, typ
 export async function sendRejectedFormalityNotification(demandeid : string, typeFormaliteId: number, firstname: string, name : string, ref_inpi: string, email : string) {
     
     const htmlContent = `
-    <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;">
-        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
-            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
-            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src="https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt="Mon Assistant Formalités">
+    <div style = "font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;" >
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);" >
+            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src = "https://www.mon-assistant-formalites.fr/images/logo.png" alt = "Mon Assistant Formalités" >
+            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src = "https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt = "Mon Assistant Formalités" >
 
-            <p style="margin-top: 30px; font-size: 0.9rem; color:#6b7280;">Références utiles pour votre dossier :</p>
-            <ul style="margin-top: 0; margin-bottom: 30px;">
-                <li>n° MAF : <strong>${demandeid}</strong></li>
-                <li>réf. INPI : <strong>${ref_inpi}</strong></li>
+            <p style="margin-top: 30px; font-size: 0.9rem; color:#6b7280;" > Références utiles pour votre dossier: </p>
+            <ul style = "margin-top: 0; margin-bottom: 30px;" >
+                <li>n° MAF: <strong>${ demandeid } </strong></li >
+                <li>réf.INPI : <strong>${ ref_inpi } </strong></li >
             </ul>
-                    
-            <h2 style="margin-bottom: 25px; font-size: 1.3rem;">Bonjour ${firstname} ${name},</h2>
-            <p style="margin-bottom: 20px;">Après analyse de votre dossier, je vous informe que votre demande de ${FORMALITY_TYPE[typeFormaliteId].label} n’a malheureusement pas pu être <strong>validée auprès de l’administration</strong>.</p>
-            <p style="margin-bottom: 20px;">Cette décision peut intervenir pour différentes raisons (informations incomplètes, incohérences dans les données transmises ou éléments nécessitant une correction préalable).</p>
-            <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
-            
-            <p>Merci pour votre confiance.</p>   
-            <p style="margin-bottom:0; padding-bottom:0">Denis BEKAERT</p>   
-            <h3 style="font-size: 1rem; margin-top: 0; padding-top: 0;">Mon Assistant Formalités</h3>
-                    
-            <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
-            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse email à vos contacts ou comme courrier légitime.</p>
+
+            <h2 style = "margin-bottom: 25px; font-size: 1.3rem;" > Bonjour ${ firstname } ${ name }, </h2>
+            <p style = "margin-bottom: 20px;" > Après analyse de votre dossier, je vous informe que votre demande de ${ FORMALITY_TYPE[typeFormaliteId].label } n'a malheureusement pas pu être <strong > validée auprès de l'administration </strong>.</p >
+            <p style="margin-bottom: 20px;" > Cette décision peut intervenir pour différentes raisons(informations incomplètes, incohérences dans les données transmises ou éléments nécessitant une correction préalable).</p>
+            <p style = "margin-bottom: 30px;" > Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n'hésitez pas à me <a href = "https://www.mon-assistant-formalites.fr/contact" style = "color:#1d4ed8; text-decoration:underline;" > contacter </a>.</p >
+
+            <p>Merci pour votre confiance.</p>
+            <p style = "margin-bottom:0; padding-bottom:0" > Denis BEKAERT </p>
+            <h3 style = "font-size: 1rem; margin-top: 0; padding-top: 0;" > Mon Assistant Formalités </h3>
+
+            <hr style = "margin-top: 20px; border-color: #e5e7eb;" />
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;" > Pour ne manquer aucune information de notre part, nous vous recommandons d'ajouter notre adresse email à vos contacts ou comme courrier légitime.</p>
         </div>
     </div>
     `;
@@ -444,8 +512,8 @@ export async function sendRejectedFormalityNotification(demandeid : string, type
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
-            To: [{ Email: email, Name: `${firstname} ${name}` }],
-            Subject: `Votre formalité MAF n°${demandeid} a été rejetée`,
+            To: [{ Email: email, Name: `${ firstname } ${ name } ` }],
+            Subject: `Votre formalité MAF n°${ demandeid } a été rejetée`,
             HTMLPart: htmlContent
         }]
     });
@@ -462,29 +530,29 @@ export async function sendRejectedFormalityNotification(demandeid : string, type
 export async function sendCanceledFormalityNotification(demandeid : string, typeFormaliteId: number, firstname: string, name : string, ref_inpi: string, email : string) {
     
     const htmlContent = `
-    <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;">
-        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
-            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités">
-            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src="https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt="Mon Assistant Formalités">
+    <div style = "font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;" >
+        <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);" >
+            <img style="max-width: 100%; height: auto; display: block; auto 40px auto;" src = "https://www.mon-assistant-formalites.fr/images/logo.png" alt = "Mon Assistant Formalités" >
+            <img style="max-width: 100%; height: auto; display: block; margin: 10px auto auto auto;" src = "https://www.mon-assistant-formalites.fr/images/mail-entete.jpg" alt = "Mon Assistant Formalités" >
 
-            <p style="margin-top: 30px; font-size: 0.9rem; color:#6b7280;">Références utiles pour votre dossier :</p>
-            <ul style="margin-top: 0; margin-bottom: 30px;">
-                <li>n° MAF : <strong>${demandeid}</strong></li>
-                <li>réf. INPI : <strong>${ref_inpi}</strong></li>
+            <p style="margin-top: 30px; font-size: 0.9rem; color:#6b7280;" > Références utiles pour votre dossier: </p>
+            <ul style = "margin-top: 0; margin-bottom: 30px;" >
+                <li>n° MAF: <strong>${ demandeid } </strong></li >
+                <li>réf.INPI : <strong>${ ref_inpi } </strong></li >
             </ul>
 
-            <h2 style="margin-bottom: 25px; font-size: 1.3rem;">Bonjour ${firstname} ${name},</h2>
+            <h2 style = "margin-bottom: 25px; font-size: 1.3rem;" > Bonjour ${ firstname } ${ name }, </h2>
 
-            <p style="margin-bottom: 20px;">Je vous informe que votre demande de ${FORMALITY_TYPE[typeFormaliteId].label} n° <strong>${demandeid}</strong> a été <strong>annulée</strong>.</p>
-            <p style="margin-bottom: 20px;">Après analyse de votre dossier, il n’a malheureusement pas été possible de poursuivre le traitement de cette formalité dans les conditions actuelles.</p>
-            <p style="margin-bottom: 30px;">Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href="https://www.mon-assistant-formalites.fr/contact" style="color:#1d4ed8; text-decoration:underline;">contacter</a>.</p>
-            
-            <p>Merci pour votre confiance.</p>   
-            <p style="margin-bottom:0; padding-bottom:0">Denis BEKAERT</p>   
-            <h3 style="font-size: 1rem; margin-top: 0; padding-top: 0;">Mon Assistant Formalités</h3>
-            
-            <hr style="margin-top: 20px; border-color: #e5e7eb;"/>
-            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;">Pour ne manquer aucune information de notre part, nous vous recommandons d’ajouter notre adresse email à vos contacts ou comme courrier légitime.</p>
+            <p style = "margin-bottom: 20px;" > Je vous informe que votre demande de ${ FORMALITY_TYPE[typeFormaliteId].label } n° <strong>${ demandeid } </strong> a été <strong>annulée</strong >.</p>
+            <p style = "margin-bottom: 20px;" > Après analyse de votre dossier, il n’a malheureusement pas été possible de poursuivre le traitement de cette formalité dans les conditions actuelles.</p>
+            <p style = "margin-bottom: 30px;" > Si vous avez la moindre question concernant votre dossier ou le traitement de votre formalité, n’hésitez pas à me <a href = "https://www.mon-assistant-formalites.fr/contact" style = "color:#1d4ed8; text-decoration:underline;" > contacter </a>.</p >
+
+            <p>Merci pour votre confiance.</p>
+            <p style = "margin-bottom:0; padding-bottom:0" > Denis BEKAERT </p>
+            <h3 style = "font-size: 1rem; margin-top: 0; padding-top: 0;" > Mon Assistant Formalités </h3>
+
+            <hr style = "margin-top: 20px; border-color: #e5e7eb;" />
+            <p style="font-size: 0.75em; color: #6b7280; margin-top: 20px; line-height: 1.4;" > Pour ne manquer aucune information de notre part, nous vous recommandons d'ajouter notre adresse email à vos contacts ou comme courrier légitime.</p>
         </div>
     </div>
     `;
@@ -492,8 +560,8 @@ export async function sendCanceledFormalityNotification(demandeid : string, type
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{
             From: { Email: 'formalites@mon-assistant-formalites.fr', Name: 'Mon Assistant Formalités' },
-            To: [{ Email: email, Name: `${firstname} ${name}` }],
-            Subject: `Votre formalité MAF n°${demandeid} a été annulée`,
+            To: [{ Email: email, Name: `${ firstname } ${ name } ` }],
+            Subject: `Votre formalité MAF n°${ demandeid } a été annulée`,
             HTMLPart: htmlContent
         }]
     });

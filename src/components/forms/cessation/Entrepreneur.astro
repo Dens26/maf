@@ -123,6 +123,14 @@ const formBackground = 'light';
         </div>
     </div>
 
+    <!-- Protection sociale -->
+    <div id="healthinsurance-wrapper" class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4 hidden">
+        <div class="text-md font-semibold">Protection sociale</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+            <Input label="N° Sécurité sociale" id="healthinsurance" name="healthinsurance" required background={formBackground}/>
+        </div>
+    </div>
+
     <!-- Adresse de l'entrepreneur -->
     <div class="space-y-2 sm:space-y-4 bg-white p-2 sm:p-4 rounded-sm mb-4">
         <div class="text-md font-semibold">Adresse de correspondance</div>
@@ -196,6 +204,29 @@ const formBackground = 'light';
         const country = document.getElementById('country');
         const zipCode = document.getElementById('zipcode');
 
+        const nationality = document.getElementById('nationality');
+        const healthInsuranceWrapper = document.getElementById('healthinsurance-wrapper');
+        const healthInsurance = document.getElementById('healthinsurance');
+
+        const toggleHealthInsurance = () => {
+            const isFrench = nationality?.value === 'FR';
+
+            if (isFrench) {
+                healthInsuranceWrapper?.classList.remove('hidden');
+                healthInsurance?.setAttribute('required', 'required');
+            } else {
+                healthInsuranceWrapper?.classList.add('hidden');
+                healthInsurance?.removeAttribute('required');
+                healthInsurance.value = '';
+            }
+        };
+
+        // lancement initial
+        toggleHealthInsurance();
+
+        // changement de nationalité
+        nationality?.addEventListener('change', toggleHealthInsurance);
+
         /* ================= EVENTS ================= */
 
         // reset zipcode si pays change
@@ -221,6 +252,10 @@ const formBackground = 'light';
             // ville → pas de chiffres
             if (e.target.name === 'city')
                 e.target.value = e.target.value.replace(/\d/g, '');
+
+            // Numéro sécurité sociale
+            if (e.target.name === "healthinsurance")
+                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 15);
         });
     });
 </script>

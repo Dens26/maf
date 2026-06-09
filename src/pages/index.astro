@@ -11,20 +11,20 @@ import CtaBanner from '@components/sections/CtaBanner.astro';
 import Faqs from '@components/sections/Faqs.astro';
 import { faqLists } from '@data/faqs';
 import RecentPosts from '@components/sections/RecentPosts.astro';
-import heroImage from '../assets/images/home/default-hero-2.jpg';
+import heroImage from '../assets/images/home/default-hero-3.jpg';
 import styleGuideImage from '../assets/images/home/advisor.jpg';
 
 const seoTitle = "Mandataire INPI | Création entreprise individuelle, modification et cessation";
 const seoDescription ="Confiez vos formalités d'entreprise individuelle à un mandataire INPI : création, modification, changement d'adresse, correction RNE et cessation. Rapide, simple et sécurisé.";
-
+const image = 'https://www.mon-assistant-formalites.fr/images/default-hero-3.jpg';
 const heroContent = {
-    title: 'Créez, modifiez ou cédez votre entreprise individuelle sans stress',
-    description: 'Je m’occupe de toutes vos formalités INPI : dossier complet, conformité garantie et accompagnement personnalisé, 100% en ligne.',
+    title: 'Créez, Modifiez ou Cessez votre Entreprise individuelle',
+    description: "Je m'occupe de toutes vos formalités INPI : dossier complet, conformité garantie et accompagnement personnalisé, 100% en ligne.",
     buttons: [
         {text: 'Commencer ma formalité', link: '/services', target: '_self', ariaLabel: 'Démarrer une formalité en ligne', title: 'Commencer ma formalité', "data-analytics": "Hero_index_cta_click" },
     ],
     backgroundImage: heroImage,
-    overlayOpacity: 0.25,
+    overlayOpacity: 0.30,
 };
 
 const featuresSection = {
@@ -92,7 +92,7 @@ const recentPostsSection = {
 };
 ---
 
-<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription}>
+<Layout footerCta={FooterCta} title={seoTitle} description={seoDescription} image={image}>
     <Hero content={heroContent} />
     <Features content={featuresSection} padding="responsive" background="base" />
     <SplitPanel content={styleGuideSection} imagePosition="right" background="light" padding="responsive" />

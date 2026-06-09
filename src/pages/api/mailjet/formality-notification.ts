@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
-import { sendCanceledFormalityNotification, sendCompletedFormalityNotification, sendRejectedFormalityNotification } from "@utils/mailService";
+import { sendProcessingConfirmation, sendCanceledFormalityNotification, sendCompletedFormalityNotification, sendRejectedFormalityNotification } from "@utils/mailService";
 import { getFormalityByDemandeId } from '@utils/supabase';
 
 
@@ -24,6 +24,9 @@ export async function POST({ request }: APIContext) {
 
         // Envoi du mail notification
         switch (action){
+            case 'demarrer_formalite' :
+                await sendProcessingConfirmation(formality.demandeid, formality.typeformaliteid, formality.firstname, formality.name, formality.email);
+                break;
             case 'terminer_formalite' :
                 await sendCompletedFormalityNotification(formality.demandeid, formality.typeformaliteid, formality.firstname, formality.name, formality.ref_inpi, formality.email);
                 break;

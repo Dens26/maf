@@ -5,7 +5,7 @@ icon: "/images/moving.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 59€"
 duration: "48h en moyenne"
-order: 2
+order: 6
 publish: true
 
 link: "/forms/moving/entrepreneur"

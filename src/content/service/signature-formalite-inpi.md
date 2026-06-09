@@ -5,7 +5,7 @@ icon: "/images/signature.jpg"
 category: "Formalités de modification"
 priceRange: "à partir de 39€"
 duration: "48h en moyenne"
-order: 6
+order: 2
 publish: true
 
 link: "/forms/signature/entrepreneur"
@@ -84,6 +84,30 @@ Total : **44 € TTC**
 👉 [Finalisez votre formalité →](/forms/signature/entrepreneur)
 
 ##### *Ces frais couvrent les éventuelles régularisations demandées par les organismes valideurs
+
+---
+
+## Frais administratifs officiels
+
+Certains organismes (INPI, Greffe, CMA…) peuvent appliquer des frais :  
+
+- fixés par l’administration  
+- non inclus dans la prestation MAF  
+- à la charge du client  
+
+[Consulter les tarifs officiels](https://formalites.entreprises.gouv.fr/tarifs.php)
+
+---
+
+## Paiement des frais administratifs
+
+- MAF peut utiliser la **délégation de paiement** du Guichet Unique  
+- Une **demande de paiement** est envoyée directement au client  
+- Paiement à effectuer via le **compte INPI**  
+
+MAF ne perçoit pas ces paiements et n’intervient pas dans leur gestion.
+
+[Explications sur la délégation de paiement](https://www.mon-assistant-formalites.fr/documents/delegation_de_paiement.pdf)
 
 ---
 

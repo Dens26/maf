@@ -1,11 +1,11 @@
 ---
 name: "Création d’entreprise"
 description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
-icon: "https://www.mon-assistant-formalites.fr/images/create-company.jpg"
+icon: "https://www.mon-assistant-formalites.fr/images/home/create.jpg"
 category: "Formalités de création"
 priceRange: "à partir de 49€"
 duration: "48h en moyenne"
-order: 1
+order: 3
 publish: true
 
 link: "/forms/create/entrepreneur"
@@ -17,7 +17,7 @@ price: "49"
 seo:
   title: "Créer une entreprise individuelle en ligne – Mandataire INPI"
   description: "Accompagnement complet pour créer votre entreprise individuelle rapidement et sans erreur. Mandataire INPI spécialisé en formalités administratives pour entrepreneurs individuels."
-  icon: "/icons/create-company.jpg"
+  icon: "/icons/home/create.jpg"
 ---
 
 # Création d’entreprise individuelle
