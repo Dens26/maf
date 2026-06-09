@@ -3,7 +3,7 @@ name: "Finaliser une formalité"
 description: "Bloqué à la signature de votre formalité ? Je finalise votre dossier rapidement."
 icon: "/images/signature.jpg"
 category: "Formalités de modification"
-priceRange: "à partir de 39€"
+priceRange: "à partir de 49€"
 duration: "48h en moyenne"
 order: 2
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/signature/entrepreneur"
 text: "Finalisez votre formalité"
 ariaLabel: "Finaliser et signer une formalité INPI en ligne"
 title: "Finaliser une formalité INPI"
-price: "39"
+price: "49"
 
 seo:
   title: "Signature INPI impossible ? Finalisez votre formalité rapidement"
@@ -76,10 +76,10 @@ Après réception du paiement et des éléments :
 
 ## Tarifs
 
-✔ Prestation MAF : **39 € TTC**  
+✔ Prestation MAF : **49 € TTC**  
 ✔ Frais de gestion administrative* : **5 €**  
 
-Total : **44 € TTC**
+Total : **54 € TTC**
 
 👉 [Finalisez votre formalité →](/forms/signature/entrepreneur)
 

@@ -8,12 +8,12 @@ const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY as string, {
 
 // Prix des formalités (en centimes)
 const FORMALITY_PRICES: Record<number, number> = {
-    1: 4900,
-    2: 5900,
-    3: 5900,
+    1: 5900,
+    2: 6900,
+    3: 6900,
     4: 3900,
-    5: 3900,
-    6: 3900,
+    5: 4900,
+    6: 4900,
 }
 
 // Labels des formalités

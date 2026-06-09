@@ -3,7 +3,7 @@ name: "Cessation d'une entreprise"
 description: "Un accompagnement clair et rapide pour déclarer la fermeture de votre EI."
 icon: "/images/closed.jpg"
 category: "Formalités de cessation"
-priceRange: "à partir de 39€"
+priceRange: "à partir de 49€"
 duration: "48h en moyenne"
 order: 1
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/cessation/entrepreneur"
 text: "Formulaire de cessation d'entreprise"
 ariaLabel: "Cessation d'une entreprise individuelle en ligne"
 title: "Cesser une entreprise individuelle"
-price: "39"
+price: "49"
 
 seo:
   title: "Déclarer la cessation d’activité de son entreprise individuelle – Mandataire INPI"
@@ -76,10 +76,10 @@ En cas de documents manquants, une **demande complémentaire** vous sera envoyé
 
 ## Tarifs
 
-✔ Prestation MAF : **39 € TTC**  
+✔ Prestation MAF : **49 € TTC**  
 ✔ Frais de gestion administrative* : **5 €**  
 
-**Total : 44 € TTC**
+**Total : 54 € TTC**
 
 👉 [Cessez votre entreprise rapidement →](/forms/cessation/entrepreneur)
 

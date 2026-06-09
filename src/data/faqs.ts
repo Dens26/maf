@@ -22,7 +22,7 @@ export const faqLists: Record<string, FaqList> = {
             },
             {
                 question: "Combien coûte une formalité ?",
-                answer: "Les tarifs commencent à partir de 39€ pour une correction ou cessation, 49€ pour une création et 59€ pour une modification. Des frais administratifs peuvent s’ajouter selon la formalité."
+                answer: "Les tarifs commencent à partir de 39€ pour une correction, 49€ pour une cessation, 59€ pour une création et 69€ pour une modification. Des frais administratifs peuvent s’ajouter selon la formalité."
             },
             {
                 question: "Quel est le délai de traitement ?",

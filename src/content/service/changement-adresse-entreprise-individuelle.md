@@ -3,7 +3,7 @@ name: "Modifier l'adresse d'une entreprise"
 description: "Pour un déménagement, transfert d’établissement sans stress."
 icon: "/images/moving.jpg"
 category: "Formalités de modification"
-priceRange: "à partir de 59€"
+priceRange: "à partir de 69€"
 duration: "48h en moyenne"
 order: 6
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/moving/entrepreneur"
 text: "Formulaire de modification d'adresse"
 ariaLabel: "Modifier l'adresse d'une entreprise individuelle en ligne"
 title: "Modifier l'adresse d'une entreprise individuelle"
-price: "59"
+price: "69"
 
 seo:
   title: "Changer l’adresse ou transférer une entreprise individuelle – Mandataire INPI"
@@ -80,10 +80,10 @@ En cas d’informations ou documents manquants, une demande complémentaire vous
 
 ## Tarifs et délai de traitement
 
-✔ Accompagnement complet : **59 € TTC**  
+✔ Accompagnement complet : **69 € TTC**  
 ✔ Frais de gestion administrative* : **5 €**  
 
-Total : **64 € TTC**
+Total : **74 € TTC**
 
 👉 [Modifier mon adresse →](/forms/moving/entrepreneur)
 

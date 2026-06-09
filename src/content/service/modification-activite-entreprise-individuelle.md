@@ -3,7 +3,7 @@ name: "Modifier l’activité d’une entreprise"
 description: "Un accompagnement complet pour déclarer votre changement ou ajout d’activité"
 icon: "/images/activities.jpg"
 category: "Formalités de modification"
-priceRange: "à partir de 59€"
+priceRange: "à partir de 69€"
 duration: "48h en moyenne"
 order: 5
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/unavailable"
 text: "Formulaire de modification d'activité"
 ariaLabel: "Modifier l'activité d'une entreprise individuelle en ligne"
 title: "Modifier l'activité d'une entreprise individuelle"
-price: "59"
+price: "69"
 
 seo:
   title: "Modifier l’activité d’une entreprise individuelle – Mandataire INPI"
@@ -78,10 +78,10 @@ En cas de documents manquants, un **mail de demande complémentaire** vous sera 
 
 ## Tarifs
 
-✔ Prestation MAF : **59 € TTC**  
+✔ Prestation MAF : **69 € TTC**  
 ✔ Frais de gestion administrative* : **5 €**  
 
-**Total : 64 € TTC**
+**Total : 74 € TTC**
 
 👉 [Modifier mon activité →](/forms/unavailable)
 

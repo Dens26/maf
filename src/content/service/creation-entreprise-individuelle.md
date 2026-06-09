@@ -3,7 +3,7 @@ name: "Création d’entreprise"
 description: "Votre entreprise individuelle clé en main, sans stress ni complexité."
 icon: "https://www.mon-assistant-formalites.fr/images/home/create.jpg"
 category: "Formalités de création"
-priceRange: "à partir de 49€"
+priceRange: "à partir de 59€"
 duration: "48h en moyenne"
 order: 3
 publish: true
@@ -12,7 +12,7 @@ link: "/forms/create/entrepreneur"
 text: "Formulaire de création d'entreprise"
 ariaLabel: "Créer une entreprise individuelle en ligne"
 title: "Créer une entreprise individuelle"
-price: "49"
+price: "59"
 
 seo:
   title: "Créer une entreprise individuelle en ligne – Mandataire INPI"
@@ -76,10 +76,10 @@ En cas d’éléments manquants, une demande complémentaire vous sera envoyée.
 
 ## Tarifs
 
-✔ Accompagnement complet : **49 € TTC**  
+✔ Accompagnement complet : **59 € TTC**  
 ✔ Frais de gestion administrative* : **5 €**  
 
-Total : **54 € TTC**
+Total : **64 € TTC**
 
 👉 [Créer mon entreprise sans erreur →](/forms/create/entrepreneur)
 ##### *Ces frais couvrent les régularisations éventuelles demandées par les organismes valideurs.
