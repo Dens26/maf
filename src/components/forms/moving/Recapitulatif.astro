@@ -330,6 +330,8 @@ const formBackground = 'light';
             // ---------------- ENTREPRENEUR ----------------
             if (Object.keys(entrepreneur).length) {
                 const rows = [
+                    createLine('Siren', entrepreneur.siren),
+                    createLine('Régime micro', entrepreneur.micro),
                     createLine('Email', entrepreneur.email),
                     createLine('Téléphone', entrepreneur.phone),
                 ];

@@ -32,7 +32,7 @@ const formBackground = 'light';
         <Input label="Email" type="email" id="email" name="email" required background={formBackground} />
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input label="Téléphone" type="tel" id="phone" name="phone" background={formBackground} />
+        <Input label="Téléphone" type="tel" id="phone" name="phone" background={formBackground} required/>
         <Input label="Entreprise" id="company" name="company" background={formBackground} />
     </div>
 
@@ -49,4 +49,13 @@ const formBackground = 'light';
         <Button type='submit'>Envoyer</Button>
     </div>
 </form>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const phone = document.getElementById('phone') as HTMLInputElement | null;
+
+        phone?.addEventListener('input', () => {
+            phone.value = phone.value.replace(/\D/g, '');
+        });
+    });
+</script>
 <script src="/js/contact.js" type="module"></script>
