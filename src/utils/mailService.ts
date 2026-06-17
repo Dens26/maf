@@ -574,54 +574,103 @@ export async function sendEmailProspection(email: string) {
     <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
 
         <!-- LOGO -->
-        <a href="https://www.mon-assistant-formalites.fr/"><img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités"></a>
+        <h1 style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto; color: #3b5998; font-weight: bold;">Mon Assistant Formalités</h1>
 
         <!-- INTRO -->
         <h2 style="margin-bottom: 20px; font-size: 1.3rem;">Bonjour,</h2>
 
-        <p style="margin-bottom: 15px;">Je me présente, Denis, mandataire spécialisé en formalités pour les entreprises individuelles.</p>
-        <p style="margin-bottom: 15px;">Vous etes bloqué sur une formalité d'entreprise ?</p>
+        <p style="margin-bottom: 15px;">
+            Je me présente, Denis, mandataire spécialisé dans l’accompagnement des entreprises individuelles pour leurs formalités administratives.
+        </p>
 
-        <!-- PROCESS -->
-        <p style="margin-bottom: 5px;">Je prends en charge directement votre dossier :</p>
+        <p style="margin-bottom: 15px;">
+            Vous rencontrez des difficultés lors du dépôt de votre formalité ou vous souhaitez simplement être accompagné? Je peux reprendre votre dossier et vous aider à finaliser votre démarche.
+        </p>
+
+        <p style="margin-bottom: 5px;">
+            Je peux notamment prendre en charge :
+        </p>
 
         <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li>vérification du dossier</li>
-            <li>signature conforme</li>
-            <li>dépôt sur le Guichet unique INPI</li>
-            <li>suivi jusqu’à validation finale</li>
+            <li>la vérification de votre dossier</li>
+            <li>la mise en conformité de la signature</li>
+            <li>le dépôt de votre formalité</li>
+            <li>le suivi jusqu’à validation finale</li>
         </ul>
 
-        <!-- CTA BLOCK PRINCIPAL -->
-        <div style="margin-top: 25px; padding: 15px; background-color: #f0f9ff; border-left: 4px solid #0ea5e9; border-radius: 6px; line-height: 1.6;">
-            <p style="margin:0; font-weight: bold;">💡 En ce moment, les 5 € de frais de gestion sont offerts.</p>
-            <p style="margin:10px 0 0 0;">👉 <a href="https://www.mon-assistant-formalites.fr/services/" target="_blank" style="font-weight:bold; color:#0ea5e9;">Demandez la prise en charge de mon dossier</a></p>
-        </div>
-
-        <!-- CLOSING -->
-        <p style="margin-top: 25px;">Dès validation de votre demande, je prends votre dossier en charge immédiatement.</p>
+        <p style="margin-bottom: 20px;">
+            Vous pouvez simplement répondre à cet email si vous souhaitez échanger sur votre situation.
+        </p>
 
         <p style="margin-top: 25px;">
             Bien cordialement,<br>
             Denis<br>
-            <a href="https://www.mon-assistant-formalites.fr/"><strong style="color: #3b5998; text-decoration: none;">Mon Assistant Formalités</strong></a>
+            <strong style="color: #3b5998;">Mon Assistant Formalités</strong>
         </p>
 
         <hr style="margin-top: 20px; border-color: #e5e7eb;" />
 
-        <!-- FOOTER -->
-        <p style="font-size: 0.75em; color: #6b7280; margin-top: 15px;">
+        <p style="font-size: 0.75em; color: #6b7280;">
             📍 Service en ligne partout en France<br>
-            📧 contact@mon-assistant-formalites.fr<br>
-            🔗 Retrouvez Mon Assistant Formalités sur 
-            <a href="https://www.facebook.com/monassistantformalites" target="_blank" style="color: #3b5998; font-weight: bold;">Facebook</a>
-            et 
-            <a href="https://www.linkedin.com/in/mon-assistant-formalites/" target="_blank" style="color: #3b5998; font-weight: bold;">LinkedIn</a>
+            📧 contact@mon-assistant-formalites.fr
         </p>
 
     </div>
 </div>
     `;
+//     const htmlContent = `
+// <div style="font-family: Arial, sans-serif; color: #2c3e50; line-height: 1.6; background-color: #f9f9f9;">
+//     <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+
+//         <!-- LOGO -->
+//         <a href="https://www.mon-assistant-formalites.fr/"><img style="max-width: 100%; height: auto; display: block; margin: 0 auto 20px auto;" src="https://www.mon-assistant-formalites.fr/images/logo.png" alt="Mon Assistant Formalités"></a>
+
+//         <!-- INTRO -->
+//         <h2 style="margin-bottom: 20px; font-size: 1.3rem;">Bonjour,</h2>
+
+//         <p style="margin-bottom: 15px;">Je me présente, Denis, mandataire spécialisé en formalités pour les entreprises individuelles.</p>
+//         <p style="margin-bottom: 15px;">Une formalité INPI bloquée ou en attente de régularisation ? En tant que mandataire, je peux la reprendre immédiatement.</p>
+
+//         <!-- PROCESS -->
+//         <p style="margin-bottom: 5px;">Je prends en charge :</p>
+
+//         <ul style="margin-bottom: 15px; padding-left: 20px;">
+//             <li>la vérification du dossier</li>
+//             <li>la signature conforme</li>
+//             <li>le dépôt sur le Guichet unique INPI</li>
+//             <li>le suivi jusqu’à validation finale</li>
+//         </ul>
+
+//         <!-- CTA BLOCK PRINCIPAL -->
+//         <div style="margin-top: 25px; padding: 15px; background-color: #f0f9ff; border-left: 4px solid #0ea5e9; border-radius: 6px; line-height: 1.6;">
+//             <p style="margin:0; font-weight: bold;">💡 Profitez en ! En ce moment, les 5 € de frais de gestion sont offerts.</p>
+//             <p style="margin:10px 0 0 0;">👉 <a href="https://www.mon-assistant-formalites.fr/services/" target="_blank" style="font-weight:bold; color:#0ea5e9;">Demandez la prise en charge de ma formalité</a></p>
+//         </div>
+
+//         <!-- CLOSING -->
+//         <p style="margin-top: 25px;">Dès validation de votre demande, je prends votre dossier en charge immédiatement.</p>
+
+//         <p style="margin-top: 25px;">
+//             Bien cordialement,<br>
+//             Denis<br>
+//             <a href="https://www.mon-assistant-formalites.fr/"><strong style="color: #3b5998; text-decoration: none;">Mon Assistant Formalités</strong></a>
+//         </p>
+
+//         <hr style="margin-top: 20px; border-color: #e5e7eb;" />
+
+//         <!-- FOOTER -->
+//         <p style="font-size: 0.75em; color: #6b7280; margin-top: 15px;">
+//             📍 Service en ligne partout en France<br>
+//             📧 contact@mon-assistant-formalites.fr<br>
+//             🔗 Retrouvez Mon Assistant Formalités sur 
+//             <a href="https://www.facebook.com/monassistantformalites" target="_blank" style="color: #3b5998; font-weight: bold;">Facebook</a>
+//             et 
+//             <a href="https://www.linkedin.com/in/mon-assistant-formalites/" target="_blank" style="color: #3b5998; font-weight: bold;">LinkedIn</a>
+//         </p>
+
+//     </div>
+// </div>
+//     `;
 
     await mailjet.post('send', { version: 'v3.1' }).request({
         Messages: [{

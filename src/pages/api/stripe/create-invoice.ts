@@ -56,7 +56,7 @@ export async function POST({ request }: APIContext) {
         } = formality
 
         const amount = FORMALITY_PRICES[typeId]
-        const advanceAmount = 500
+        const advanceAmount = 0
         const label = FORMALITY_LABELS[typeId]
 
         if (!email || !amount || !label) {
